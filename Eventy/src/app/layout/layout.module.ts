@@ -4,19 +4,21 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MaterialModule } from '../infrastructure/material/material.module';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 
 
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    HomeComponent
+    HomeComponent,
+    NavDrawerComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule
   ],
-  exports: [NavBarComponent]
+  exports: [NavBarComponent, NavDrawerComponent]
 })
 export class LayoutModule { }

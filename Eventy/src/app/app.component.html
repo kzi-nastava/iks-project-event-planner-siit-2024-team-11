@@ -1,2 +1,12 @@
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
+<mat-sidenav-container autosize>
+  <!-- Drawer -->
+  <mat-sidenav #drawer mode="side">
+    <app-nav-drawer></app-nav-drawer>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <app-nav-bar [drawer]="drawer"></app-nav-bar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

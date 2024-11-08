@@ -1,0 +1,30 @@
+img {
+  width: 25vw;
+  height: auto;
+}
+
+mat-nav-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidenav-link {
+  font-size: 25px;
+  font-family: "Albert Sans";
+  color: #6F7381;
+  padding: 2vh;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.sidenav-link:hover {
+  background-color: #ddd;
+}
+
+.sidenav-link mat-icon {
+  margin-right: 1vw;
+}

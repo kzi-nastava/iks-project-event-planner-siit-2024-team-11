@@ -8,6 +8,8 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavContainer, MatSidenavModule} from '@angular/material/sidenav';
+import {MatListItem, MatNavList} from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatAnchor,
     MatLabel,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    MatSidenavContainer,
+    MatNavList,
+    MatListItem
   ],
   exports: [
     MatToolbarModule,
@@ -34,7 +40,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatAnchor,
     MatLabel,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    MatSidenavContainer,
+    MatNavList,
+    MatListItem
   ]
 })
 export class MaterialModule { }
