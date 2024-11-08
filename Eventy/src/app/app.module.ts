@@ -14,7 +14,8 @@ import { WineModule } from './wine/wine.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    WineModule
   ],
   providers: [
     provideAnimationsAsync()
