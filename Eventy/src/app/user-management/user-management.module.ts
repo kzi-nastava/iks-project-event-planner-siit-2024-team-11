@@ -10,6 +10,7 @@ import {RouterLink} from '@angular/router';
 import { RegisterBannerComponent } from './register-banner/register-banner.component';
 import { RegisterOrganizerComponent } from './register-organizer/register-organizer.component';
 import { RegisterProviderComponent } from './register-provider/register-provider.component';
+import { InvalidInputDataDialogComponent } from './invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 
 
@@ -21,7 +22,8 @@ import { RegisterProviderComponent } from './register-provider/register-provider
     LoginFormComponent,
     RegisterBannerComponent,
     RegisterOrganizerComponent,
-    RegisterProviderComponent
+    RegisterProviderComponent,
+    InvalidInputDataDialogComponent
   ],
   imports: [
     CommonModule,

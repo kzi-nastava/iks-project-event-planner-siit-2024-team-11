@@ -10,6 +10,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavContainer, MatSidenavModule} from '@angular/material/sidenav';
 import {MatListItem, MatNavList} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -28,7 +29,8 @@ import {MatListItem, MatNavList} from '@angular/material/list';
     MatSidenavModule,
     MatSidenavContainer,
     MatNavList,
-    MatListItem
+    MatListItem,
+    MatDialogModule
   ],
   exports: [
     MatToolbarModule,
@@ -44,7 +46,8 @@ import {MatListItem, MatNavList} from '@angular/material/list';
     MatSidenavModule,
     MatSidenavContainer,
     MatNavList,
-    MatListItem
+    MatListItem,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

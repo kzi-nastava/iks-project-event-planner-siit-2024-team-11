@@ -1,6 +1,8 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
+import {MatDialog} from '@angular/material/dialog';
+import {InvalidInputDataDialogComponent} from '../invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 @Component({
   selector: 'app-register-organizer',
@@ -19,7 +21,7 @@ export class RegisterOrganizerComponent {
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private dialog: MatDialog) {
 
   }
 
@@ -35,7 +37,12 @@ export class RegisterOrganizerComponent {
 
   register() {
     if(this.registerForm.invalid) {
-      alert("Something is wrong"); // dialog
+      this.dialog.open(InvalidInputDataDialogComponent, {
+          data : {
+            title: "Invalid input",
+            message: "Invalid input data"
+          }
+      });
     } else {
       this.userService.register(this.registerForm.value.email, this.registerForm.value.password);
     }

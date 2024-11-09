@@ -1,0 +1,14 @@
+mat-dialog-content {
+  font-size: 16px;
+  color: #333;
+  font-family: "Figtree";
+}
+
+mat-dialog-title {
+  font-size: 18px;
+  font-family: "Montserrat";
+}
+
+button {
+  color: #F1F1F1 !important;
+}
