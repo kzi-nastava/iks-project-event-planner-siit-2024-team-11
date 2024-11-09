@@ -4,11 +4,15 @@
 }
 
 .left-side {
-  width : 40%
+  width: 40vw;
+  position: fixed;
+  left: 0;
 }
 
 .right-side {
-  width : 60%;
+  position: fixed;
+  left: 40vw;
+  width: 60vw;
 }
 
 @media (max-width: 730px) {

@@ -1,0 +1,30 @@
+.register {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-side {
+  width: 40vw;
+  position: fixed;
+  left: 0;
+}
+
+.right-side {
+  position: fixed;
+  left: 40vw;
+  width: 60vw;
+  overflow-y: auto;
+  height: 100%;
+}
+
+@media (max-width: 730px) {
+  /* it will need to be a bit smarter */
+
+  .left-side {
+    display: none;
+  }
+
+  .right-side {
+    width: 100%;
+  }
+}

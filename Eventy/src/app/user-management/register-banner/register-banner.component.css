@@ -1,0 +1,72 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #929AB7;
+  color: white;
+  height: 76vh;
+  padding: 8vh;
+}
+
+.banner-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  width: 40vw;
+}
+
+.welcome-text {
+  font-size: 30px;
+  line-height: 40px;
+  letter-spacing: 3px;
+  font-family: Montserrat;
+}
+
+.select-text {
+  font-size: 20px;
+  line-height: 20px;
+  font-family: Albert Sans;
+}
+
+.role-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.role-button {
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: #E8E8E8;
+  margin: 1vw;
+  cursor: pointer;
+}
+
+.role-button img {
+  width: 9vw;
+  padding: 1vw;
+}
+
+.role-button-text {
+  font-family: "Albert Sans";
+  font-size: 13px;
+  line-height: 20px;
+  color: #6E717B;
+}
+
+.not-selected-button {
+  opacity: 65%;
+}
+
+.register-text {
+  font-size: 17px;
+  line-height: 30px;
+  text-align: center;
+  color: #F6F4F4;
+  font-family: Albert Sans;
+}

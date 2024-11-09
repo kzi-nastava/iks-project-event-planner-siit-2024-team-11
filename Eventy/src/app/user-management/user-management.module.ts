@@ -7,6 +7,10 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import {MaterialModule} from '../infrastructure/material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
+import { RegisterBannerComponent } from './register-banner/register-banner.component';
+import { RegisterOrganizerComponent } from './register-organizer/register-organizer.component';
+import { RegisterProviderComponent } from './register-provider/register-provider.component';
+import { InvalidInputDataDialogComponent } from './invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 
 
@@ -15,7 +19,11 @@ import {RouterLink} from '@angular/router';
     LoginComponent,
     RegisterComponent,
     LoginBannerComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RegisterBannerComponent,
+    RegisterOrganizerComponent,
+    RegisterProviderComponent,
+    InvalidInputDataDialogComponent
   ],
   imports: [
     CommonModule,
