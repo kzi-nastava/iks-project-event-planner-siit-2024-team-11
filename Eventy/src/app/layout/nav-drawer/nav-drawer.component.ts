@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-nav-drawer',
@@ -6,4 +7,5 @@ import {Component} from '@angular/core';
   styleUrl: './nav-drawer.component.css'
 })
 export class NavDrawerComponent {
+  @Input() drawer!: MatSidenav;
 }

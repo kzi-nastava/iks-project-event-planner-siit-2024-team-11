@@ -1,0 +1,22 @@
+.login {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-side {
+  width : 40%
+}
+
+.right-side {
+  width : 60%;
+}
+
+@media (max-width: 730px) {
+  .left-side {
+    display: none;
+  }
+
+  .right-side {
+    width: 100%;
+  }
+}
