@@ -1,0 +1,35 @@
+<div class="banner">
+  <div class="banner-part">
+    <p class="welcome-text">
+      Welcome to
+    </p>
+
+    <img src="logo-background.png" alt="Application logo"/>
+  </div>
+
+  <div class="banner-part">
+    <p class="select-text">
+      SELECT ACCOUNT ROLE
+    </p>
+
+    <div class="role-buttons">
+      <button [ngClass]="getOrganizerButtonClasses()" (click)="switchRegister.emit(true)">
+        <img src="Organiser.png" alt="Event Organizer photo" />
+        <p class="role-button-text">EVENT ORGANIZER</p>
+      </button>
+
+      <button [ngClass]="getProviderButtonClasses()" (click)="switchRegister.emit(false)">
+        <img src="Provider.png" alt="Product/Service Provider photo" />
+        <p class="role-button-text">PRODUCT/SERVICE PROVIDER</p>
+      </button>
+    </div>
+  </div>
+
+  <div class="banner-part">
+    <p class="register-text">
+      Already have an account?
+    </p>
+
+    <a mat-flat-button class="button" [routerLink]="['/login']">LOGIN HERE</a>
+  </div>
+</div>
