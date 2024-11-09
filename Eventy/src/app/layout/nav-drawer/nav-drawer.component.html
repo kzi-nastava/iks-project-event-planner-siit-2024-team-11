@@ -1,0 +1,5 @@
+<img src="logo-background.png" alt="Eventy logo" [routerLink]="['']" />
+<mat-nav-list>
+  <a class="sidenav-link" [routerLink]="['login']" (click)="drawer.toggle()"><mat-icon>badge</mat-icon> Login</a>
+  <a class="sidenav-link" [routerLink]="['register']" (click)="drawer.toggle()"><mat-icon>person_add</mat-icon> Register</a>
+</mat-nav-list>

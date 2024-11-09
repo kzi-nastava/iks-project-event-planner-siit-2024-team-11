@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LayoutModule } from './layout/layout.module';
-import { WineModule } from './wine/wine.module';
+import {MaterialModule} from './infrastructure/material/material.module';
+import {UserManagementModule} from './user-management/user-management.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { WineModule } from './wine/wine.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    UserManagementModule,
+    MaterialModule
   ],
   providers: [
     provideAnimationsAsync()

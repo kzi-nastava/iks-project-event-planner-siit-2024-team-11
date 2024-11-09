@@ -2,3 +2,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+  font-family: 'Albert Sans';
+  src: url('../public/AlbertSans.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../public/Montserrat.ttf');
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('../public/Figtree.ttf');
+}
+
+.button {
+  border-radius: 10px !important;
+  background-color: #6E7489 !important;
+  font-family: Roboto;
+}
