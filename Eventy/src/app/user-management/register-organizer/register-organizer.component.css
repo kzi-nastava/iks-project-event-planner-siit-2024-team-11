@@ -1,0 +1,84 @@
+.form {
+  background-color: #F1F1F1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+
+.register-label {
+  margin-bottom: 8vh;
+  font-family: "Albert Sans";
+  font-size: 40px;
+  line-height: 55px;
+  color: #7A7575;
+  width: 30vw;
+  text-align: center;
+}
+
+.form>button {
+  margin-top: 3vh;
+  margin-bottom: 12vh; /* this keeps the whole form in the central place */
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.field {
+  width: 30vw;
+  margin-bottom: 2vh;
+  /* background-color: #F8F4F4 !important; */
+}
+
+.name-fields {
+  display: flex;
+  flex-direction: row;
+  width: 30vw;
+  justify-content: space-between;
+}
+
+.name-field {
+  width: 14vw;
+  margin-bottom: 2vh;
+}
+
+.profile-picture-picker {
+  margin-bottom: 4vh;
+  cursor: pointer;
+}
+
+.profile-picture-picker img {
+  border-radius:50%;
+  width: 12vw;
+  border: 3px white solid;
+}
+
+#profilePictureInputId {
+  display: none;
+}
+
+.profile-picture-container {
+  position: relative;
+  display: inline-block; /* Keep it inline with surrounding elements */
+}
+
+.change-picture-note {
+  position: absolute;
+  bottom: -10%; /* Position slightly below the circle */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center it */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  color: white; /* Text color */
+  padding: 5px 10px; /* Padding for the note */
+  border-radius: 12px; /* Rounded corners to fit circular shape */
+  font-size: 12px; /* Smaller text size */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
+  width: 7vw;
+  text-align: center;
+  font-family: "Montserrat";
+}
