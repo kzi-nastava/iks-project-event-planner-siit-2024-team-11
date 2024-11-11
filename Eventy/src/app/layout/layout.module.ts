@@ -5,6 +5,7 @@ import { MaterialModule } from '../infrastructure/material/material.module';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -12,13 +13,14 @@ import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
   declarations: [
     NavBarComponent,
     HomeComponent,
-    NavDrawerComponent
+    NavDrawerComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule
   ],
-  exports: [NavBarComponent, NavDrawerComponent]
+    exports: [NavBarComponent, NavDrawerComponent, FooterComponent]
 })
 export class LayoutModule { }

@@ -8,5 +8,6 @@
   <mat-sidenav-content>
     <app-nav-bar [drawer]="drawer"></app-nav-bar>
     <router-outlet></router-outlet>
+    <app-footer *ngIf="showFooter"></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
