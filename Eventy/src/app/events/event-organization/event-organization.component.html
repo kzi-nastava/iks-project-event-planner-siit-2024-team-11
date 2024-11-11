@@ -1,1 +1,18 @@
-<p>event-organization works!</p>
+<div>
+  <div class="top-part">
+    <button mat-mini-fab (click)="goBack()" [disabled]="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{titleMap.get(eventOrganizationStage)}}</h1>
+    <span></span>
+  </div>
+
+  <app-event-creation-basic-information *ngIf="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION"></app-event-creation-basic-information>
+  <app-agenda-creation *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"></app-agenda-creation>
+  <app-invitations-sending *ngIf="eventOrganizationStage === EventOrganizationStage.INVITATIONS_SENDING"></app-invitations-sending>
+
+  <div class="bottom-part">
+    <button mat-flat-button class="button" (click)="submit()" *ngIf="!isForward()"><mat-icon>add</mat-icon>ADD EVENT</button>
+    <button mat-flat-button class="button" (click)="goForward()" *ngIf="isForward()"><mat-icon>arrow_forward</mat-icon>NEXT</button>
+  </div>
+</div>

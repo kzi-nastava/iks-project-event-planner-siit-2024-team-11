@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { LayoutModule } from './layout/layout.module';
 import {MaterialModule} from './infrastructure/material/material.module';
 import {UserManagementModule} from './user-management/user-management.module';
+import {EventsModule} from './events/events.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {UserManagementModule} from './user-management/user-management.module';
     AppRoutingModule,
     LayoutModule,
     UserManagementModule,
-    MaterialModule
+    MaterialModule,
+    EventsModule
   ],
   providers: [
     provideAnimationsAsync()
