@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatAnchor, MatButtonModule} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
-import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavContainer, MatSidenavModule} from '@angular/material/sidenav';
-import {MatListItem, MatNavList} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -23,14 +26,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatAnchor,
-    MatLabel,
     MatIconModule,
     MatSidenavModule,
-    MatSidenavContainer,
-    MatNavList,
-    MatListItem,
-    MatDialogModule
+    MatListModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule
   ],
   exports: [
     MatToolbarModule,
@@ -40,14 +42,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatAnchor,
-    MatLabel,
     MatIconModule,
     MatSidenavModule,
-    MatSidenavContainer,
-    MatNavList,
-    MatListItem,
-    MatDialogModule
+    MatListModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule
   ]
 })
 export class MaterialModule { }

@@ -38,7 +38,9 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
             ],
             "scripts": []
           },
