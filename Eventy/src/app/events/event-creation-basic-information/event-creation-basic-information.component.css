@@ -1,0 +1,41 @@
+form {
+  display: flex;
+  flex-direction: row;
+}
+
+form>div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  width: 30vw;
+  margin-bottom: 2vh;
+}
+
+mat-radio-group {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: #444;
+  margin-bottom: 4vh;
+}
+
+#map {
+  height: 35vh;
+  width: 30vw;
+  margin-bottom: 2vh;
+}
+
+.map-label-container {
+  width: 40vw;
+  margin-bottom: 5vh;
+  text-align: center;
+  font-family: Montserrat;
+  color: #333;
+}

@@ -15,7 +15,7 @@ export class EventOrganizationComponent {
   protected readonly EventOrganizationStage = EventOrganizationStage;
 
    eventOrganizationStage: EventOrganizationStage;
-   isEventOpen: boolean;
+   isEventPublic: boolean;
    titleMap: Map<EventOrganizationStage, string>;
 
    constructor() {
@@ -24,7 +24,7 @@ export class EventOrganizationComponent {
      this.titleMap.set(EventOrganizationStage.AGENDA_CREATION, "Add Agenda to the Event");
      this.titleMap.set(EventOrganizationStage.INVITATIONS_SENDING, "Send Invitations");
      this.eventOrganizationStage = EventOrganizationStage.BASIC_INFORMATION;
-     this.isEventOpen = true;
+     this.isEventPublic = true;
    }
 
     goBack(): void {
@@ -37,7 +37,7 @@ export class EventOrganizationComponent {
 
     isForward(): boolean {
      return this.eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION ||
-       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && this.isEventOpen);
+       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && this.isEventPublic);
     }
 
     goForward(): void {

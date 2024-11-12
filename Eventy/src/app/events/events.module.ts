@@ -5,6 +5,7 @@ import { EventOrganizationComponent } from './event-organization/event-organizat
 import { EventCreationBasicInformationComponent } from './event-creation-basic-information/event-creation-basic-information.component';
 import { AgendaCreationComponent } from './agenda-creation/agenda-creation.component';
 import { InvitationsSendingComponent } from './invitations-sending/invitations-sending.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { InvitationsSendingComponent } from './invitations-sending/invitations-s
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class EventsModule { }
