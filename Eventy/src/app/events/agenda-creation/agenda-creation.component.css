@@ -1,0 +1,33 @@
+.all-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10vh;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%;
+}
+
+.field {
+  width: 30vw;
+  margin-bottom: 2vh;
+}
+
+table {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
