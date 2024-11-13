@@ -32,4 +32,15 @@ export class AgendaCreationComponent {
     this.minStartTime = this.activityForm.value.timeRange[1];
     this.activityForm.reset();
   }
+
+  formatDate(date : Date) : string {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',   // full day name (e.g., Monday)
+      year: 'numeric',   // year (e.g., 2024)
+      month: 'long',     // full month name (e.g., October)
+      day: 'numeric',    // day of the month (e.g., 13)
+      hour: '2-digit',   // hour (e.g., 03 PM)
+      minute: '2-digit'  // minute (e.g., 45)
+    });
+  }
 }
