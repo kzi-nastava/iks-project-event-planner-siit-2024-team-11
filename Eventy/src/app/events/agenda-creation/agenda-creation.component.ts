@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {IActivity} from '../model/events.model';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import {
+  InvalidInputDataDialogComponent
+} from '../../user-management/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-agenda-creation',
@@ -14,7 +18,7 @@ export class AgendaCreationComponent {
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
-    timeRange: new FormControl([], Validators.required)
+    timeRange: new FormControl([], [Validators.required, this.validateTimeRange()])
   });
 
   displayedColumns: string[] = ['name', 'description', 'location', 'startTime', 'endTime'];
@@ -27,10 +31,37 @@ export class AgendaCreationComponent {
 
   minStartTime: Date = new Date();
 
+  constructor(private dialog: MatDialog) {
+  }
+
   addActivity() : void {
-    this.agenda.push(this.activityForm.value);
-    this.minStartTime = this.activityForm.value.timeRange[1];
-    this.activityForm.reset();
+    this.activityForm.controls['name'].setValue(this.activityForm.controls['name'].value)
+    this.activityForm.controls['description'].setValue(this.activityForm.controls['description'].value)
+    this.activityForm.controls['location'].setValue(this.activityForm.controls['location'].value)
+    this.activityForm.controls['timeRange'].setValue(this.activityForm.controls['timeRange'].value)
+
+    if(this.activityForm.valid) {
+      this.agenda = [...this.agenda, this.activityForm.value];
+      this.minStartTime = this.activityForm.value.timeRange[1];
+      this.activityForm.reset(
+        {
+          "name": "",
+          "description": "",
+          "location": "",
+          "timeRange": [this.minStartTime, this.minStartTime]
+        }
+      );
+      Object.keys(this.activityForm.controls).forEach(key => {
+        this.activityForm.controls[key].setErrors(null) ;
+      });
+    } else {
+      this.dialog.open(InvalidInputDataDialogComponent, {
+        data : {
+          title: "Invalid input",
+          message: "Invalid input data"
+        }
+      });
+    }
   }
 
   formatDate(date : Date) : string {
@@ -42,5 +73,15 @@ export class AgendaCreationComponent {
       hour: '2-digit',   // hour (e.g., 03 PM)
       minute: '2-digit'  // minute (e.g., 45)
     });
+  }
+
+  private validateTimeRange(): ValidatorFn {
+    return (): ValidationErrors | null => {
+      if(this.activityForm) {
+        return this.activityForm.controls['timeRange'].value[0] && this.activityForm.controls['timeRange'].value[1] ? null : { bothTimesEntered: true };
+      }
+
+      return null;
+    };
   }
 }

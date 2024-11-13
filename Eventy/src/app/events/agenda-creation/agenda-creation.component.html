@@ -38,6 +38,10 @@
       @if (activityForm.controls['timeRange'].hasError('required')) {
         <mat-error>Time Range is <strong>required</strong></mat-error>
       }
+      @if (activityForm.controls['timeRange'].hasError('bothTimesEntered') &&
+        !activityForm.controls['timeRange'].hasError('required')) {
+        <mat-error>End Time is <strong>required</strong></mat-error>
+      }
     </mat-form-field>
 
     <button mat-flat-button class="button" type="submit" (click)="addActivity()"><mat-icon>add</mat-icon>Add Activity</button>
