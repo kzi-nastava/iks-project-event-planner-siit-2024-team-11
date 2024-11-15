@@ -1,6 +1,6 @@
 <!-- TABS -->
 <div class = "tabs_container">
-   <div class = "events_tab_container">
+   <div class = "events_tab_container" style = "opacity: 100%"> <!-- TO-DO: tab active: 100%, tab inactive: 40% -->
       <div class = "events_tab_left_border"></div>
       
       <div class = "tab_icon_and_name">
@@ -9,7 +9,7 @@
       </div>
    </div>
 
-   <div class = "solutions_tab_container">
+   <div class = "solutions_tab_container" style = "opacity: 40%;"> <!-- TO-DO: tab active: 100%, tab inactive: 40% -->
       <div class = "solutions_tab_left_border"></div> 
 
       <div class = "tab_icon_and_name">
@@ -21,5 +21,45 @@
 
 <!-- FEATURED ITEMS -->
 <div class = "featured_items">
+   <div class = "events_title_container" style = "display: flex"> <!-- TO-DO: tab active: flex, tab inactive: none -->
+      <p class = "title" style = "margin-right: 20px;">
+         FEATURED
+      </p>
+      <div style = "border-bottom: 24px solid #808AAC; position: relative; padding-left: 1px; padding-bottom: 8px;">
+         <p class = "title" style = "visibility: hidden; height: 0px;">
+            EVENTS
+         </p>
+         <p class = "title" style = "position: absolute;">
+            EVENTS
+         </p>
+      </div>
+   </div>
+
+   <div class = "solutions_title_container" style = "display: none;"> <!-- TO-DO: tab active: flex, tab inactive: none -->
+      <p class = "title">
+         FEATURED
+      </p>
+      <div style = "display: flex; flex-direction: row; margin-top: 30px;">
+         <div style = "border-bottom: 24px solid #FAD609; position: relative; padding-left: 1px; padding-bottom: 8px;">
+            <p class = "title" style = "visibility: hidden; height: 0px;">
+               SERVICES
+            </p>
+            <p class = "title" style = "position: absolute;">
+               SERVICES
+            </p>
+         </div>
+         <p class = "title" style = "margin-right: 15px; margin-left: 15px;">
+            &
+         </p>
+         <div style = "border-bottom: 24px solid #DD79AE; position: relative; padding-left: 1px; padding-bottom: 8px;">
+            <p class = "title" style = "visibility: hidden; height: 0px;">
+               PRODUCTS
+            </p>
+            <p class = "title" style = "position: absolute;">
+               PRODUCTS
+            </p>
+         </div>
+      </div>
+   </div>
 
 </div>
