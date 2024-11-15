@@ -1,6 +1,6 @@
 mat-toolbar {
     background-color: #929AB7;
-    height: 8vh;
+    height: 60px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -17,15 +17,22 @@ div {
 }
 
 mat-icon {
-  font-size: 5vh;
-  margin-right: 2vw;
+  font-size: 40px;
   color: white;
-  height: 5vh;
-  width: 5vh;
+  height: 40px;
+  width: 40px;
+}
+
+.tool-bar-icon {
+  margin-left: 25px;
+}
+
+.drawer-opener {
+  margin-right: 1vw;
 }
 
 img {
-  height: 8vh;
+  height: 60px;
   width: auto;
 }
 

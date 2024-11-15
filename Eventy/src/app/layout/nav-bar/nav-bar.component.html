@@ -1,14 +1,14 @@
 <mat-toolbar>
   <div>
-    <mat-icon class="clickable" (click)="drawer.toggle()">menu</mat-icon>
+    <mat-icon class="drawer-opener clickable" (click)="drawer.toggle()">menu</mat-icon>
     <span class="clickable" [routerLink]="['']">
       <img src="logo-nav.png" alt="Eventy Logo" />
     </span>
   </div>
   <div>
     <!-- Router Links will be added here -->
-    <mat-icon class="clickable">account_circle</mat-icon>
-    <mat-icon class="clickable">chat_bubble</mat-icon>
-    <mat-icon class="clickable">notifications</mat-icon>
+    <mat-icon class="tool-bar-icon clickable">account_circle</mat-icon>
+    <mat-icon class="tool-bar-icon clickable">chat_bubble</mat-icon>
+    <mat-icon class="tool-bar-icon clickable">notifications</mat-icon>
   </div>
 </mat-toolbar>

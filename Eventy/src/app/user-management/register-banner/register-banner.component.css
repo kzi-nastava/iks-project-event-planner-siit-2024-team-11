@@ -5,8 +5,8 @@
   align-items: center;
   background-color: #929AB7;
   color: white;
-  height: 76vh;
-  padding: 8vh;
+  height: 84%;
+  padding: 8%;
 }
 
 .banner-part {
@@ -48,7 +48,7 @@ img {
 }
 
 .role-button img {
-  width: 9vw;
+  width: 7vw;
   padding: 1vw;
 }
 
