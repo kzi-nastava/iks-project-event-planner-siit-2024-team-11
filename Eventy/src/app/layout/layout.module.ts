@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 import { FooterComponent } from './footer/footer.component';
+import { EventsModule } from '../events/events.module';
+import { EventCardComponent } from '../events/event-card/event-card.component';
 
 
 
@@ -19,7 +21,8 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    EventsModule,
   ],
     exports: [NavBarComponent, NavDrawerComponent, FooterComponent]
 })

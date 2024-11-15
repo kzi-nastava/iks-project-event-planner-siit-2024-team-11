@@ -89,8 +89,8 @@
             color: #6E717B;
          }
 
-/* --- FEATURED ITEMS --- */
-.featured_items {
+/* --- FEATURED ITEMS TITLE --- */
+.featured_items_title_container {
    display: flex;
    background-color: #B5BEDF;
    padding-top: 35px;
@@ -109,7 +109,7 @@
          font-family: "Albert Sans";
          letter-spacing: 3px;
          font-weight: 900;
-         font-size: 40px;
+         font-size: 4.5vw;
          margin: 0;
       }
 
@@ -120,3 +120,36 @@
       align-items: center;
       flex-direction: column;
    }
+
+/* --- FEATURED ITEMS --- */
+.featured_items_container {
+   display: flex;
+   flex-direction: column;
+   background-color: #B5BEDF;
+}
+
+   .featured_left {
+      display: flex;
+      background-color: red;
+   }
+
+   .featured_right {
+      display: flex;
+   }
+
+      .featured_card {
+         margin-left: 40px;
+         margin-right: 40px;
+      }
+
+
+
+
+
+
+
+
+
+
+
+

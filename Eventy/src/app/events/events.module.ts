@@ -7,6 +7,7 @@ import { AgendaCreationComponent } from './agenda-creation/agenda-creation.compo
 import { InvitationsSendingComponent } from './invitations-sending/invitations-sending.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
+import { EventCardComponent } from './event-card/event-card.component';
 
 
 
@@ -15,13 +16,17 @@ import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
     EventOrganizationComponent,
     EventCreationBasicInformationComponent,
     AgendaCreationComponent,
-    InvitationsSendingComponent
+    InvitationsSendingComponent,
+    EventCardComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     DatepickerModule
+  ],
+  exports: [
+    EventCardComponent,
   ]
 })
 export class EventsModule { }
