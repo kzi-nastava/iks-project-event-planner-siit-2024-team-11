@@ -1,5 +1,9 @@
+.all-container {
+  background-color: #F1F1F1;
+}
+
 .top-part {
-  margin-top: 3vh;
+  padding-top: 3vh;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -29,5 +33,5 @@
   flex-direction: row;
   justify-content: center;
   margin-top: 4vh;
-  margin-bottom: 2vh;
+  padding-bottom: 2vh;
 }
