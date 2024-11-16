@@ -93,8 +93,8 @@
 .featured_items_title_container {
    display: flex;
    background-color: #B5BEDF;
-   padding-top: 3vw;
-   padding-bottom: 3vw;
+   padding-top: 2.6vw;
+   padding-bottom: 2.6vw;
 }
 
    .events_title_container {
@@ -128,7 +128,7 @@
       display: flex;
       position: relative;
       justify-content: left;
-      margin-bottom: 18px;
+      margin-bottom: 17px;
    }
 
       .left_line {
@@ -175,7 +175,7 @@
       display: flex;
       position: relative;
       justify-content: right;
-      margin-bottom: 18px;
+      margin-bottom: 17px;
    }
 
       .line_background {
