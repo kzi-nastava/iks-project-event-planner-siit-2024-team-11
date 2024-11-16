@@ -1,6 +1,6 @@
 .card_container {
    display: flex;
-   width: 520px;
+   width: 580px;
    background-color: white;
    margin: 10px;
    border-radius: 10px;
@@ -12,9 +12,9 @@
       flex: 1;
       flex-direction: column;
       padding-left: 14px;
-      padding-top: 10px;
+      padding-top: 12px;
       padding-right: 15px;
-      padding-bottom: 7px;
+      padding-bottom: 12px;
       }
 
       .title_container {
@@ -25,10 +25,10 @@
 
          .title {
             margin: 0;  
-            color: #5a5959;
-            font-weight: 500;
-            padding-bottom: 4px; 
-            font-size: 15.5px;
+            color: #5a5959e2;
+            font-weight: 600;
+            padding-bottom: 5px; 
+            font-size: 17.5px;
             font-family: Albert Sans;
          }
 
@@ -36,25 +36,26 @@
          display: flex;
          width: 100%;
          flex-direction: row;
-         padding-top: 8px;
-         padding-bottom: 9px;
+         padding-top: 10px;
+         padding-bottom: 14px;
       }  
 
          .type {
             margin: 0;
             color: #AEAAAA;
-            font-size: 14.5px;
+            font-size: 16px;
          }
 
       .max_participants_container {
          display: flex;
          width: 100%;
+         padding-bottom: 20px
       }  
 
          .max_participants {
             color: #5B5B5B;
             margin: 0;
-            padding-bottom: 14px;
+            font-size: 17px;
          }
 
       .date_location_container {
@@ -66,16 +67,19 @@
          .date {
             margin: 0;
             color: #5B5B5B;
+            padding-bottom: 5px;
+            font-size: 17px;
          }
 
          .location {
             margin: 0;
             color: #5B5B5B;
+            font-size: 17px;
          }
 
    .right_side_container {
       display: flex;
-      flex: 1.2;
+      flex: 1.1;
       flex-direction: column;
       padding-left: 0px;
       padding-top: 10px;
@@ -98,21 +102,21 @@
             position: relative;
             display: flex;
             padding: 1px;
-            padding-left: 1.5px;
-            padding-right: 2.5px;
+            padding-left: 1px;
+            padding-right: 3.5px;
             justify-content: center;
             align-items: center;
             border-radius: 7px;
             border: solid 2px #929AB7;
-            margin-right: 10px;
+            margin-right: 13px;
             cursor: pointer;
          }
 
          .see_more_button_container {
             display: flex;
             padding: 1px;
-            padding-left: 8px;
-            padding-right: 8px;
+            padding-left: 9px;
+            padding-right: 9px;
             justify-content: center;
             align-items: center;
             border-radius: 7px;
@@ -120,7 +124,7 @@
             margin: 0px;
             margin-left: 0px;
             cursor: pointer;
-            margin-right: 3px;
+            margin-right: 4px;
          }
 
       .description_container {
@@ -135,9 +139,9 @@
             margin: 0; 
             display: -webkit-box;
             -webkit-box-orient: vertical; 
-            -webkit-line-clamp: 4; 
-            line-clamp: 4;
-            font-size: 14px; 
+            -webkit-line-clamp: 5; 
+            line-clamp: 5;
+            font-size: 15px; 
             line-height: 20px; 
             color: #5B5B5B; 
             letter-spacing: 0.3;
