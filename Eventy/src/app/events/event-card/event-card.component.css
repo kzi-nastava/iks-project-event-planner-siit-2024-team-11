@@ -133,8 +133,8 @@
             position: relative;
             display: flex;
             padding: 3px;
-            padding-left: 1px;
-            padding-right: 3.5px;
+            padding-left: 3px;
+            padding-right: 5.5px;
             justify-content: center;
             align-items: center;
             border-radius: 7px;

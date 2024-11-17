@@ -93,8 +93,8 @@
 .featured_items_title_container {
    display: flex;
    background-color: #B5BEDF;
-   padding-top: 2.2vw;
-   padding-bottom: 2.2vw;
+   padding-top: 1.4vw;
+   padding-bottom: 1.5vw;
 }
 
    .events_title_container {
@@ -128,12 +128,12 @@
       display: flex;
       position: relative;
       justify-content: left;
-      margin-bottom: 17px;
+      margin-bottom: 19px;
    }
 
       .left_line {
          position: absolute;
-         height: 45px;
+         height: 55px;
          background-color: #DADEEA;
          left: 0;
          border-top-right-radius: 20px;
@@ -142,8 +142,8 @@
 
       .bubbles1_left {
          position: absolute;
-         width: 55px;
-         height: 55px;
+         width: 60px;
+         height: 60px;
          border-radius: 100px;
          background-color: #929AB7;
          top: 12%;
@@ -153,8 +153,8 @@
 
       .bubbles2_left {
          position: absolute;
-         width: 65px;
-         height: 65px;
+         width: 70px;
+         height: 70px;
          border-radius: 100px;
          background-color: #71788F;
          top: 22%;
@@ -163,8 +163,8 @@
 
       .bubbles3_left {
          position: absolute;
-         width: 45px;
-         height: 45px;
+         width: 50px;
+         height: 50px;
          border-radius: 100px;
          background-color: #ffffff;
          top: 50%;
@@ -175,23 +175,23 @@
       display: flex;
       position: relative;
       justify-content: right;
-      margin-bottom: 17px;
+      margin-bottom: 19px;
    }
 
       .line_background {
          position: absolute;
-         top: 17%;
+         top: 20%;
          width: 85%;
          background-color: #DADEEA;
          right: 0;
-         height: 190px;
+         height: 220px;
          border-top-left-radius: 40px;
          border-bottom-left-radius: 40px;
       }
 
       .right_line {
          position: absolute;
-         height: 45px;
+         height: 55px;
          background-color: #B5BEDF;
          right: 0;
          border-top-left-radius: 20px;
@@ -200,8 +200,8 @@
 
       .bubbles1_right {
          position: absolute;
-         width: 55px;
-         height: 55px;
+         width: 60px;
+         height: 60px;
          border-radius: 100px;
          background-color: #929AB7;
          top: 12%;
@@ -211,8 +211,8 @@
 
       .bubbles2_right {
          position: absolute;
-         width: 65px;
-         height: 65px;
+         width: 70px;
+         height: 70px;
          border-radius: 100px;
          background-color: #71788F;
          top: 22%;
@@ -221,8 +221,8 @@
 
       .bubbles3_right {
          position: absolute;
-         width: 45px;
-         height: 45px;
+         width: 50px;
+         height: 50px;
          border-radius: 100px;
          background-color: #ffffff;
          top: 50%;
