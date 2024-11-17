@@ -16,7 +16,7 @@ export class AllEventTypesComponent implements OnInit {
   searchQuery: string = "";
   eventTypes: IEventType[] = [];
   selectedEventType: IEventType;
-  pageSize: number = 3;
+  pageSize: number = 12;
   currentPage: number = 0;
   paginatedEventTypes: IEventType[] = [];
 
@@ -86,5 +86,10 @@ export class AllEventTypesComponent implements OnInit {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedEventTypes = this.eventTypes.slice(startIndex, endIndex);
+  }
+
+  search(): void {
+    this.eventTypes = this.eventTypeService.search(this.searchQuery);
+    this.updatePaginatedEventTypes();
   }
 }

@@ -47,9 +47,21 @@
   text-decoration: none;
 }
 
-.search-field {
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 30vw;
   margin-bottom: 3vh;
+}
+
+.search-container button {
+  height: 55px;
+  width: 55px;
+}
+
+.search-field {
+  width: 25vw;
 }
 
 .types-container {

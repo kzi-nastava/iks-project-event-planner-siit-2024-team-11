@@ -122,4 +122,8 @@ export class EventTypeService {
       console.error('Event type not found.');
     }
   }
+
+  search(text: string): IEventType[] {
+    return this.eventTypes.filter(x => x.name === text);
+  }
 }
