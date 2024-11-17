@@ -92,4 +92,10 @@ export class AllEventTypesComponent implements OnInit {
     this.eventTypes = this.eventTypeService.search(this.searchQuery);
     this.updatePaginatedEventTypes();
   }
+
+  deleteType(): void {
+    this.eventTypeService.delete(this.selectedEventType);
+    this.eventTypes = this.eventTypeService.getAll();
+    this.updatePaginatedEventTypes();
+  }
 }

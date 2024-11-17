@@ -38,7 +38,7 @@
 
       <div>
         <a mat-flat-button class="button" [routerLink]="['/edit-event-type']"><mat-icon>edit</mat-icon>Edit</a>
-        <button mat-flat-button class="button deactivate-button"><mat-icon>delete</mat-icon>Deactivate</button>
+        <button mat-flat-button class="button deactivate-button" (click)="deleteType()"><mat-icon>delete</mat-icon>Deactivate</button>
       </div>
     </div>
 
