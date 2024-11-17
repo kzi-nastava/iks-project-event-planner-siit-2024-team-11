@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IEventType} from '../model/events.model';
 import {EventTypeService} from '../event-type.service';
+import {PageEvent} from '@angular/material/paginator';
 
 interface ICardClasses {
   "event-type-card": boolean,
@@ -15,6 +16,9 @@ export class AllEventTypesComponent implements OnInit {
   searchQuery: string = "";
   eventTypes: IEventType[] = [];
   selectedEventType: IEventType;
+  pageSize: number = 3;
+  currentPage: number = 0;
+  paginatedEventTypes: IEventType[] = [];
 
   constructor(private eventTypeService: EventTypeService) {
 
@@ -22,6 +26,8 @@ export class AllEventTypesComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventTypes = this.eventTypeService.getAll();
+
+    this.updatePaginatedEventTypes();
   }
 
   clearSearch(): void {
@@ -68,5 +74,17 @@ export class AllEventTypesComponent implements OnInit {
       "event-type-card" : true,
       "selected-card": this.selectedEventType && this.selectedEventType.name === eventType.name
     }
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.updatePaginatedEventTypes();
+  }
+
+  private updatePaginatedEventTypes(): void {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedEventTypes = this.eventTypes.slice(startIndex, endIndex);
   }
 }

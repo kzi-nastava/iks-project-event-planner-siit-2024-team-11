@@ -125,3 +125,11 @@
   padding: 0 2vh 2vh;
   width: 80%;
 }
+
+mat-paginator {
+  border-radius: 15px;
+  border: 1px solid #222;
+  color: black;
+  margin-top: 5vh;
+  font-size: 15px;
+}

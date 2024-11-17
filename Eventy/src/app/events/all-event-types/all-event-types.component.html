@@ -17,12 +17,14 @@
     </div>
 
     <div class="types-container">
-      <div class="triplet-container" *ngFor="let triplet of getItemsTypesAsTriplets(this.eventTypes)">
+      <div class="triplet-container" *ngFor="let triplet of getItemsTypesAsTriplets(this.paginatedEventTypes)">
         <div [ngClass]="getCardClasses(eventType)" *ngFor="let eventType of filterTriplet(triplet)" (click)="selectType(eventType)">
           {{ eventType.name }}
         </div>
       </div>
     </div>
+    <mat-paginator [length]="eventTypes.length" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+    </mat-paginator>
   </div>
 
   <div *ngIf="selectedEventType" class="right-side">
