@@ -93,8 +93,8 @@
 .featured_items_title_container {
    display: flex;
    background-color: #B5BEDF;
-   padding-top: 2.6vw;
-   padding-bottom: 2.6vw;
+   padding-top: 2.2vw;
+   padding-bottom: 2.2vw;
 }
 
    .events_title_container {
@@ -142,12 +142,12 @@
 
       .bubbles1_left {
          position: absolute;
-         width: 60px;
-         height: 60px;
+         width: 55px;
+         height: 55px;
          border-radius: 100px;
          background-color: #929AB7;
          top: 12%;
-         right: 7%;
+         right: 7.5%;
          z-index: 2;
       }
 
@@ -185,8 +185,8 @@
          background-color: #DADEEA;
          right: 0;
          height: 190px;
-         border-top-left-radius: 20px;
-         border-bottom-left-radius: 20px;
+         border-top-left-radius: 40px;
+         border-bottom-left-radius: 40px;
       }
 
       .right_line {
@@ -200,12 +200,12 @@
 
       .bubbles1_right {
          position: absolute;
-         width: 60px;
-         height: 60px;
+         width: 55px;
+         height: 55px;
          border-radius: 100px;
          background-color: #929AB7;
          top: 12%;
-         left: 7%;
+         left: 7.5%;
          z-index: 2;
       }
 

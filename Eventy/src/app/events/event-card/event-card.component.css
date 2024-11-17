@@ -1,21 +1,22 @@
 .card_container {
    display: flex;
-   width: 580px;
+   width: 40em;
    background-color: white;
    margin: 10px;
    border-radius: 10px;
    border-left: solid 13px #808AAC;
+   padding-left: 16px;
+   padding-right: 17px;
 }  
 
    .left_side_container {
       display: flex;
       flex: 1;
       flex-direction: column;
-      padding-left: 14px;
-      padding-top: 12px;
-      padding-right: 15px;
-      padding-bottom: 12px;
-      }
+      padding-top: 14px;
+      margin-right: 12px;
+      padding-bottom: 13px;
+   }
 
       .title_container {
          display: flex;
@@ -25,10 +26,10 @@
 
          .title {
             margin: 0;  
-            color: #5a5959e2;
+            color: #798098;
             font-weight: 600;
-            padding-bottom: 5px; 
-            font-size: 17.5px;
+            padding-bottom: 7px; 
+            font-size: 18.5px;
             font-family: Albert Sans;
          }
 
@@ -36,55 +37,85 @@
          display: flex;
          width: 100%;
          flex-direction: row;
-         padding-top: 10px;
-         padding-bottom: 14px;
+         padding-top: 7px;
+         padding-bottom: 10px;
       }  
 
          .type {
             margin: 0;
-            color: #AEAAAA;
+            color: #b9b4b4;
             font-size: 16px;
+            font-family: Albert Sans;
+            font-weight: 450;
          }
 
       .max_participants_container {
          display: flex;
          width: 100%;
-         padding-bottom: 20px
+         padding-bottom: 12px;
       }  
 
          .max_participants {
-            color: #5B5B5B;
+            color: #717171;
             margin: 0;
-            font-size: 17px;
+            font-size: 17px;  
+            font-weight: 500;
+            font-family: Albert Sans;
          }
 
       .date_location_container {
          display: flex;
          width: 100%;
          flex-direction: column;
+         padding-bottom: 10px;
       }  
 
          .date {
             margin: 0;
-            color: #5B5B5B;
-            padding-bottom: 5px;
-            font-size: 17px;
+            padding-bottom: 1px;
+            font-size: 17px;  
+            font-weight: 450;
+            color: #717171;
+            letter-spacing: 0;
+            font-family: Figtree;
          }
 
          .location {
             margin: 0;
-            color: #5B5B5B;
-            font-size: 17px;
+            font-size: 17px;  
+            font-weight: 450;
+            color: #717171;
+            letter-spacing: 0;
+            font-family: Figtree;
+         }
+
+      .organiser_container {
+         display: flex;
+         width: 100%;
+         flex-direction: row;
+      }  
+
+         .organiser_img {
+            width: 48px;
+            height: 48px;
+            border-radius: 100px;
+         }
+
+         .organiser {
+            margin: 0;
+            font-size: 17px;  
+            font-weight: 500;
+            color: #798098;
+            letter-spacing: 0;
+            font-family: Figtree;
          }
 
    .right_side_container {
       display: flex;
       flex: 1.1;
-      flex-direction: column;
-      padding-left: 0px;
-      padding-top: 10px;
-      padding-right: 15px;
+      padding-top: 12px;
       padding-bottom: 14px;
+      flex-direction: column;
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
    }
@@ -101,7 +132,7 @@
          .favorite_button_container {
             position: relative;
             display: flex;
-            padding: 1px;
+            padding: 3px;
             padding-left: 1px;
             padding-right: 3.5px;
             justify-content: center;
@@ -114,7 +145,7 @@
 
          .see_more_button_container {
             display: flex;
-            padding: 1px;
+            padding: 3px;
             padding-left: 9px;
             padding-right: 9px;
             justify-content: center;
@@ -130,6 +161,7 @@
       .description_container {
          display: flex;
          height: 100%;
+         margin-top: 2px;
          border-radius: 8px;
          box-shadow: 0px 0px 3px #adadadcb;
       }
@@ -139,8 +171,8 @@
             margin: 0; 
             display: -webkit-box;
             -webkit-box-orient: vertical; 
-            -webkit-line-clamp: 5; 
-            line-clamp: 5;
+            -webkit-line-clamp: 7; 
+            line-clamp: 7;
             font-size: 15px; 
             line-height: 20px; 
             color: #5B5B5B; 
