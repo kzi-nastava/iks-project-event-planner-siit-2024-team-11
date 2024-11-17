@@ -5,12 +5,13 @@ import { EventOrganizationComponent } from './event-organization/event-organizat
 import { EventCreationBasicInformationComponent } from './event-creation-basic-information/event-creation-basic-information.component';
 import { AgendaCreationComponent } from './agenda-creation/agenda-creation.component';
 import { InvitationsSendingComponent } from './invitations-sending/invitations-sending.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
 import { AllEventTypesComponent } from './all-event-types/all-event-types.component';
 import { CreateEventTypeComponent } from './create-event-type/create-event-type.component';
 import { EditEventTypeComponent } from './edit-event-type/edit-event-type.component';
 import { EventTypePageComponent } from './event-type-page/event-type-page.component';
+import {RouterLink} from '@angular/router';
 
 
 
@@ -23,13 +24,15 @@ import { EventTypePageComponent } from './event-type-page/event-type-page.compon
     AllEventTypesComponent,
     CreateEventTypeComponent,
     EditEventTypeComponent,
-    EventTypePageComponent
+    EventTypePageComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    DatepickerModule
+    DatepickerModule,
+    RouterLink,
+    FormsModule
   ]
 })
 export class EventsModule { }

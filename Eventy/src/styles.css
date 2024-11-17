@@ -19,6 +19,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   src: url('../public/Figtree.ttf');
 }
 
+@font-face {
+  font-family: 'Alike';
+  src: url('../public/Alike.ttf');
+}
+
 .button {
   border-radius: 10px !important;
   background-color: #6E7489 !important;

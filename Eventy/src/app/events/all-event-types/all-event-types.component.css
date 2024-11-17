@@ -1,0 +1,127 @@
+.all-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #F1F1F1;
+  height: 100%;
+  width: 100%;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 3vw;
+}
+
+.right-side {
+  width: 50%;
+  background-color: white;
+  border-radius: 25px;
+  border: solid 2px black;
+  padding: 2vw;
+  margin: 5vw 5vw 5vw 0;
+}
+
+.types-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  margin-bottom: 5vh;
+}
+
+.types-header-container span {
+  font-family: "Albert Sans";
+  font-size: 40px;
+  line-height: 55px;
+  color: #7A7575;
+  margin-right: 3vw;
+}
+
+.types-header-container a {
+  text-decoration: none;
+}
+
+.search-field {
+  width: 30vw;
+  margin-bottom: 3vh;
+}
+
+.types-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3vh;
+  width: 50%;
+}
+
+.triplet-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3vh;
+}
+
+.event-type-card {
+  background-color: white;
+  border-radius: 25px;
+  padding: 20px;
+  border: 2px solid #222;
+  font-family: "Albert Sans";
+  font-size: 25px;
+  cursor: pointer;
+  margin-right: 3vw;
+}
+
+.selected-card {
+  background-color: #929AB7;
+  border: 2px solid white;
+  color: white;
+}
+
+.type-title {
+  font-family: "Albert Sans";
+  font-size: 28px;
+}
+
+.type-desc {
+  font-family: "Alike";
+  font-size: 15px;
+  color: #666666;
+  margin-bottom: 3vh;
+}
+
+.deactivate-button {
+  background-color: #852221 !important;
+  margin-left: 1vw;
+}
+
+.shown-card-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3vh;
+}
+
+.category-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 15px;
+  border: 1px solid #222;
+  font-family: "Albert Sans";
+  font-size: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.category-container {
+  padding: 0 2vh 2vh;
+  width: 80%;
+}

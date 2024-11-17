@@ -25,6 +25,66 @@ export class EventTypeService {
           description: "Let your guests eat well!"
         }
       ]
+    },
+    {
+      name: "Wedding2",
+      description: "Celebrate two people that are getting married!",
+      recommendedCategories: [
+        {
+          name: "Music",
+          description: "Great atmosphere and ambient at your event through MUSIC!"
+        }
+      ]
+    },
+    {
+      name: "Birthday2",
+      description: "Celebrate day when your person was born!",
+      recommendedCategories: [
+        {
+          name: "Food",
+          description: "Let your guests eat well!"
+        }
+      ]
+    },
+    {
+      name: "Wedding3",
+      description: "Celebrate two people that are getting married!",
+      recommendedCategories: [
+        {
+          name: "Music",
+          description: "Great atmosphere and ambient at your event through MUSIC!"
+        }
+      ]
+    },
+    {
+      name: "Birthday3",
+      description: "Celebrate day when your person was born!",
+      recommendedCategories: [
+        {
+          name: "Food",
+          description: "Let your guests eat well!"
+        }
+      ]
+    },
+    {
+      name: "Wedding4",
+      description: "Celebrate two people that are getting married!",
+      recommendedCategories: [
+        {
+          name: "Music",
+          description: "Great atmosphere and ambient at your event through MUSIC!"
+        }
+      ]
+    },
+    {
+      name: "Birthday4",
+      description: "Celebrate day when your person was born!",
+      recommendedCategories: [
+        {
+          name: "Food",
+          description: "Let your guests eat well!"
+        }
+      ]
     }
   ];
 
