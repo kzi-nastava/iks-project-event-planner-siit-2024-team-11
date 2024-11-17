@@ -11,7 +11,7 @@ export interface IEventType {
   recommendedCategories: ICategory[];
 }
 
-interface ICategory {
+export interface ICategory {
   name: string;
   description: string;
 }
