@@ -1,8 +1,10 @@
 .all-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   background-color: #F1F1F1;
+  height: 80vh;
 }
 
 .heading {
@@ -82,6 +84,7 @@
   padding: 3vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .rec-cat-card p {
@@ -91,5 +94,18 @@
 
 .rec-cat-card span {
   font-family: Montserrat;
-  font-size: 17px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rec-cat-card span mat-icon {
+  margin-right: 5vw;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  color: red;
+  cursor: pointer;
 }

@@ -35,7 +35,11 @@ export class AllEventTypesComponent implements OnInit {
   }
 
   selectType(eventType: IEventType): void {
-    this.selectedEventType = eventType;
+    if(this.selectedEventType === eventType) {
+      this.selectedEventType = null;
+    } else {
+      this.selectedEventType = eventType;
+    }
   }
 
   getItemsTypesAsTriplets<T>(items: T[]): [T, T, T][] {

@@ -10,7 +10,6 @@ import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
 import { AllEventTypesComponent } from './all-event-types/all-event-types.component';
 import { CreateEventTypeComponent } from './create-event-type/create-event-type.component';
 import { EditEventTypeComponent } from './edit-event-type/edit-event-type.component';
-import { EventTypePageComponent } from './event-type-page/event-type-page.component';
 import {RouterLink} from '@angular/router';
 
 
@@ -24,7 +23,6 @@ import {RouterLink} from '@angular/router';
     AllEventTypesComponent,
     CreateEventTypeComponent,
     EditEventTypeComponent,
-    EventTypePageComponent,
   ],
   imports: [
     CommonModule,

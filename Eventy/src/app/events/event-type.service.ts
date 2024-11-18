@@ -117,7 +117,6 @@ export class EventTypeService {
     const index = this.eventTypes.findIndex(t => t.name === type.name);
     if (index !== -1) {
       this.eventTypes[index] = { ...this.eventTypes[index], ...type };
-      console.log('Event type updated locally:', this.eventTypes[index]);
     } else {
       console.error('Event type not found.');
     }
