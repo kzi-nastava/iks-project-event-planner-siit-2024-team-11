@@ -17,6 +17,14 @@ export class FeaturedSolutionsComponent {
     this.featuredSolutions = this.getMockData();
   }
 
+  isService(solution: Solution): boolean {
+    return (solution as Service).specifics !== undefined;
+  }
+
+  isProduct(solution: Solution): boolean {
+    return (solution as Product).specifics === undefined;
+  }
+
   getMockData(): Solution[] {
     const service1: Service = {
       name: 'Photography',
@@ -81,7 +89,8 @@ export class FeaturedSolutionsComponent {
       imageUrls: ['floral1.jpg', 'floral2.jpg'],
       isDeleted: false,
       isVisible: true,
-      isAvailable: true
+      isAvailable: true,
+      specifics: undefined,
     };
 
     const product2: Product = {
@@ -93,7 +102,8 @@ export class FeaturedSolutionsComponent {
       imageUrls: ['gift1.jpg', 'gift2.jpg'],
       isDeleted: false,
       isVisible: true,
-      isAvailable: true
+      isAvailable: true,
+      specifics: undefined,
     };
 
     return [service1, product1, service2, service3, product2];

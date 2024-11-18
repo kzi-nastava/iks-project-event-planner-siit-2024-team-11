@@ -2,8 +2,8 @@
 .featured_items_title_container {
    display: flex;
    background-color: #B5BEDF;
-   padding-top: 2.4vw;
-   padding-bottom: 2.5vw;
+   padding-top: 2.3vw;
+   padding-bottom: 2.7vw;
 }
 
    .events_title_container {
@@ -29,8 +29,8 @@
 }
 
    .featured_card {
-      margin-left: 9%;
-      margin-right: 9%;
+      margin-left: 8%;
+      margin-right: 8%;
    }
 
    .featured_left {
