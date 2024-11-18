@@ -1,18 +1,19 @@
 
 <!-- TABS -->
 <div class = "tabs_container">
-   <div class = "events_tab_container" style = "opacity: 100%"> <!-- TO-DO: tab active: 100%, tab inactive: 35% -->
-      <div class = "events_tab_left_border"></div>
-      
+
+   <!-- Events tab button -->
+   <div (click)="switchTab()" class = "events_tab_container" [ngStyle]="{'opacity' : isEventsSelected ? '100%' : '35%'}">
+      <div *ngIf="isEventsSelected" class = "events_tab_left_border"></div>
       <div class = "tab_icon_and_name">
          <img class = "tab_icon" src = "organiser_white_background.png">
          <p class = "tab_name"> Events </p>
       </div>
    </div>
 
-   <div class = "solutions_tab_container" style = "opacity: 35%;"> <!-- TO-DO: tab active: 100%, tab inactive: 35% -->
-      <div class = "solutions_tab_left_border"></div> 
-
+   <!-- Solutions tab button -->
+   <div (click)="switchTab()" class = "solutions_tab_container" [ngStyle]="{'opacity' : !isEventsSelected ? '100%' : '35%'}"> 
+      <div *ngIf="!isEventsSelected" class = "solutions_tab_left_border"></div> 
       <div class = "tab_icon_and_name">
          <img class = "tab_icon" src = "provider_white_background.png">
          <p class = "tab_name"> Solutions </p>
@@ -20,75 +21,8 @@
    </div>
 </div>
 
-<!-- FEATURED ITEMS TITLE -->
-<div class = "featured_items_title_container">
-   <div class = "events_title_container" style = "display: flex"> <!-- TO-DO: tab active: flex, tab inactive: none -->
-      <img src = "event_assets/featured_events_title.png" width="100%">
-   </div>
+<!-- FEATURED EVENTS -->
+<app-featured-events id = "featured_events" *ngIf="isEventsSelected"/>
 
-   <div class = "solutions_title_container" style = "display: none;"> <!-- TO-DO: tab active: flex, tab inactive: none -->
-      <img src = "event_assets/featured_solutions_title.png" width="100%">
-   </div>
-</div>
-
-<!-- FEATURED ITEMS -->
-<div class = "featured_items_container">
-
-   <!-- 1st CARD -->
-   <div class = "featured_left">
-      <app-event-card class = "featured_card" style = "position: absolute; z-index: 3;"/>
-      <div class = "left_line" style = "top: 34%; width: 75%;"> </div>
-      <div class = "left_line" style = "top: 66%; width: 80%; margin-left: 20px; border-radius: 20px;"> </div>
-      <div class = "bubbles1_left"> </div>
-      <div class = "bubbles2_left"> </div>
-      <div class = "bubbles3_left"> </div> 
-      <app-event-card class = "featured_card" style = "visibility: hidden;"/>  
-   </div>
-   
-   <!-- 2nd CARD -->
-   <div class = "featured_right">
-      <app-event-card class = "featured_card" style = "position: absolute; z-index: 3;"/>
-      <div class = "line_background"> </div>
-      <div class = "right_line" style = "top: 34%; width: 75%;"> </div>
-      <div class = "right_line" style = "top: 67%; width: 80%; margin-right: 20px; border-radius: 20px;"> </div>
-      <div class = "bubbles1_right"> </div>
-      <div class = "bubbles2_right"> </div>
-      <div class = "bubbles3_right"> </div>
-      <app-event-card class = "featured_card" style = "visibility: hidden;"/>
-   </div>
-   
-   <!-- 3rd CARD -->
-   <div class = "featured_left">
-      <app-event-card class = "featured_card" style = "position: absolute; z-index: 3;"/>
-      <div class = "left_line" style = "top: 34%; width: 75%;"> </div>
-      <div class = "left_line" style = "top: 66%; width: 80%; margin-left: 20px; border-radius: 20px;"> </div>
-      <div class = "bubbles1_left"> </div>
-      <div class = "bubbles2_left"> </div>
-      <div class = "bubbles3_left"> </div> 
-      <app-event-card class = "featured_card" style = "visibility: hidden;"/> 
-   </div>
-   
-   <!-- 4th CARD -->
-   <div class = "featured_right">
-      <app-event-card class = "featured_card" style = "position: absolute; z-index: 3;"/>
-      <div class = "line_background"> </div>
-      <div class = "right_line" style = "top: 34%; width: 75%;"> </div>
-      <div class = "right_line" style = "top: 67%; width: 80%; margin-right: 20px; border-radius: 20px;"> </div>
-      <div class = "bubbles1_right"> </div>
-      <div class = "bubbles2_right"> </div>
-      <div class = "bubbles3_right"> </div>
-      <app-event-card class = "featured_card" style = "visibility: hidden;"/>
-   </div>
-
-   <!-- 5th CARD -->
-   <div class = "featured_left">
-      <app-event-card class = "featured_card" style = "position: absolute; z-index: 3;"/>
-      <div class = "left_line" style = "top: 34%; width: 75%;"> </div>
-      <div class = "left_line" style = "top: 66%; width: 80%; margin-left: 20px; border-radius: 20px;"> </div>
-      <div class = "bubbles1_left"> </div>
-      <div class = "bubbles2_left"> </div>
-      <div class = "bubbles3_left"> </div> 
-      <app-event-card class = "featured_card" style = "visibility: hidden;"/> 
-   </div>
-   
-</div>
+<!-- FEATURED SOLUTIONS -->
+<app-featured-solutions id = "featured_solutions" *ngIf="!isEventsSelected"/>

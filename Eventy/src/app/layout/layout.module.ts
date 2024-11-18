@@ -7,8 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 import { FooterComponent } from './footer/footer.component';
 import { EventsModule } from '../events/events.module';
-import { EventCardComponent } from '../events/event-card/event-card.component';
-
+import { ProductsModule } from '../products/products.module';
+import { ServicesModule } from '../services/services.module';
+import { SolutionsModule } from '../solutions/solutions.module';
 
 
 @NgModule({
@@ -23,6 +24,9 @@ import { EventCardComponent } from '../events/event-card/event-card.component';
     MaterialModule,
     RouterModule,
     EventsModule,
+    ProductsModule,
+    ServicesModule,
+    SolutionsModule,
   ],
     exports: [NavBarComponent, NavDrawerComponent, FooterComponent]
 })
