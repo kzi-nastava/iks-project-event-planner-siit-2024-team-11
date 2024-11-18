@@ -1,36 +1,36 @@
 <div class = "card_container">
    <div class = "left_side_container">
       <div class = "title_container">
-         <p id = "title" class = "title">"Mirko & Jana's Wedding"</p>
+         <p id = "title" class = "title">{{eventCardDTO.event.name}}</p>
       </div>
 
       <div class = "type_container">
          <p style = "margin-right: 5px;" class = "type">Type:</p>
-         <p id = "type" class = "type">wedding</p>
+         <p id = "type" class = "type">{{eventCardDTO.event.eventType.name}}</p>
       </div>
 
       <div class = "max_participants_container">
          <p style = "margin-right: 5px;" class = "max_participants">Max participants:</p>
-         <p id = "max_participants" class = "max_participants">530</p>
+         <p id = "max_participants" class = "max_participants">{{eventCardDTO.event.maxParticipants}}</p>
       </div>
 
       <div class = "date_location_container">
          <div style = "display: flex; flex-direction: row;">
             <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
-            <p id = "date" class = "date">24.12.2024.</p>
+            <p id = "date" class = "date">{{eventCardDTO.event.date.toLocaleDateString()}}</p>
          </div>
          
          <div style = "display: flex; flex-direction: row;">   
             <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.8px;">location_pin</mat-icon>
-            <p id = "location" class = "location">Belgrade, Serbia</p>
+            <p id = "location" class = "location">{{eventCardDTO.event.location.name}}</p>
          </div>
       </div>
 
       <div class = "organiser_container">
-         <img src = "event_assets/organiser.jpg" class = "organiser_img">
+         <img src = "event_assets/{{eventCardDTO.organiserImage}}" class = "organiser_img">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
             <p style = "margin-right: 5px; margin-top: 1px" class = "type">Organiser:</p>
-            <p id = "organiser" class = "organiser" style = "margin-top: -1px">Tamara Ježićković</p>
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px">{{eventCardDTO.organiser}}</p>
          </div>     
       </div>
    </div>
@@ -54,7 +54,7 @@
       <div class = "description_container">
          <div style = "display: flex; flex: 1; flex-direction: column; padding: 4px; padding-left: 10px; padding-right: 10px; padding-bottom: 9px;">
             <p style = "margin: 0; font-size: 15px; color: #AEAAAA;  margin-bottom: 2px"> Description: </p>
-            <p id = "description" class = "description"> Hjdsah sdahjdash ashdsajdh asjd ah 31dp 31dp sdads ads asda sdas da sdas dsa as asdas das sdsa dsa  asd  dsad sad as assadhajs Hjdsah sdahjdash ashdsajdh asjd ah sadhajs sdah asdjh djajhj sdhjdh as hsadjh asd jsdhs dsadsa dasds asd ajsh ajsdhsaj sd asdasd asd ada dsajh dash djsahd a jasdhajsd </p>
+            <p id = "description" class = "description"> {{eventCardDTO.event.description}} </p>
          </div>
       </div>
    </div>

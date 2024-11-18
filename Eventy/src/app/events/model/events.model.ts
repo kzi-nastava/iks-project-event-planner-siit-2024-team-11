@@ -1,5 +1,5 @@
 import { EventType } from "./event-type.model";
-import { Location } from "@angular/common";
+import { Location } from "./location.model";
 
 export interface IActivity {
   name: string;
