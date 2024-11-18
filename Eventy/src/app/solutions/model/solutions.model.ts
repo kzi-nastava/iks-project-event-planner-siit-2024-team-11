@@ -9,5 +9,6 @@ export interface Solution {
    imageUrls: string[],
    isDeleted: boolean,
    isVisible: boolean,
-   isAvailable: boolean
+   isAvailable: boolean,
+   specifics: string,
 }
