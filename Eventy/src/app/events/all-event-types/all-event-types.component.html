@@ -1,0 +1,61 @@
+<div class="all-container">
+  <div class="left-side">
+    <div class="types-header-container">
+      <span>Types of Events</span>
+      <a mat-flat-button class="button" [routerLink]="['/add-event-types']"><mat-icon>add</mat-icon>Add</a>
+    </div>
+
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput placeholder="Search" [(ngModel)]="searchQuery" />
+        <button mat-icon-button matSuffix *ngIf="searchQuery" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-mini-fab (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+
+    <div class="types-container">
+      <div class="triplet-container" *ngFor="let triplet of getItemsTypesAsTriplets(this.paginatedEventTypes)">
+        <div [ngClass]="getCardClasses(eventType)" *ngFor="let eventType of filterTriplet(triplet)" (click)="selectType(eventType)">
+          {{ eventType.name }}
+        </div>
+      </div>
+    </div>
+    <mat-paginator [length]="eventTypes.length" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+    </mat-paginator>
+  </div>
+
+  <div *ngIf="selectedEventType" class="right-side">
+    <div class="shown-card-top">
+      <span class="type-title">
+        {{ selectedEventType.name }}
+      </span>
+
+      <div>
+        <a mat-flat-button class="button" [routerLink]="['/edit-event-type', this.selectedEventType.name]"><mat-icon>edit</mat-icon>Edit</a>
+        <button mat-flat-button class="button deactivate-button" (click)="deleteType()"><mat-icon>delete</mat-icon>Deactivate</button>
+      </div>
+    </div>
+
+    <p class="type-desc">
+      {{ selectedEventType.description }}
+    </p>
+
+    <p>
+      Recommended categories of products/services:
+    </p>
+
+    <div class="category-container">
+      <div class="triplet-container" *ngFor="let triplet of getItemsTypesAsTriplets(selectedEventType.recommendedCategories)">
+        <div class="category-card" *ngFor="let category of filterTriplet(triplet)">
+          {{ category.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
