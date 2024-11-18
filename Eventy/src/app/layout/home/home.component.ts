@@ -8,7 +8,7 @@ import { isEarlyEventType } from '@angular/core/primitives/event-dispatch';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  isEventsSelected : boolean = false;
+  isEventsSelected : boolean = true;
 
   switchTab() : void {
     this.isEventsSelected = !this.isEventsSelected;

@@ -5,6 +5,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
 import { FeaturedSolutionsComponent } from './featured-solutions/featured-solutions.component';
 import { EventsModule } from '../events/events.module';
+import { ServicesModule } from "../services/services.module";
+import { ProductsModule } from "../products/products.module";
 
 
 
@@ -17,8 +19,10 @@ import { EventsModule } from '../events/events.module';
     MaterialModule,
     ReactiveFormsModule,
     DatepickerModule,
-    EventsModule
-  ],
+    EventsModule,
+    ServicesModule,
+    ProductsModule
+],
   exports: [
     FeaturedSolutionsComponent
   ]
