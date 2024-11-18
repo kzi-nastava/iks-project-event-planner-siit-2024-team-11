@@ -4,6 +4,7 @@ import { Product } from '../model/products.model';
 import { Service } from '../model/services.model';
 import { ReservationConfirmationType } from '../model/services.model';
 import { Status } from '../model/category.model';
+import { SolutionCard } from '../model/solution-card.model';
 
 @Component({
   selector: 'app-featured-solutions',
@@ -11,21 +12,21 @@ import { Status } from '../model/category.model';
   styleUrl: './featured-solutions.component.css'
 })
 export class FeaturedSolutionsComponent {
-  featuredSolutions: Solution[];
+  featuredSolutions: SolutionCard[];
 
   constructor() {
     this.featuredSolutions = this.getMockData();
   }
 
-  isService(solution: Solution): boolean {
-    return (solution as Service).specifics !== undefined;
+  isService(solutionCard: SolutionCard): boolean {
+    return (solutionCard.solution as Service).specifics !== undefined;
   }
 
-  isProduct(solution: Solution): boolean {
-    return (solution as Product).specifics === undefined;
+  isProduct(solutionCard: SolutionCard): boolean {
+    return (solutionCard.solution as Product).specifics === undefined;
   }
 
-  getMockData(): Solution[] {
+  getMockData(): SolutionCard[] {
     const service1: Service = {
       name: 'Photography',
       category: { name: 'photography', description: 'Neki description', status: Status.ACCEPTED },
@@ -63,9 +64,9 @@ export class FeaturedSolutionsComponent {
     };
 
     const service3: Service = {
-      name: 'Event Catering - The best',
+      name: 'solution Catering - The best',
       category: { name: 'catering', description: 'Neki description', status: Status.ACCEPTED },
-      description: 'Delicious catering service for all types of events.',
+      description: 'Delicious catering service for all types of solutions.',
       price: 1200.0,
       discount: 15,
       imageUrls: ['catering1.jpg', 'catering2.jpg'],
@@ -83,7 +84,7 @@ export class FeaturedSolutionsComponent {
     const product1: Product = {
       name: 'Sweet 16 - cake',
       category: { name: 'cake', description: 'Neki description', status: Status.ACCEPTED },
-      description: 'Elegant floral centerpiece for your event.',
+      description: 'Elegant floral centerpiece for your solution.',
       price: 50.0,
       discount: 0,
       imageUrls: ['floral1.jpg', 'floral2.jpg'],
@@ -106,6 +107,32 @@ export class FeaturedSolutionsComponent {
       specifics: undefined,
     };
 
-    return [service1, product1, service2, service3, product2];
+    return [
+      { 
+        solution: service1,
+        provider: "Tamara Jezickovic",
+        providerImage: "organiser1.jpg",
+      },
+      { 
+        solution: product2,
+        provider: "Zeko Zekic",
+        providerImage: "organiser2.jpg",
+      },
+      { 
+        solution: service2,
+        provider: "Taca Jezickovic",
+        providerImage: "organiser3.png",
+      },
+      { 
+        solution: service3,
+        provider: "Veselin Jezickovic",
+        providerImage: "organiser4.jpg",
+      },
+      { 
+        solution: product2,
+        provider: "Taca Jezic",
+        providerImage: "organiser5.jpg",
+      },
+    ]
   }
 }

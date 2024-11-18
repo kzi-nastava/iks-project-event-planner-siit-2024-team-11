@@ -1,12 +1,12 @@
 <div class = "card_container">
    <div class = "left_side_container">
       <div class = "title_container">
-         <p id = "title" class = "title">{{service.name}}</p>
+         <p id = "title" class = "title">{{serviceCard.solution.name}}</p>
       </div>
 
       <div class = "type_container">
          <p style = "margin-right: 5px;" class = "type">Category:</p>
-         <p id = "type" class = "type">{{service.category.name}}</p>
+         <p id = "type" class = "type">{{serviceCard.solution.category.name}}</p>
       </div>
 
       <div class = "max_participants_container">
@@ -27,10 +27,10 @@
       </div>
 
       <div class = "organiser_container">
-         <img src = "event_assets/organiser.jpg" class = "organiser_img">
+         <img src = "event_assets/{{serviceCard.providerImage}}" class = "organiser_img">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
-            <p style = "margin-right: 5px; margin-top: 1px" class = "type">Organiser:</p>
-            <p id = "organiser" class = "organiser" style = "margin-top: -1px">Tamara Ježićković</p>
+            <p style = "margin-right: 5px; margin-top: 1px" class = "type">Provider:</p>
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px">{{serviceCard.provider}}</p>
          </div>     
       </div>
    </div>

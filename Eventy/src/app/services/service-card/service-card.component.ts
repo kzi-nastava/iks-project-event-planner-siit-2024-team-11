@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Service } from '../../solutions/model/services.model';
-import { Solution } from '../../solutions/model/solutions.model';
+import { SolutionCard } from '../../solutions/model/solution-card.model';
 
 
 @Component({
@@ -9,6 +9,6 @@ import { Solution } from '../../solutions/model/solutions.model';
   styleUrl: './service-card.component.css'
 })
 export class ServiceCardComponent {
-  @Input() service: Solution;
+  @Input() serviceCard: SolutionCard;
 
 }

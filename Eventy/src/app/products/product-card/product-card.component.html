@@ -1,7 +1,7 @@
 <div class = "card_container">
    <div class = "left_side_container">
       <div class = "title_container">
-         <p class = "title">{{product.name}}</p>
+         <p class = "title">{{productCard.solution.name}}</p>
       </div>
 
       <div class = "type_container">
@@ -27,10 +27,10 @@
       </div>
 
       <div class = "organiser_container">
-         <img src = "event_assets/organiser.jpg" class = "organiser_img">
+         <img src = "event_assets/{{productCard.providerImage}}" class = "organiser_img">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
-            <p style = "margin-right: 5px; margin-top: 1px" class = "type">Organiser:</p>
-            <p id = "organiser" class = "organiser" style = "margin-top: -1px">Tamara Ježićković</p>
+            <p style = "margin-right: 5px; margin-top: 1px" class = "type">Provider:</p>
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px">{{productCard.provider}}</p>
          </div>     
       </div>
    </div>

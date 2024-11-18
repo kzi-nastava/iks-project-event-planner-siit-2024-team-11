@@ -12,32 +12,32 @@
 <!-- FEATURED ITEMS -->
 <div class = "featured_items_container">
 
-   <div *ngFor="let solution of featuredSolutions; let i = index">
+   <div *ngFor="let solutionCard of featuredSolutions; let i = index">
       <!-- Left Card -->
       <div *ngIf="i % 2 === 0" class="featured_left"> 
-         <app-service-card *ngIf="isService(solution)" [service]="solution" class = "featured_card" style = "position: absolute; z-index: 3;"/>
-         <app-product-card *ngIf="isProduct(solution)" [product]="solution" class = "featured_card" style = "position: absolute; z-index: 3;"/>
+         <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" class = "featured_card" style = "position: absolute; z-index: 3;"/>
+         <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" class = "featured_card" style = "position: absolute; z-index: 3;"/>
          <div class = "left_line" style = "top: 34%; width: 75%;"> </div>
          <div class = "left_line" style = "top: 66%; width: 80%; margin-left: 20px; border-radius: 20px;"> </div>
          <div class = "bubbles1_left"> </div>
          <div class = "bubbles2_left"> </div>
          <div class = "bubbles3_left"> </div> 
-         <app-service-card *ngIf="isService(solution)" [service]="solution" class = "featured_card" style = "visibility: hidden;"/>  
-         <app-product-card *ngIf="isProduct(solution)" [product]="solution" class = "featured_card" style = "visibility: hidden;"/>
+         <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" class = "featured_card" style = "visibility: hidden;"/>  
+         <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" class = "featured_card" style = "visibility: hidden;"/>
       </div>
 
       <!-- Right Card -->
       <div *ngIf="i % 2 !== 0" class="featured_right">
-         <app-service-card *ngIf="isService(solution)" [service]="solution" class = "featured_card" style = "position: absolute; z-index: 3;"/>
-         <app-product-card *ngIf="isProduct(solution)" [product]="solution" class = "featured_card" style = "position: absolute; z-index: 3;"/>
+         <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" class = "featured_card" style = "position: absolute; z-index: 3;"/>
+         <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" class = "featured_card" style = "position: absolute; z-index: 3;"/>
          <div class = "line_background"> </div>
          <div class = "right_line" style = "top: 34%; width: 75%;"> </div>
          <div class = "right_line" style = "top: 67%; width: 80%; margin-right: 20px; border-radius: 20px;"> </div>
          <div class = "bubbles1_right"> </div>
          <div class = "bubbles2_right"> </div>
          <div class = "bubbles3_right"> </div>
-         <app-service-card *ngIf="isService(solution)" [service]="solution" class = "featured_card" style = "visibility: hidden;"/>  
-         <app-product-card *ngIf="isProduct(solution)" [product]="solution" class = "featured_card" style = "visibility: hidden;"/>
+         <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" class = "featured_card" style = "visibility: hidden;"/>  
+         <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" class = "featured_card" style = "visibility: hidden;"/>
       </div>
    </div>
    
