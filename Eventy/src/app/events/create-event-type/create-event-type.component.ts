@@ -31,7 +31,12 @@ export class CreateEventTypeComponent {
   }
 
   addCategory(): void {
-    // check if it is already inside? !this.eventTypeFormGroup.controls['recommendedCategories'].value.contains(this.categoryInputFormControl.value)
+    for(let category of this.eventTypeFormGroup.controls['recommendedCategories'].value) {
+      if(category === this.categoryInputFormControl.value) {
+        return;
+      }
+    }
+
     if(this.categoryInputFormControl.value) {
       this.eventTypeFormGroup.controls['recommendedCategories'].setValue([
         ...(this.eventTypeFormGroup.controls['recommendedCategories'].value), this.categoryInputFormControl.value
