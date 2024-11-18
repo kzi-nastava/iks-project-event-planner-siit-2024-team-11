@@ -1,35 +1,41 @@
 <div class = "card_container">
    <div class = "left_side_container">
       <div class = "title_container">
-         <p id = "title" class = "title">{{serviceCard.solution.name}}</p>
+         <p class = "title">{{serviceCard.service.name}}</p>
       </div>
 
-      <div class = "type_container">
-         <p style = "margin-right: 5px;" class = "type">Category:</p>
-         <p id = "type" class = "type">{{serviceCard.solution.category.name}}</p>
+      <div class = "category_container">
+         <p style = "margin-right: 5px;" class = "category">Category:</p>
+         <p class = "category">{{serviceCard.service.category.name}}</p>
       </div>
 
-      <div class = "max_participants_container">
-         <p style = "margin-right: 5px;" class = "max_participants">Max participants:</p>
-         <p id = "max_participants" class = "max_participants">530</p>
+      <div class = "duration_container">
+         <p style = "margin-right: 5px;" class = "duration">Service duration:</p>
+         <p class = "duration">{{serviceCard.service.minReservationTime === serviceCard.service.maxReservationTime ? serviceCard.service.minReservationTime + "h" : serviceCard.service.minReservationTime + "h - " + serviceCard.service.maxReservationTime + "h"}}</p>
       </div>
 
-      <div class = "date_location_container">
-         <div style = "display: flex; flex-direction: row;">
-            <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
-            <p id = "date" class = "date">24.12.2024.</p>
-         </div>
-         
-         <div style = "display: flex; flex-direction: row;">   
-            <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.8px;">location_pin</mat-icon>
-            <p id = "location" class = "location">Belgrade, Serbia</p>
+      <div class = "reservation_container">
+         <p style = "margin-right: 5px;" class = "reservation">Reservation:</p>
+         <p class = "reservation">{{serviceCard.service.reservationType === 0 ? "manual" : "automatic"}}</p>
+      </div>
+
+      <div class = "event_types_all_container">
+         <p style = "margin-right: 5px; padding-bottom: 5px;" class = "category">Event types:</p>
+
+         <div class = "event_types_container">
+            <div class = "event_type_container" *ngFor="let eventType of serviceCard.eventTypes">
+               <p style = "color: #4e4e4e; margin: 0; font-size: 13.5px; font-family: Albert Sans; font-weight: 600;">{{eventType.name}}</p>
+            </div>
+            <div class = "event_type_container">
+               <p style = "color: #4e4e4e; margin: 0; font-size: 13.5px; font-family: Albert Sans; font-weight: 600;">...</p>
+            </div>
          </div>
       </div>
 
       <div class = "organiser_container">
          <img src = "event_assets/{{serviceCard.providerImage}}" class = "organiser_img">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
-            <p style = "margin-right: 5px; margin-top: 1px" class = "type">Provider:</p>
+            <p style = "margin-right: 5px; margin-top: 1px" class = "category">Provider:</p>
             <p id = "organiser" class = "organiser" style = "margin-top: -1px">{{serviceCard.provider}}</p>
          </div>     
       </div>

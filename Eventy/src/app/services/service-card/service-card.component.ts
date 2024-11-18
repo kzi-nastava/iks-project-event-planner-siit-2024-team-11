@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Service } from '../../solutions/model/services.model';
 import { SolutionCard } from '../../solutions/model/solution-card.model';
 
 

@@ -5,6 +5,7 @@ import { Service } from '../model/services.model';
 import { ReservationConfirmationType } from '../model/services.model';
 import { Status } from '../model/category.model';
 import { SolutionCard } from '../model/solution-card.model';
+import { EventType } from '../../events/model/event-type.model';
 
 @Component({
   selector: 'app-featured-solutions',
@@ -19,11 +20,11 @@ export class FeaturedSolutionsComponent {
   }
 
   isService(solutionCard: SolutionCard): boolean {
-    return (solutionCard.solution as Service).specifics !== undefined;
+    return (solutionCard.product === undefined);
   }
 
   isProduct(solutionCard: SolutionCard): boolean {
-    return (solutionCard.solution as Product).specifics === undefined;
+    return (solutionCard.service === undefined);
   }
 
   getMockData(): SolutionCard[] {
@@ -38,8 +39,8 @@ export class FeaturedSolutionsComponent {
       isVisible: true,
       isAvailable: true,
       specifics: 'Full-day photography',
-      minReservationTime: 30,
-      maxReservationTime: 180,
+      minReservationTime: 1,
+      maxReservationTime: 5,
       reservationDeadline: 7,
       cancellationDeadline: 3,
       reservationType: ReservationConfirmationType.AUTOMATIC
@@ -56,8 +57,8 @@ export class FeaturedSolutionsComponent {
       isVisible: true,
       isAvailable: true,
       specifics: 'Includes sound and lighting equipment',
-      minReservationTime: 60,
-      maxReservationTime: 120,
+      minReservationTime: 3,
+      maxReservationTime: 3,
       reservationDeadline: 14,
       cancellationDeadline: 7,
       reservationType: ReservationConfirmationType.MANUAL
@@ -74,8 +75,8 @@ export class FeaturedSolutionsComponent {
       isVisible: true,
       isAvailable: true,
       specifics: 'Custom menu available',
-      minReservationTime: 30,
-      maxReservationTime: 150,
+      minReservationTime: 2,
+      maxReservationTime: 4,
       reservationDeadline: 10,
       cancellationDeadline: 5,
       reservationType: ReservationConfirmationType.AUTOMATIC
@@ -107,31 +108,77 @@ export class FeaturedSolutionsComponent {
       specifics: undefined,
     };
 
+    const eventType1 : EventType = {
+      name: "Wedding",
+      description: "A celebration of marriage, bringing families together to celebrate love and commitment.",
+      isActive: true
+    }
+
+    const eventType2 : EventType = {
+      name: "Conference",
+      description: "A professional gathering focused on knowledge sharing, networking, and industry discussions.",
+      isActive: true
+    }
+
+    const eventType3 : EventType = {
+      name: "Concert",
+      description: "A live musical performance featuring various artists or bands, offering an unforgettable entertainment experience.",
+      isActive: true
+    }
+
+    const eventType4 : EventType = {
+      name: "Party",
+      description: "A social gathering with music, dancing, and fun activities, ideal for celebrations and networking.",
+      isActive: true
+    }
+
+    const eventType5 : EventType = {
+      name: "Meeting",
+      description: "A formal gathering for discussing specific business or personal matters, focused on decision-making.",
+      isActive: true
+    }
+
+    const eventType6 : EventType = {
+      name: "Workshop",
+      description: "An interactive session aimed at learning new skills, with hands-on activities and expert guidance.",
+      isActive: true
+    }
+    
     return [
       { 
-        solution: service1,
+        service: service1,
+        product: undefined,
         provider: "Tamara Jezickovic",
         providerImage: "organiser1.jpg",
+        eventTypes: [eventType1, eventType4, eventType2]
       },
       { 
-        solution: product2,
+        service: undefined,
+        product: product1,
         provider: "Zeko Zekic",
         providerImage: "organiser2.jpg",
+        eventTypes: [eventType2, eventType4, eventType5]
       },
       { 
-        solution: service2,
+        service: service2,
+        product: undefined,
         provider: "Taca Jezickovic",
         providerImage: "organiser3.png",
+        eventTypes: [eventType1, eventType2, eventType6]
       },
       { 
-        solution: service3,
+        service: service3,
+        product: undefined,
         provider: "Veselin Jezickovic",
         providerImage: "organiser4.jpg",
+        eventTypes: [eventType6, eventType5, eventType2]
       },
       { 
-        solution: product2,
+        service: undefined,
+        product: product2,
         provider: "Taca Jezic",
         providerImage: "organiser5.jpg",
+        eventTypes: [eventType5, eventType3, eventType4]
       },
     ]
   }

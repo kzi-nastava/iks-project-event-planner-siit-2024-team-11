@@ -1,7 +1,11 @@
-import { Solution } from "./solutions.model";
+import { EventType } from "../../events/model/event-type.model";
+import { Product } from "./products.model";
+import { Service } from "./services.model";
 
 export interface SolutionCard {
-   solution: Solution,
+   service: Service,
+   product: Product,
    provider: string,
    providerImage: string,
+   eventTypes: EventType[],
 }
