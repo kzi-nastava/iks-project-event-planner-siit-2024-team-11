@@ -11,7 +11,11 @@ import { Status } from '../model/category.model';
   styleUrl: './featured-solutions.component.css'
 })
 export class FeaturedSolutionsComponent {
-  featuredSolutions: Solution[] = this.getMockData();
+  featuredSolutions: Solution[];
+
+  constructor() {
+    this.featuredSolutions = this.getMockData();
+  }
 
   getMockData(): Solution[] {
     const service1: Service = {
