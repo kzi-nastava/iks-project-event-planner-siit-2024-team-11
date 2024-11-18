@@ -1,6 +1,6 @@
 import { Event } from "./events.model";
 
-export interface EventCardDTO {
+export interface EventCard {
    event: Event,
    organiser: string,
    organiserImage: string,

@@ -3,7 +3,7 @@ import { EventType } from '../model/event-type.model';
 import { Location } from '../model/location.model';
 import { PrivacyType } from '../model/events.model';
 import { Event } from '../model/events.model';
-import { EventCardDTO } from '../model/event-card-DTO.model';
+import { EventCard } from '../model/event-card.model';
 
 
 @Component({
@@ -12,13 +12,13 @@ import { EventCardDTO } from '../model/event-card-DTO.model';
   styleUrl: './featured-events.component.css'
 })
 export class FeaturedEventsComponent {
-  featuredEvents: EventCardDTO[] = [];
+  featuredEvents: EventCard[] = [];
 
   constructor() {
     this.featuredEvents = this.getMockData();
   }
 
-  getMockData(): EventCardDTO[] {
+  getMockData(): EventCard[] {
     // Event Types
     const weddingType: EventType = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };
     const conferenceType: EventType = { name: 'Conference', description: 'Professional gathering for knowledge exchange', isActive: true };
