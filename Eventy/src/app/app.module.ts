@@ -6,10 +6,8 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LayoutModule } from './layout/layout.module';
 import {MaterialModule} from './infrastructure/material/material.module';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import {UserManagementModule} from './user-management/user-management.module';
 import {EventsModule} from './events/events.module';
-import { MatInputModule } from '@angular/material/input';
 import { ServicesModule } from './services/services.module';
 
 @NgModule({
