@@ -8,6 +8,7 @@ import { LayoutModule } from './layout/layout.module';
 import {MaterialModule} from './infrastructure/material/material.module';
 import {UserManagementModule} from './user-management/user-management.module';
 import {EventsModule} from './events/events.module';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {EventsModule} from './events/events.module';
     LayoutModule,
     UserManagementModule,
     MaterialModule,
-    EventsModule
+    EventsModule,
+    ServicesModule
   ],
   providers: [
     provideAnimationsAsync(),
