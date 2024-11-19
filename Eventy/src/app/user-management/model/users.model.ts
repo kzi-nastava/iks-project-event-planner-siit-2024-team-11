@@ -6,7 +6,6 @@ export interface User {
   phoneNumber: string;
 }
 
-// combine everything into one interface?
 export interface Organizer extends User {
   firstName: string;
   lastName: string;

@@ -3,6 +3,7 @@ import {UserService} from '../user.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -15,18 +16,13 @@ export class LoginFormComponent {
     password: new FormControl(),
   });
 
-  constructor(private userService: UserService, private dialog: MatDialog) {
+  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
 
   }
 
   login() : void {
     if(this.userService.login(this.loginForm.value.email, this.loginForm.value.password)) {
-      this.dialog.open(InvalidInputDataDialogComponent, {
-        data : {
-          title: "Succesfully logged in",
-          message: this.loginForm.value.email + " " +  this.loginForm.value.password
-        }
-      });
+      this.router.navigate(['']);
     } else {
       this.dialog.open(InvalidInputDataDialogComponent, {
         data : {
