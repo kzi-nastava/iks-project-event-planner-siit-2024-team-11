@@ -79,7 +79,7 @@
   border-radius: 12px; /* Rounded corners to fit circular shape */
   font-size: 12px; /* Smaller text size */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
-  width: 7vw;
+  width: 10vw;
   text-align: center;
   font-family: "Montserrat";
 }
