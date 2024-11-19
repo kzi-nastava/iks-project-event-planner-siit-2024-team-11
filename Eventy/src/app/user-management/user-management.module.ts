@@ -10,7 +10,7 @@ import {RouterLink} from '@angular/router';
 import { RegisterBannerComponent } from './register-banner/register-banner.component';
 import { RegisterOrganizerComponent } from './register-organizer/register-organizer.component';
 import { RegisterProviderComponent } from './register-provider/register-provider.component';
-import { InvalidInputDataDialogComponent } from './invalid-input-data-dialog/invalid-input-data-dialog.component';
+import { InvalidInputDataDialogComponent } from '../layout/invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 
 

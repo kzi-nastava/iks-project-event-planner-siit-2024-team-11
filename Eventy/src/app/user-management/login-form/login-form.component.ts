@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {UserService} from '../user.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {InvalidInputDataDialogComponent} from '../invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../layout/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({

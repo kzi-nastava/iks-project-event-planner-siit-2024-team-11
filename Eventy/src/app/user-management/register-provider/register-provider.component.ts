@@ -2,7 +2,7 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../layout/invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 @Component({
   selector: 'app-register-provider',
@@ -46,7 +46,7 @@ export class RegisterProviderComponent {
         }
       });
     } else {
-      this.userService.register(this.registerForm.value.email, this.registerForm.value.password);
+      this.userService.register(this.registerForm.value);
     }
   }
 

@@ -4,7 +4,7 @@ import {IActivity} from '../model/events.model';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {
   InvalidInputDataDialogComponent
-} from '../../user-management/invalid-input-data-dialog/invalid-input-data-dialog.component';
+} from '../../layout/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
