@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-interface IButtonClasses {
+interface ButtonClasses {
   "role-button" : boolean,
   "not-selected-button" : boolean
 }
@@ -14,14 +14,14 @@ export class RegisterBannerComponent {
   @Input() isOrganizer!: boolean;
   @Output() setRegisterType = new EventEmitter<boolean>();
 
-  getOrganizerButtonClasses() : IButtonClasses {
+  getOrganizerButtonClasses() : ButtonClasses {
     return {
       "role-button" : true,
       "not-selected-button" : !this.isOrganizer
     }
   }
 
-  getProviderButtonClasses() : IButtonClasses {
+  getProviderButtonClasses() : ButtonClasses {
     return {
       "role-button" : true,
       "not-selected-button" : this.isOrganizer

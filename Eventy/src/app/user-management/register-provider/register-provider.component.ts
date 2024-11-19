@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from 
 import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-provider',
@@ -23,7 +24,7 @@ export class RegisterProviderComponent {
 
   public pictureIndex: number = 0;
 
-  constructor(private userService: UserService, private dialog: MatDialog) {
+  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
 
   }
 
@@ -37,7 +38,7 @@ export class RegisterProviderComponent {
     };
   }
 
-  register() {
+  register(): void {
     if(this.registerForm.invalid) {
       this.dialog.open(InvalidInputDataDialogComponent, {
         data : {
@@ -47,19 +48,20 @@ export class RegisterProviderComponent {
       });
     } else {
       this.userService.register(this.registerForm.value);
+      this.router.navigate(['']);
     }
   }
 
   onFilesSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
+    const input: HTMLInputElement = event.target as HTMLInputElement;
     if (input.files) {
       let newPictures : string[] = []; // Clear previous selection
 
-      Array.from(input.files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
+      Array.from(input.files).forEach((file: File): void => {
+        const reader: FileReader = new FileReader();
+        reader.onload = (e: ProgressEvent<FileReader>): void => {
           if (e.target) {
-            newPictures.push(e.target.result as string); // Add each image to the array
+            newPictures.push(e.target.result as string);
           }
         };
         reader.readAsDataURL(file);

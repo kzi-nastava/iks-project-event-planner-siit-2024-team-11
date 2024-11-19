@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from 
 import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-organizer',
@@ -21,7 +22,7 @@ export class RegisterOrganizerComponent {
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });
 
-  constructor(private userService: UserService, private dialog: MatDialog) {
+  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
 
   }
 
@@ -35,27 +36,27 @@ export class RegisterOrganizerComponent {
     };
   }
 
-  register() {
+  register(): void {
     if(this.registerForm.invalid) {
       this.dialog.open(InvalidInputDataDialogComponent, {
           data : {
             title: "Invalid input",
-            message: "Invalid input data"
+            message: "Invalid registration data"
           }
       });
     } else {
       this.userService.register(this.registerForm.value);
+      this.router.navigate(['']);
     }
   }
 
   onFileSelected(event: Event): void {
-    const fileInput = event.target as HTMLInputElement;
+    const fileInput: HTMLInputElement = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files[0]) {
-      const file = fileInput.files[0];
+      const file: File = fileInput.files[0];
 
-      // Preview the image by creating a temporary URL
-      const reader = new FileReader();
-      reader.onload = e => this.registerForm.controls['profilePicture'].setValue(e.target?.result);
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => this.registerForm.controls['profilePicture'].setValue(e.target?.result);
       reader.readAsDataURL(file);
     }
   }
