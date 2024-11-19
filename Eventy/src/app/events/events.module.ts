@@ -11,6 +11,7 @@ import { AllEventTypesComponent } from './all-event-types/all-event-types.compon
 import { CreateEventTypeComponent } from './create-event-type/create-event-type.component';
 import { EditEventTypeComponent } from './edit-event-type/edit-event-type.component';
 import {RouterLink} from '@angular/router';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -30,7 +31,8 @@ import {RouterLink} from '@angular/router';
     ReactiveFormsModule,
     DatepickerModule,
     RouterLink,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class EventsModule { }

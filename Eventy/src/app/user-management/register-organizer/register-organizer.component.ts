@@ -2,7 +2,7 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../layout/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 @Component({
   selector: 'app-register-organizer',
