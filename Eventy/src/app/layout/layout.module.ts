@@ -10,6 +10,7 @@ import { EventsModule } from '../events/events.module';
 import { ProductsModule } from '../products/products.module';
 import { ServicesModule } from '../services/services.module';
 import { SolutionsModule } from '../solutions/solutions.module';
+import { FeaturedSolutionsComponent } from '../solutions/featured-solutions/featured-solutions.component';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { SolutionsModule } from '../solutions/solutions.module';
     NavBarComponent,
     HomeComponent,
     NavDrawerComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     CommonModule,

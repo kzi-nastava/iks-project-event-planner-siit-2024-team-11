@@ -3,8 +3,8 @@ import { Product } from '../model/products.model';
 import { Service } from '../model/services.model';
 import { ReservationConfirmationType } from '../model/services.model';
 import { Status } from '../model/category.model';
-import { SolutionCard } from '../model/solution-card.model';
 import { EventType } from '../../events/model/event-type.model';
+import { SolutionCard } from '../model/solution-card.model';
 
 @Component({
   selector: 'app-featured-solutions',
@@ -31,7 +31,7 @@ export class FeaturedSolutionsComponent {
       name: "Tamara's Sweet Shop",
       category: { name: 'catering', description: 'Neki description', status: Status.ACCEPTED },
       description: 'Professional sweets catering service.',
-      price: 1500.0,
+      price: 159.0,
       discount: 0,
       imageUrls: ["pink_shop.webp"],
       isDeleted: false,
@@ -49,8 +49,8 @@ export class FeaturedSolutionsComponent {
       name: 'Bon Jovi',
       category: { name: 'music', description: 'Neki description', status: Status.ACCEPTED },
       description: 'Best band ever!',
-      price: 800.0,
-      discount: 5,
+      price: 99999.99,
+      discount: 0,
       imageUrls: ["bon_jovi.webp"],
       isDeleted: false,
       isVisible: true,
@@ -67,7 +67,7 @@ export class FeaturedSolutionsComponent {
       name: 'Catering - The best',
       category: { name: 'catering', description: 'Neki description', status: Status.ACCEPTED },
       description: 'Delicious catering service for all types of solutions.',
-      price: 99900.0,
+      price: 150.0,
       discount: 15,
       imageUrls: ["pink_chanel.jpg"],
       isDeleted: false,
@@ -84,9 +84,9 @@ export class FeaturedSolutionsComponent {
     const product1: Product = {
       name: 'Sweet 16 - cake',
       category: { name: 'cake', description: 'Neki description', status: Status.ACCEPTED },
-      description: 'Elegant floral centerpiece for your solution.',
-      price: 50.0,
-      discount: 0,
+      description: 'Make your Sweet 16 unforgettable with a stunning floral-themed cake centerpiece. Designed to impress, this elegant cake adds a touch of sophistication to your special celebration.',
+      price: 99.99,
+      discount: 10,
       imageUrls: ["pink_cake.jpg"],
       isDeleted: false,
       isVisible: true,
@@ -95,11 +95,11 @@ export class FeaturedSolutionsComponent {
     };
 
     const product2: Product = {
-      name: 'Custom Gift Candy Basket',
+      name: 'Custom Gift Flowers',
       category: { name: 'gifts', description: 'Neki description', status: Status.ACCEPTED },
-      description: 'Personalized gift basket for special occasions.',
-      price: 75.0,
-      discount: 5,
+      description: 'Delight your loved ones with a personalized flowers, perfect for any special occasion. Filled with a selection of sweet treats, this custom gift adds a thoughtful and memorable touch.',
+      price: 49.50,
+      discount: 0,
       imageUrls: ["roses.jpg"],
       isDeleted: false,
       isVisible: true,

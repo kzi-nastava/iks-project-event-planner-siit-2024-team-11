@@ -7,12 +7,14 @@ import { FeaturedSolutionsComponent } from './featured-solutions/featured-soluti
 import { EventsModule } from '../events/events.module';
 import { ServicesModule } from "../services/services.module";
 import { ProductsModule } from "../products/products.module";
+import { SolutionFiltersComponent } from './solution-filters/solution-filters.component';
 
 
 
 @NgModule({
   declarations: [
-    FeaturedSolutionsComponent
+    FeaturedSolutionsComponent,
+    SolutionFiltersComponent
   ],
   imports: [
     CommonModule,

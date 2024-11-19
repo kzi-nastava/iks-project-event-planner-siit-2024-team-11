@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { EventCardComponent } from '../../events/event-card/event-card.component';
-import { isEarlyEventType } from '@angular/core/primitives/event-dispatch';
-
+import { FeaturedSolutionsComponent } from '../../solutions/featured-solutions/featured-solutions.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  isEventsSelected : boolean = false;
+  isEventsSelected : boolean = true;
 
   switchTab() : void {
     this.isEventsSelected = !this.isEventsSelected;
