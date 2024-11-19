@@ -13,12 +13,12 @@
     </p>
 
     <div class="role-buttons">
-      <button [ngClass]="getOrganizerButtonClasses()" (click)="switchRegister.emit(true)">
+      <button [ngClass]="getOrganizerButtonClasses()" (click)="setRegisterType.emit(true)">
         <img src="Organiser.png" alt="Event Organizer photo" />
         <p class="role-button-text">EVENT ORGANIZER</p>
       </button>
 
-      <button [ngClass]="getProviderButtonClasses()" (click)="switchRegister.emit(false)">
+      <button [ngClass]="getProviderButtonClasses()" (click)="setRegisterType.emit(false)">
         <img src="Provider.png" alt="Product/Service Provider photo" />
         <p class="role-button-text">PRODUCT/SERVICE PROVIDER</p>
       </button>
