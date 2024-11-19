@@ -33,7 +33,7 @@ export class FeaturedSolutionsComponent {
       category: { name: 'photography', description: 'Neki description', status: Status.ACCEPTED },
       description: 'Professional wedding photography service.',
       price: 1500.0,
-      discount: 10,
+      discount: 0,
       imageUrls: ['image1.jpg', 'image2.jpg'],
       isDeleted: false,
       isVisible: true,
@@ -65,10 +65,10 @@ export class FeaturedSolutionsComponent {
     };
 
     const service3: Service = {
-      name: 'solution Catering - The best',
+      name: 'Catering - The best',
       category: { name: 'catering', description: 'Neki description', status: Status.ACCEPTED },
       description: 'Delicious catering service for all types of solutions.',
-      price: 1200.0,
+      price: 99900.0,
       discount: 15,
       imageUrls: ['catering1.jpg', 'catering2.jpg'],
       isDeleted: false,

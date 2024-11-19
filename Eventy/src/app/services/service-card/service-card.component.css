@@ -135,9 +135,38 @@
          margin-bottom: 11px;
       }
 
-         .open_event {
-            margin: 0;  
+         .price_container {
+            justify-content: center;
+            display: inline-block;
+            flex-direction: column;
          }
+            .old_price {
+               margin: 0; 
+               color: #F40F0F; 
+               font-weight: 500; 
+               font-size: 14px; 
+               margin-top: 0px; 
+               padding: 0;
+               background: linear-gradient(to top left,
+                   rgba(0, 0, 0, 0) 0%, 
+                   rgba(0, 0, 0, 0) calc(50% - 1px), 
+                   rgb(238, 30, 30) 50%, 
+                   rgba(0, 0, 0, 0) calc(50% + 1px), 
+                   rgba(0, 0, 0, 0) 100%);
+               display:flex;
+               margin-left: 5px; 
+               font-family: Albert Sans;
+            }
+
+            .current_price {
+               margin: 0; 
+               color: #454444; 
+               font-weight: 700; 
+               font-size: 24.5px; 
+               margin-top: 0px; 
+               margin-left: 5px; 
+               font-family: Albert Sans;
+            }
 
          .favorite_button_container {
             position: relative;
