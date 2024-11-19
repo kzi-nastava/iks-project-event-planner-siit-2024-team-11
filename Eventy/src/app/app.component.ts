@@ -7,8 +7,8 @@ import {NavigationEnd, Router} from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Eventy';
-  showFooter = true;
+  title: string = 'Eventy';
+  showFooter: boolean = true;
 
   constructor(private router: Router) {
 

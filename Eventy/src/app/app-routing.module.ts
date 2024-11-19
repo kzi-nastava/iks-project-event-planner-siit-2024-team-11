@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'event-types', component: AllEventTypesComponent},
   {path: 'add-event-types', component: CreateEventTypeComponent},
   {path: 'edit-event-type/:id', component: EditEventTypeComponent},
+  {path: '**', redirectTo: ''},
 ];
 
 @NgModule({

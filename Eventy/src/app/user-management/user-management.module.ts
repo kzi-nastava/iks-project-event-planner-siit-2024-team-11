@@ -10,9 +10,7 @@ import {RouterLink} from '@angular/router';
 import { RegisterBannerComponent } from './register-banner/register-banner.component';
 import { RegisterOrganizerComponent } from './register-organizer/register-organizer.component';
 import { RegisterProviderComponent } from './register-provider/register-provider.component';
-import { InvalidInputDataDialogComponent } from './invalid-input-data-dialog/invalid-input-data-dialog.component';
-
-
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,15 +20,15 @@ import { InvalidInputDataDialogComponent } from './invalid-input-data-dialog/inv
     LoginFormComponent,
     RegisterBannerComponent,
     RegisterOrganizerComponent,
-    RegisterProviderComponent,
-    InvalidInputDataDialogComponent
+    RegisterProviderComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
   ]
 })
 export class UserManagementModule { }
