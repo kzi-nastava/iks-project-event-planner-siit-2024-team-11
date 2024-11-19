@@ -30,24 +30,24 @@
 
         <mat-form-field *ngIf="serviceForm.get('serviceType')?.value === 'basic'" appearance="fill">
           <mat-label>Duration (minutes)</mat-label>
-          <input matInput placeholder="Enter value" required>
+          <input matInput placeholder="Enter value" required type="number">
         </mat-form-field>
 
         <div *ngIf="serviceForm.get('serviceType')?.value === 'premium'" class="premium-textbox-container">
           <mat-form-field appearance="fill" class="premium-textbox">
             <mat-label>Minimum duration (minutes)</mat-label>
-            <input matInput placeholder="Enter value" required>
+            <input matInput placeholder="Enter value" required type="number">
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="premium-textbox">
             <mat-label>Maximum duration (minutes)</mat-label>
-            <input matInput placeholder="Enter value" required>
+            <input matInput placeholder="Enter value" required type="number">
           </mat-form-field>
         </div>
 
         <mat-form-field appearance="fill">
           <mat-label>Days notice for reservation</mat-label>
-          <input matInput placeholder="Enter value" required>
+          <input matInput placeholder="Enter value" required type="number">
         </mat-form-field>
 
         <mat-checkbox [checked]="checked">Automatically accept reservations</mat-checkbox>
@@ -66,12 +66,12 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Price</mat-label>
-          <input matInput placeholder="Enter value" required>
+          <input matInput placeholder="Enter value" required type="number">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Discount (%)</mat-label>
-          <input matInput placeholder="Enter value" required>
+          <input matInput placeholder="Enter value" required type="number">
         </mat-form-field>
 
         <div class="image-picker-container">
