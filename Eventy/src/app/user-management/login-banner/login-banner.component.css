@@ -5,8 +5,9 @@
   align-items: center;
   background-color: #929AB7;
   color: white;
-  padding: 8%;
-  height: 84%;
+  height: calc(100% - 60px);
+  padding: 10%;
+  box-sizing: border-box;
 }
 
 .banner-part {
@@ -17,6 +18,7 @@
 
 img {
   width: 40vw;
+  max-width: 80vh;
 }
 
 .welcome-text {
