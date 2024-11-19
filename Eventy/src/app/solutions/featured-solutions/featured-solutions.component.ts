@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Solution } from '../model/solutions.model';
 import { Product } from '../model/products.model';
 import { Service } from '../model/services.model';
 import { ReservationConfirmationType } from '../model/services.model';
@@ -29,16 +28,16 @@ export class FeaturedSolutionsComponent {
 
   getMockData(): SolutionCard[] {
     const service1: Service = {
-      name: 'Photography',
-      category: { name: 'photography', description: 'Neki description', status: Status.ACCEPTED },
-      description: 'Professional wedding photography service.',
+      name: "Tamara's Sweet Shop",
+      category: { name: 'catering', description: 'Neki description', status: Status.ACCEPTED },
+      description: 'Professional sweets catering service.',
       price: 1500.0,
       discount: 0,
-      imageUrls: ['image1.jpg', 'image2.jpg'],
+      imageUrls: ["pink_shop.webp"],
       isDeleted: false,
       isVisible: true,
       isAvailable: true,
-      specifics: 'Full-day photography',
+      specifics: 'All kind of sweets!',
       minReservationTime: 1,
       maxReservationTime: 5,
       reservationDeadline: 7,
@@ -52,7 +51,7 @@ export class FeaturedSolutionsComponent {
       description: 'Best band ever!',
       price: 800.0,
       discount: 5,
-      imageUrls: ['dj1.jpg', 'dj2.jpg'],
+      imageUrls: ["bon_jovi.webp"],
       isDeleted: false,
       isVisible: true,
       isAvailable: true,
@@ -70,7 +69,7 @@ export class FeaturedSolutionsComponent {
       description: 'Delicious catering service for all types of solutions.',
       price: 99900.0,
       discount: 15,
-      imageUrls: ['catering1.jpg', 'catering2.jpg'],
+      imageUrls: ["pink_chanel.jpg"],
       isDeleted: false,
       isVisible: true,
       isAvailable: true,
@@ -88,7 +87,7 @@ export class FeaturedSolutionsComponent {
       description: 'Elegant floral centerpiece for your solution.',
       price: 50.0,
       discount: 0,
-      imageUrls: ['floral1.jpg', 'floral2.jpg'],
+      imageUrls: ["pink_cake.jpg"],
       isDeleted: false,
       isVisible: true,
       isAvailable: true,
@@ -101,7 +100,7 @@ export class FeaturedSolutionsComponent {
       description: 'Personalized gift basket for special occasions.',
       price: 75.0,
       discount: 5,
-      imageUrls: ['gift1.jpg', 'gift2.jpg'],
+      imageUrls: ["roses.jpg"],
       isDeleted: false,
       isVisible: true,
       isAvailable: true,
