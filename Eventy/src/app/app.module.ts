@@ -22,8 +22,6 @@ import { ServicesModule } from './services/services.module';
     LayoutModule,
     UserManagementModule,
     MaterialModule,
-    MatFormFieldModule,
-    MatInputModule,
     EventsModule,
     ServicesModule
   ],
