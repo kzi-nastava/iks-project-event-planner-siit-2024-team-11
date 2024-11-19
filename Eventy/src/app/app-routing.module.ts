@@ -8,6 +8,7 @@ import { AddServiceComponent } from './services/add-service/add-service.componen
 import {AllEventTypesComponent} from './events/all-event-types/all-event-types.component';
 import {CreateEventTypeComponent} from './events/create-event-type/create-event-type.component';
 import {EditEventTypeComponent} from './events/edit-event-type/edit-event-type.component';
+import { EditServiceComponent } from './services/edit-service/edit-service.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'event-types', component: AllEventTypesComponent},
   {path: 'add-event-types', component: CreateEventTypeComponent},
   {path: 'edit-event-type/:id', component: EditEventTypeComponent},
-  {path: '**', redirectTo: ''},
+  {path: 'edit-service/:id', component: EditServiceComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
