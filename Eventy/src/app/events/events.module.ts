@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
 import { EventCardComponent } from './event-card/event-card.component';
 import { FeaturedEventsComponent } from './featured-events/featured-events.component';
+import { EventFiltersComponent } from './event-filters/event-filters.component';
 
 
 
@@ -19,7 +20,8 @@ import { FeaturedEventsComponent } from './featured-events/featured-events.compo
     AgendaCreationComponent,
     InvitationsSendingComponent,
     EventCardComponent,
-    FeaturedEventsComponent
+    FeaturedEventsComponent,
+    EventFiltersComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { FeaturedEventsComponent } from './featured-events/featured-events.compo
   exports: [
     EventCardComponent,
     FeaturedEventsComponent,
+    EventFiltersComponent,
   ]
 })
 export class EventsModule { }
