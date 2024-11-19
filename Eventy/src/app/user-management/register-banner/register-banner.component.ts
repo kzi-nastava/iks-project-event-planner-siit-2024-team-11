@@ -12,7 +12,7 @@ interface IButtonClasses {
 })
 export class RegisterBannerComponent {
   @Input() isOrganizer!: boolean;
-  @Output() switchRegister = new EventEmitter<boolean>();
+  @Output() setRegisterType = new EventEmitter<boolean>();
 
   getOrganizerButtonClasses() : IButtonClasses {
     return {
