@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 import { FooterComponent } from './footer/footer.component';
+import {InvalidInputDataDialogComponent} from './invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 
 
@@ -14,13 +15,14 @@ import { FooterComponent } from './footer/footer.component';
     NavBarComponent,
     HomeComponent,
     NavDrawerComponent,
-    FooterComponent
+    FooterComponent,
+    InvalidInputDataDialogComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule
   ],
-    exports: [NavBarComponent, NavDrawerComponent, FooterComponent]
+    exports: [NavBarComponent, NavDrawerComponent, FooterComponent, InvalidInputDataDialogComponent]
 })
 export class LayoutModule { }
