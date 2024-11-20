@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { SolutionCard } from '../../solutions/model/solution-card.model';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-service-card',
@@ -8,6 +8,14 @@ import { SolutionCard } from '../../solutions/model/solution-card.model';
   styleUrl: './service-card.component.css'
 })
 export class ServiceCardComponent {
+  private _snackBar = inject(MatSnackBar);
   @Input() serviceCard: SolutionCard;
 
+  handleFavoriteItem() {
+    this._snackBar.open("FAVORITE: " + this.serviceCard.service.name, "OK!");
+  }
+
+  handleSeeMore() {
+    this._snackBar.open("FAVORITE: " + this.serviceCard.service.name, "OK!");
+  }
 }
