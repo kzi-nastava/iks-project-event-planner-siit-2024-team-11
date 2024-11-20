@@ -12,7 +12,7 @@
   </div>
 
   <div class = "role-buttons">
-    <button style = "margin-right: 50px" [ngClass]="getOrganizerButtonClasses()" (click)="switchRegister.emit(true)">
+    <button style = "margin-right: 50px" [ngClass]="getOrganizerButtonClasses()" (click)="setRegisterType.emit(true)">
       <img src="Organiser.png" alt="Event Organizer photo" />
       <div style = "position: relative; margin-top: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
         <p class="role-button-text">EVENT</p>
@@ -21,7 +21,7 @@
 
     </button>
 
-    <button [ngClass]="getProviderButtonClasses()" (click)="switchRegister.emit(false)">
+    <button [ngClass]="getProviderButtonClasses()" (click)="setRegisterType.emit(false)">
       <img src="Provider.png" alt="Solutions Provider photo" />
       <div style = "margin-top: 10px; display: flex; flex-direction: column;">
         <p class="role-button-text">SOLUTIONS</p>
