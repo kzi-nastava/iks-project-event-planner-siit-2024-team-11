@@ -4,7 +4,7 @@
       <div style = "display: flex; justify-content: center; align-items: center;">
          <p style = "font-size: 20px; letter-spacing: 1px; margin: 0; color: #A0A0A0; font-family: Albert Sans;">Filters</p>
       </div>
-      <div style = "display: flex; justify-content: center; align-items: center; flex-direction: row; background-color: #ED4D4D; border-radius: 7px; width: 115px; padding-bottom: 7px; padding-top: 7px; padding-right: 6.5px;">
+      <div class = "resetFilterContainer" (click)="resetFilters()">
          <mat-icon style = "color: white; font-size: 23px; margin-right: 5px; margin-top: 1px;">delete_outline</mat-icon>
          <p style = "margin: 0; color: white; font-family: Albert Sans; font-weight: 500">Reset All</p>
       </div>
@@ -18,12 +18,12 @@
       </div>
       <mat-form-field>
          <mat-select [formControl]="eventTypes" multiple>
-            <mat-option [value]="eventTypeValue">Wedding</mat-option>
-            <mat-option [value]="eventTypeValue">Sport</mat-option>
-            <mat-option [value]="eventTypeValue">Conference</mat-option>
-            <mat-option [value]="eventTypeValue">Party</mat-option>
-            <mat-option [value]="eventTypeValue">Prom</mat-option>
-            <mat-option [value]="eventTypeValue">Big Party</mat-option>
+            <mat-option value="Wedding">Wedding</mat-option>
+            <mat-option value="Sport">Sport</mat-option>
+            <mat-option value="Conference">Conference</mat-option>
+            <mat-option value="Party">Party</mat-option>
+            <mat-option value="Prom">Prom</mat-option>
+            <mat-option value="Big Party">Big Party</mat-option>
          </mat-select>
        </mat-form-field>
    </div>
@@ -33,7 +33,7 @@
          <p class = "input_label">Max participants:</p>
       </div>
       <mat-form-field class="example-full-width">
-         <input type="number" matInput value="" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+         <input type="number" matInput [(ngModel)]="maxParticipantsValue" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
        </mat-form-field>
    </div>
 
@@ -42,11 +42,11 @@
          <p class = "input_label">Location:</p>
       </div>
      <form class="example-form">
-         <mat-form-field class="example-full-width">
+         <mat-form-field>
             <input type="text"  
-                  matInput
-                  [formControl]="locationControl"
-                  [matAutocomplete]="auto">
+                   matInput
+                   [formControl]="locations"
+                   [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                @for (locationOption of filteredLocationOptions | async; track locationOption) {
                <mat-option [value]="locationOption">{{locationOption}}</mat-option>
@@ -56,27 +56,28 @@
       </form>  
    </div>
    
-   <div class = "input_container">
+   <div id = "events_calendar_filter" class = "input_container">
       <div style = "width: 26vw; display: flex; justify-content: flex-start;">
          <p class = "input_label">Date range:</p>
       </div>
-      <mat-form-field>
-         <mat-label>Enter a date range</mat-label>
-         <mat-date-range-input [rangePicker]="picker">
-           <input matStartDate placeholder="Start date">
-           <input matEndDate placeholder="End date">
-         </mat-date-range-input>
-         <mat-hint style = "color: #C4C2C2 !important">MM/DD/YYYY - MM/DD/YYYY</mat-hint>
-         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-         <mat-date-range-picker #picker></mat-date-range-picker>
-       </mat-form-field>  
+      <form [formGroup]="dateRangeForm">
+         <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange">
+               <input formControlName="start" matStartDate placeholder="Start date">
+               <input formControlName="end" matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint style = "color: #C4C2C2 !important">MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+         </mat-form-field>  
+      </form>
    </div>
 
    <div style = "display: flex; justify-content: center; margin-top: 25px;">
-      <div class = "confirm_filter_container">
+      <div class = "confirm_filter_container" (click) = "filterEvents()">
          <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">CONFIRM</p>
       </div>
-   </div>
-   
+   </div>  
 </div>
 

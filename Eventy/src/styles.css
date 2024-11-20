@@ -30,6 +30,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-family: Roboto;
 }
 
+/* events filters */
+
+#all_events {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 48px !important;
+    width: 260px !important;
+    align-items: center !important;
+    justify-content: center !important;
+ }
+}
+
 #event_filters {
   .mat-mdc-text-field-wrapper {
     background-color: white !important;
@@ -42,6 +56,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
  }
 }
 
+  #events_calendar_filter {
+    .mat-mdc-text-field-wrapper {
+      background-color: white !important;
+      border-radius: 8px !important;
+      box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+      height: 50px !important;
+      width: 27vw !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
+
+/* solutions filters */
 #solution_filters {
   .mat-mdc-text-field-wrapper {
     background-color: white !important;
@@ -53,53 +80,66 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     justify-content: center !important;
  }
 
- .mat-mdc-checkbox {
-    width: 28vw !important;
- }
+  .mat-mdc-checkbox {
+    width: 8vw !important;
+  }
 
- .mdc-label {
-  font-size: 16px;
-  font-family: Albert Sans;
-  font-weight: 400;
- }
+  .mdc-label {
+    font-size: 15px;
+    font-family: Albert Sans;
+    font-weight: 400;
+  }
 }
 
-#solution_filters_double {
-  .mat-mdc-text-field-wrapper {
-    background-color: white !important;
-    border-radius: 8px !important;
-    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
-    height: 43px !important;
-    width: 12vw !important;
-    align-items: center !important;
-    justify-content: center !important;
- }
-}
+  #solution_calendar_filter {
+    .mat-mdc-text-field-wrapper {
+      background-color: white !important;
+      border-radius: 8px !important;
+      box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+      height: 50px !important;
+      width: 16vw !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
 
-#all_events {
-  .mat-mdc-text-field-wrapper {
-    background-color: white !important;
-    border-radius: 8px !important;
-    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
-    height: 48px !important;
-    width: 190px !important;
-    align-items: center !important;
-    justify-content: center !important;
- }
-}
+  #solution_checkbox_filter {
+    .mat-mdc-text-field-wrapper {
+      background-color: white !important;
+      border-radius: 8px !important;
+      box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+      height: 50px !important;
+      width: 8vw !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
 
-#all_solutions {
-  .mat-mdc-text-field-wrapper {
-    background-color: white !important;
-    border-radius: 8px !important;
-    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
-    height: 48px !important;
-    width: 190px !important;
-    align-items: center !important;
-    justify-content: center !important;
- }
-}
+  #solution_filters_double {
+    .mat-mdc-text-field-wrapper {
+      background-color: white !important;
+      border-radius: 8px !important;
+      box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+      height: 43px !important;
+      width: 12vw !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
 
+  #all_solutions {
+    .mat-mdc-text-field-wrapper {
+      background-color: white !important;
+      border-radius: 8px !important;
+      box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+      height: 48px !important;
+      width: 260px !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
+
+/* global */
 .ng-trigger {
   background-color: white !important;
 } /* ovo mora u global.. vidjeti sa kolegama.. */

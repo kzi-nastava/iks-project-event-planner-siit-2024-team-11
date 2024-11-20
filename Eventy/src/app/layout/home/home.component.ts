@@ -8,9 +8,18 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   isEventsSelected : boolean = true;
+  currentTab: number = 1;
 
-  switchTab() : void {
-    this.isEventsSelected = !this.isEventsSelected;
+  switchTab(tab: number) : void { 
+    if (this.currentTab === 1 && tab === 2) {
+      this.currentTab = 2;
+      this.isEventsSelected = !this.isEventsSelected;
+    }
+
+    if (this.currentTab === 2 && tab === 1) {
+      this.currentTab = 1;
+      this.isEventsSelected = !this.isEventsSelected;
+    }
   }
 }
   
