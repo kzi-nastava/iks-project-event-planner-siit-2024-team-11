@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Service } from './model/service.model';
 
-const services: Service[] = [
+const SERVICES: Service[] = [
   { id: 1, pupId: 101, name: 'Spa Massage', description: 'A relaxing full-body massage to relieve stress and tension.', price: 100, discount: 10, imageURLs: ['url1'], isDeleted: false, isVisible: true, isAvailable: true, specifics: '60-minute full-body massage, aromatherapy included', reservationDuration: [1, 2], reservationDeadline: 48, isAutomaticallyAccepted: false },
   { id: 2, pupId: 102, name: 'Yoga Class', description: 'A guided yoga session to improve flexibility and strength.', price: 200, discount: 15, imageURLs: ['url2'], isDeleted: false, isVisible: true, isAvailable: true, specifics: '45-minute group session for all levels', reservationDuration: [1, null], reservationDeadline: 72, isAutomaticallyAccepted: true },
   { id: 3, pupId: 103, name: 'Personal Training', description: 'One-on-one training to achieve your fitness goals.', price: 300, discount: 20, imageURLs: ['url3'], isDeleted: false, isVisible: true, isAvailable: true, specifics: '60-minute personalized workout with a certified trainer', reservationDuration: [2, 4], reservationDeadline: 24, isAutomaticallyAccepted: true },
@@ -18,11 +18,11 @@ const services: Service[] = [
 @Injectable({
   providedIn: 'root'
 })
-export class ServicesServiceService {
-  private serviceList: Service[];
+export class ServicesService {
+  serviceList: Service[] = [];
 
   constructor() {
-    for (let serviceObject of services) {
+    for (let serviceObject of SERVICES) {
       const service: Service = {
         id: serviceObject.id,
         pupId: serviceObject.pupId,
@@ -38,8 +38,8 @@ export class ServicesServiceService {
         reservationDuration: serviceObject.reservationDuration,
         reservationDeadline: serviceObject.reservationDeadline,
         isAutomaticallyAccepted: serviceObject.isAutomaticallyAccepted,
-      }
-      this.serviceList.push(service)
+      };
+      this.serviceList.push(service);
     }   
   }
 

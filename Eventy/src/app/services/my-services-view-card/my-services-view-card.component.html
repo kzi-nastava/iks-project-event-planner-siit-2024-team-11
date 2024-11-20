@@ -1,0 +1,15 @@
+<mat-card  appearance="outlined">
+    <mat-card-content>
+      <b>{{service.name}}</b>
+      <p>{{service.description}}</p>
+      <div class="card-row">
+        <b>${{service.price}}</b>
+        <a mat-button [routerLink]="['../edit-service', service.id]" class="edit-btn">
+            <mat-icon>edit</mat-icon> Edit
+        </a>
+        <a mat-button (click)="deleteItem(service.id)" class="delete-btn">
+            <mat-icon>delete</mat-icon> Delete
+          </a>            
+      </div>
+    </mat-card-content>
+</mat-card>

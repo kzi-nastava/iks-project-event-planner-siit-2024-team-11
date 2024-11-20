@@ -1,0 +1,32 @@
+mat-card {
+    background-color: #5656a1;
+    color: white;
+    margin: 30px
+}
+
+.edit-btn {
+    color: blue;
+    background-color: white !important;
+    text-align: right;
+}
+
+.delete-btn {
+    color: white !important;
+    background-color: red !important;
+    text-align: right;
+}
+
+.card-row {
+    display: flex;
+    align-items: center;
+}
+
+.card-row b {
+    margin-right: auto; /* Keeps the <b> on the left */
+}
+
+.card-row a {
+    margin-left: 10px; /* Adds space between the buttons */
+}
+
+
