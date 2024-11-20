@@ -19,8 +19,13 @@
         <p class = "reservation">{{service.reservationType === 0 ? "manual" : "automatic"}}</p>
      </div>
 
-     <div class = "event_types_all_container">
-        <p style = "margin-right: 5px; padding-bottom: 5px;" class = "category">Event types:</p>
+     <div class = "manipulation_buttons_container">
+      <a mat-button class="edit-btn">
+        <mat-icon>edit</mat-icon> Edit
+      </a>
+      <a mat-button class="delete-btn">
+        <mat-icon>delete</mat-icon> Delete
+      </a>
      </div>
   </div>
 

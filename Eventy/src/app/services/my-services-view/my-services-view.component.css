@@ -1,11 +1,11 @@
 .services-wrapper {
-    display: flex;
-    justify-content: center;  /* Centers the items horizontally */
-    align-items: center;      /* Centers the items vertically */
+    display: flex;      /* Centers the items vertically */
+    flex-direction: column;
 }
 
 .services-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
   
