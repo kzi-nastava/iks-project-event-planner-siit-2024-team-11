@@ -32,10 +32,15 @@
 </div>
 
 
-
 <!-- FEATURED SOLUTIONS -->
 <app-featured-solutions *ngIf="!isEventsSelected"/>
-<!-- SOLUTIONS FILTER -->
-<app-solution-filters *ngIf="!isEventsSelected"> </app-solution-filters>
-<!-- ALL SOLUTIONS -->
- <app-all-solutions *ngIf="!isEventsSelected"> </app-all-solutions>
+
+
+<div *ngIf="!isEventsSelected" style = "background-color: #F1F1F1; width: 100%;">
+   <!-- SOLUTIONS FILTER -->
+   <app-solution-filters *ngIf="!isEventsSelected"> </app-solution-filters>
+   <!-- ALL SOLUTIONS -->
+   <app-all-solutions *ngIf="!isEventsSelected"> </app-all-solutions>
+</div>
+
+

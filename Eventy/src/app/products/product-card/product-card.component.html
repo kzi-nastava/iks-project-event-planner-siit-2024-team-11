@@ -44,7 +44,8 @@
             <div style = "display: inline-block" [ngStyle]="{'visibility' : productCard.product.discount === 0 ? 'hidden' : 'visible'}">
                <p class = "old_price">{{(productCard.product.price).toFixed(2)}}$</p>
             </div>
-            <p [ngStyle]="{'margin-top' : productCard.product.discount === 0 ? '-16px' : '0px'}"  class = "current_price">{{(productCard.product.price - productCard.product.price * productCard.product.discount / 100).toFixed(2)}}$</p>
+            <p [ngStyle]="{'margin-top' : productCard.product.discount === 0 ? '-11px' : '0px',
+                           'padding-bottom': productCard.product.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(productCard.product.price - productCard.product.price * productCard.product.discount / 100).toFixed(2)}}$</p>
          </div>
          <div style = "justify-content:right; align-items: center; display: flex; flex: 1.3;">
             <div class = "favorite_button_container">

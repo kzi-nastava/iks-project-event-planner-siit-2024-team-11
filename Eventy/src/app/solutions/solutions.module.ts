@@ -9,7 +9,10 @@ import { ServicesModule } from "../services/services.module";
 import { ProductsModule } from "../products/products.module";
 import { SolutionFiltersComponent } from './solution-filters/solution-filters.component';
 import { AllSolutionsComponent } from './all-solutions/all-solutions.component';
-
+import {AsyncPipe} from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -25,7 +28,12 @@ import { AllSolutionsComponent } from './all-solutions/all-solutions.component';
     DatepickerModule,
     EventsModule,
     ServicesModule,
-    ProductsModule
+    ProductsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe,
 ],
   exports: [
     FeaturedSolutionsComponent,
