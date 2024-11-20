@@ -19,7 +19,7 @@
       @if (registerForm.controls['email'].hasError('required')) {
         <mat-error>Email is <strong>required</strong></mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.controls['email'].setValue('')">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('email')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -30,7 +30,7 @@
       @if (registerForm.controls['password'].hasError('required')) {
         <mat-error>Password is <strong>required</strong></mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.controls['password'].setValue('')">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('password')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -44,7 +44,7 @@
       @if (registerForm.controls['confirmedPassword'].hasError('match')) {
         <mat-error>Passwords don't match</mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.controls['confirmedPassword'].setValue('')">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('confirmedPassword')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -56,7 +56,7 @@
         @if (registerForm.controls['firstName'].hasError('required')) {
           <mat-error>First name is <strong>required</strong></mat-error>
         }
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.controls['firstName'].setValue('')">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('firstName')">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
@@ -67,7 +67,7 @@
         @if (registerForm.controls['lastName'].hasError('required')) {
           <mat-error>Last name is <strong>required</strong></mat-error>
         }
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.controls['lastName'].setValue('')">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('lastName')">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
@@ -79,7 +79,7 @@
       @if (registerForm.controls['address'].hasError('required')) {
         <mat-error>Address is <strong>required</strong></mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.controls['address'].setValue('')">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('address')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -93,7 +93,7 @@
       @if (registerForm.controls['phoneNumber'].hasError('pattern')) {
         <mat-error>Invalid phone number</mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.controls['phoneNumber'].setValue('')">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('phoneNumber')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>

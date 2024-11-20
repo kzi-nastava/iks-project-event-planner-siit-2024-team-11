@@ -44,6 +44,9 @@ export class RegisterOrganizerComponent {
             message: "Invalid registration data"
           }
       });
+
+      this.registerForm.updateValueAndValidity();
+      this.registerForm.markAllAsTouched();
     } else {
       this.userService.register(this.registerForm.value);
       this.router.navigate(['']);
@@ -65,5 +68,23 @@ export class RegisterOrganizerComponent {
 
   pickProfilePicture() : void {
     this.fileInput.nativeElement.click();
+  }
+
+  resetValue(targetField: string): void {
+    if(this.registerForm.controls.hasOwnProperty(targetField)) {
+      let fieldsWithoutErrors: string[] = [];
+
+      for(let field in this.registerForm.controls) {
+        if(field !== targetField && !this.registerForm.controls[field].touched) {
+          fieldsWithoutErrors.push(field);
+        }
+      }
+
+      this.registerForm.controls[targetField].setValue('');
+
+      for(let field of fieldsWithoutErrors) {
+        this.registerForm.controls[field].setErrors(null);
+      }
+    }
   }
 }
