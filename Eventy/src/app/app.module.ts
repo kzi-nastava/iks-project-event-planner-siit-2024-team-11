@@ -8,10 +8,13 @@ import { LayoutModule } from './layout/layout.module';
 import {MaterialModule} from './infrastructure/material/material.module';
 import {UserManagementModule} from './user-management/user-management.module';
 import {EventsModule} from './events/events.module';
+import { SolutionsModule } from './solutions/solutions.module';
+import { ProductsModule } from './products/products.module';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,10 @@ import {EventsModule} from './events/events.module';
     LayoutModule,
     UserManagementModule,
     MaterialModule,
-    EventsModule
+    EventsModule,
+    SolutionsModule,
+    ProductsModule,
+    ServicesModule, 
   ],
   providers: [
     provideAnimationsAsync(),

@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class RegisterComponent {
   isOrganizer : boolean = true;
 
-  switchRegister(isOrganiser: boolean) : void {
+  setRegisterType(isOrganiser: boolean) : void {
     this.isOrganizer = isOrganiser;
   }
 }

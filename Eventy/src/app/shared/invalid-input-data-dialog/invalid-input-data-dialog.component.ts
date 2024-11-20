@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-interface IDialogData {
+interface DialogData {
   title: string;
   message: string;
 }
@@ -14,7 +14,7 @@ export class InvalidInputDataDialogComponent {
   title: string;
   message: string;
 
-  constructor(public dialogRef: MatDialogRef<InvalidInputDataDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: IDialogData) {
+  constructor(public dialogRef: MatDialogRef<InvalidInputDataDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.title = data.title;
     this.message = data.message;
   }
