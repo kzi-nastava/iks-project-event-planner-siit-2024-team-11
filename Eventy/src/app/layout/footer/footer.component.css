@@ -1,0 +1,26 @@
+.footer {
+  background-color: #929AB7;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: auto;
+  font-family: "Figtree";
+}
+
+.footer a {
+  color: #ffcc00;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer p {
+  margin: 5px 0;
+}

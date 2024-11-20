@@ -1,0 +1,139 @@
+<div class="container">
+    <h1>Edit a service</h1>
+    <form [formGroup]="serviceForm" (ngSubmit)="submit()">
+      <div class="form-row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Service category</mat-label>
+            <input matInput placeholder="Enter value" disabled="true">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Enter value" formControlName="name" required>
+            <mat-error *ngIf="serviceForm.controls['name'].hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Enter value" formControlName="description" required>
+            <mat-error *ngIf="serviceForm.controls['description'].hasError('required')">
+              Description is required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Specifics</mat-label>
+            <input matInput placeholder="Enter value" formControlName="specifics" required>
+            <mat-error *ngIf="serviceForm.controls['specifics'].hasError('required')">
+              Specifics are required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-radio-group formControlName="serviceType">
+            <mat-radio-button value="fixed">Fixed duration</mat-radio-button>
+            <mat-radio-button value="variable">Variable duration</mat-radio-button>
+          </mat-radio-group>
+  
+          <mat-form-field *ngIf="serviceForm.get('serviceType')?.value === 'fixed'" appearance="fill">
+            <mat-label>Duration (minutes)</mat-label>
+            <input matInput placeholder="Enter value" formControlName="duration" required type="number">
+            <mat-error *ngIf="serviceForm.controls['duration'].hasError('required')">
+              Duration is required for fixed durations
+            </mat-error>
+          </mat-form-field>
+  
+          <div *ngIf="serviceForm.get('serviceType')?.value === 'variable'" class="premium-textbox-container">
+            <mat-form-field appearance="fill" class="premium-textbox">
+              <mat-label>Minimum duration (minutes)</mat-label>
+              <input matInput placeholder="Enter value" formControlName="minDuration" required type="number">
+              <mat-error *ngIf="serviceForm.controls['minDuration'].hasError('required')">
+                Minimum duration is required for variable durations
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="premium-textbox">
+              <mat-label>Maximum duration (minutes)</mat-label>
+              <input matInput placeholder="Enter value" formControlName="maxDuration" required type="number">
+              <mat-error *ngIf="serviceForm.controls['maxDuration'].hasError('required')">
+                Maximum duration is required for variable durations
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Days notice for reservation</mat-label>
+            <input matInput placeholder="Enter value" formControlName="daysNoticeForReservation" required type="number">
+            <mat-error *ngIf="serviceForm.controls['daysNoticeForReservation'].hasError('required')">
+              Days notice for reservation is required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Days notice for cancellation</mat-label>
+            <input matInput placeholder="Enter value" formControlName="daysNoticeForCancellation" required type="number">
+            <mat-error *ngIf="serviceForm.controls['daysNoticeForCancellation'].hasError('required')">
+              Days notice for cancellation is required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-checkbox [checked]="checkedAutoReservation" formControlName="autoAccept">Automatically accept reservations</mat-checkbox>
+          <mat-checkbox [checked]="checkedIsVisible" formControlName="visibility">Make service visible</mat-checkbox>
+          <mat-checkbox [checked]="checkedIsAvailable" formControlName="availability">Make service available</mat-checkbox>
+  
+        </div>
+  
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Related event types</mat-label>
+            <mat-select formControlName="relevantEventTypes" multiple>
+              <mat-option *ngFor="let category of categoryList" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="serviceForm.controls['relevantEventTypes'].hasError('required')">
+              At least one relevant event type is required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="Enter value" formControlName="price" required type="number">
+            <mat-error *ngIf="serviceForm.controls['price'].hasError('required')">
+              Price is required
+            </mat-error>
+            <mat-error *ngIf="serviceForm.controls['price'].hasError('min')">
+              Price must be a positive number
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Discount (%)</mat-label>
+            <input matInput placeholder="Enter value" formControlName="discount" required type="number">
+            <mat-error *ngIf="serviceForm.controls['discount'].hasError('required')">
+              Discount is required
+            </mat-error>
+            <mat-error *ngIf="serviceForm.controls['discount'].hasError('min') || serviceForm.controls['discount'].hasError('max')">
+              Discount must be between 0 and 100
+            </mat-error>
+          </mat-form-field>
+  
+          <div class="image-picker-container">
+            <input #addPictures id="picker" type="file" (change)="onFilesSelected($event)" accept="image/*" multiple>
+            <div class="picture-button" (click)="triggerFileInput()">Upload Pictures</div>
+          </div>
+          
+          <div class="selected-images" *ngIf="selectedFiles.length">
+            <div *ngFor="let file of selectedFiles; let i = index" class="image-preview">
+              <img [src]="file.preview" alt="image preview" />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <button mat-raised-button class="green-background black-text" color="accent" type="submit">Confirm changes</button>
+    </form>
+  </div>
+  

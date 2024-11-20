@@ -1,0 +1,28 @@
+.login {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-side {
+  width: 40vw;
+  position: fixed;
+  left: 0;
+  height: 100%;
+}
+
+.right-side {
+  position: fixed;
+  left: 40vw;
+  width: 60vw;
+  height: 100%;
+}
+
+@media (max-width: 730px) {
+  .left-side {
+    display: none;
+  }
+
+  .right-side {
+    width: 100%;
+  }
+}

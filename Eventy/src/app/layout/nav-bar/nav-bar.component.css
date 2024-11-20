@@ -1,16 +1,41 @@
 mat-toolbar {
-    background-color: #5656a1;
+  background-color: #929AB7;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 div {
-    width: 100%;
-    justify-content: flex-end;
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-button {
-    margin-right: 10px;
+mat-icon {
+  font-size: 30px;
+  color: white;
+  height: 30px;
+  width: 30px;
 }
 
-span {
-    color: white
+.tool-bar-icon {
+  margin-left: 25px;
+}
+
+.drawer-opener {
+  margin-right: 1vw;
+}
+
+img {
+  height: 60px;
+  width: auto;
+}
+
+.clickable:hover {
+  cursor: pointer;
 }

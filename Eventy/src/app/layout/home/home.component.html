@@ -1,1 +1,45 @@
-<p>home works!</p>
+<div style = "zoom: 100%">
+<!-- TABS -->
+<div class = "tabs_container">
+
+   <!-- Events tab button -->
+   <div (click)="switchTab(1)" class = "events_tab_container" [ngStyle]="{'opacity' : isEventsSelected ? '100%' : '35%'}">
+      <div *ngIf="isEventsSelected" class = "events_tab_left_border"></div>
+      <div class = "tab_icon_and_name">
+         <img class = "tab_icon" src = "organiser_white_background.png">
+         <p class = "tab_name"> Events </p>
+      </div>
+   </div>
+
+   <!-- Solutions tab button -->
+   <div (click)="switchTab(2)" class = "solutions_tab_container" [ngStyle]="{'opacity' : !isEventsSelected ? '100%' : '35%'}"> 
+      <div *ngIf="!isEventsSelected" class = "solutions_tab_left_border"></div> 
+      <div class = "tab_icon_and_name">
+         <img class = "tab_icon" src = "provider_white_background.png">
+         <p class = "tab_name"> Solutions </p>
+      </div>
+   </div>
+</div>
+
+
+<!-- FEATURED EVENTS -->
+<app-featured-events *ngIf="isEventsSelected"/>
+
+<div *ngIf="isEventsSelected" style = "background-color: #F1F1F1; width: 100%;">
+   <!-- EVENTS FILTER -->
+   <app-event-filters > </app-event-filters>
+   <!-- ALL EVENTS -->
+   <app-all-events> </app-all-events>
+</div>
+
+
+<!-- FEATURED SOLUTIONS -->
+<app-featured-solutions *ngIf="!isEventsSelected"/>
+
+<div *ngIf="!isEventsSelected" style = "background-color: #F1F1F1; width: 100%;">
+   <!-- SOLUTIONS FILTER -->
+   <app-solution-filters *ngIf="!isEventsSelected"> </app-solution-filters>
+   <!-- ALL SOLUTIONS -->
+   <app-all-solutions *ngIf="!isEventsSelected"> </app-all-solutions>
+</div>
+</div>

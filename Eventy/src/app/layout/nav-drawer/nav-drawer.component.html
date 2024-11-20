@@ -1,0 +1,14 @@
+<a [routerLink]="['']" class="logo-link">
+  <img src="logo-background.png" alt="Eventy logo" />
+</a>
+<mat-nav-list>
+  <a class="sidenav-link" [routerLink]="['']" (click)="drawer.toggle()"><mat-icon>home</mat-icon> Home</a>
+  <a class="sidenav-link" [routerLink]="['login']" (click)="drawer.toggle()"><mat-icon>badge</mat-icon> Login</a>
+  <a class="sidenav-link" [routerLink]="['register']" (click)="drawer.toggle()"><mat-icon>person_add</mat-icon> Register</a>
+  <a class="sidenav-link" [routerLink]="['organize-event']" (click)="drawer.toggle()"><mat-icon>event_note</mat-icon> Organize Event</a>
+  <a class="sidenav-link" [routerLink]="['add-service']" (click)="drawer.toggle()"><mat-icon>face</mat-icon> Add Service</a>
+  <a class="sidenav-link" [routerLink]="['event-types']" (click)="drawer.toggle()"><mat-icon>theater_comedy</mat-icon> Event Types</a>
+  <a class="sidenav-link" [routerLink]="['my-services']" (click)="drawer.toggle()"><mat-icon>sentiment_very_satisfied
+  </mat-icon> My services</a>
+</mat-nav-list>
+

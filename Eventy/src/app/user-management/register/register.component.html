@@ -1,0 +1,5 @@
+<div class="register">
+  <app-register-banner class="left-side" [isOrganizer]="isOrganizer" (setRegisterType)="setRegisterType($event)"></app-register-banner>
+  <app-register-organizer *ngIf="isOrganizer" class="right-side"></app-register-organizer>
+  <app-register-provider *ngIf="!isOrganizer" class="right-side"></app-register-provider>
+</div>

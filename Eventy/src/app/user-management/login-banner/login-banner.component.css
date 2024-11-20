@@ -1,0 +1,46 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #929AB7;
+  color: white;
+  height: calc(100% - 60px);
+  padding: 10%;
+  box-sizing: border-box;
+}
+
+.banner-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  width: 40vw;
+  max-width: 80vh;
+}
+
+.welcome-text {
+  font-size: 30px;
+  line-height: 40px;
+  letter-spacing: 3px;
+  font-family: Montserrat;
+}
+
+.song {
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #FDFAFA;
+  font-family: Albert Sans;
+  width: 90%;
+}
+
+.register-text {
+  font-size: 17px;
+  line-height: 30px;
+  text-align: center;
+  color: #F6F4F4;
+  font-family: Albert Sans;
+}

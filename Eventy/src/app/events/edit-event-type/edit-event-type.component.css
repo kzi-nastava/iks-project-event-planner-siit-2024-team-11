@@ -1,0 +1,111 @@
+.all-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #F1F1F1;
+  height: 80vh;
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5vh;
+  margin-top: 3vh;
+  width: 100%;
+}
+
+.heading span {
+  font-family: "Albert Sans";
+  font-size: 40px;
+  line-height: 55px;
+  color: #7A7575;
+}
+
+.heading a {
+  position: relative;
+  right: 20%;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.small-content {
+  width: 40%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.add-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 5px 2vw;
+  margin-bottom: 3vh;
+  background-color: #408A56 !important;
+}
+
+.field {
+  width: 30vw;
+  margin-bottom: 2vh;
+}
+
+.category-picker {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.category-picker-field {
+  width: 25vw;
+  margin-bottom: 2vh;
+}
+
+.category-picker button {
+  height: 50px;
+  width: 50px;
+}
+
+.rec-cat-card {
+  background-color: white;
+  border-radius: 25px;
+  border: 2px solid #222;
+  padding: 3vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rec-cat-card p {
+  font-family: "Albert Sans";
+  font-size: 18px;
+}
+
+.rec-cat-card span {
+  font-family: Montserrat;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rec-cat-card span mat-icon {
+  margin-right: 5vw;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  color: red;
+  cursor: pointer;
+}

@@ -1,0 +1,78 @@
+<form class="form" [formGroup]="basicInformationForm">
+  <div>
+    <mat-form-field class="field">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput placeholder="Ex. My Event" formControlName="name" />
+      @if (basicInformationForm.controls['name'].hasError('required')) {
+        <mat-error>Name is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="basicInformationForm.controls['name'].setValue('')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Description</mat-label>
+      <textarea type="text" matInput placeholder="Your Description" formControlName="description"></textarea>
+      @if (basicInformationForm.controls['description'].hasError('required')) {
+        <mat-error>Description is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="basicInformationForm.controls['description'].setValue('')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Maximum number of participants</mat-label>
+      <input type="text" matInput placeholder="120" formControlName="maxNumberParticipants" />
+      @if (basicInformationForm.controls['maxNumberParticipants'].hasError('required') &&
+      !basicInformationForm.controls['maxNumberParticipants'].hasError('pattern')) {
+        <mat-error>Maximum number of participants is <strong>required</strong></mat-error>
+      }
+      @if (basicInformationForm.controls['maxNumberParticipants'].hasError('pattern')) {
+        <mat-error>Input must be a positive integer</mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="basicInformationForm.controls['maxNumberParticipants'].setValue(0)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-radio-group formControlName="isPublic">
+      <mat-label>Privacy type:</mat-label>
+      <mat-radio-button [value]="true">Public</mat-radio-button>
+      <mat-radio-button [value]="false">Private</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="field">
+      <mat-label>Select Event Type</mat-label>
+      <mat-select formControlName="eventType">
+        <mat-option *ngFor="let type of eventTypes" [value]="type">{{ type.name }}</mat-option>
+      </mat-select>
+      @if (basicInformationForm.controls['eventType'].hasError('required')) {
+        <mat-error>Event Type is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <div id="map"></div>
+
+    <div class="map-label-container">
+      <p *ngIf="selectedAddress">Selected Location: {{ selectedAddress }}</p>
+      <p *ngIf="!selectedAddress">Please select an address!</p>
+    </div>
+
+    <mat-form-field class="field">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [min]="minDate"  formGroupName="dateRange" [rangePicker]="picker">
+        <input matStartDate formControlName="startDate" placeholder="Start date" readonly>
+        <input matEndDate formControlName="endDate" placeholder="End date" readonly>
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      @if (dateRangeGroup.controls['startDate'].hasError('required')) {
+        <mat-error>Start Date is <strong>required</strong></mat-error>
+      }
+      @if (dateRangeGroup.controls['endDate'].hasError('required')) {
+        <mat-error>End Date is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+</form>

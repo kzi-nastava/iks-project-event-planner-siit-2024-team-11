@@ -1,0 +1,33 @@
+.form {
+  background-color: #F1F1F1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.login-label {
+  margin-bottom: 8vh;
+  font-family: "Albert Sans";
+  font-size: 40px;
+  line-height: 55px;
+  color: #7A7575;
+}
+
+.form>button {
+  margin-top: 3vh;
+  margin-bottom: 12vh; /* this keeps the whole form in the central place */
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.field {
+  width: 30vw;
+  /* background-color: #F8F4F4 !important; */
+}
