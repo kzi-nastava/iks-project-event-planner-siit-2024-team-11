@@ -22,7 +22,6 @@ import { EditEventTypeComponent } from './edit-event-type/edit-event-type.compon
 import {RouterLink, RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 
-
 @NgModule({
   declarations: [
     EventOrganizationComponent,

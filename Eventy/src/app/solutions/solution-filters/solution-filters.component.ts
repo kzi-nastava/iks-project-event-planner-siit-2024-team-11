@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Component, inject} from '@angular/core';
+import {FormControl} from '@angular/forms';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatDateRangeInput } from '@angular/material/datepicker';
+import { FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -14,20 +18,39 @@ import {map, startWith} from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SolutionFiltersComponent {
-  typeValue: string = "option1";
+  private _snackBar = inject(MatSnackBar);
+
+  // filter values
+  type: string = "Any";
 
   solutionCategories = new FormControl('');
-  solutionCategoryValue: string = "Food";
   
   eventTypes = new FormControl('');
   eventTypesValue: string = "Wedding";
 
-  companyControl = new FormControl('');
+  company = new FormControl('');
   companyOptions: string[] = ['B.G. DOO', 'M&M DOO', 'VIT DOO', 'H&M', 'Apple', 'Samsung'];
   filteredLCompanyOptions: Observable<string[]>;
 
+  minPrice: number = null;
+  maxPrice: number = null;
+
+  dateRangeForm: FormGroup;
+
+  isAvailable: boolean = true;
+  // 
+
+  constructor (private fb: FormBuilder) {
+    this.dateRangeForm = this.fb.group({
+      dateRange: this.fb.group({
+        start: [''],
+        end: [''],
+      }),
+    });
+  }
+
   ngOnInit() {
-    this.filteredLCompanyOptions = this.companyControl.valueChanges.pipe(
+    this.filteredLCompanyOptions = this.company.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
@@ -45,5 +68,35 @@ export class SolutionFiltersComponent {
     }
 
     return `${value}`;
+  }
+
+  filterSolutions(): void {
+    const { start, end } = this.dateRangeForm.get('dateRange')?.value;
+    const startDate = start;
+    const endDate = end;
+
+    const message: string = "FILTER:\n" +
+                   "Type: " + this.type + ";   " + 
+                   "Solutions: " + this.solutionCategories.value + ";   " +
+                   "Event types: " + this.eventTypes.value + ";   " +
+                   "Company: " + this.company.value + ";   " +
+                   "Min price: " + this.minPrice + ";   " +
+                   "Max price: " + this.maxPrice + ";   " +
+                   "Date start: " + startDate + ";   " +
+                   "Date end: " + endDate + ";  " + 
+                   "Availability: " + this.isAvailable;
+
+    this._snackBar.open(message, "OK!");
+  }
+
+  resetFilters(): void {
+    this.type = "Any";
+    this.solutionCategories = new FormControl('');
+    this.eventTypes = new FormControl('');
+    this.company = new FormControl('');
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.dateRangeForm.get('dateRange')?.reset();
+    this.isAvailable = true;
   }
 }

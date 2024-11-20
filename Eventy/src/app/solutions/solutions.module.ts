@@ -16,6 +16,8 @@ import { SolutionsServiceService } from './services/solutions/solutions-service.
 import { ServicesModule } from '../services/services.module';
 import { ProductsModule } from '../products/products.module';
 import { FeaturedSolutionsComponent } from './featured-solutions/featured-solutions.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { FeaturedSolutionsComponent } from './featured-solutions/featured-soluti
     MatCheckboxModule,
     ServicesModule,
     ProductsModule,
+    FormsModule,
+    
 ],
   exports: [
     SolutionFiltersComponent,
