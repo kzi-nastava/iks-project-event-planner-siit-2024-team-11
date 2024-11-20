@@ -21,13 +21,13 @@
             <p style = "font-weight: 450; margin: 0; margin-top: -13px; margin-right: 10px; font-family: Albert Sans;">Sort by:</p>
             <mat-form-field>
                <mat-select [(value)]="sortValue">
-                  <mat-option [value]="sortValue">Category</mat-option>  
+                  <mat-option [value]="sortValue">Event Type</mat-option>  
                   <mat-option [value]="sortValue">Name</mat-option>    
-                  <mat-option [value]="sortValue">Price (ASC)</mat-option>    
-                  <mat-option [value]="sortValue">Price (DESC)</mat-option>      
-                  <mat-option [value]="sortValue">Date</mat-option>    
-                  <mat-option [value]="sortValue">Duration (ASC)</mat-option>
-                  <mat-option [value]="sortValue">Duration (DESC)</mat-option>
+                  <mat-option [value]="sortValue">Max Participants (ASC)</mat-option> 
+                  <mat-option [value]="sortValue">Max Participants (DESC)</mat-option>       
+                  <mat-option [value]="sortValue">Location</mat-option>      
+                  <mat-option [value]="sortValue">Date (ASC)</mat-option>    
+                  <mat-option [value]="sortValue">Date (DESC)</mat-option>
                </mat-select>
             </mat-form-field>
          </div>
@@ -35,7 +35,7 @@
    </div>
 
    <!-- ALL EVENTS -->
-   <div *ngFor="let eventCard of featuredEvents;">
+   <div *ngFor="let eventCard of allEvents;">
       <div class="featured_left"> 
          <app-event-card [eventCard]="eventCard" class = "featured_card"/>     
       </div>   

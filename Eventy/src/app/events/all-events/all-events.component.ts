@@ -14,11 +14,11 @@ import { ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class AllEventsComponent {
-  featuredEvents: EventCard[] = [];
-  sortValue: string = "Category";
+  allEvents: EventCard[] = [];
+  sortValue: string = "Event Type";
 
   constructor() {
-    this.featuredEvents = this.getMockData();
+    this.allEvents = this.getMockData();
   }
 
   getMockData(): EventCard[] {
