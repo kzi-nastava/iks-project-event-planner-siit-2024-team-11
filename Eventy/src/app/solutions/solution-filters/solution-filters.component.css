@@ -1,0 +1,32 @@
+.sticky_container {
+   position: sticky;
+   top: 0;
+   width: 33%;
+   background-color: white;   
+   color: black;
+   height: 100vh;
+}
+
+   .container {
+      height: 100vh;
+   }
+
+   .solution_filters_double {
+      display: flex; 
+      flex-direction: row; 
+      width: 27vw;
+      justify-content: space-between;
+   }
+
+   .input_container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+   }
+
+      .input_label {
+         margin: 0 !important;
+         color: #C4C2C2;
+         font-family: Albert Sans;
+      }
