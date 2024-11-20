@@ -1,0 +1,139 @@
+<div id = "solution_filters" class = "sticky_container">
+   
+   <div style = "cursor: pointer; display: flex; flex-direction: row; justify-content: space-between; margin-left: 30px; margin-right: 30px; padding-top: 15px;">
+      <div style = "display: flex; justify-content: center; align-items: center;">
+         <p style = "font-size: 20px; letter-spacing: 1px; margin: 0; color: #A0A0A0; font-family: Albert Sans;">Filters</p>
+      </div>
+      <div style = "display: flex; justify-content: center; align-items: center; flex-direction: row; background-color: #ED4D4D; border-radius: 7px; width: 115px; padding-bottom: 7px; padding-top: 7px; padding-right: 6.5px;">
+         <mat-icon style = "color: white; font-size: 23px; margin-right: 5px; margin-top: 1px;">delete_outline</mat-icon>
+         <p style = "margin: 0; color: white; font-family: Albert Sans; font-weight: 500">Reset All</p>
+      </div>
+   </div>
+
+   <div style = "height: 2px; background-color: #F1F1F1; width: 100%; margin-top: 15px;"></div>
+
+   <div style = "display: flex; justify-content: center; width: 100%; margin-top: 15px">
+      <div id = "solution_filters_double" class = "solution_filters_double">
+         <div class = "input_container" style = "margin-right: 0px; align-items: flex-start;">
+            <div style = "width: 12vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+               <p class = "input_label">Type:</p>
+            </div>
+            <mat-form-field>
+               <mat-select [(value)]="typeValue">
+                 <mat-option value="option1">Any</mat-option>
+                 <mat-option value="option2"> <mat-icon style = "margin: 0; margin-top: 10px; font-size: 12px; color: #FAD609;">circle</mat-icon> Services </mat-option>
+                 <mat-option value="option3"> <mat-icon style = "margin: 0; margin-top: 10px; font-size: 12px; color: #DD79AE;">circle</mat-icon> Products </mat-option>
+               </mat-select>
+            </mat-form-field>    
+         </div>
+
+         <div class = "input_container" style = "align-items: flex-end;">
+            <div style = "width: 12vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+               <p class = "input_label">Category:</p>
+            </div>
+                   
+            <mat-form-field>
+               <mat-select [formControl]="solutionCategories" multiple>
+                  <mat-option [value]="solutionCategoryValue">Food</mat-option>
+                  <mat-option [value]="solutionCategoryValue">Music</mat-option>
+                  <mat-option [value]="solutionCategoryValue">Caterin</mat-option>
+                  <mat-option [value]="solutionCategoryValue">Flowers</mat-option>
+                  <mat-option [value]="solutionCategoryValue">Party</mat-option>
+                  <mat-option [value]="solutionCategoryValue">Sport</mat-option>
+               </mat-select>
+            </mat-form-field>
+         </div>
+      </div>
+   </div>
+
+   <div style = "display: flex; justify-content: center; width: 100%;">
+      <div id = "solution_filters_double" class = "solution_filters_double">
+         <div class = "input_container" style = "align-items: flex-start;">
+            <div style = "width: 12vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+               <p class = "input_label">Event type(s):</p>
+            </div>
+            <mat-form-field>
+               <mat-select [formControl]="eventTypes" multiple>
+                  <mat-option [value]="eventTypesValue">Wedding</mat-option>
+                  <mat-option [value]="eventTypesValue">Sport</mat-option>
+                  <mat-option [value]="eventTypesValue">Conference</mat-option>
+                  <mat-option [value]="eventTypesValue">Party</mat-option>
+                  <mat-option [value]="eventTypesValue">Prom</mat-option>
+                  <mat-option [value]="eventTypesValue">Big Party</mat-option>
+               </mat-select>
+            </mat-form-field>         
+         </div>
+
+         <div class = "input_container" style = "align-items: flex-end;">
+            <div style = "width: 12vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+               <p class = "input_label">Company:</p>
+            </div>
+            <form class="example-form">
+               <mat-form-field class="example-full-width">
+                  <input type="text"  
+                         matInput
+                         [formControl]="companyControl"
+                         [matAutocomplete]="auto">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                     @for (companyOptions of filteredLCompanyOptions | async; track companyOptions) {
+                     <mat-option [value]="companyOptions">{{companyOptions}}</mat-option>
+                     }
+                  </mat-autocomplete>
+               </mat-form-field>
+            </form>        
+         </div>
+      </div>
+   </div>
+
+   <div style = "display: flex; justify-content: center; width: 100%;">
+      <div id = "solution_filters_double" class = "solution_filters_double">
+         <div class = "input_container" style = "margin-right: 0px; align-items: flex-start;">
+            <div style = "width: 12vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+               <p class = "input_label">Min price:</p>
+            </div>
+            <mat-form-field>
+               <input type="number" matInput value="" min = "0" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </mat-form-field>  
+         </div>
+
+         <div class = "input_container" style = "align-items: flex-end;">
+            <div style = "width: 12vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+               <p class = "input_label">Max price:</p>
+            </div>           
+            <mat-form-field>
+               <input type="number" matInput value="" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </mat-form-field>
+         </div>
+      </div>
+   </div>
+
+   <div id = "solution_filters" style = "display: flex; flex-direction: row; justify-content: center;">
+      <div class = "input_container">
+         <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+            <p class = "input_label">Date range:</p>
+         </div>
+         <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date">
+            <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint style = "color: #C4C2C2 !important">MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+         </mat-form-field>  
+      </div>
+   </div>
+
+   <div id = "solution_filters" style = "display: flex; flex-direction: row; justify-content: center; margin-top: 17px">
+      <div class = "input_container">
+         <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: -5px">
+            <p class = "input_label">Availability:</p>
+         </div>
+         <mat-checkbox checked="true">Available</mat-checkbox>
+      </div>
+   </div>
+
+
+</div>
+
