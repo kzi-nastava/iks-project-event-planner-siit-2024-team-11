@@ -23,3 +23,16 @@
          color: #C4C2C2;
          font-family: Albert Sans;
       }
+
+   .confirm_filter_container {
+      width: 26vw;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 3px rgb(180, 180, 180);
+      background-color: rgb(57, 166, 41);
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      cursor: pointer;
+   }
+
