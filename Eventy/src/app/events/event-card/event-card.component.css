@@ -158,6 +158,19 @@
             margin-right: 4px;
          }
 
+         .favorite_button_container:hover {
+            background-color: #929AB7;
+         }
+         .favorite_button_container:hover mat-icon {
+            color: white !important;
+         }
+         .see_more_button_container:hover {
+            background-color: #929AB7;
+         }
+         .see_more_button_container:hover p {
+            color: white !important;
+         }
+
       .description_container {
          display: flex;
          height: 100%;
