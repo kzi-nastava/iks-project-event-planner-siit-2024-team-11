@@ -50,7 +50,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: center !important;
     justify-content: center !important;
  }
- .ng-trigger {
-    background-color: white !important;
- } /* ovo mora u global.. vidjeti sa kolegama.. */
+ 
 }
+
+.ng-trigger {
+  background-color: white !important;
+} /* ovo mora u global.. vidjeti sa kolegama.. */
