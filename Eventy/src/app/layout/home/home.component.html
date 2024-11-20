@@ -3,7 +3,7 @@
 <div class = "tabs_container">
 
    <!-- Events tab button -->
-   <div (click)="switchTab()" class = "events_tab_container" [ngStyle]="{'opacity' : isEventsSelected ? '100%' : '35%'}">
+   <div (click)="switchTab(1)" class = "events_tab_container" [ngStyle]="{'opacity' : isEventsSelected ? '100%' : '35%'}">
       <div *ngIf="isEventsSelected" class = "events_tab_left_border"></div>
       <div class = "tab_icon_and_name">
          <img class = "tab_icon" src = "organiser_white_background.png">
@@ -12,7 +12,7 @@
    </div>
 
    <!-- Solutions tab button -->
-   <div (click)="switchTab()" class = "solutions_tab_container" [ngStyle]="{'opacity' : !isEventsSelected ? '100%' : '35%'}"> 
+   <div (click)="switchTab(2)" class = "solutions_tab_container" [ngStyle]="{'opacity' : !isEventsSelected ? '100%' : '35%'}"> 
       <div *ngIf="!isEventsSelected" class = "solutions_tab_left_border"></div> 
       <div class = "tab_icon_and_name">
          <img class = "tab_icon" src = "provider_white_background.png">
