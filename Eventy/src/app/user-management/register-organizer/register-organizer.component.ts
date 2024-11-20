@@ -49,7 +49,6 @@ export class RegisterOrganizerComponent {
       this.registerForm.markAllAsTouched();
     } else {
       this.userService.register(this.registerForm.value);
-      console.log(this.registerForm.value);
       this.router.navigate(['']);
     }
   }

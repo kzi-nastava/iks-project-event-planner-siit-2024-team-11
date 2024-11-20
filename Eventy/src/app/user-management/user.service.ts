@@ -42,6 +42,5 @@ export class UserService {
 
   register(newUser: (Organizer | Provider)) : void {
     this.users.push(newUser);
-    console.log(this.users);
   }
 }
