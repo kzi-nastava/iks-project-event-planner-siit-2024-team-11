@@ -20,10 +20,22 @@
    </div>
 </div>
 
+
 <!-- FEATURED EVENTS -->
-<app-featured-events id = "featured_events" *ngIf="isEventsSelected"/>
+<app-featured-events *ngIf="isEventsSelected"/>
+
+<div *ngIf="isEventsSelected" style = "background-color: #F1F1F1; width: 100%;">
+   <!-- EVENTS FILTER -->
+   <app-event-filters > </app-event-filters>
+   <!-- ALL EVENTS -->
+   <app-all-events> </app-all-events>
+</div>
+
+
 
 <!-- FEATURED SOLUTIONS -->
-<app-featured-solutions id = "featured_solutions" *ngIf="!isEventsSelected"/>
-
-<app-event-filters> </app-event-filters>
+<app-featured-solutions *ngIf="!isEventsSelected"/>
+<!-- SOLUTIONS FILTER -->
+<app-solution-filters *ngIf="!isEventsSelected"> </app-solution-filters>
+<!-- ALL SOLUTIONS -->
+ <app-all-solutions *ngIf="!isEventsSelected"> </app-all-solutions>

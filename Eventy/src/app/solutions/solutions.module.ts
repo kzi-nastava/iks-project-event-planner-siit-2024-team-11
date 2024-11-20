@@ -8,13 +8,15 @@ import { EventsModule } from '../events/events.module';
 import { ServicesModule } from "../services/services.module";
 import { ProductsModule } from "../products/products.module";
 import { SolutionFiltersComponent } from './solution-filters/solution-filters.component';
+import { AllSolutionsComponent } from './all-solutions/all-solutions.component';
 
 
 
 @NgModule({
   declarations: [
     FeaturedSolutionsComponent,
-    SolutionFiltersComponent
+    SolutionFiltersComponent,
+    AllSolutionsComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,9 @@ import { SolutionFiltersComponent } from './solution-filters/solution-filters.co
     ProductsModule
 ],
   exports: [
-    FeaturedSolutionsComponent
+    FeaturedSolutionsComponent,
+    SolutionFiltersComponent,
+    AllSolutionsComponent,
   ]
 })
 export class SolutionsModule { }
