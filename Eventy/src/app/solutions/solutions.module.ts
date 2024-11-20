@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MaterialModule} from '../infrastructure/material/material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
-import { FeaturedSolutionsComponent } from './featured-solutions/featured-solutions.component';
 import { EventsModule } from '../events/events.module';
-import { ServicesModule } from "../services/services.module";
-import { ProductsModule } from "../products/products.module";
 import { SolutionFiltersComponent } from './solution-filters/solution-filters.component';
 import { AllSolutionsComponent } from './all-solutions/all-solutions.component';
 import {AsyncPipe} from '@angular/common';
@@ -15,13 +12,16 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { SolutionsServiceService } from './services/solutions/solutions-service.service';
+import { ServicesModule } from '../services/services.module';
+import { ProductsModule } from '../products/products.module';
+import { FeaturedSolutionsComponent } from './featured-solutions/featured-solutions.component';
 
 @NgModule({
   declarations: [
-    FeaturedSolutionsComponent,
     SolutionFiltersComponent,
-    AllSolutionsComponent
+    AllSolutionsComponent,
+    FeaturedSolutionsComponent,
   ],
   imports: [
     CommonModule,
@@ -29,20 +29,22 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     DatepickerModule,
     EventsModule,
-    ServicesModule,
-    ProductsModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    ReactiveFormsModule,
     AsyncPipe,
     MatSliderModule,
     MatCheckboxModule,
+    ServicesModule,
+    ProductsModule,
 ],
   exports: [
-    FeaturedSolutionsComponent,
     SolutionFiltersComponent,
     AllSolutionsComponent,
+    FeaturedSolutionsComponent,
+  ], 
+  providers: [
+    SolutionsServiceService,
   ]
 })
 export class SolutionsModule { }
