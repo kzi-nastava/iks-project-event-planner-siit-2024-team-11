@@ -15,6 +15,7 @@ import {AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { EventsServiceService } from './services/events/events-service.service';
 
 
 @NgModule({
@@ -45,6 +46,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     FeaturedEventsComponent,
     EventFiltersComponent,
     AllEventsComponent,
+  ],
+  providers: [
+    EventsServiceService,
   ]
 })
 export class EventsModule { }
