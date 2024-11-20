@@ -1,15 +1,51 @@
-<mat-card  appearance="outlined">
-    <mat-card-content>
-      <b>{{service.name}}</b>
-      <p>{{service.description}}</p>
-      <div class="card-row">
-        <b>${{service.price}}</b>
-        <a mat-button [routerLink]="['../edit-service', service.id]" class="edit-btn">
-            <mat-icon>edit</mat-icon> Edit
-        </a>
-        <a mat-button (click)="deleteItem(service.id)" class="delete-btn">
-            <mat-icon>delete</mat-icon> Delete
-          </a>            
-      </div>
-    </mat-card-content>
-</mat-card>
+<div class = "card_container">
+  <div class = "left_side_container">
+     <div class = "title_container">
+        <p class = "title">{{service.name}}</p>
+     </div>
+
+     <div class = "category_container">
+        <p style = "margin-right: 5px;" class = "category">Category:</p>
+        <p class = "category">{{service.category.name}}</p>
+     </div>
+
+     <div class = "duration_container">
+        <p style = "margin-right: 5px;" class = "duration">Service duration:</p>
+        <p class = "duration">{{service.minReservationTime === service.maxReservationTime ? service.minReservationTime + "h" : service.minReservationTime + "h - " + service.maxReservationTime + "h"}}</p>
+     </div>
+
+     <div class = "reservation_container">
+        <p style = "margin-right: 5px;" class = "reservation">Reservation:</p>
+        <p class = "reservation">{{service.reservationType === 0 ? "manual" : "automatic"}}</p>
+     </div>
+
+     <div class = "event_types_all_container">
+        <p style = "margin-right: 5px; padding-bottom: 5px;" class = "category">Event types:</p>
+     </div>
+  </div>
+
+  <div class = "right_side_container">
+     <div class = "buttons_container">
+        <div class = "price_container">
+           <div style = "display: inline-block" [ngStyle]="{'visibility' : service.discount === 0 ? 'hidden' : 'visible'}">
+              <p class = "old_price">{{(service.price).toFixed(2)}}$</p>
+           </div>
+           <p [ngStyle]="{'margin-top' : service.discount === 0 ? '-11px' : '0px',
+                          'padding-bottom': service.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(service.price - service.price * service.discount / 100).toFixed(2)}}$</p>
+        </div>
+        <div style = "justify-content:right; align-items: center; display: flex; flex: 1.3;">
+           <div class = "favorite_button_container">
+              <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
+           </div>
+           
+           <div class = "see_more_button_container">
+              <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
+           </div>
+        </div>
+     </div>
+
+     <div class = "image_container">
+        <img class = "service_image" src = "solution_assets/{{service.imageUrls[0]}}"/>
+     </div>
+  </div>
+</div>

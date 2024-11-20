@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Service } from '../model/service.model';
-import { ServicesService } from '../services.service';
+import { Service } from '../../solutions/model/services.model';
 
 @Component({
   selector: 'app-my-services-view-card',
@@ -8,14 +7,6 @@ import { ServicesService } from '../services.service';
   styleUrl: './my-services-view-card.component.css'
 })
 export class MyServicesViewCardComponent {
-  @Input()
-  service: Service;
+  @Input() service: Service;
 
-  constructor(private servicesService: ServicesService) {
-
-  }
-
-  deleteItem(id: number) {
-    this.servicesService.delete(id);
-  }
 }

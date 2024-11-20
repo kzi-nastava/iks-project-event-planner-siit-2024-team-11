@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ServicesService } from '../services.service';
-import { Service } from '../model/service.model';
+import { Service } from '../../solutions/model/services.model';
 
 @Component({
   selector: 'app-my-services-view',

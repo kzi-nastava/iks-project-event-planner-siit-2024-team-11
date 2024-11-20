@@ -1,3 +1,5 @@
-<div *ngFor="let service of services">
-    <app-my-services-view-card [service]="service"></app-my-services-view-card>
+<div class="services-wrapper">
+    <div class="services-container" *ngFor="let service of services">
+        <app-my-services-view-card [service]="service"></app-my-services-view-card>
+    </div>
 </div>
