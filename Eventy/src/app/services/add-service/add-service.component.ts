@@ -13,11 +13,39 @@ export class AddServiceComponent {
   checked: boolean = false;
 
   serviceForm = new FormGroup({
-    serviceType: new FormControl('', Validators.required)
+    serviceCategory: new FormControl('', [Validators.required]),
+    name: new FormControl ('', [Validators.required]),
+    description: new FormControl ('', [Validators.required]),
+    specifics: new FormControl ('', [Validators.required]),
+    serviceType: new FormControl ('', [Validators.required]),
+    duration: new FormControl (null, [Validators.required]),
+    minDuration: new FormControl (null, [Validators.required]),
+    maxDuration: new FormControl (null, [Validators.required]),
+    daysNoticeForReservation: new FormControl (null, [Validators.required]),
+    daysNoticeForCancellation: new FormControl (null, [Validators.required]),
+    autoAccept: new FormControl ([false]),
+    relevantEventTypes: new FormControl ([], [Validators.required]),
+    price: new FormControl (null, [Validators.required, Validators.min(0)]),
+    discount: new FormControl (null, [Validators.required, Validators.min(0), Validators.max(100)]),
+    images: new FormControl (null),
   });
 
   constructor() {
+    this.serviceForm.get('serviceType')?.valueChanges.subscribe(value => {
+      if (value === 'variable') {
+        this.serviceForm.get('duration')?.clearValidators();
+        this.serviceForm.get('minDuration')?.setValidators([Validators.required]);
+        this.serviceForm.get('maxDuration')?.setValidators([Validators.required]);
+      } else {
+        this.serviceForm.get('minDuration')?.clearValidators();
+        this.serviceForm.get('maxDuration')?.clearValidators();
+        this.serviceForm.get('duration')?.setValidators([Validators.required]);
+      }
 
+      this.serviceForm.get('duration')?.updateValueAndValidity();
+      this.serviceForm.get('minDuration')?.updateValueAndValidity();
+      this.serviceForm.get('maxDuration')?.updateValueAndValidity();
+    });
   }
   
   @ViewChild('addPictures') fileInput!: ElementRef<HTMLInputElement>;
@@ -45,6 +73,11 @@ export class AddServiceComponent {
   
 
   submit() {
-    alert("SERVICE CREATED")
+    if (this.serviceForm.valid) {
+      alert("SERVICE CREATED");
+    }
+    else {
+      alert("NOT EVERYTHING IS VALID");
+    }
   }
 }
