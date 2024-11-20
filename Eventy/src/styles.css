@@ -30,8 +30,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: white !important;
     border-radius: 8px !important;
     box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
-    height: 50px !important;
-    width: 26vw !important;
+    height: 48px !important;
+    width: 27vw !important;
     align-items: center !important;
     justify-content: center !important;
  }
@@ -42,10 +42,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: white !important;
     border-radius: 8px !important;
     box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
-    height: 50px !important;
-    width: 26vw !important;
+    height: 48px !important;
+    width: 27vw !important;
     align-items: center !important;
     justify-content: center !important;
+ }
+
+ .mat-mdc-checkbox {
+    width: 28vw !important;
+ }
+
+ .mdc-label {
+  font-size: 16px;
+  font-family: Albert Sans;
+  font-weight: 400;
  }
 }
 
@@ -54,7 +64,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: white !important;
     border-radius: 8px !important;
     box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
-    height: 50px !important;
+    height: 43px !important;
     width: 12vw !important;
     align-items: center !important;
     justify-content: center !important;

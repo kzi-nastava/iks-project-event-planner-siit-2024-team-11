@@ -14,15 +14,20 @@ import {map, startWith} from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SolutionFiltersComponent {
-  eventTypes = new FormControl('');
-  eventTypeValue: string = "Wedding";
+  typeValue: string = "option1";
 
-  locationControl = new FormControl('');
-  locationOptions: string[] = ['Belgrade', 'Gradiska', 'Novi Sad', 'Paris', 'New York', 'Kuala Lumpur'];
-  filteredLocationOptions: Observable<string[]>;
+  solutionCategories = new FormControl('');
+  solutionCategoryValue: string = "Food";
+  
+  eventTypes = new FormControl('');
+  eventTypesValue: string = "Wedding";
+
+  companyControl = new FormControl('');
+  companyOptions: string[] = ['B.G. DOO', 'M&M DOO', 'VIT DOO', 'H&M', 'Apple', 'Samsung'];
+  filteredLCompanyOptions: Observable<string[]>;
 
   ngOnInit() {
-    this.filteredLocationOptions = this.locationControl.valueChanges.pipe(
+    this.filteredLCompanyOptions = this.companyControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
@@ -31,6 +36,14 @@ export class SolutionFiltersComponent {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.locationOptions.filter(option => option.toLowerCase().includes(filterValue));
+    return this.companyOptions.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return `${value}`;
   }
 }

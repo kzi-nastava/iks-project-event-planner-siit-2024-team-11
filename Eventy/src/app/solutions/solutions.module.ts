@@ -13,6 +13,8 @@ import {AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
+    MatSliderModule,
+    MatCheckboxModule,
 ],
   exports: [
     FeaturedSolutionsComponent,

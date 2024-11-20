@@ -10,10 +10,10 @@
       </div>
    </div>
 
-   <div style = "height: 2px; background-color: #F1F1F1; width: 100%; margin-top: 20px;"></div>
+   <div style = "height: 2px; background-color: #F1F1F1; width: 100%; margin-top: 15px;"></div>
 
-   <div class = "input_container" style = "margin-top: 20px">
-      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+   <div class = "input_container" style = "margin-top: 15px">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start;">
          <p class = "input_label">Event types:</p>
       </div>
       <mat-form-field>
@@ -29,35 +29,35 @@
    </div>
 
    <div class = "input_container">
-      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start;">
          <p class = "input_label">Max participants:</p>
       </div>
       <mat-form-field class="example-full-width">
-         <input type="number" matInput value="1" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+         <input type="number" matInput value="" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
        </mat-form-field>
    </div>
 
    <div class = "input_container">
-      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start;">
          <p class = "input_label">Location:</p>
       </div>
      <form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input type="text"  
-           matInput
-           [formControl]="locationControl"
-           [matAutocomplete]="auto">
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      @for (locationOption of filteredLocationOptions | async; track locationOption) {
-        <mat-option [value]="locationOption">{{locationOption}}</mat-option>
-      }
-    </mat-autocomplete>
-  </mat-form-field>
-</form>  
+         <mat-form-field class="example-full-width">
+            <input type="text"  
+                  matInput
+                  [formControl]="locationControl"
+                  [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+               @for (locationOption of filteredLocationOptions | async; track locationOption) {
+               <mat-option [value]="locationOption">{{locationOption}}</mat-option>
+               }
+            </mat-autocomplete>
+         </mat-form-field>
+      </form>  
    </div>
    
    <div class = "input_container">
-      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start;">
          <p class = "input_label">Date range:</p>
       </div>
       <mat-form-field>
@@ -71,7 +71,6 @@
          <mat-date-range-picker #picker></mat-date-range-picker>
        </mat-form-field>  
    </div>
-
 
 </div>
 

@@ -14,7 +14,7 @@
    .solution_filters_double {
       display: flex; 
       flex-direction: row; 
-      width: 26vw;
+      width: 27vw;
       justify-content: space-between;
    }
 

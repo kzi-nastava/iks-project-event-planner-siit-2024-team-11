@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  isEventsSelected : boolean = false;
+  isEventsSelected : boolean = true;
 
   switchTab() : void {
     this.isEventsSelected = !this.isEventsSelected;
