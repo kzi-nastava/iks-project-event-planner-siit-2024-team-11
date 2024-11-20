@@ -20,7 +20,7 @@ export class EventCardComponent {
   }
 
   handleSeeMore() {
-    this._snackBar.open("FAVORITE: " + this.eventCard.event.name, "OK!");
+    this._snackBar.open("SEE MORE: " + this.eventCard.event.name, "OK!");
   }
 }
 

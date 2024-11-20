@@ -16,6 +16,6 @@ export class ServiceCardComponent {
   }
 
   handleSeeMore() {
-    this._snackBar.open("FAVORITE: " + this.serviceCard.service.name, "OK!");
+    this._snackBar.open("SEE MORE: " + this.serviceCard.service.name, "OK!");
   }
 }
