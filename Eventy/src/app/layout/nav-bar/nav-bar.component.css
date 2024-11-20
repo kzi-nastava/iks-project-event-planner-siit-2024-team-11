@@ -1,31 +1,38 @@
 mat-toolbar {
-    background-color: #929AB7;
-    height: 8vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  background-color: #929AB7;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 div {
-    width: auto;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 mat-icon {
-  font-size: 5vh;
-  margin-right: 2vw;
+  font-size: 30px;
   color: white;
-  height: 5vh;
-  width: 5vh;
+  height: 30px;
+  width: 30px;
+}
+
+.tool-bar-icon {
+  margin-left: 25px;
+}
+
+.drawer-opener {
+  margin-right: 1vw;
 }
 
 img {
-  height: 8vh;
+  height: 60px;
   width: auto;
 }
 

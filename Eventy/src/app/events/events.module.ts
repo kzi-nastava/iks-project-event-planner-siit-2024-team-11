@@ -16,6 +16,13 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { EventsServiceService } from './services/events/events-service.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
+import { AllEventTypesComponent } from './all-event-types/all-event-types.component';
+import { CreateEventTypeComponent } from './create-event-type/create-event-type.component';
+import { EditEventTypeComponent } from './edit-event-type/edit-event-type.component';
+import {RouterLink} from '@angular/router';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -28,6 +35,9 @@ import { EventsServiceService } from './services/events/events-service.service';
     FeaturedEventsComponent,
     EventFiltersComponent,
     AllEventsComponent
+    AllEventTypesComponent,
+    CreateEventTypeComponent,
+    EditEventTypeComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +59,9 @@ import { EventsServiceService } from './services/events/events-service.service';
   ],
   providers: [
     EventsServiceService,
+    RouterLink,
+    FormsModule,
+    SharedModule
   ]
 })
 export class EventsModule { }

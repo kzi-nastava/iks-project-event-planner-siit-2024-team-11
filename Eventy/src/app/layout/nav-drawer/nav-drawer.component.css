@@ -1,6 +1,14 @@
-img {
+a.logo-link {
+  text-decoration: none;
+  border: none;
+  outline: none;
+  display: block;
+}
+
+a.logo-link img {
   width: 25vw;
   height: auto;
+  display: block;
 }
 
 mat-nav-list {

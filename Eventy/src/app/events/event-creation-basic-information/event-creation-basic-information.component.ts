@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import * as L from 'leaflet';
+import {EventTypeService} from '../event-type.service';
+import {IEventType} from '../model/events.model';
 
 @Component({
   selector: 'app-event-creation-basic-information',
@@ -27,7 +29,7 @@ export class EventCreationBasicInformationComponent {
       return this.basicInformationForm.controls['dateRange'] as FormGroup;
     }
 
-    eventTypes: string[] = ["Wedding", "Graduation", "Conference"];
+    eventTypes: IEventType[] = [];
 
     minDate: Date = new Date();
 
@@ -36,6 +38,10 @@ export class EventCreationBasicInformationComponent {
     currentMarker: L.Marker | undefined;
     selectedAddress: string | undefined;
     readonly ftnCoordinates: [number, number] = [45.2445, 19.8484];
+
+    constructor(private eventTypeService: EventTypeService) {
+      this.eventTypes = this.eventTypeService.getAll();
+    }
 
     ngOnInit(): void {
       this.initMap();
