@@ -72,14 +72,14 @@
   position: absolute;
   bottom: -10%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); 
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 12px;
+  font-size: 12px; 
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  width: 7vw;
+  width: 10vw;
   text-align: center;
   font-family: "Montserrat";
 }

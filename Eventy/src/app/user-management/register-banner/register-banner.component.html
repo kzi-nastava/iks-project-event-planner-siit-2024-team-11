@@ -1,35 +1,39 @@
 <div class="banner">
-  <div class="banner-part">
-    <p class="welcome-text">
-      Welcome to
-    </p>
-
-    <img src="logo-background.png" alt="Application logo"/>
+  <div class = "welcome_to_container">
+    <p class = "welcome-text">Welcome to</p>
   </div>
 
-  <div class="banner-part">
-    <p class="select-text">
-      SELECT ACCOUNT ROLE
-    </p>
+  <div class = "logo_container">
+    <img src = "logo_bg_small.png"/>
+  </div>
 
-    <div class="role-buttons">
-      <button [ngClass]="getOrganizerButtonClasses()" (click)="setRegisterType.emit(true)">
-        <img src="Organiser.png" alt="Event Organizer photo" />
-        <p class="role-button-text">EVENT ORGANIZER</p>
-      </button>
+  <div class = "select_role_text_container">
+    <p class = "select-text">SELECT ACCOUNT ROLE</p>
+  </div>
 
-      <button [ngClass]="getProviderButtonClasses()" (click)="setRegisterType.emit(false)">
-        <img src="Provider.png" alt="Product/Service Provider photo" />
-        <p class="role-button-text">PRODUCT/SERVICE PROVIDER</p>
-      </button>
+  <div class = "role-buttons">
+    <button style = "margin-right: 50px" [ngClass]="getOrganizerButtonClasses()" (click)="switchRegister.emit(true)">
+      <img src="Organiser.png" alt="Event Organizer photo" />
+      <div style = "position: relative; margin-top: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <p class="role-button-text">EVENT</p>
+        <p class="role-button-text">ORGANISER</p>
+      </div>
+
+    </button>
+
+    <button [ngClass]="getProviderButtonClasses()" (click)="switchRegister.emit(false)">
+      <img src="Provider.png" alt="Solutions Provider photo" />
+      <div style = "margin-top: 10px; display: flex; flex-direction: column;">
+        <p class="role-button-text">SOLUTIONS</p>
+        <p class="role-button-text">PROVIDER</p>
+      </div>
+    </button>
+  </div>
+
+    <div class = "already_have_acc_container">
+      <p class="register-text">
+        Already have an account?
+      </p>
+      <a mat-flat-button class="button" [routerLink]="['/login']">LOGIN HERE</a>
     </div>
-  </div>
-
-  <div class="banner-part">
-    <p class="register-text">
-      Already have an account?
-    </p>
-
-    <a mat-flat-button class="button" [routerLink]="['/login']">LOGIN HERE</a>
-  </div>
 </div>

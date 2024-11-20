@@ -1,71 +1,100 @@
 .banner {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   background-color: #929AB7;
   color: white;
   height: calc(100% - 60px);
-  padding: 5%;
-  box-sizing: border-box;
 }
 
-.banner-part {
+.welcome_to_container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-img {
-  width: 40vw;
-  max-width: 65vh;
+  flex: 1;
+  padding-top: 5px;
+  justify-content: center;
+  align-items:flex-end;
 }
 
 .welcome-text {
+  margin: 0;
   font-size: 30px;
   line-height: 40px;
   letter-spacing: 3px;
   font-family: Montserrat;
 }
 
+.logo_container {
+  display: flex;
+  flex: 2;
+  justify-content: center;
+}
+
+.logo_container img {
+  width: 75%;
+}
+
+.select_role_text_container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
 .select-text {
+  margin: 0;
   font-size: 20px;
   line-height: 20px;
   font-family: Albert Sans;
+  font-weight: 500;
+  color: white;
 }
 
 .role-buttons {
   display: flex;
+  flex: 1;
+  justify-content: center;
   flex-direction: row;
-  justify-content: space-around;
-  width: 80%;
 }
 
 .role-button {
-  border: 1px solid black;
+  width: 30%;
+  display: flex;
+  padding: 1px;
+  padding-top: 13px;
+  padding-bottom: 10px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid rgb(106, 119, 150);
   border-radius: 15px;
   background-color: #E8E8E8;
-  margin: 1vw;
   cursor: pointer;
-  max-width: 20vh;
-  max-height: 25vh;
 }
 
 .role-button img {
-  width: 7vw;
-  max-width: 13vh;
-  padding: 1vw;
+  width: 60%;
 }
 
 .role-button-text {
+  margin: 0;
   font-family: "Albert Sans";
   font-size: 12px;
   line-height: 15px;
+  font-weight: 500;
   color: #6E717B;
 }
 
 .not-selected-button {
   opacity: 65%;
+}
+
+.already_have_acc_container {
+  display: flex;
+  flex: 2;
+  padding-top: 6%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .register-text {
