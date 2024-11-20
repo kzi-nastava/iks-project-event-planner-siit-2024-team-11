@@ -24,6 +24,23 @@
          font-family: Albert Sans;
       }
 
+   .resetFilterContainer {
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      flex-direction: row; 
+      background-color: #ED4D4D; 
+      border-radius: 7px; 
+      width: 115px; 
+      padding-bottom: 7px; 
+      padding-top: 7px; 
+      padding-right: 6.5px;
+   }
+
+   .resetFilterContainer:hover {
+      background-color: #ed4d4ddf;
+   }  
+
    .confirm_filter_container {
       width: 26vw;
       padding: 10px;
