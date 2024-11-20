@@ -1,0 +1,26 @@
+.sticky_container {
+   position: sticky;
+   top: 0;
+   width: 33%;
+   background-color: white;   
+   color: black;
+   height: 100vh;
+}
+
+   .container {
+      height: 100vh;
+   }
+
+   .input_container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-top: 8px;
+   }
+
+      .input_label {
+         margin: 0 !important;
+         color: #C4C2C2;
+         font-family: Albert Sans;
+      }

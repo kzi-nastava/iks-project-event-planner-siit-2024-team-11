@@ -1,1 +1,77 @@
-<p>event-filters works!</p>
+<div  id = "event_filters" class = "sticky_container">
+   
+   <div style = "cursor: pointer; display: flex; flex-direction: row; justify-content: space-between; margin-left: 30px; margin-right: 30px; padding-top: 15px;">
+      <div style = "display: flex; justify-content: center; align-items: center;">
+         <p style = "font-size: 20px; letter-spacing: 1px; margin: 0; color: #A0A0A0; font-family: Albert Sans;">Filters</p>
+      </div>
+      <div style = "display: flex; justify-content: center; align-items: center; flex-direction: row; background-color: #ED4D4D; border-radius: 7px; width: 115px; padding-bottom: 7px; padding-top: 7px; padding-right: 6.5px;">
+         <mat-icon style = "color: white; font-size: 23px; margin-right: 5px; margin-top: 1px;">delete_outline</mat-icon>
+         <p style = "margin: 0; color: white; font-family: Albert Sans; font-weight: 500">Reset All</p>
+      </div>
+   </div>
+
+   <div style = "height: 2px; background-color: #F1F1F1; width: 100%; margin-top: 15px;"></div>
+
+   <div class = "input_container" style = "margin-top: 20px">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+         <p class = "input_label">Event types:</p>
+      </div>
+      <mat-form-field>
+         <mat-select [formControl]="eventTypes" multiple>
+            <mat-option [value]="eventTypeValue">Wedding</mat-option>
+            <mat-option [value]="eventTypeValue">Sport</mat-option>
+            <mat-option [value]="eventTypeValue">Conference</mat-option>
+            <mat-option [value]="eventTypeValue">Party</mat-option>
+            <mat-option [value]="eventTypeValue">Prom</mat-option>
+            <mat-option [value]="eventTypeValue">Big Party</mat-option>
+         </mat-select>
+       </mat-form-field>
+   </div>
+
+   <div class = "input_container">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+         <p class = "input_label">Max participants:</p>
+      </div>
+      <mat-form-field class="example-full-width">
+         <input type="number" matInput value="1" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+       </mat-form-field>
+   </div>
+
+   <div class = "input_container">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+         <p class = "input_label">Location:</p>
+      </div>
+     <form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text"  
+           matInput
+           [formControl]="locationControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      @for (locationOption of filteredLocationOptions | async; track locationOption) {
+        <mat-option [value]="locationOption">{{locationOption}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</form>  
+   </div>
+   
+   <div class = "input_container">
+      <div style = "width: 26vw; display: flex; justify-content: flex-start; margin-bottom: 5px;">
+         <p class = "input_label">Date range:</p>
+      </div>
+      <mat-form-field>
+         <mat-label>Enter a date range</mat-label>
+         <mat-date-range-input [rangePicker]="picker">
+           <input matStartDate placeholder="Start date">
+           <input matEndDate placeholder="End date">
+         </mat-date-range-input>
+         <mat-hint style = "color: #C4C2C2 !important">MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+         <mat-date-range-picker #picker></mat-date-range-picker>
+       </mat-form-field>  
+   </div>
+
+
+</div>
+
