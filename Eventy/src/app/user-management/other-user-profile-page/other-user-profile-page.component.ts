@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {Organizer, Provider} from '../model/users.model';
+import {EventsServiceService} from '../../events/services/events/events-service.service';
+import {EventCard} from '../../events/model/event-card.model';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-other-user-profile-page',
@@ -16,6 +19,13 @@ export class OtherUserProfilePageComponent {
     "address": "Najblizi zbunic za hibernaciju",
     "phoneNumber": "+324 24 232 33"
   };
+
+  myEvents: EventCard[];
+
+  constructor(private userService: UserService) {
+    this.myEvents = this.userService.getMyEvents();
+  }
+
 
   isOrganizer(): boolean {
     return "firstName" in this.user;

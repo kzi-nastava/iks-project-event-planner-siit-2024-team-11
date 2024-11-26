@@ -30,7 +30,18 @@
     </div>
   </div>
 
-  <div class="my-cards">
+  <div *ngIf="isOrganizer()" class="my-cards">
+    <p>
+      My Organized Events
+    </p>
+    <div *ngFor="let eventCard of myEvents;">
+      <app-event-card [eventCard]="eventCard" class = "featured_card" />
+    </div>
+  </div>
 
+  <div *ngIf="!isOrganizer()" class="my-cards">
+    <p>
+      My Products/Services
+    </p>
   </div>
 </div>
