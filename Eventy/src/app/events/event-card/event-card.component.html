@@ -26,11 +26,13 @@
          </div>
       </div>
 
-      <div class = "organiser_container" [routerLink]="['/users', eventCard.organiser]">
-         <img src = "event_assets/{{eventCard.organiserImage}}" class = "organiser_img">
+      <div class = "organiser_container">
+         <img src = "event_assets/{{eventCard.organiserImage}}" class = "organiser_img" [routerLink]="['/users', eventCard.organiser]">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
             <p style = "margin-right: 5px; margin-top: 1px" class = "type">Organiser:</p>
-            <p id = "organiser" class = "organiser" style = "margin-top: -1px">{{eventCard.organiser}}</p>
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', eventCard.organiser]">
+              {{eventCard.organiser}}
+            </p>
          </div>
       </div>
    </div>

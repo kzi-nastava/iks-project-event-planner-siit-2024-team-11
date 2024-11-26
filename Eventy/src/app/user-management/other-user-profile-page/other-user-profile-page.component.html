@@ -1,1 +1,27 @@
-<p>other-user-profile-page works!</p>
+<div class="all-container">
+  <div class="basic-info">
+    <img *ngIf="isOrganizer()" src="{{ getOrganizerProfilePicture() }}" alt="Profile Picture" />
+    <div class="carousel" *ngIf="!isOrganizer()">
+      <img [src]="getProviderProfilePictures()[pictureIndex]" alt="Profile picture" />
+
+      <div class="carousel-buttons">
+        <button mat-mini-fab (click)="previousPicture()" [disabled]="pictureIndex === 0">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="nextPicture()" [disabled]="pictureIndex === getProviderProfilePictures().length - 1">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+    <span>{{ getName() }}</span>
+    <span>Type: Organizer</span>
+    <span *ngIf="!isOrganizer()">{{ getDescription() }}</span>
+    <span>Email: {{ user.email }}</span>
+    <span>Address: {{ user.address }}</span>
+    <span>Phone number: {{ user.phoneNumber }}</span>
+  </div>
+
+  <div class="my-cards">
+
+  </div>
+</div>

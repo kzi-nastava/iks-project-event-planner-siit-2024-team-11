@@ -108,13 +108,13 @@
          display: flex;
          width: 100%;
          flex-direction: row;
-         cursor: pointer;
       }
 
          .organiser_img {
             width: 48px;
             height: 48px;
             border-radius: 100px;
+            cursor: pointer;
          }
 
          .organiser {
@@ -124,6 +124,7 @@
             color: #798098;
             letter-spacing: 0;
             font-family: Figtree;
+            cursor: pointer;
          }
 
    .right_side_container {
