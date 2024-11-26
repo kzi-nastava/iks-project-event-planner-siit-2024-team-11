@@ -70,7 +70,7 @@ export class OtherUserProfilePageComponent {
   getProviderProfilePictures(): string[] {
     if(!this.isOrganizer()) {
       this.user = (this.user as Provider);
-      if(this.user.profilePictures.length > 0) {
+      if(this.user.profilePictures && this.user.profilePictures.length > 0) {
         return this.user.profilePictures;
       }
 
