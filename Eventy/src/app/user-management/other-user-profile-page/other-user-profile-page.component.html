@@ -1,24 +1,33 @@
 <div class="all-container">
-  <div class="basic-info">
-    <img *ngIf="isOrganizer()" src="{{ getOrganizerProfilePicture() }}" alt="Profile Picture" />
-    <div class="carousel" *ngIf="!isOrganizer()">
-      <img [src]="getProviderProfilePictures()[pictureIndex]" alt="Profile picture" />
+  <div class="basic-info-wrapper">
+    <div style="flex: 1;"></div>
 
-      <div class="carousel-buttons">
-        <button mat-mini-fab (click)="previousPicture()" [disabled]="pictureIndex === 0">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <button mat-mini-fab (click)="nextPicture()" [disabled]="pictureIndex === getProviderProfilePictures().length - 1">
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
+    <div class="basic-info">
+      <img class="pfp-image" *ngIf="isOrganizer()" src="{{ getOrganizerProfilePicture() }}" alt="Profile Picture" />
+      <div class="carousel" *ngIf="!isOrganizer()">
+        <img [src]="getProviderProfilePictures()[pictureIndex]" alt="Profile picture" />
+
+        <div class="carousel-buttons">
+          <button mat-mini-fab (click)="previousPicture()" [disabled]="pictureIndex === 0">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <button mat-mini-fab (click)="nextPicture()" [disabled]="pictureIndex === getProviderProfilePictures().length - 1">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
       </div>
+      <span class="name">{{ getName() }}</span>
+      <!-- <span class="info">Type: {{ isOrganizer() ? "Organizer" : "Provider" }}</span>  is this useless? -->
+      <span class="info" *ngIf="!isOrganizer()">{{ getDescription() }}</span>
+      <span class="info"><span class="info-name">Email:</span> {{ user.email }}</span>
+      <span class="info"><span class="info-name">Address:</span> {{ user.address }}</span>
+      <span class="info"><span class="info-name">Phone number:</span> {{ user.phoneNumber }}</span>
     </div>
-    <span>{{ getName() }}</span>
-    <span>Type: Organizer</span>
-    <span *ngIf="!isOrganizer()">{{ getDescription() }}</span>
-    <span>Email: {{ user.email }}</span>
-    <span>Address: {{ user.address }}</span>
-    <span>Phone number: {{ user.phoneNumber }}</span>
+
+    <div class="basic-info-buttons">
+      <button mat-flat-button class="button" type="submit"><mat-icon>chat_bubble</mat-icon> Chat</button>
+      <button mat-flat-button class="button negative-button" type="submit"><mat-icon>error</mat-icon> Report User</button>
+    </div>
   </div>
 
   <div class="my-cards">

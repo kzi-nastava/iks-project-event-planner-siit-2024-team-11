@@ -9,12 +9,12 @@ import {Organizer, Provider} from '../model/users.model';
 export class OtherUserProfilePageComponent {
   user: (Organizer | Provider) = {
     "profilePicture" : null,
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john@doe.com",
-    "password": "123456",
-    "address": "asdkm",
-    "phoneNumber": "+324 24232331"
+    "firstName": "Tac Tac",
+    "lastName": "Jezickovic",
+    "email": "tactacjezickovic@doe.com",
+    "password": "njamnjamjez",
+    "address": "Najblizi zbunic za hibernaciju",
+    "phoneNumber": "+324 24 232 33"
   };
 
   isOrganizer(): boolean {
