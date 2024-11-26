@@ -35,7 +35,7 @@
       My Organized Events
     </p>
     <div *ngFor="let eventCard of myEvents;">
-      <app-event-card [eventCard]="eventCard" class = "featured_card" />
+      <app-event-card [eventCard]="eventCard" />
     </div>
   </div>
 
@@ -43,5 +43,10 @@
     <p>
       My Products/Services
     </p>
+
+    <div *ngFor="let solutionCard of mySolutions; let i = index">
+      <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
+      <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
+    </div>
   </div>
 </div>

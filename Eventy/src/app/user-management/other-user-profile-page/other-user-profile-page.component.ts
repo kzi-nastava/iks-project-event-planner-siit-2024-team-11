@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Organizer, Provider} from '../model/users.model';
-import {EventsServiceService} from '../../events/services/events/events-service.service';
 import {EventCard} from '../../events/model/event-card.model';
 import {UserService} from '../user.service';
+import {SolutionCard} from '../../solutions/model/solution-card.model';
 
 @Component({
   selector: 'app-other-user-profile-page',
@@ -21,9 +21,11 @@ export class OtherUserProfilePageComponent {
   };
 
   myEvents: EventCard[];
+  mySolutions: SolutionCard[];
 
   constructor(private userService: UserService) {
     this.myEvents = this.userService.getMyEvents();
+    this.mySolutions = this.userService.getMySolutions();
   }
 
 
@@ -88,5 +90,13 @@ export class OtherUserProfilePageComponent {
     if(this.pictureIndex > 0) {
       this.pictureIndex--;
     }
+  }
+
+  isService(solutionCard: SolutionCard): boolean {
+    return (solutionCard.product === undefined);
+  }
+
+  isProduct(solutionCard: SolutionCard): boolean {
+    return (solutionCard.service === undefined);
   }
 }

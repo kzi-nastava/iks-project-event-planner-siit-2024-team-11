@@ -13,6 +13,8 @@ import { RegisterProviderComponent } from './register-provider/register-provider
 import {SharedModule} from '../shared/shared.module';
 import { OtherUserProfilePageComponent } from './other-user-profile-page/other-user-profile-page.component';
 import {EventsModule} from "../events/events.module";
+import {ProductsModule} from '../products/products.module';
+import {ServicesModule} from '../services/services.module';
 
 @NgModule({
   declarations: [
@@ -25,14 +27,16 @@ import {EventsModule} from "../events/events.module";
     RegisterProviderComponent,
     OtherUserProfilePageComponent
   ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        FormsModule,
-        RouterLink,
-        ReactiveFormsModule,
-        SharedModule,
-        EventsModule,
-    ]
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FormsModule,
+    RouterLink,
+    ReactiveFormsModule,
+    SharedModule,
+    EventsModule,
+    ProductsModule,
+    ServicesModule,
+  ]
 })
 export class UserManagementModule { }
