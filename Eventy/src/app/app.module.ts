@@ -11,6 +11,7 @@ import {EventsModule} from './events/events.module';
 import { SolutionsModule } from './solutions/solutions.module';
 import { ProductsModule } from './products/products.module';
 import { ServicesModule } from './services/services.module';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ServicesModule } from './services/services.module';
   ],
   providers: [
     provideAnimationsAsync(),
-    { provide: LOCALE_ID, useValue: 'en-GB' }
+    { provide: LOCALE_ID, useValue: 'en-GB' },
+    provideHttpClient(),
   ],
   bootstrap: [AppComponent]
 })

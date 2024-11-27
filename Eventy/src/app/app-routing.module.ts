@@ -10,6 +10,7 @@ import {CreateEventTypeComponent} from './events/create-event-type/create-event-
 import {EditEventTypeComponent} from './events/edit-event-type/edit-event-type.component';
 import { EditServiceComponent } from './services/edit-service/edit-service.component';
 import { MyServicesViewComponent } from './services/my-services-view/my-services-view.component';
+import { SolutionCategoryManagementComponent } from './solutions/solution-category-management/solution-category-management.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'edit-event-type/:id', component: EditEventTypeComponent},
   {path: 'edit-service/:id', component: EditServiceComponent},
   {path: 'my-services', component: MyServicesViewComponent},
+  {path: 'solution-categories', component: SolutionCategoryManagementComponent},
   {path: '**', redirectTo: ''},
 ];
 
