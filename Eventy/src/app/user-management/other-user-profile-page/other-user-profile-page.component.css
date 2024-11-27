@@ -137,3 +137,11 @@
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
 }
+
+mat-paginator {
+  border-radius: 15px;
+  border: 1px solid #222;
+  color: black;
+  margin-top: 5vh;
+  font-size: 15px;
+}

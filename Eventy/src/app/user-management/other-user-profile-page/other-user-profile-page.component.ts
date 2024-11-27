@@ -3,6 +3,7 @@ import {Organizer, Provider} from '../model/users.model';
 import {EventCard} from '../../events/model/event-card.model';
 import {UserService} from '../user.service';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-other-user-profile-page',
@@ -105,5 +106,24 @@ export class OtherUserProfilePageComponent {
   search(): void {
     // search
     this.searchQuery = "";
+  }
+
+  pageSize: number = 12;
+  currentPage: number = 0;
+
+  getPaginatorItemsLength(): number {
+    return this.isOrganizer() ? this.myEvents.length : this.mySolutions.length;
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.updatePaginatedEventTypes();
+  }
+
+  private updatePaginatedEventTypes(): void {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    // service call
   }
 }
