@@ -13,6 +13,7 @@ import { MyServicesViewComponent } from './services/my-services-view/my-services
 import {
   OtherUserProfilePageComponent
 } from './user-management/other-user-profile-page/other-user-profile-page.component';
+import {EditUserComponent} from './user-management/edit-user/edit-user.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'edit-service/:id', component: EditServiceComponent},
   {path: 'my-services', component: MyServicesViewComponent},
   {path: 'users/:id', component: OtherUserProfilePageComponent},
+  {path: 'users/:id/edit', component: EditUserComponent},
   {path: '**', redirectTo: ''},
 ];
 

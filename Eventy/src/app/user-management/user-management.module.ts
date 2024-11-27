@@ -15,6 +15,7 @@ import { OtherUserProfilePageComponent } from './other-user-profile-page/other-u
 import {EventsModule} from "../events/events.module";
 import {ProductsModule} from '../products/products.module';
 import {ServicesModule} from '../services/services.module';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {ServicesModule} from '../services/services.module';
     RegisterBannerComponent,
     RegisterOrganizerComponent,
     RegisterProviderComponent,
-    OtherUserProfilePageComponent
+    OtherUserProfilePageComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,
