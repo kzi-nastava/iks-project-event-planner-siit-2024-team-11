@@ -11,6 +11,10 @@ import { RegisterBannerComponent } from './register-banner/register-banner.compo
 import { RegisterOrganizerComponent } from './register-organizer/register-organizer.component';
 import { RegisterProviderComponent } from './register-provider/register-provider.component';
 import {SharedModule} from '../shared/shared.module';
+import { OtherUserProfilePageComponent } from './other-user-profile-page/other-user-profile-page.component';
+import {EventsModule} from "../events/events.module";
+import {ProductsModule} from '../products/products.module';
+import {ServicesModule} from '../services/services.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,8 @@ import {SharedModule} from '../shared/shared.module';
     LoginFormComponent,
     RegisterBannerComponent,
     RegisterOrganizerComponent,
-    RegisterProviderComponent
+    RegisterProviderComponent,
+    OtherUserProfilePageComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +34,9 @@ import {SharedModule} from '../shared/shared.module';
     RouterLink,
     ReactiveFormsModule,
     SharedModule,
+    EventsModule,
+    ProductsModule,
+    ServicesModule,
   ]
 })
 export class UserManagementModule { }
