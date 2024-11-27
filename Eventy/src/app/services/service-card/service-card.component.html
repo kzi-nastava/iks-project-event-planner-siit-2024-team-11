@@ -33,11 +33,13 @@
       </div>
 
       <div class = "organiser_container">
-         <img src = "event_assets/{{serviceCard.providerImage}}" class = "organiser_img">
+         <img src = "event_assets/{{serviceCard.providerImage}}" class = "organiser_img" [routerLink]="['/users', serviceCard.provider]">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
             <p style = "margin-right: 5px; margin-top: 1px" class = "category">Provider:</p>
-            <p id = "organiser" class = "organiser" style = "margin-top: -1px">{{serviceCard.provider}}</p>
-         </div>     
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', serviceCard.provider]">
+              {{serviceCard.provider}}
+            </p>
+         </div>
       </div>
    </div>
 
@@ -54,7 +56,7 @@
             <div class = "favorite_button_container" (click)="handleFavoriteItem()">
                <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
             </div>
-            
+
             <div class = "see_more_button_container" (click)="handleSeeMore()">
                <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
             </div>

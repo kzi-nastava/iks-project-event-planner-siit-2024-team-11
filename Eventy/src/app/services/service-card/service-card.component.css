@@ -7,7 +7,7 @@
    border-left: solid 13px #FAD609;
    padding-left: 16px;
    padding-right: 17px;
-}  
+}
 
    .left_side_container {
       display: flex;
@@ -22,18 +22,18 @@
          display: flex;
          width: 100%;
          border-bottom: solid 1.5px #EDEDED;
-      }  
+      }
 
          .title {
-            margin: 0;  
+            margin: 0;
             color: #798098;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-box-orient: vertical; 
-            -webkit-line-clamp: 1; 
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
             line-clamp: 1;
             font-weight: 600;
-            padding-bottom: 7px; 
+            padding-bottom: 7px;
             font-size: 18.5px;
             font-family: Albert Sans;
          }
@@ -44,7 +44,7 @@
          flex-direction: row;
          padding-top: 7px;
          padding-bottom: 9px;
-      }  
+      }
 
          .category {
             margin: 0;
@@ -58,12 +58,12 @@
          display: flex;
          width: 100%;
          padding-bottom: 2px;
-      }  
+      }
 
          .duration {
             color: #717171;
             margin: 0;
-            font-size: 17px;  
+            font-size: 17px;
             font-weight: 500;
             font-family: Albert Sans;
          }
@@ -72,12 +72,12 @@
          display: flex;
          width: 100%;
          padding-bottom: 4px;
-      }  
+      }
 
          .reservation {
             color: #717171;
             margin: 0;
-            font-size: 17px;  
+            font-size: 17px;
             font-weight: 500;
             font-family: Albert Sans;
          }
@@ -88,7 +88,7 @@
          flex-direction: column;
          padding-top: 8px;
          padding-bottom: 15px;
-      }  
+      }
 
          .event_types_container {
             display: flex;
@@ -108,21 +108,23 @@
          display: flex;
          width: 100%;
          flex-direction: row;
-      }  
+      }
 
          .organiser_img {
             width: 48px;
             height: 48px;
             border-radius: 100px;
+            cursor: pointer;
          }
 
          .organiser {
             margin: 0;
-            font-size: 17px;  
+            font-size: 17px;
             font-weight: 500;
             color: #798098;
             letter-spacing: 0;
             font-family: Figtree;
+            cursor: pointer;
          }
 
    .right_side_container {
@@ -134,7 +136,7 @@
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
    }
-   
+
       .buttons_container {
          display: flex;
          margin-bottom: 9px;
@@ -147,30 +149,30 @@
             flex-direction: column;
          }
             .old_price {
-               margin: 0; 
-               color: #F40F0F; 
-               font-weight: 500; 
-               font-size: 14px; 
-               margin-top: 0px; 
+               margin: 0;
+               color: #F40F0F;
+               font-weight: 500;
+               font-size: 14px;
+               margin-top: 0px;
                padding: 0;
                background: linear-gradient(to top left,
-                   rgba(0, 0, 0, 0) 0%, 
-                   rgba(0, 0, 0, 0) calc(50% - 1px), 
-                   rgb(238, 30, 30) 50%, 
-                   rgba(0, 0, 0, 0) calc(50% + 1px), 
+                   rgba(0, 0, 0, 0) 0%,
+                   rgba(0, 0, 0, 0) calc(50% - 1px),
+                   rgb(238, 30, 30) 50%,
+                   rgba(0, 0, 0, 0) calc(50% + 1px),
                    rgba(0, 0, 0, 0) 100%);
                display:flex;
-               margin-left: 5px; 
+               margin-left: 5px;
                font-family: Albert Sans;
             }
 
             .current_price {
-               margin: 0; 
-               color: #454444; 
-               font-weight: 700; 
-               font-size: 24.5px; 
-               margin-top: 0px; 
-               margin-left: 5px; 
+               margin: 0;
+               color: #454444;
+               font-weight: 700;
+               font-size: 24.5px;
+               margin-top: 0px;
+               margin-left: 5px;
                font-family: Albert Sans;
             }
 
@@ -215,7 +217,7 @@
          .see_more_button_container:hover p {
             color: white !important;
          }
-         
+
       .image_container {
          display: flex;
          height: 100%;

@@ -7,7 +7,7 @@
    border-left: solid 13px #808AAC;
    padding-left: 16px;
    padding-right: 17px;
-}  
+}
 
    .left_side_container {
       display: flex;
@@ -22,13 +22,13 @@
          display: flex;
          width: 100%;
          border-bottom: solid 1.5px #EDEDED;
-      }  
+      }
 
          .title {
-            margin: 0;  
+            margin: 0;
             color: #798098;
             font-weight: 600;
-            padding-bottom: 7px; 
+            padding-bottom: 7px;
             font-size: 18.5px;
             font-family: Albert Sans;
          }
@@ -39,7 +39,7 @@
          flex-direction: row;
          padding-top: 7px;
          padding-bottom: 10px;
-      }  
+      }
 
          .type {
             margin: 0;
@@ -53,12 +53,12 @@
          display: flex;
          width: 100%;
          padding-bottom: 12px;
-      }  
+      }
 
          .max_participants {
             color: #717171;
             margin: 0;
-            font-size: 17px;  
+            font-size: 17px;
             font-weight: 500;
             font-family: Albert Sans;
          }
@@ -68,12 +68,12 @@
          width: 100%;
          flex-direction: column;
          padding-bottom: 10px;
-      }  
+      }
 
          .date {
             margin: 0;
             padding-bottom: 1px;
-            font-size: 17px;  
+            font-size: 17px;
             font-weight: 450;
             color: #717171;
             letter-spacing: 0;
@@ -82,7 +82,7 @@
 
          .location {
             margin: 0;
-            font-size: 17px;  
+            font-size: 17px;
             font-weight: 450;
             color: #717171;
             letter-spacing: 0;
@@ -93,21 +93,23 @@
          display: flex;
          width: 100%;
          flex-direction: row;
-      }  
+      }
 
          .organiser_img {
             width: 48px;
             height: 48px;
             border-radius: 100px;
+            cursor: pointer;
          }
 
          .organiser {
             margin: 0;
-            font-size: 17px;  
+            font-size: 17px;
             font-weight: 500;
             color: #798098;
             letter-spacing: 0;
             font-family: Figtree;
+            cursor: pointer;
          }
 
    .right_side_container {
@@ -119,14 +121,14 @@
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
    }
-   
+
       .buttons_container {
          display: flex;
          margin-bottom: 11px;
       }
 
          .open_event {
-            margin: 0;  
+            margin: 0;
          }
 
          .favorite_button_container {
@@ -180,15 +182,14 @@
       }
 
          .description {
-            overflow: hidden; 
-            margin: 0; 
+            overflow: hidden;
+            margin: 0;
             display: -webkit-box;
-            -webkit-box-orient: vertical; 
-            -webkit-line-clamp: 7; 
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 7;
             line-clamp: 7;
-            font-size: 15px; 
-            line-height: 20px; 
-            color: #5B5B5B; 
+            font-size: 15px;
+            line-height: 20px;
+            color: #5B5B5B;
             letter-spacing: 0.3;
          }
-         

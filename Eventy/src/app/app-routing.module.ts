@@ -11,6 +11,10 @@ import {EditEventTypeComponent} from './events/edit-event-type/edit-event-type.c
 import { EditServiceComponent } from './services/edit-service/edit-service.component';
 import { MyServicesViewComponent } from './services/my-services-view/my-services-view.component';
 import { SolutionCategoryManagementComponent } from './solutions/solution-category-management/solution-category-management.component';
+import {
+  OtherUserProfilePageComponent
+} from './user-management/other-user-profile-page/other-user-profile-page.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -24,6 +28,7 @@ const routes: Routes = [
   {path: 'edit-service/:id', component: EditServiceComponent},
   {path: 'my-services', component: MyServicesViewComponent},
   {path: 'solution-categories', component: SolutionCategoryManagementComponent},
+  {path: 'users/:id', component: OtherUserProfilePageComponent},
   {path: '**', redirectTo: ''},
 ];
 

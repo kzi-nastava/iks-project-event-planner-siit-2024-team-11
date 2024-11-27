@@ -19,19 +19,21 @@
             <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
             <p id = "date" class = "date">{{eventCard.event.date.toLocaleDateString()}}</p>
          </div>
-         
-         <div style = "display: flex; flex-direction: row;">   
+
+         <div style = "display: flex; flex-direction: row;">
             <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.8px;">location_pin</mat-icon>
             <p id = "location" class = "location">{{eventCard.event.location.name}}</p>
          </div>
       </div>
 
       <div class = "organiser_container">
-         <img src = "event_assets/{{eventCard.organiserImage}}" class = "organiser_img">
+         <img src = "event_assets/{{eventCard.organiserImage}}" class = "organiser_img" [routerLink]="['/users', eventCard.organiser]">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
             <p style = "margin-right: 5px; margin-top: 1px" class = "type">Organiser:</p>
-            <p id = "organiser" class = "organiser" style = "margin-top: -1px">{{eventCard.organiser}}</p>
-         </div>     
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', eventCard.organiser]">
+              {{eventCard.organiser}}
+            </p>
+         </div>
       </div>
    </div>
 
@@ -44,8 +46,8 @@
             <div class = "favorite_button_container" (click)="handleFavoriteItem()">
                <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
             </div>
-            
-            <div class = "see_more_button_container" (click)="handleSeeMore()"> 
+
+            <div class = "see_more_button_container" (click)="handleSeeMore()">
                <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
             </div>
          </div>
