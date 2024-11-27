@@ -23,6 +23,8 @@ export class OtherUserProfilePageComponent {
   myEvents: EventCard[];
   mySolutions: SolutionCard[];
 
+  searchQuery: string;
+
   constructor(private userService: UserService) {
     this.myEvents = this.userService.getMyEvents();
     this.mySolutions = this.userService.getMySolutions();
@@ -98,5 +100,10 @@ export class OtherUserProfilePageComponent {
 
   isProduct(solutionCard: SolutionCard): boolean {
     return (solutionCard.service === undefined);
+  }
+
+  search(): void {
+    // search
+    this.searchQuery = "";
   }
 }
