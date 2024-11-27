@@ -1,0 +1,35 @@
+.container {
+    background-color: #F1F1F1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+mat-card {
+    width: 47%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+mat-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.manipulation_buttons_container {
+    display: inline;
+}
+
+.edit-btn {
+    color: white !important;
+    background-color: blue !important;
+    text-align: right;
+    margin-right: 10px
+}
+
+.delete-btn {
+    color: white !important;
+    background-color: red !important;
+    text-align: right;
+}

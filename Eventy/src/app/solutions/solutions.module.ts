@@ -17,6 +17,11 @@ import { ServicesModule } from '../services/services.module';
 import { ProductsModule } from '../products/products.module';
 import { FeaturedSolutionsComponent } from './featured-solutions/featured-solutions.component';
 import { FormsModule } from '@angular/forms';
+import { SolutionCategoryManagementComponent } from './solution-category-management/solution-category-management.component';
+import { SolutionCategoriesViewComponent } from './solution-categories-view/solution-categories-view.component';
+import { MatCardModule } from '@angular/material/card';
+import { SolutionCategoriesViewDualCardComponent } from './solution-categories-view-dual-card/solution-categories-view-dual-card.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -24,6 +29,9 @@ import { FormsModule } from '@angular/forms';
     SolutionFiltersComponent,
     AllSolutionsComponent,
     FeaturedSolutionsComponent,
+    SolutionCategoryManagementComponent,
+    SolutionCategoriesViewComponent,
+    SolutionCategoriesViewDualCardComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +48,8 @@ import { FormsModule } from '@angular/forms';
     ServicesModule,
     ProductsModule,
     FormsModule,
-    
+    MatCardModule,
+    SharedModule,
 ],
   exports: [
     SolutionFiltersComponent,

@@ -1,0 +1,27 @@
+<div class = "tabs_container">
+
+    <div (click)="switchTab(1)" class = "categories_tab_container" [ngStyle]="{'opacity' : isRequestsSelected ? '100%' : '35%'}">
+        <div *ngIf="isRequestsSelected" class = "categories_tab_left_border"></div>
+        <p class = "tab_name"> Existing categories </p>
+    </div>
+ 
+    <div (click)="switchTab(2)" class = "requests_tab_container" [ngStyle]="{'opacity' : !isRequestsSelected ? '100%' : '35%'}"> 
+        <div *ngIf="!isRequestsSelected" class = "requests_tab_left_border"></div> 
+        <p class = "tab_name"> Requests </p>
+    </div>
+</div>
+
+<div class="main_content_container">
+    <div *ngIf="isRequestsSelected">
+    <app-solution-categories-view></app-solution-categories-view>
+    </div>
+
+    <div *ngIf="!isRequestsSelected">
+    
+    </div>
+</div>
+
+<div *ngIf="isRequestsSelected" class="buttons_container">
+    
+</div>
+ 
