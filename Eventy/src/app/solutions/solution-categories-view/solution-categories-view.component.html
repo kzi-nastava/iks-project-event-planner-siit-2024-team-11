@@ -1,0 +1,10 @@
+<div *ngFor="let categoryPair of categoryPairs">
+    <app-solution-categories-view-dual-card [categoryDouble]="categoryPair" (categoryDeleted)="categoryDeleted($event)" (categoryEdited)="categoryEdited($event)"></app-solution-categories-view-dual-card>
+</div>
+<mat-paginator [length]="categories.length" [pageSize]="10" (page)="onPageChange($event)" [pageSizeOptions]="[6, 10, 20]" aria-label="Select page">
+</mat-paginator>
+<div class="button-container">
+    <button mat-button (click)="addCategory()">
+        <mat-icon>add</mat-icon> Add new category
+    </button>
+</div>
