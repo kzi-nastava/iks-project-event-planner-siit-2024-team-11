@@ -65,7 +65,7 @@
       <mat-label>Name</mat-label>
       <input type="text" matInput placeholder="Company Name" formControlName="name" />
       @if (registerForm.controls['name'].hasError('required')) {
-        <mat-error>Address is <strong>required</strong></mat-error>
+        <mat-error>Name is <strong>required</strong></mat-error>
       }
       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('name')">
         <mat-icon>close</mat-icon>

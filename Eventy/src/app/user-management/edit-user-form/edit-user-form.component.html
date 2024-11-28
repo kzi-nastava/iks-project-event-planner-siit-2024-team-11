@@ -13,15 +13,6 @@
     <mat-form-field class="field">
       <mat-label>Email</mat-label>
       <input type="email" matInput placeholder="Ex. something@gmail.com" formControlName="email" />
-      @if (editForm.controls['email'].hasError('email') && !editForm.controls['email'].hasError('required')) {
-        <mat-error>Please enter a valid email address</mat-error>
-      }
-      @if (editForm.controls['email'].hasError('required')) {
-        <mat-error>Email is <strong>required</strong></mat-error>
-      }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('email')">
-        <mat-icon>close</mat-icon>
-      </button>
     </mat-form-field>
 
     <mat-form-field class="field">
@@ -110,5 +101,5 @@
     </mat-form-field>
   </div>
 
-  <button mat-flat-button class="button" (click)="confirmEdit()" type="submit">REGISTER</button>
+  <button mat-flat-button class="button" (click)="confirmEdit()" type="submit">EDIT</button>
 </form>
