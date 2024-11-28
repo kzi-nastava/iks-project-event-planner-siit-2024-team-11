@@ -20,4 +20,12 @@ export class EditUserComponent {
   isProvider(): boolean {
     return "name" in this.user;
   }
+
+  getUserOrganizer(): Organizer {
+    return this.user as Organizer;
+  }
+
+  getUserProvider(): Provider {
+    return this.user as Provider;
+  }
 }

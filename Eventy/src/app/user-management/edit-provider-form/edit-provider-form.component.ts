@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {
   InvalidInputDataDialogComponent
 } from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {Provider} from '../model/users.model';
 
 @Component({
   selector: 'app-edit-provider-form',
@@ -13,6 +14,9 @@ import {
   styleUrl: './edit-provider-form.component.css'
 })
 export class EditProviderFormComponent {
+  @Input()
+  user: Provider;
+
   registerForm: FormGroup = new FormGroup({
     profilePictures: new FormControl(['ProfilePicture.png']),
     email: new FormControl('', [Validators.required, Validators.email]),
