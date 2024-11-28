@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -13,20 +13,11 @@ import {Provider} from '../model/users.model';
   templateUrl: './edit-provider-form.component.html',
   styleUrl: './edit-provider-form.component.css'
 })
-export class EditProviderFormComponent {
+export class EditProviderFormComponent implements OnInit{
   @Input()
   user: Provider;
 
-  registerForm: FormGroup = new FormGroup({
-    profilePictures: new FormControl(['ProfilePicture.png']),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    confirmedPassword: new FormControl('', [Validators.required, this.passwordMatching()]),
-    name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
-  });
+  editForm: FormGroup;
 
   public pictureIndex: number = 0;
 
@@ -34,29 +25,43 @@ export class EditProviderFormComponent {
 
   }
 
+  ngOnInit(): void {
+    this.editForm = new FormGroup({
+      profilePictures: new FormControl(this.user.profilePictures || ['ProfilePicture.png']),
+      email: new FormControl({value: this.user.email, disabled: true }),
+      oldPassword: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      confirmedPassword: new FormControl('', [Validators.required, this.passwordMatching()]),
+      name: new FormControl({value: this.user.name, disabled: true }),
+      description: new FormControl(this.user.description, [Validators.required]),
+      address: new FormControl(this.user.address, [Validators.required]),
+      phoneNumber: new FormControl(this.user.phoneNumber, [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
+    });
+  }
+
   private passwordMatching(): ValidatorFn {
     return (): ValidationErrors | null => {
-      if(this.registerForm) {
-        return this.registerForm.controls['password'].value === this.registerForm.controls['confirmedPassword'].value ? null : { match: true };
+      if(this.editForm) {
+        return this.editForm.controls['password'].value === this.editForm.controls['confirmedPassword'].value ? null : { match: true };
       }
 
       return null;
     };
   }
 
-  register(): void {
-    if(this.registerForm.invalid) {
+  confirmEdit(): void {
+    if(this.editForm.invalid) {
       this.dialog.open(InvalidInputDataDialogComponent, {
         data : {
           title: "Invalid input",
-          message: "Invalid input data"
+          message: "Invalid edit data"
         }
       });
 
-      this.registerForm.updateValueAndValidity();
-      this.registerForm.markAllAsTouched();
+      this.editForm.updateValueAndValidity();
+      this.editForm.markAllAsTouched();
     } else {
-      this.userService.register(this.registerForm.value);
+      // service edit method
       this.router.navigate(['']);
     }
   }
@@ -76,7 +81,7 @@ export class EditProviderFormComponent {
         reader.readAsDataURL(file);
       });
 
-      this.registerForm.controls['profilePictures'].setValue(newPictures);
+      this.editForm.controls['profilePictures'].setValue(newPictures);
     }
   }
 
@@ -87,7 +92,7 @@ export class EditProviderFormComponent {
   }
 
   nextPicture() : void {
-    if(this.pictureIndex < this.registerForm.value.profilePictures.length - 1) {
+    if(this.pictureIndex < this.editForm.value.profilePictures.length - 1) {
       this.pictureIndex++;
     }
   }
@@ -99,19 +104,19 @@ export class EditProviderFormComponent {
   }
 
   resetValue(targetField: string): void {
-    if(this.registerForm.controls.hasOwnProperty(targetField)) {
+    if(this.editForm.controls.hasOwnProperty(targetField)) {
       let fieldsWithoutErrors: string[] = [];
 
-      for(let field in this.registerForm.controls) {
-        if(field !== targetField && !this.registerForm.controls[field].touched) {
+      for(let field in this.editForm.controls) {
+        if(field !== targetField && !this.editForm.controls[field].touched) {
           fieldsWithoutErrors.push(field);
         }
       }
 
-      this.registerForm.controls[targetField].setValue('');
+      this.editForm.controls[targetField].setValue('');
 
       for(let field of fieldsWithoutErrors) {
-        this.registerForm.controls[field].setErrors(null);
+        this.editForm.controls[field].setErrors(null);
       }
     }
   }
