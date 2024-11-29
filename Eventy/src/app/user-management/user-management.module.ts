@@ -15,6 +15,9 @@ import { OtherUserProfilePageComponent } from './other-user-profile-page/other-u
 import {EventsModule} from "../events/events.module";
 import {ProductsModule} from '../products/products.module';
 import {ServicesModule} from '../services/services.module';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
+import { EditProviderFormComponent } from './edit-provider-form/edit-provider-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import {ServicesModule} from '../services/services.module';
     RegisterBannerComponent,
     RegisterOrganizerComponent,
     RegisterProviderComponent,
-    OtherUserProfilePageComponent
+    OtherUserProfilePageComponent,
+    EditUserComponent,
+    EditUserFormComponent,
+    EditProviderFormComponent
   ],
   imports: [
     CommonModule,
