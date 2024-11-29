@@ -25,32 +25,34 @@
     </div>
   </div>
 
-  <div  class="my-cards">
-    <p>
-      {{ isOrganizer() ? "My Organized Events" : "My Products/Services" }}
-    </p>
+  <div class="my-cards-wrapper">
+    <div  class="my-cards">
+      <p>
+        {{ isOrganizer() ? "My Organized Events" : "My Products/Services" }}
+      </p>
 
-    <div class = "search_container">
-      <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
-      <div class = "search_icon_container" (click)="search()">
-        <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
+      <div class = "search_container">
+        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
+        <div class = "search_icon_container" (click)="search()">
+          <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="isOrganizer()">
-      <div *ngFor="let eventCard of myEvents;">
-        <app-event-card [eventCard]="eventCard" />
+      <div *ngIf="isOrganizer()">
+        <div *ngFor="let eventCard of myEvents;">
+          <app-event-card [eventCard]="eventCard" />
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="!isOrganizer()">
-      <div *ngFor="let solutionCard of mySolutions; let i = index">
-        <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
-        <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
+      <div *ngIf="!isOrganizer()">
+        <div *ngFor="let solutionCard of mySolutions; let i = index">
+          <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
+          <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
+        </div>
       </div>
-    </div>
 
-    <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
-    </mat-paginator>
+      <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+      </mat-paginator>
+    </div>
   </div>
 </div>
