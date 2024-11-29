@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: 'my-services', component: MyServicesViewComponent},
   {path: 'solution-categories', component: SolutionCategoryManagementComponent},
   {path: 'users/:id', component: OtherUserProfilePageComponent},
-  {path: 'users/:id/edit', component: EditUserComponent},
+  {path: 'profile/edit', component: EditUserComponent},
   {path: 'profile', component: MyProfilePageComponent},
   {path: '**', redirectTo: ''},
 ];

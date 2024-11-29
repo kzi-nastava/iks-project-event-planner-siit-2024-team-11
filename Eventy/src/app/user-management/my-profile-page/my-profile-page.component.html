@@ -22,6 +22,11 @@
       <span class="info"><span class="info-name">Email:</span> {{ user.email }}</span>
       <span class="info"><span class="info-name">Address:</span> {{ user.address }}</span>
       <span class="info"><span class="info-name">Phone number:</span> {{ user.phoneNumber }}</span>
+
+      <div class="basic-info-buttons">
+        <button mat-flat-button class="button" type="submit" [routerLink]="['/profile', 'edit']"><mat-icon>edit</mat-icon> Edit</button>
+        <button mat-flat-button class="button negative-button" type="submit"><mat-icon>delete</mat-icon> Deactivate account</button>
+      </div>
     </div>
   </div>
 
