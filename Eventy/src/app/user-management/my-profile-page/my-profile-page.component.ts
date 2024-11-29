@@ -31,9 +31,16 @@ export class MyProfilePageComponent {
     this.mySolutions = this.userService.getMySolutions();
   }
 
+  isOtherUser(): boolean {
+    return "firstName" in this.user && false;
+  }
 
   isOrganizer(): boolean {
-    return "firstName" in this.user;
+    return "firstName" in this.user && true;
+  }
+
+  isProvider(): boolean {
+    return "name" in this.user;
   }
 
   getName(): string {

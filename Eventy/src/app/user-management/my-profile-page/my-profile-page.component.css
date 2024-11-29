@@ -10,7 +10,7 @@
   width: 50%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 5vh;
 }
 
@@ -79,6 +79,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 8vh;
 }
 
 .my-cards p {
@@ -144,10 +145,11 @@ mat-paginator {
 
 .basic-info-buttons {
   width: 80%;
-  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  margin: 2vh;
+  margin-bottom: 3vh;
 }
 
 .negative-button {

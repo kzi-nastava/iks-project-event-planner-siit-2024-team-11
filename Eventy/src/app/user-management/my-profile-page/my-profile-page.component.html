@@ -24,14 +24,16 @@
       <span class="info"><span class="info-name">Phone number:</span> {{ user.phoneNumber }}</span>
 
       <div class="basic-info-buttons">
-        <button mat-flat-button class="button" type="submit" [routerLink]="['/profile', 'edit']"><mat-icon>edit</mat-icon> Edit</button>
-        <button mat-flat-button class="button negative-button" type="submit"><mat-icon>delete</mat-icon> Deactivate account</button>
+        <button mat-flat-button class="button" [routerLink]="['/profile', 'edit']"><mat-icon>edit</mat-icon> Edit</button>
+        <button mat-flat-button class="button negative-button"><mat-icon>delete</mat-icon> Deactivate account</button>
       </div>
+
+      <button *ngIf="isOtherUser()" mat-flat-button class="button" [routerLink]="['/register']"><mat-icon>arrow_drop_up</mat-icon> Upgrade to Organizer/Provider</button>
     </div>
   </div>
 
   <div class="my-cards-wrapper">
-    <div  class="my-cards">
+    <div *ngIf="!isOtherUser()" class="my-cards">
       <p>
         {{ isOrganizer() ? "My Organized Events" : "My Products/Services" }}
       </p>
@@ -49,11 +51,52 @@
         </div>
       </div>
 
-      <div *ngIf="!isOrganizer()">
+      <div *ngIf="isProvider()">
         <div *ngFor="let solutionCard of mySolutions; let i = index">
           <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
           <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
         </div>
+      </div>
+
+      <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+      </mat-paginator>
+    </div>
+
+    <div class="my-cards">
+      <p>
+        <mat-icon>favorite</mat-icon> My favorite events
+      </p>
+
+      <div class = "search_container">
+        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
+        <div class = "search_icon_container" (click)="search()">
+          <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
+        </div>
+      </div>
+
+      <div *ngFor="let eventCard of myEvents;">
+        <app-event-card [eventCard]="eventCard" />
+      </div>
+
+      <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+      </mat-paginator>
+    </div>
+
+    <div class="my-cards">
+      <p>
+        <mat-icon>favorite</mat-icon> My favorite products/services
+      </p>
+
+      <div class = "search_container">
+        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
+        <div class = "search_icon_container" (click)="search()">
+          <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
+        </div>
+      </div>
+
+      <div *ngFor="let solutionCard of mySolutions; let i = index">
+        <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
+        <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
       </div>
 
       <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
