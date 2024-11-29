@@ -18,6 +18,7 @@ import {ServicesModule} from '../services/services.module';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
 import { EditProviderFormComponent } from './edit-provider-form/edit-provider-form.component';
+import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EditProviderFormComponent } from './edit-provider-form/edit-provider-fo
     OtherUserProfilePageComponent,
     EditUserComponent,
     EditUserFormComponent,
-    EditProviderFormComponent
+    EditProviderFormComponent,
+    MyProfilePageComponent
   ],
   imports: [
     CommonModule,
