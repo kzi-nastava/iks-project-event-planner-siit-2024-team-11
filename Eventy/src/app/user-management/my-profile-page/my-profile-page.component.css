@@ -1,0 +1,136 @@
+.all-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 3%;
+  background-color: #F1F1F1;
+}
+
+.basic-info-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5vh;
+}
+
+.basic-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pfp-image {
+  width: 12vw;
+  border-radius: 50%;
+  margin-bottom: 2vh;
+}
+
+.name {
+  font-family: "Albert Sans";
+  font-size: 40px;
+  line-height: 55px;
+  color: #7A7575;
+  margin-bottom: 2vh;
+}
+
+.info-name {
+  font-family: "Figtree";
+  color: black;
+}
+
+.info {
+  font-family: "Montserrat";
+  font-size: 22px;
+  line-height: 35px;
+  color: #555555;
+  margin-bottom: 1vh;
+}
+
+.carousel-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 10vw;
+}
+
+.carousel {
+  padding-bottom: 4vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel img {
+  border-radius:50%;
+  width: 12vw;
+  border: 3px white solid;
+}
+
+.my-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-cards p {
+  font-family: "Figtree";
+  font-size: 30px;
+  color: #666666;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 2vh;
+  margin-bottom: 3vh;
+}
+
+.search_container {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 0px 3px rgba(171, 171, 171, 0.639);
+  border-radius: 15px;
+  margin-bottom: 2vh;
+}
+
+.search_form {
+  width: 100%;
+  padding: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px;
+  font-family: Albert Sans;
+  color: #4f4f4f;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-top: 0px solid black;
+  border-bottom: 0px solid black;
+  border-left: 0px solid black;
+  border-right: 0px solid rgb(224, 224, 224);
+}
+
+.search_form:focus {
+  outline: 0;
+}
+
+.search_icon_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0px;
+  padding-right: 17px;
+  background-color: white;
+  border-top: 0px solid black;
+  border-bottom: 0px solid black;
+  border-right: 0px solid black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+mat-paginator {
+  border-radius: 15px;
+  border: 1px solid #222;
+  color: black;
+  margin-top: 5vh;
+  font-size: 15px;
+}
