@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Organizer, Provider} from '../model/users.model';
 import {EventCard} from '../../events/model/event-card.model';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
@@ -151,9 +151,15 @@ export class MyProfilePageComponent {
   dayClicked({ day }: { day: any }): void {
     const { date, events } = day;
     if (events.length > 0) {
-      alert("Clicked on a day with events");
-    } else {
-      alert("Clicked on a day with no events");
+      alert(date);
     }
+  }
+
+  previousMonth(): void {
+    this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() - 1));
+  }
+
+  nextMonth(): void {
+    this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() + 1));
   }
 }

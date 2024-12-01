@@ -34,12 +34,28 @@
 
   <div class="my-cards-wrapper">
     <div class="my-cards">
+      <p>
+        My calendar - {{ viewDate.toLocaleDateString('en-UK', {
+        year: 'numeric',
+        month: 'long',
+      }) }}
+      </p>
+
       <mwl-calendar-month-view
         [viewDate]="viewDate"
         [events]="events"
         (dayClicked)="dayClicked($event)"
       >
       </mwl-calendar-month-view>
+
+      <div class="calendar-buttons">
+        <button mat-mini-fab (click)="previousMonth()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="nextMonth()">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
     </div>
 
     <div *ngIf="!isOtherUser()" class="my-cards">

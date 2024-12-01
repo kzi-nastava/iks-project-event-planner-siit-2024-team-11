@@ -155,3 +155,19 @@ mat-paginator {
 .negative-button {
   background-color: #852221 !important;
 }
+
+mwl-calendar-month-view {
+  width: 75%;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.calendar-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 10vw;
+  margin-top: 2vh;
+}
