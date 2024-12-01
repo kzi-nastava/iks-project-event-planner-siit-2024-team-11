@@ -15,6 +15,7 @@ import {
   OtherUserProfilePageComponent
 } from './user-management/other-user-profile-page/other-user-profile-page.component';
 import {EditUserComponent} from './user-management/edit-user/edit-user.component';
+import {MyProfilePageComponent} from './user-management/my-profile-page/my-profile-page.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path: 'my-services', component: MyServicesViewComponent},
   {path: 'solution-categories', component: SolutionCategoryManagementComponent},
   {path: 'users/:id', component: OtherUserProfilePageComponent},
-  {path: 'users/:id/edit', component: EditUserComponent},
+  {path: 'profile/edit', component: EditUserComponent},
+  {path: 'profile', component: MyProfilePageComponent},
   {path: '**', redirectTo: ''},
 ];
 
