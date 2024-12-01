@@ -3,8 +3,8 @@
     <div style="flex: 1;"></div>
 
     <div class="basic-info">
-      <img class="pfp-image" *ngIf="isOrganizer()" src="{{ getOrganizerProfilePicture() }}" alt="Profile Picture" />
-      <div class="carousel" *ngIf="!isOrganizer()">
+      <img class="pfp-image" *ngIf="isOrganizer() || isOtherUser()" src="{{ getUserProfilePicture() }}" alt="Profile Picture" />
+      <div class="carousel" *ngIf="isProvider()">
         <img [src]="getProviderProfilePictures()[pictureIndex]" alt="Profile picture" />
 
         <div class="carousel-buttons">
@@ -43,7 +43,7 @@
 
       <mwl-calendar-month-view
         [viewDate]="viewDate"
-        [events]="events"
+        [events]="calendarEvents"
         (dayClicked)="dayClicked($event)"
       >
       </mwl-calendar-month-view>
@@ -64,8 +64,8 @@
       </p>
 
       <div class = "search_container">
-        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
-        <div class = "search_icon_container" (click)="search()">
+        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchMyEventsSolutions" />
+        <div class = "search_icon_container" (click)="searchMyStuff()">
           <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
         </div>
       </div>
@@ -93,8 +93,8 @@
       </p>
 
       <div class = "search_container">
-        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
-        <div class = "search_icon_container" (click)="search()">
+        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchMyFavEvents" />
+        <div class = "search_icon_container" (click)="searchFavEvents()">
           <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
         </div>
       </div>
@@ -113,8 +113,8 @@
       </p>
 
       <div class = "search_container">
-        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
-        <div class = "search_icon_container" (click)="search()">
+        <input class = "search_form" placeholder="Search.." [(ngModel)]="searchMyFavSolutions" />
+        <div class = "search_icon_container" (click)="searchFavSolutions()">
           <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
         </div>
       </div>

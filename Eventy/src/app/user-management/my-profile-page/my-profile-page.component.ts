@@ -25,11 +25,48 @@ export class MyProfilePageComponent {
   myEvents: EventCard[];
   mySolutions: SolutionCard[];
 
-  searchQuery: string;
+  calendarEvents: CalendarEvent[];
+
+  searchMyEventsSolutions: string;
+  searchMyFavEvents: string;
+  searchMyFavSolutions: string;
 
   constructor(private userService: UserService) {
     this.myEvents = this.userService.getMyEvents();
     this.mySolutions = this.userService.getMySolutions();
+    // will create calendarEvents from events and solutions, but for now...
+    this.calendarEvents = [
+      {
+        id: 1,
+        start: new Date(),
+        end: new Date(),
+        title: 'Today’s Event',
+        color: {
+          primary: "#808AAC",
+          secondary: "#bfc4d5"
+        }
+      },
+      {
+        id: 2,
+        start: new Date(new Date().setDate(new Date().getDate() + 2)),
+        end: new Date(new Date().setDate(new Date().getDate() + 4)),
+        title: 'Event in Two Days Product',
+        color: {
+          primary: "#FAD609",
+          secondary: "#fdee9c"
+        }
+      },
+      {
+        id: 3,
+        start: new Date(new Date().setDate(new Date().getDate() + 10)),
+        end: new Date(new Date().setDate(new Date().getDate() + 10)),
+        title: 'Last Event Service',
+        color: {
+          primary: "#DD79AE",
+          secondary: "#f4d6e6"
+        }
+      },
+    ];
   }
 
   isOtherUser(): boolean {
@@ -63,8 +100,8 @@ export class MyProfilePageComponent {
     return "";
   }
 
-  getOrganizerProfilePicture(): string {
-    if(this.isOrganizer()) {
+  getUserProfilePicture(): string {
+    if(this.isOrganizer() || this.isOtherUser()) {
       this.user = (this.user as Organizer);
       if(this.user.profilePicture) {
         return this.user.profilePicture;
@@ -111,12 +148,21 @@ export class MyProfilePageComponent {
     return (solutionCard.service === undefined);
   }
 
-  search(): void {
+  searchMyStuff(): void {
     // search
-    this.searchQuery = "";
+    this.searchMyEventsSolutions = "";
   }
 
-  pageSize: number = 12;
+  searchFavEvents(): void {
+    // search
+    this.searchMyFavEvents = "";
+  }
+
+  searchFavSolutions(): void {
+    this.searchMyFavSolutions = "";
+  }
+
+  pageSize: number = 3;
   currentPage: number = 0;
 
   getPaginatorItemsLength(): number {
@@ -137,21 +183,11 @@ export class MyProfilePageComponent {
 
   viewDate: Date = new Date();
 
-  events: CalendarEvent[] = [
-    {
-      start: new Date(),
-      title: 'Today’s Event',
-    },
-    {
-      start: new Date(new Date().setDate(new Date().getDate() + 2)),
-      title: 'Event in Two Days',
-    },
-  ];
-
   dayClicked({ day }: { day: any }): void {
     const { date, events } = day;
     if (events.length > 0) {
       alert(date);
+      // navigate to the event details page here
     }
   }
 
