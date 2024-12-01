@@ -4,6 +4,7 @@ import {EventCard} from '../../events/model/event-card.model';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
 import {UserService} from '../user.service';
 import {PageEvent} from '@angular/material/paginator';
+import {CalendarEvent} from 'angular-calendar';
 
 @Component({
   selector: 'app-my-profile-page',
@@ -132,5 +133,27 @@ export class MyProfilePageComponent {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     // service call
+  }
+
+  viewDate: Date = new Date();
+
+  events: CalendarEvent[] = [
+    {
+      start: new Date(),
+      title: 'Today’s Event',
+    },
+    {
+      start: new Date(new Date().setDate(new Date().getDate() + 2)),
+      title: 'Event in Two Days',
+    },
+  ];
+
+  dayClicked({ day }: { day: any }): void {
+    const { date, events } = day;
+    if (events.length > 0) {
+      alert("Clicked on a day with events");
+    } else {
+      alert("Clicked on a day with no events");
+    }
   }
 }
