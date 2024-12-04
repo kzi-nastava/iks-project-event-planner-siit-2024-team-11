@@ -23,6 +23,19 @@ export class SolutionCategoryService {
     { id: 10, name: 'Category 10', description: 'Description for category 10', status: Status.ACCEPTED }
  ];
 
+ requests: CategoryWithId[] = [
+  { id: 1, name: 'Request 1', description: 'Description for category 1', status: Status.PENDING },
+  { id: 2, name: 'Request 2', description: 'Description for category 2', status: Status.PENDING },
+  { id: 3, name: 'Request 3', description: 'Description for category 3', status: Status.PENDING },
+  { id: 4, name: 'Request 4', description: 'Description for category 4', status: Status.PENDING },
+  { id: 5, name: 'Request 5', description: 'Description for category 5', status: Status.PENDING },
+  { id: 6, name: 'Request 6', description: 'Description for category 6', status: Status.PENDING },
+  { id: 7, name: 'Request 7', description: 'Description for category 7', status: Status.PENDING },
+  { id: 8, name: 'Request 8', description: 'Description for category 8', status: Status.PENDING },
+  { id: 9, name: 'Request 9', description: 'Description for category 9', status: Status.PENDING },
+  { id: 10, name: 'Request 10', description: 'Description for category 10', status: Status.PENDING }
+];
+
   constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<CategoryWithId[]> {
@@ -40,5 +53,10 @@ export class SolutionCategoryService {
 
   create(category: Category): Observable<CategoryWithId> {
     return this.httpClient.post<CategoryWithId>(this.controllerURL, category)
+  }
+
+  getAllRequests(): Observable<CategoryWithId[]> {
+    // return this.httpClient.get<CategoryWithId[]>(this.controllerURL + "/requests")
+    return of(this.requests);
   }
 }

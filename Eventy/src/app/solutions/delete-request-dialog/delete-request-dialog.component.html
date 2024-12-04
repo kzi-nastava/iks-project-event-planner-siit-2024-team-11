@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Which category do you want to switch the category {{categoryName}} with?</h2>
+<mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Choose a different category</mat-label>
+        <mat-select [(value)]="replacementCategory">
+          <mat-option *ngFor="let category of categories" [value]="category">{{ category.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveInput()">OK</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

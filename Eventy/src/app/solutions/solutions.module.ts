@@ -22,6 +22,9 @@ import { SolutionCategoriesViewComponent } from './solution-categories-view/solu
 import { MatCardModule } from '@angular/material/card';
 import { SolutionCategoriesViewDualCardComponent } from './solution-categories-view-dual-card/solution-categories-view-dual-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { SolutionCategoryRequestsViewComponent } from './solution-category-requests-view/solution-category-requests-view.component';
+import { SolutionCategoryRequestViewDualCardComponent } from './solution-category-request-view-dual-card/solution-category-request-view-dual-card.component';
+import { DeleteRequestDialogComponent } from './delete-request-dialog/delete-request-dialog.component';
 
 
 @NgModule({
@@ -32,6 +35,9 @@ import { SharedModule } from '../shared/shared.module';
     SolutionCategoryManagementComponent,
     SolutionCategoriesViewComponent,
     SolutionCategoriesViewDualCardComponent,
+    SolutionCategoryRequestsViewComponent,
+    SolutionCategoryRequestViewDualCardComponent,
+    DeleteRequestDialogComponent,
   ],
   imports: [
     CommonModule,
