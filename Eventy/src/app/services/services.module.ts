@@ -13,7 +13,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MyServicesViewComponent } from './my-services-view/my-services-view.component';
 import { MyServicesViewCardComponent } from './my-services-view-card/my-services-view-card.component';
 import { RouterModule } from '@angular/router';
-
+import { CreateReservationComponent } from './create-reservation/create-reservation.component';
+import { EventsModule } from '../events/events.module';
+import { ReservationSelectDatetimeComponent } from './reservation-select-datetime/reservation-select-datetime.component';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { RouterModule } from '@angular/router';
     EditServiceComponent,
     MyServicesViewComponent,
     MyServicesViewCardComponent,
+    CreateReservationComponent,
+    ReservationSelectDatetimeComponent,
   ],
   imports: [
     CommonModule,
@@ -33,12 +38,15 @@ import { RouterModule } from '@angular/router';
     MatCheckboxModule,
     ReactiveFormsModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    EventsModule,
+    NgxMatTimepickerModule
   ],
   exports: [
     ServiceCardComponent,
     AddServiceComponent,
-    EditServiceComponent
+    EditServiceComponent,
+    CreateReservationComponent
   ],
 })
 export class ServicesModule { }
