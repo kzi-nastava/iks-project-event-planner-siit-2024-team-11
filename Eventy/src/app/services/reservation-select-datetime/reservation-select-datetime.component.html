@@ -14,7 +14,8 @@
             <!-- Step 2 -->
             <div class = "step">
                <div style = "display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                  <div class = "circle active">2</div>
+                  <div *ngIf="confirmReservationClickedStage === 0" class = "circle active">2</div>
+                  <div *ngIf="confirmReservationClickedStage === 1 || confirmReservationClickedStage == 2" class = "circle active"><mat-icon>check</mat-icon></div>
                   <span class = "label">Select</span>
                   <span class = "label">Datetime</span>
                </div>
@@ -23,7 +24,9 @@
             <!-- Step 3 -->
             <div class = "step" style = "align-items: end;">
                <div style = "display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                  <div class = "circle">3</div>
+                  <div *ngIf="confirmReservationClickedStage === 0" class = "circle">3</div>
+                  <div *ngIf="confirmReservationClickedStage === 1" class = "circle active">3</div>
+                  <div *ngIf="confirmReservationClickedStage === 2" class = "circle active"><mat-icon>check</mat-icon></div>
                   <span class = "label">Confirm</span>
                   <span class = "label">Reservation</span>
                </div>
@@ -35,7 +38,8 @@
             </div>
             
             <div class = "line_container">
-               <div class = "line" style = "background: #e0e0e0;"></div>
+               <div *ngIf="confirmReservationClickedStage === 0" class = "line" style = "background: #e0e0e0;"></div>
+               <div *ngIf="confirmReservationClickedStage === 1 || confirmReservationClickedStage === 2" class = "line" style = "background: #4caf50;"></div>
             </div>
          </div>
       </div>

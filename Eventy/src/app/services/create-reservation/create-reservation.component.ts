@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component } from '@angular/core';
 import { EventCard } from '../../events/model/event-card.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-create-reservation',
@@ -8,10 +9,12 @@ import { EventCard } from '../../events/model/event-card.model';
   styleUrl: './create-reservation.component.css'
 })
 export class CreateReservationComponent {
-  private _snackBar = inject(MatSnackBar);
   stage: Number = 1;
   selectedEvent: EventCard = null;
 
+  constructor(private dialog: MatDialog) {
+
+  }
   onSelectedEventCard(eventCard: EventCard) {
     this.selectedEvent = eventCard
   }
@@ -22,7 +25,15 @@ export class CreateReservationComponent {
     } 
 
     if (clicked && this.selectedEvent === null) {
-      this._snackBar.open("You need to click an event!!!");
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true, // prevents closing by clicking outside
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: 'Selection Error', 
+          message: 'Please make sure that an event is selected before continuing to the next step.',
+        },
+      });
     }
   }
 }

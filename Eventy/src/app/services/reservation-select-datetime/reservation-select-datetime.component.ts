@@ -7,6 +7,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { YesNoFancierDialogComponent } from '../../shared/yes-no-fancier-dialog/yes-no-fancier-dialog.component';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class ReservationSelectDatetimeComponent {
   isFixedDuration = false;
   selectedStartTime: Date | null = null;
   selectedEndTime: Date | null = null;
+  confirmReservationClickedStage: Number = 0;
 
   constructor(servicesService: ServicesService, private snackBar: MatSnackBar, private dialog: MatDialog) {
     this.selectedService = servicesService.get(5); // random ID for now
@@ -179,36 +181,44 @@ export class ReservationSelectDatetimeComponent {
     this.endTimeControl.markAsTouched();
 
     if (this.isDateValid() && this.isTimeValid()) {
+      this.confirmReservationClickedStage = 1;
+
       const element = document.querySelector('mat-sidenav-content') || window;
       element.scrollTo({top: 0, behavior: 'smooth'}); // smooth scrolling
 
       const dialogRef = this.dialog.open(YesNoFancierDialogComponent, {
         width: '400px',
-        disableClose: true, // Prevent closing by clicking outside
+        disableClose: true, // prevents closing by clicking outside
         backdropClass: 'blurred_backdrop_dialog',
         data: {
-          title: 'Confirm Action', // Pass the title
-          message: 'Are you sure you want to proceed?', // Pass the message
+          title: 'Confirm Reservation', 
+          message: 'Are you sure you want to proceed with creating the reservation?',
         },
       });
     
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
+          this.snackBar.open("SUCCESSFULLY CREATED! (not rly)");
           console.log('User clicked Yes');
+          this.confirmReservationClickedStage = 2;
         } else {
           console.log('User clicked No');
+          this.confirmReservationClickedStage = 0;
         }
       });
-
     } else {
       console.log('Some inputs are invalid. Please correct them.');
 
-       // Show a snack bar notification
-      this.snackBar.open('All inputs must be correct!', 'Close', {
-        duration: 3000, // Duration in milliseconds
-        verticalPosition: 'top', // Position (top/bottom)
-        horizontalPosition: 'center', // Position (start, center, end, left, right)
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true, // Prevent closing by clicking outside
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: 'Invalid data', // Pass the title
+          message: 'Please make sure that all inputs are valid before confirming the reservation.', // Pass the message
+        },
       });
+
     }
   }
 }
