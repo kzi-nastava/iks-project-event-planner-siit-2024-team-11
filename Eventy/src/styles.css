@@ -140,7 +140,55 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
   }
 
-/* global */
-.ng-trigger {
+
+.mat-mdc-form-field-error-wrapper {
+  background-color: transparent !important;
+} 
+
+
+/* service reservation datepicker */
+#reservation-select-datetime {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 52px !important;
+    width: 27vw !important;
+    align-items: center !important;
+    justify-content: center !important;
+ }
+
+  .mat-mdc-checkbox {
+    width: 8vw !important;
+  }
+
+  .mdc-label {
+    font-size: 15px;
+    font-family: Albert Sans;
+    font-weight: 400;
+  }
+
+  .mat-mdc-form-field-error {
+    margin-left: -15px !important;
+  }
+}
+
+.mat-datepicker-content {
   background-color: white !important;
-} /* ovo mora u global.. vidjeti sa kolegama.. */
+  box-shadow: 0px 0px 7px rgb(227, 227, 227) !important;
+}
+
+#reservation-select-event {
+  .ng-trigger {
+    background-color: #ffffff !important;
+  } 
+}
+
+.timepicker {
+  padding-top: 15px !important;
+}
+
+.blurred_backdrop_dialog {
+  background: rgba(62, 62, 62, 0.411);
+  backdrop-filter: blur(3px);
+}

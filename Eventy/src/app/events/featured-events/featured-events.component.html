@@ -12,7 +12,7 @@
 <!-- FEATURED ITEMS -->
 <div class = "featured_items_container">
 
-   <div *ngFor="let eventCard of featuredEvents; let i = index">
+   <div *ngFor="let eventCard of featuredEvents; let i = index" style = "margin-bottom: 10px; margin-top: 10px">
       <!-- Left Card -->
       <div *ngIf="i % 2 === 0" class="featured_left"> 
          <app-event-card [eventCard]="eventCard" class = "featured_card" style = "position: absolute; z-index: 3;"/>

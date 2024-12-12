@@ -11,6 +11,7 @@ import { ProductsModule } from '../products/products.module';
 import { ServicesModule } from '../services/services.module';
 import { SolutionsModule } from '../solutions/solutions.module';
 import { FeaturedSolutionsComponent } from '../solutions/featured-solutions/featured-solutions.component';
+import { CreateReservationComponent } from '../services/create-reservation/create-reservation.component';
 
 
 @NgModule({

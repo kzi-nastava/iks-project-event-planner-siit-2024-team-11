@@ -1,0 +1,13 @@
+<div class="error_dialog">
+   <div class = "title_container">
+      <mat-icon class = "icon">error</mat-icon>
+      <p class = "title">{{data.title}}</p>
+   </div>
+   <p class = "message">{{data.message}}</p>
+
+   <div style = "display: flex; justify-content: center; margin-top: 25px;">
+      <div class = "confirm_filter_container" (click) = "closeDialog()">
+         <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">OK</p>
+      </div>
+   </div>  
+</div>

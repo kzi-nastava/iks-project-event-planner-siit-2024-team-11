@@ -36,26 +36,28 @@
       justify-content: center; 
       align-items: center; 
       flex-direction: row; 
-      background-color: #ED4D4D; 
+      background: linear-gradient(to left, #f93c3c, #ff5c5c);
       border-radius: 7px; 
       width: 115px; 
       padding-bottom: 7px; 
       padding-top: 7px; 
       padding-right: 6.5px;
    }
-
    .resetFilterContainer:hover {
-      background-color: #ed4d4ddf;
-   }  
+      background: linear-gradient(to left, #d82828, #fe5050);
+   }     
 
    .confirm_filter_container {
       width: 26vw;
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0px 0px 3px rgb(180, 180, 180);
-      background-color: rgb(57, 166, 41);
+      background: linear-gradient(to left, #848eb2, #a5b9d2);
       display: flex; 
       justify-content: center; 
       align-items: center;
       cursor: pointer;
+   }
+   .confirm_filter_container:hover {
+      background: linear-gradient(to left, rgb(106, 115, 144), #97abc3);
    }

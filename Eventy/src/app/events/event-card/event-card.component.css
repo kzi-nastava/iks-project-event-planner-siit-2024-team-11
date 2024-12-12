@@ -2,7 +2,6 @@
    display: flex;
    width: 43em;
    background-color: white;
-   margin: 10px;
    border-radius: 10px;
    border-left: solid 13px #808AAC;
    padding-left: 16px;
@@ -12,6 +11,7 @@
    .left_side_container {
       display: flex;
       flex: 1;
+      max-width: 46.5%;
       flex-direction: column;
       padding-top: 14px;
       margin-right: 12px;
@@ -28,7 +28,12 @@
             margin: 0;
             color: #798098;
             font-weight: 600;
-            padding-bottom: 7px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            margin-bottom: 7px;
             font-size: 18.5px;
             font-family: Albert Sans;
          }
@@ -101,6 +106,9 @@
             border-radius: 100px;
             cursor: pointer;
          }
+         .organiser_img:hover {
+            box-shadow: 0px 0px 5px #363948;
+         }
 
          .organiser {
             margin: 0;
@@ -110,6 +118,10 @@
             letter-spacing: 0;
             font-family: Figtree;
             cursor: pointer;
+         }
+         #organiser:hover {
+            text-decoration: underline 1px #7882a2;
+            text-underline-offset: 3px;
          }
 
    .right_side_container {
@@ -171,6 +183,13 @@
          }
          .see_more_button_container:hover p {
             color: white !important;
+         }
+
+         .no-hover .favorite_button_container:hover {
+            background-color: transparent;
+          }   
+         .no-hover .favorite_button_container:hover mat-icon {
+            color: #929AB7 !important;
          }
 
       .description_container {

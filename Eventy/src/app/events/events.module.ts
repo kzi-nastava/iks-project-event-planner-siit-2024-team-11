@@ -21,6 +21,7 @@ import { CreateEventTypeComponent } from './create-event-type/create-event-type.
 import { EditEventTypeComponent } from './edit-event-type/edit-event-type.component';
 import {RouterLink, RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
+import { ReservationSelectEventComponent } from './reservation-select-event/reservation-select-event.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {SharedModule} from '../shared/shared.module';
     AllEventTypesComponent,
     CreateEventTypeComponent,
     EditEventTypeComponent,
+    ReservationSelectEventComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,7 @@ import {SharedModule} from '../shared/shared.module';
     FeaturedEventsComponent,
     EventFiltersComponent,
     AllEventsComponent,
+    ReservationSelectEventComponent
   ],
   providers: [
     EventsServiceService,

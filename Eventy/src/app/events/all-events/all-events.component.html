@@ -36,8 +36,15 @@
 
    <!-- ALL EVENTS -->
    <div *ngFor="let eventCard of allEvents;">
-      <div class="featured_left"> 
-         <app-event-card [eventCard]="eventCard" class = "featured_card"/>     
+      <div 
+         (click)="handleCardClick(eventCard)" 
+         [ngClass]="{'selected_event_border': eventCard === selectedEventCard}" 
+         style = "margin: 6px; border: 4px solid #F1F1F1"
+      > 
+         <app-event-card 
+            [eventCard]="eventCard" 
+            [isClickable]="isCardClickable"        
+         />     
       </div>   
    </div>
 </div>

@@ -10,17 +10,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EventCardComponent {
   private _snackBar = inject(MatSnackBar);
   @Input() eventCard: EventCard;
+  @Input() isClickable: Boolean;
 
   constructor() {
 
   }
 
   handleFavoriteItem() {
-    this._snackBar.open("FAVORITE: " + this.eventCard.event.name, "OK!");
+    if (!this.isClickable) {
+      this._snackBar.open("FAVORITE: " + this.eventCard.event.name, "OK!");
+    }
   }
 
   handleSeeMore() {
-    this._snackBar.open("SEE MORE: " + this.eventCard.event.name, "OK!");
+    if (!this.isClickable) {
+      this._snackBar.open("SEE MORE: " + this.eventCard.event.name, "OK!");
+    }
   }
 }
 
