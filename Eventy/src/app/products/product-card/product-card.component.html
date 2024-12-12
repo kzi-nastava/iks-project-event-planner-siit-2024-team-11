@@ -54,7 +54,7 @@
                <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
             </div>
 
-            <div class = "see_more_button_container"(click)="handleSeeMore()">
+            <div class = "see_more_button_container"(click)="handleSeeMore()" [routerLink]="['/users', productCard.provider]">
                <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
             </div>
          </div>
