@@ -1,0 +1,9 @@
+<app-reservation-select-event 
+   *ngIf="stage === 1" 
+   (selectedEventCardEventEmitter)="onSelectedEventCard($event)"
+   (continueButtonClicked)="onContinueButtonClicked($event)"
+/>
+<app-reservation-select-datetime 
+   *ngIf="stage === 2"
+   [selectedEvent]="selectedEvent" 
+/>
