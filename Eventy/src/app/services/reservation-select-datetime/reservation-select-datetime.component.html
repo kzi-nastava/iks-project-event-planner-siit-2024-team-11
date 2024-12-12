@@ -1,0 +1,222 @@
+<div id = "reservation-select-datetime">
+   <div class = "header_container">
+      <div class = "progress_bar_container">
+         <div class="progress_bar">
+            <!-- Step 1 -->
+            <div class = "step" style = "align-items: start;">
+               <div style = "display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <div class = "circle active"><mat-icon>check</mat-icon></div>
+                  <span class = "label">Select</span>
+                  <span class = "label">Event</span>
+               </div>
+            </div>
+         
+            <!-- Step 2 -->
+            <div class = "step">
+               <div style = "display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <div class = "circle active">2</div>
+                  <span class = "label">Select</span>
+                  <span class = "label">Datetime</span>
+               </div>
+            </div>
+         
+            <!-- Step 3 -->
+            <div class = "step" style = "align-items: end;">
+               <div style = "display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <div class = "circle">3</div>
+                  <span class = "label">Confirm</span>
+                  <span class = "label">Reservation</span>
+               </div>
+            </div>
+         </div>
+         <div class = "lines_container">
+            <div class = "line_container">
+               <div class = "line" style = "background: #4caf50;"></div>
+            </div>
+            
+            <div class = "line_container">
+               <div class = "line" style = "background: #e0e0e0;"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- 1. -->
+   <div class = "description_text">
+      <p>1. See the details of your service reservation: </p>
+   </div>
+
+   <div class = "details_container">
+      <app-service-card [serviceCard]="selectedService" style = "border-radius: 10px; box-shadow: 0px 0px 5px rgb(233, 233, 233)"/>
+      <div class = "event_details" [routerLink]="['/users', selectedService.provider]">
+         <div class = "left_side_container">
+            <div class = "title_container">
+               <p id = "title" class = "title">{{selectedEvent.event.name}}</p>
+            </div>
+      
+            <div class = "type_container">
+               <p style = "margin-right: 5px;" class = "type">Type:</p>
+               <p id = "type" class = "type">{{selectedEvent.event.eventType.name}}</p>
+            </div>
+      
+            <div class = "max_participants_container">
+               <p style = "margin-right: 5px;" class = "max_participants">Max participants:</p>
+               <p id = "max_participants" class = "max_participants">{{selectedEvent.event.maxParticipants}}</p>
+            </div>
+      
+            <div class = "date_location_container">
+               <div style = "display: flex; flex-direction: row;">
+                  <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
+                  <p id = "date" class = "date">{{selectedEvent.event.date.toLocaleDateString()}}</p>
+               </div>
+      
+               <div style = "display: flex; flex-direction: row;">
+                  <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.8px;">location_pin</mat-icon>
+                  <p id = "location" class = "location">{{selectedEvent.event.location.name}}</p>
+               </div>
+            </div>
+      
+            <div class = "description_container">
+               <div style = "display: flex; flex: 1; flex-direction: column; padding: 4px; padding-left: 10px; padding-right: 10px; padding-bottom: 9px;">
+                  <p style = "margin: 0; font-size: 15px; color: #AEAAAA;  margin-bottom: 2px"> Description: </p>
+                  <p id = "description" class = "description"> {{selectedEvent.event.description}} </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class = "deadlines_container">
+      <div style = "display: flex; flex-direction: row;">
+         <mat-icon style = "color: rgb(139, 139, 139); size: 19px; margin-right: 0px;">arrow_right</mat-icon>
+         <p>Reservation deadline: <b>{{selectedService.service.reservationDeadline}} days</b></p>
+      </div>
+      <div style = "display: flex; flex-direction: row; margin-left: 45px;">
+         <mat-icon style = "color: rgb(139, 139, 139); size: 19px; margin-right: 0%;">arrow_right</mat-icon>
+         <p>Cancellation deadline: <b>{{selectedService.service.cancellationDeadline}} days</b></p>
+      </div>  
+   </div>
+
+   <div style = "display: flex; justify-content: space-around; flex-direction: row; padding-top: 20px; margin-bottom: 30px; background-color: white;">
+      <!-- 2. -->
+      <div [style.padding-bottom]="isDateValid() || !this.dateControl.touched ? '0px' : '10px'">
+         <div class = "description_text" style = "margin-top: 0px; margin-bottom: 0px; display: flex; flex-direction: row;">
+            <p>2. Select the preferred date:</p>
+         </div>
+
+         <div class = "text_container">
+            <div class = "text_label_container">
+               <p class = "text_label">Select event date:</p>
+            </div>
+
+            <div class="date_time_picker_container">
+               <!-- Event Date picker -->
+               <mat-form-field appearance="fill" style = "width: 26vw;">
+                  <mat-label>Event Date</mat-label>
+                  <input matInput [matDatepicker]="picker" [formControl]="dateControl" />
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-error *ngIf="dateControl.hasError('required')">
+                     Date is required.
+                  </mat-error>
+                  <mat-error *ngIf="dateControl.hasError('tooEarly')">
+                     The selected date is too early to reserve.
+                  </mat-error>
+                  <mat-error *ngIf="dateControl.hasError('alreadyReserved')">
+                     The selected date is already reserved.
+                  </mat-error>
+               </mat-form-field>
+            </div>
+         </div>  
+      </div> 
+
+      <!-- 3. -->
+      <div [style.padding-bottom]="isTimeValid() || (!this.startTimeControl.touched && !this.endTimeControl.touched) ? '0px' : '10px'">
+         <div class = "description_text" style = "margin-top: 0px; margin-bottom: 0px; display: flex; flex-direction: row;">
+            <p>3. Select the preferred time range:</p>
+         </div>
+
+         <div style = "display:flex; flex-direction: row;">
+            <div class = "text_container">
+               <div class = "text_label_container">
+                  <p class = "text_label">Select start time:</p>
+               </div>
+               <!-- Start Time Picker -->
+               <div class="time-picker-container">
+                  <mat-form-field appearance="fill" style="width: 26vw;">
+                     <mat-label>Start Time</mat-label>
+                     <input
+                       matInput
+                       [ngxMatTimepicker]="startPicker"
+                       [formControl]="startTimeControl"                 
+                     />
+                     <ngx-mat-timepicker-toggle  matSuffix [for]="startPicker"></ngx-mat-timepicker-toggle>
+                     <ngx-mat-timepicker #startPicker></ngx-mat-timepicker>
+                     <mat-error *ngIf="startTimeControl.hasError('required')">
+                        Start time is required.
+                     </mat-error>
+                     <mat-error *ngIf="startTimeControl.hasError('invalidTime')">
+                        Start time is before the end time.
+                     </mat-error>      
+                     <mat-error
+                       *ngIf="!startTimeControl.hasError('required') && !startTimeControl.hasError('durationTooLong') && startTimeControl.hasError('durationTooShort')">
+                       Duration is too short.
+                     </mat-error>
+                     <mat-error
+                       *ngIf="!startTimeControl.hasError('required') && !startTimeControl.hasError('durationTooShort') && startTimeControl.hasError('durationTooLong')">
+                       Duration is too long.
+                     </mat-error>
+                   </mat-form-field>
+               </div>
+            </div>  
+
+            <div class = "text_container">
+               <div class = "text_label_container">
+                  <p class = "text_label">Select end time:</p>
+               </div>
+               <!-- End Time Picker -->
+               <div class="time-picker-container">
+                  <mat-form-field appearance="fill" style="width: 26vw;">
+                     <mat-label>End Time</mat-label>
+                     <input
+                       matInput
+                       [ngxMatTimepicker]="endPicker"
+                       [formControl]="endTimeControl"
+                       [disabled]="isFixedDuration"
+                     />
+                     <ngx-mat-timepicker-toggle matSuffix [for]="endPicker"></ngx-mat-timepicker-toggle>
+                     <ngx-mat-timepicker #endPicker></ngx-mat-timepicker>
+                     <mat-error *ngIf="endTimeControl.hasError('required')">
+                       End time is required.
+                     </mat-error>
+                     <mat-error *ngIf="endTimeControl.hasError('invalidTime')">
+                        End time is after the start time.
+                     </mat-error>
+                     <mat-error
+                       *ngIf="!endTimeControl.hasError('required') && !endTimeControl.hasError('durationTooLong') && endTimeControl.hasError('durationTooShort')">
+                       Duration is too short.
+                     </mat-error>
+                     <mat-error
+                       *ngIf="!endTimeControl.hasError('required') && !endTimeControl.hasError('durationTooShort') && endTimeControl.hasError('durationTooLong')">
+                       Duration is too long.
+                     </mat-error>
+                  </mat-form-field>
+
+                  <div *ngIf="isFixedDuration" style="margin-top: 16px;">
+                  <p>Fixed Duration: {{selectedService.service.minReservationTime}} minutes</p>
+                  </div>
+               </div>
+            </div> 
+         </div>
+      </div> 
+   </div>
+
+   <div style = "box-shadow: 10px 0px 5px rgb(228, 228, 228); padding: 18px; bottom: 0; background-color: white; border-left: solid 3px #F1F1F1;">
+      <div style = "display: flex; justify-content: center;">
+         <div class = "confirm_selection_container" (click)="onContinueButtonClicked()">
+            <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">CONFIRM RESERVATION</p>
+         </div>
+      </div>  
+   </div>
+
+</div>
