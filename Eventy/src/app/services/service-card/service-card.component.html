@@ -11,7 +11,7 @@
 
       <div class = "duration_container">
          <p style = "margin-right: 5px;" class = "duration">Service duration:</p>
-         <p class = "duration">{{serviceCard.service.minReservationTime === serviceCard.service.maxReservationTime ? serviceCard.service.minReservationTime + "h" : serviceCard.service.minReservationTime + "h - " + serviceCard.service.maxReservationTime + "h"}}</p>
+         <p class = "duration">{{serviceCard.service.minReservationTime === serviceCard.service.maxReservationTime ? serviceCard.service.minReservationTime + "min" : serviceCard.service.minReservationTime + "min - " + serviceCard.service.maxReservationTime + "min"}}</p>
       </div>
 
       <div class = "reservation_container">
@@ -57,7 +57,7 @@
                <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
             </div>
 
-            <div class = "see_more_button_container" (click)="handleSeeMore()">
+            <div class = "see_more_button_container" (click)="handleSeeMore()" [routerLink]="['/users', serviceCard.provider]">
                <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
             </div>
          </div>

@@ -1,4 +1,4 @@
-<div class = "card_container">
+<div class = "card_container" [ngClass]="{'no-hover': isClickable}" [ngStyle]="{'cursor' : isClickable ? 'pointer' : 'visible'}">
    <div class = "left_side_container">
       <div class = "title_container">
          <p id = "title" class = "title">{{eventCard.event.name}}</p>
@@ -43,11 +43,11 @@
             <p id = "open_event" class = "open_event" style = "margin: 0; color: #3ED34F; font-weight: 700; font-size: 18.5px; margin-top: 0px; margin-left: 5px; font-family: Albert Sans;">OPEN EVENT!</p>
          </div>
          <div style = "justify-content:right; align-items: center; display: flex; flex: 1.3;">
-            <div class = "favorite_button_container" (click)="handleFavoriteItem()">
+            <div *ngIf="!isClickable" class = "favorite_button_container" (click)="handleFavoriteItem()">
                <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
             </div>
 
-            <div class = "see_more_button_container" (click)="handleSeeMore()">
+            <div class = "see_more_button_container" (click)="handleSeeMore()" [routerLink]="['/users', eventCard.organiser]">
                <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
             </div>
          </div>

@@ -39,7 +39,7 @@
 
    <!-- ALL EVENTS -->
    <div *ngFor="let solutionCard of allSolutions;">
-      <div class="featured_left"> 
+      <div style = "margin: 10px;"> 
          <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" class = "featured_card"/> 
          <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" class = "featured_card"/>      
       </div>   
