@@ -18,7 +18,6 @@ import {EditUserComponent} from './user-management/edit-user/edit-user.component
 import {MyProfilePageComponent} from './user-management/my-profile-page/my-profile-page.component';
 import { CreateReservationComponent } from './services/create-reservation/create-reservation.component';
 import { FastRegistrationComponent } from './user-management/fast-registration/fast-registration.component';
-import { UpgradeProfileComponent } from './user-management/upgrade-profile/upgrade-profile.component';
 
 
 const routes: Routes = [
@@ -38,7 +37,6 @@ const routes: Routes = [
   {path: 'profile', component: MyProfilePageComponent},
   {path: 'create-reservation', component: CreateReservationComponent},
   {path: 'fast-registration', component: FastRegistrationComponent},
-  {path: 'upgrade-profile', component: UpgradeProfileComponent},
   {path: '**', redirectTo: ''},
 ];
 
