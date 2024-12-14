@@ -135,12 +135,12 @@
 
          .add_email_container {
             display: flex;
-            flex: 2.5;
             display: flex;
             align-items: center;
             flex-direction: column;
             border-radius: 13px;
-            padding-top: 7px;
+            padding-top: 12px;
+            padding-bottom: 12px;
             background-color: white;
             box-shadow: 0px 0px 3px #d8d8d8cb;
          }
@@ -150,7 +150,7 @@
                flex-direction: row;
                width: 100%;
                justify-content: center;
-               margin-top: 11px;
+               margin-top: 13px;
             }
 
                .add_email_form {
@@ -187,15 +187,28 @@
 
          .images_container {
             display: flex;
-            flex: 2;   
-            background: lightblue;
+            flex: 2.5;   
+            justify-content: center;
+            align-items: center;
          }
+
+            .decoration_image {
+               width: 98%;
+               height: 94%;
+               padding-top: 4px;
+            }
 
          .text_container {
             display: flex;
-            flex: 1.5;
-           
-            background: lightgreen;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 13px;
+            background-color: white;
+            box-shadow: 0px 0px 3px #d8d8d8cb;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 8px;
+            padding-bottom: 8px;
          }
 
 }

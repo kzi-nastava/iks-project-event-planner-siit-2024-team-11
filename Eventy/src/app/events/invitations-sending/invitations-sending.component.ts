@@ -15,7 +15,6 @@ export class InvitationsSendingComponent {
 
   constructor() {
     this.emailControl = new FormControl('', [
-      Validators.required,
       Validators.email,
       emailValidatorFn(this.invitedEmails)
     ]);
@@ -31,8 +30,8 @@ export class InvitationsSendingComponent {
 
   private adjustRightContainerHeight(): void {
     if (this.leftContainer && this.rightContainer) {
-      const leftHeight = this.leftContainer.nativeElement.offsetHeight; // Get left container height
-      this.rightContainer.nativeElement.style.height = `${leftHeight}px`; // Set right container height
+      const leftHeight = this.leftContainer.nativeElement.offsetHeight; 
+      this.rightContainer.nativeElement.style.height = `${leftHeight}px`; 
     }
   }
 
@@ -55,7 +54,6 @@ export class InvitationsSendingComponent {
 
   private updateEmailValidator(): void {
     this.emailControl.setValidators([
-      Validators.required,
       Validators.email,
       emailValidatorFn(this.invitedEmails)
     ]);

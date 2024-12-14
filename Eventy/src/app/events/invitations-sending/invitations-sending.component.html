@@ -37,9 +37,6 @@
                       placeholder="example@gmail.com"
                       [formControl]="emailControl"
                     />
-                    <mat-error *ngIf="emailControl.hasError('required')">
-                      Email is required
-                    </mat-error>
                     <mat-error *ngIf="emailControl.hasError('email')">
                       Please enter a valid email
                     </mat-error>
@@ -57,10 +54,10 @@
          </div>
 
          <div class = "images_container">
-            
+            <img src = "solution_assets/reservation_decoration.png" class = "decoration_image">
          </div>
          <div class = "text_container">
-            
+            <p id = "description" class = "description" style = "font-weight: 600; text-decoration: underline; text-underline-offset: 3px;">Everyone on the list will receive an invitation in their mail!</p>
          </div>
       </div>
 
