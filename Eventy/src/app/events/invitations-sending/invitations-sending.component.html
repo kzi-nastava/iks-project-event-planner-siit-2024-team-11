@@ -1,1 +1,66 @@
-<p>invitations-sending works!</p>
+<div id = "invitations_sending" class = "main_container">
+   <div class = "title_container">
+      <p class = "title">INVITE PEOPLE</p>
+   </div>
+
+   <div class = "description_container">
+      <p id = "description" class = "description">You're one step away from creating your perfect event! All that's left is to choose the people you want to share it with—those whose presence will make the occasion truly meaningful and unforgettable. Whether it's close friends, beloved family members, or cherished colleagues, the right guests will transform your event into a heartfelt celebration filled with joy, connection, and lasting memories.</p>
+   </div>
+
+   <div class = "form_container">
+      <div #left_container class = "left_container">
+         <p class = "form_label">Added people:</p>
+   
+         <div class = "emails_container">
+            <div *ngFor="let email of invitedEmails; let i = index" class = "invited_email_container">
+               <div class = "email_text_container">
+                  <p style = "margin: 0;">{{i + 1}}. {{email}}</p>
+               </div>
+
+               <div class = "remove_email_button_container" (click)="removeEmail(email)">
+                  <mat-icon style = "color: white; font-size: 23px; margin-right: 5px; margin-top: 1px;">delete_outline</mat-icon>
+                  <p style = "margin: 0; color: white; font-family: Albert Sans; font-weight: 500">Remove</p>
+               </div>
+            </div>
+         </div> 
+      </div>
+
+      <div #right_container class = "right_container" (window:resize)="onScreenResize($event)">
+         <div class = "add_email_container">
+            <p class = "form_label" style = "font-size: 19px; margin-top: 13px;">Add a new person:</p>
+
+            <div class = "add_container">
+               <form>
+                  <mat-form-field class="add_email_form">
+                    <input
+                      matInput
+                      placeholder="example@gmail.com"
+                      [formControl]="emailControl"
+                    />
+                    <mat-error *ngIf="emailControl.hasError('email')">
+                      Please enter a valid email
+                    </mat-error>
+                    <mat-error *ngIf="emailControl.hasError('reccuring')">
+                     This email is already added
+                   </mat-error>
+                  </mat-form-field>
+                </form>
+               <mat-icon 
+                class = "add_icon"
+                (click)="addEmail()"
+                [ngClass]="{ disabled: emailControl.invalid }"
+               >add_circle_outline</mat-icon>
+            </div>
+         </div>
+
+         <div class = "images_container">
+            <img src = "solution_assets/reservation_decoration.png" class = "decoration_image">
+         </div>
+         <div class = "text_container">
+            <p id = "description" class = "description" style = "font-weight: 600; text-decoration: underline; text-underline-offset: 3px;">Everyone on the list will receive an invitation in their mail!</p>
+         </div>
+      </div>
+
+   </div>
+</div>
+

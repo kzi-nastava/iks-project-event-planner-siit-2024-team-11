@@ -11,7 +11,10 @@
   Because we need it to keep the data? Or maybe also keep the data here? We will see... -->
   <app-event-creation-basic-information *ngIf="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION"></app-event-creation-basic-information>
   <app-agenda-creation *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"></app-agenda-creation>
-  <app-invitations-sending *ngIf="eventOrganizationStage === EventOrganizationStage.INVITATIONS_SENDING"></app-invitations-sending>
+  <app-invitations-sending  
+    *ngIf="eventOrganizationStage === EventOrganizationStage.INVITATIONS_SENDING"
+    (invitedEmailsEventEmitter)="collectInvitedEmails($event)"
+  />
 
   <div style = "box-shadow: 10px 0px 5px rgb(228, 228, 228); padding: 18px; bottom: 0; background-color: white; border-left: solid 3px #F1F1F1;">
     <div style = "display: flex; justify-content: center;">
