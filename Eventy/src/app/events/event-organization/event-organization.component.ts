@@ -17,6 +17,7 @@ export class EventOrganizationComponent {
    eventOrganizationStage: EventOrganizationStage;
    isEventPublic: boolean;
    titleMap: Map<EventOrganizationStage, string>;
+   invitedEmails: string[] = [];
 
    constructor() {
      this.titleMap = new Map<EventOrganizationStage, string>();
@@ -48,7 +49,15 @@ export class EventOrganizationComponent {
       }
     }
 
+    collectInvitedEmails(emails: string[]): void {
+      this.invitedEmails = emails;
+    }
+
     submit(): void {
-     alert("DONE");
+      alert("DONE");
+      console.log('Collected Data:', {
+        invitedEmails: this.invitedEmails,
+        // other data from previous stages
+      });
     }
 }

@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Component, ElementRef, ViewChild, Output, EventEmitter  } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { emailValidatorFn } from './email-validator';
 
 @Component({
@@ -11,6 +11,7 @@ export class InvitationsSendingComponent {
   @ViewChild('left_container') leftContainer!: ElementRef;
   @ViewChild('right_container') rightContainer!: ElementRef;
   invitedEmails: string[] = [];
+  @Output() invitedEmailsEventEmitter = new EventEmitter<string[]>();
   emailControl: FormControl;
 
   constructor() {
@@ -40,6 +41,7 @@ export class InvitationsSendingComponent {
     if (this.emailControl.valid) {
       if (!this.invitedEmails.includes(newEmail)) {
         this.invitedEmails.push(newEmail);
+        this.invitedEmailsEventEmitter.emit(this.invitedEmails);
         this.adjustRightContainerHeight();
         this.updateEmailValidator();
       } 
@@ -48,6 +50,7 @@ export class InvitationsSendingComponent {
 
   removeEmail(selectedEmail: String) {
     this.invitedEmails = this.invitedEmails.filter(email => email !== selectedEmail);
+    this.invitedEmailsEventEmitter.emit(this.invitedEmails);
     this.adjustRightContainerHeight();
     this.updateEmailValidator();
   }
