@@ -1,0 +1,44 @@
+<div class="register">
+
+   <div class="left-side">
+      <div class = "welcome_to_container">
+         <p class = "welcome-text">Welcome to</p>
+         <img class = "logo" src = "logo_bg_small.png"/>
+      </div>
+   
+      <div class = "select_role_text_container">
+         <p class = "select-text">SELECT ACCOUNT ROLE</p>
+      </div>
+   
+      <div class = "role-buttons">
+         <button [ngClass]="getOrganizerButtonClasses()" style = "margin-right: 50px" (click)="setRegisterType(true)">
+            <img src="Organiser.png" alt="Event Organizer photo" />
+            <div style = "position: relative; margin-top: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+               <p class="role-button-text">EVENT</p>
+               <p class="role-button-text">ORGANISER</p>
+            </div>
+         </button>
+      
+         <button [ngClass]="getProviderButtonClasses()" (click)="setRegisterType(false)">
+            <img src="Provider.png" alt="Solutions Provider photo" />
+            <div style = "margin-top: 10px; display: flex; flex-direction: column;">
+               <p class="role-button-text">SOLUTIONS</p>
+               <p class="role-button-text">PROVIDER</p>
+            </div>
+         </button>
+      </div>
+   
+      
+      <div class = "already_have_acc_container">
+         <p class="register-text">Already have an account?</p>
+         <div style = "display: flex; justify-content: center;">
+            <div class = "confirm_filter_container" [routerLink]="['/login']">
+               <p style = "font-size: 1.5vw; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">LOGIN</p>
+            </div>
+         </div>  
+      </div>
+   </div>
+
+   <app-register-organizer *ngIf="isOrganizer" class="right-side"></app-register-organizer>
+   <app-register-provider *ngIf="!isOrganizer" class="right-side"></app-register-provider>
+</div>
