@@ -44,17 +44,13 @@
       
          <div class="fields">   
             <mat-form-field class="field" style = "margin-top: 20px">
-               <mat-label>Email</mat-label>
-               <input type="email" matInput placeholder="example@gmail.com" formControlName="email"/>
+               <input type="email" matInput formControlName="email"/>
                @if (registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')) {
                   <mat-error>Please enter a valid email address</mat-error>
                }
                @if (registerForm.controls['email'].hasError('required')) {
                   <mat-error>Email is <strong>required</strong></mat-error>
                }
-               <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('email')">
-                  <mat-icon>close</mat-icon>
-               </button>
             </mat-form-field>
          
             <mat-form-field class="field">

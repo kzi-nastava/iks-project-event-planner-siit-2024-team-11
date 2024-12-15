@@ -17,9 +17,10 @@ interface ButtonClasses {
   styleUrl: './fast-registration.component.css'
 })
 export class FastRegistrationComponent {
+  email: string = "tactac123@gmail.com"
   registerForm : FormGroup = new FormGroup({
     profilePicture: new FormControl('ProfilePicture.png'),
-    email : new FormControl('', [Validators.required, Validators.email]),
+    email : new FormControl({value: this.email, disabled: true}, [Validators.required, Validators.email]),
     password : new FormControl('', [Validators.required]),
     confirmedPassword : new FormControl('', [Validators.required, this.passwordMatching()]),
     firstName : new FormControl('', [Validators.required]),
@@ -28,7 +29,7 @@ export class FastRegistrationComponent {
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });
   @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
-  email: string = "example@gmail.com"
+  
 
   constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
   
