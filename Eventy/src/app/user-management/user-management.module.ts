@@ -21,6 +21,7 @@ import { EditProviderFormComponent } from './edit-provider-form/edit-provider-fo
 import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import { FastRegistrationComponent } from './fast-registration/fast-registration.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
     EditUserComponent,
     EditUserFormComponent,
     EditProviderFormComponent,
-    MyProfilePageComponent
+    MyProfilePageComponent,
+    FastRegistrationComponent,
   ],
   imports: [
     CommonModule,
