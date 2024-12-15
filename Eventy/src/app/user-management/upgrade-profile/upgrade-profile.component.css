@@ -1,7 +1,7 @@
 .register {
    display: flex;
    flex-direction: row;
-   height: 100vh;
+ 
  }
  
   .left-side {
@@ -12,7 +12,7 @@
     color: white;
     flex-direction: column;
     justify-content: center;
-    height: calc(100% - 60px);
+    height: calc(100vh - 60px);
   }
 
     .welcome_to_container {
@@ -49,7 +49,6 @@
         font-weight: 500;
         color: white;
       }
-  
   
     .role-buttons {
       display: flex;

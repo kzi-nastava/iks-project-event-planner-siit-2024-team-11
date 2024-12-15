@@ -11,7 +11,7 @@ interface ButtonClasses {
   styleUrl: './upgrade-profile.component.css'
 })
 export class UpgradeProfileComponent {
-  isOrganizer: boolean = false;
+  isOrganizer: boolean = true;
   registerType: boolean = false;
 
   setRegisterType(isOrganiser: boolean) : void {

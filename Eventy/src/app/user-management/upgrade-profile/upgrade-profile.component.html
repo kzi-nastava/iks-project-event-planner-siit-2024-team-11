@@ -39,6 +39,6 @@
       </div>
    </div>
 
-   <app-register-organizer *ngIf="isOrganizer" class="right-side"></app-register-organizer>
-   <app-register-provider *ngIf="!isOrganizer" class="right-side"></app-register-provider>
+   <app-upgrade-organizer *ngIf="isOrganizer" class="right-side"/>
+   <app-register-provider *ngIf="!isOrganizer" class="right-side"/>
 </div>
