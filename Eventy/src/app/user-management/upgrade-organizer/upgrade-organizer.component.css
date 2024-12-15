@@ -1,0 +1,101 @@
+.form {
+   background-color: #F1F1F1;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   min-height: calc(100% - 60px);
+ }
+ 
+   .register-label {
+      font-family: "Albert Sans";
+      font-size: 3.3vw;
+      color: #979797;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+   }
+
+   .fields {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    } 
+
+      .profile-picture-picker {
+         margin-bottom: 4vh;
+         cursor: pointer;
+      }
+         
+      .profile-picture-container {
+         position: relative;
+         display: inline-block;
+      }
+   
+         .profile-picture-picker img {
+            border-radius:50%;
+            width: 15vw;
+            height: 15vw;
+            border: 3px white solid;
+            object-fit: cover;
+         }
+      
+         .change-picture-note {
+            position: absolute;
+            bottom: -5%;
+            left: 50%;
+            transform: translateX(-50%); 
+            background-color: rgba(37, 37, 37, 0.699);
+            color: white;
+            padding: 5px 8px;
+            border-radius: 12px;
+            font-size: 13.5px; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            width: 10vw;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-align: center;
+            font-family: Albert Sans;
+         }
+    
+         #profilePictureInputId {
+            display: none;
+         }
+
+      .field {
+         margin-top: 2.5vh;
+      }
+
+      .name-fields {
+         display: flex;
+         flex-direction: row;
+         width: 54vw;
+         justify-content: space-between;
+      }
+
+         .name-field {
+            margin-top: 2.5vh;
+         }
+       
+   #button_confirm {
+      margin-top: 0vh;
+      margin-bottom: 18vh; /* this keeps the whole form in the central place */
+   }
+
+   .confirm_registration_container {
+      width: 26vw;
+      padding: 13px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 3px rgb(180, 180, 180);
+      background: linear-gradient(to left, #7f88aa, #97aac1);
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      cursor: pointer;
+   }
+
+   .confirm_registration_container:hover {
+      background: linear-gradient(to left, rgb(95, 103, 129), #8ea0b7);
+   }
