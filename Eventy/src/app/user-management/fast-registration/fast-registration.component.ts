@@ -4,6 +4,7 @@ import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {Router} from '@angular/router';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 interface ButtonClasses {
   "role-button" : boolean,
@@ -27,6 +28,7 @@ export class FastRegistrationComponent {
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });
   @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
+  email: string = "example@gmail.com"
 
   constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
   
@@ -44,11 +46,14 @@ export class FastRegistrationComponent {
 
   register(): void {
     if(this.registerForm.invalid) {
-      this.dialog.open(InvalidInputDataDialogComponent, {
-          data : {
-            title: "Invalid input",
-            message: "Invalid registration data"
-          }
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true, // prevents closing by clicking outside
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: 'Input Error', 
+          message: 'Please make sure that all inputs are valid before registration.',
+        },
       });
 
       this.registerForm.updateValueAndValidity();
