@@ -11,7 +11,8 @@ import {EventsModule} from './events/events.module';
 import { SolutionsModule } from './solutions/solutions.module';
 import { ProductsModule } from './products/products.module';
 import { ServicesModule } from './services/services.module';
-import { provideHttpClient } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
+import {Interceptor} from './infrastructure/auth/interceptor';
 
 
 @NgModule({
@@ -27,12 +28,17 @@ import { provideHttpClient } from '@angular/common/http';
     EventsModule,
     SolutionsModule,
     ProductsModule,
-    ServicesModule, 
+    ServicesModule,
   ],
   providers: [
     provideAnimationsAsync(),
     { provide: LOCALE_ID, useValue: 'en-GB' },
-    provideHttpClient(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true,
+    },
+    provideHttpClient(withFetch(), withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]
 })
