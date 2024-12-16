@@ -1,106 +1,118 @@
 <form id = "upgrade_organizer" class="form" [formGroup]="registerForm">
-   <p class="register-label">UPGRADE TO ORGANIZER</p>
- 
-   <div class="fields">
-     <div class="profile-picture-picker profile-picture-container" (click)="pickProfilePicture()">
-       <img [src]="registerForm.controls['profilePicture'].value" class="profile-picture" alt="Profile picture" />
-       <span class="change-picture-note">Change Picture</span>
-       <input type="file" #profilePictureInput id="profilePictureInputId" (change)="onFileSelected($event)" accept="image/*">
-     </div>
- 
-     <mat-form-field class="field" style = "margin-top: 23px">
-       <mat-label>Email</mat-label>
-       <input type="email" matInput placeholder="Ex. something@gmail.com" formControlName="email" />
-       @if (registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')) {
-         <mat-error>Please enter a valid email address</mat-error>
-       }
-       @if (registerForm.controls['email'].hasError('required')) {
-         <mat-error>Email is <strong>required</strong></mat-error>
-       }
-       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('email')">
-         <mat-icon>close</mat-icon>
-       </button>
-     </mat-form-field>
- 
-     <mat-form-field class="field">
-       <mat-label>Password</mat-label>
-       <input matInput type="password" formControlName="password" />
-       @if (registerForm.controls['password'].hasError('required')) {
-         <mat-error>Password is <strong>required</strong></mat-error>
-       }
-       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('password')">
-         <mat-icon>close</mat-icon>
-       </button>
-     </mat-form-field>
- 
-     <mat-form-field class="field">
-       <mat-label>Confirm password</mat-label>
-       <input matInput type="password" formControlName="confirmedPassword" />
-       @if (registerForm.controls['confirmedPassword'].hasError('required') && !registerForm.controls['confirmedPassword'].hasError('match')) {
-         <mat-error>Password confirmation is <strong>required</strong></mat-error>
-       }
-       @if (registerForm.controls['confirmedPassword'].hasError('match')) {
-         <mat-error>Passwords don't match</mat-error>
-       }
-       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('confirmedPassword')">
-         <mat-icon>close</mat-icon>
-       </button>
-     </mat-form-field>
- 
-     <div id = "upgrade_organizer_double_fields" class="name-fields">
-       <mat-form-field class="name-field">
-         <mat-label>First Name</mat-label>
-         <input type="text" matInput placeholder="Your Name" formControlName="firstName" />
-         @if (registerForm.controls['firstName'].hasError('required')) {
-           <mat-error>First name is <strong>required</strong></mat-error>
-         }
-         <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('firstName')">
-           <mat-icon>close</mat-icon>
-         </button>
-       </mat-form-field>
- 
-       <mat-form-field class="name-field">
-         <mat-label>Last Name</mat-label>
-         <input type="text" matInput placeholder="Your Last Name" formControlName="lastName" />
-         @if (registerForm.controls['lastName'].hasError('required')) {
-           <mat-error>Last name is <strong>required</strong></mat-error>
-         }
-         <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('lastName')">
-           <mat-icon>close</mat-icon>
-         </button>
-       </mat-form-field>
-     </div>
- 
-     <mat-form-field class="field">
-       <mat-label>Address</mat-label>
-       <input type="text" matInput placeholder="Some Street 32" formControlName="address" />
-       @if (registerForm.controls['address'].hasError('required')) {
-         <mat-error>Address is <strong>required</strong></mat-error>
-       }
-       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('address')">
-         <mat-icon>close</mat-icon>
-       </button>
-     </mat-form-field>
- 
-     <mat-form-field class="field">
-       <mat-label>Phone Number</mat-label>
-       <input type="text" matInput placeholder="Ex. +381 65 57 30 724" formControlName="phoneNumber" />
-       @if (registerForm.controls['phoneNumber'].hasError('required') && !registerForm.controls['phoneNumber'].hasError("pattern")) {
-         <mat-error>Phone number is <strong>required</strong></mat-error>
-       }
-       @if (registerForm.controls['phoneNumber'].hasError('pattern')) {
-         <mat-error>Invalid phone number</mat-error>
-       }
-       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('phoneNumber')">
-         <mat-icon>close</mat-icon>
-       </button>
-     </mat-form-field>
-   </div>
- 
-   <div id = "button_confirm" style = "display: flex; justify-content: center; margin-top: 25px;">
-      <div class = "confirm_registration_container" (click)="register()" type="submit">
-         <p style = "font-size: 21px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">REGISTER</p>
-      </div>
-   </div> 
- </form>
+  <p class="register-label">UPGRADE PROFILE</p>
+
+  <div class = "selected_role_container">
+    <div class = "role_container">
+      <p style = "font-weight: 500; font-family: Albert Sans; font-size: 15.5px; color: rgb(171, 171, 171); margin-bottom: 0px; margin-top: 10px; margin-left: 15px; margin-right: 15px;">Selected role:</p>
+      <p style = "font-weight: 600; font-family: Albert Sans; font-size: 20px; color: #929AB7; margin-bottom: 10px; margin-left: 15px; margin-right: 15px;">Event Organiser</p>
+    </div>
+  </div>
+
+  <div class="fields">
+    <div class="profile-picture-picker profile-picture-container" (click)="pickProfilePicture()">
+      <img [src]="registerForm.controls['profilePicture'].value" class="profile-picture" alt="Profile picture" />
+      <div class="change-picture-note">Select Profile Picture</div>
+      <input type="file" #profilePictureInput id="profilePictureInputId" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+   
+    <div class="line-container">
+      <div class="line"></div>
+      <div class="line-text">Personal Info</div>
+    </div>
+
+    <mat-form-field class="field" style = "margin-top: 23px">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Ex. something@gmail.com" formControlName="email" />
+      @if (registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+      @if (registerForm.controls['email'].hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('email')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      @if (registerForm.controls['password'].hasError('required')) {
+        <mat-error>Password is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('password')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Confirm password</mat-label>
+      <input matInput type="password" formControlName="confirmedPassword" />
+      @if (registerForm.controls['confirmedPassword'].hasError('required') && !registerForm.controls['confirmedPassword'].hasError('match')) {
+        <mat-error>Password confirmation is <strong>required</strong></mat-error>
+      }
+      @if (registerForm.controls['confirmedPassword'].hasError('match')) {
+        <mat-error>Passwords don't match</mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('confirmedPassword')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div id = "upgrade_organizer_double_fields" class="name-fields">
+      <mat-form-field class="name-field">
+        <mat-label>First Name</mat-label>
+        <input type="text" matInput placeholder="Your Name" formControlName="firstName" />
+        @if (registerForm.controls['firstName'].hasError('required')) {
+          <mat-error>First name is <strong>required</strong></mat-error>
+        }
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('firstName')">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="name-field">
+        <mat-label>Last Name</mat-label>
+        <input type="text" matInput placeholder="Your Last Name" formControlName="lastName" />
+        @if (registerForm.controls['lastName'].hasError('required')) {
+          <mat-error>Last name is <strong>required</strong></mat-error>
+        }
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('lastName')">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="field">
+      <mat-label>Address</mat-label>
+      <input type="text" matInput placeholder="Some Street 32" formControlName="address" />
+      @if (registerForm.controls['address'].hasError('required')) {
+        <mat-error>Address is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('address')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Phone Number</mat-label>
+      <input type="text" matInput placeholder="Ex. +381 65 57 30 724" formControlName="phoneNumber" />
+      @if (registerForm.controls['phoneNumber'].hasError('required') && !registerForm.controls['phoneNumber'].hasError("pattern")) {
+        <mat-error>Phone number is <strong>required</strong></mat-error>
+      }
+      @if (registerForm.controls['phoneNumber'].hasError('pattern')) {
+        <mat-error>Invalid phone number</mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('phoneNumber')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div id = "button_confirm" style = "display: flex; justify-content: center; margin-top: 25px;">
+    <div class = "confirm_registration_container" (click)="register()" type="submit">
+        <p style = "font-size: 21px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">REGISTER</p>
+    </div>
+  </div> 
+</form>
  

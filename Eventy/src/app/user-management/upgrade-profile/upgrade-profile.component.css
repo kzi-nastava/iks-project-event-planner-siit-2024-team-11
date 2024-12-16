@@ -25,26 +25,26 @@
       
       .welcome-text {
         margin: 0;
-        font-size: 1.7vw;
+        font-size: 1.6vw;
         font-weight: 400;
         letter-spacing: 1.5px;
         font-family: Albert Sans;
       }
     
       .logo {
-        margin-top: 2.4vh;
-        width: 65%;
+        margin-top: 1.7vh;
+        width: 62%;
       }
 
     .select_role_text_container {
       display: flex;
-      height: 15.5%;
+      height: 16.5%;
       align-items: flex-end;
       justify-content: center;
     }
     
       .select-text {
-        font-size: 1.5vw;
+        font-size: 1.4vw;
         font-family: Albert Sans;
         font-weight: 500;
         color: white;
@@ -88,11 +88,11 @@
 
     .already_have_acc_container {
       display: flex;
-      height: 15%;
+      height: 17%;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      padding-top: 2.5vw;
+      padding-top: 2.2vw;
     }
 
       .register-text {

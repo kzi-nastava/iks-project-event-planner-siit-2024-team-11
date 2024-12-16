@@ -14,7 +14,7 @@ import { User } from '../model/users.model';
 export class UpgradeOrganizerComponent {
   user: User;
   registerForm : FormGroup = new FormGroup({
-    profilePicture: new FormControl('ProfilePicture.png'),
+    profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
     email : new FormControl('', [Validators.required, Validators.email]),
     password : new FormControl('', [Validators.required]),
     confirmedPassword : new FormControl('', [Validators.required, this.passwordMatching()]),

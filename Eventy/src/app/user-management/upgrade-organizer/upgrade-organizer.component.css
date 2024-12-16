@@ -17,6 +17,20 @@
       margin-bottom: 40px;
    }
 
+   .selected_role_container {
+      width: 54vw; 
+      margin-bottom: 35px;
+   }
+
+      .role_container {
+         display: flex;
+         flex-direction: column;
+         background-color: white;
+         border-radius: 13px;
+         width: 100%;
+         
+      }
+
    .fields {
       display: flex;
       flex-direction: column;
@@ -25,7 +39,7 @@
     } 
 
       .profile-picture-picker {
-         margin-bottom: 4vh;
+         margin-bottom: 5vh;
          cursor: pointer;
       }
          
@@ -36,32 +50,54 @@
    
          .profile-picture-picker img {
             border-radius:50%;
-            width: 15vw;
-            height: 15vw;
-            border: 3px white solid;
+            width: 16vw;
+            height: 16vw;
             object-fit: cover;
          }
       
          .change-picture-note {
             position: absolute;
-            bottom: -5%;
             left: 50%;
             transform: translateX(-50%); 
-            background-color: rgba(37, 37, 37, 0.699);
             color: white;
-            padding: 5px 8px;
-            border-radius: 12px;
-            font-size: 13.5px; 
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            width: 10vw;
-            font-weight: 500;
-            letter-spacing: 1px;
+            margin-top: 3px;
+            font-size: 18px; 
+            color: #8189a4;
+            font-weight: 600;
+            width: 100%;
             text-align: center;
             font-family: Albert Sans;
          }
     
          #profilePictureInputId {
             display: none;
+         }
+
+      .line-container {
+         position: relative;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         width: 54vw;
+         margin-top: 32px;
+         margin-bottom: 7px
+      }
+         
+         .line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #cbcbcb; 
+         }
+         
+         .line-text {
+            position: relative;
+            background-color: #F1F1F1; 
+            padding: 0 8px; 
+            font-size: 18px; 
+            color: #bcbcbc; 
+            font-family: Albert Sans;
+            margin: 0;
          }
 
       .field {
