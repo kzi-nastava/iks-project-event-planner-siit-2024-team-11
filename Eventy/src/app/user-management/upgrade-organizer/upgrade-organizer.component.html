@@ -20,8 +20,7 @@
       <div class="line-text">Personal Info</div>
     </div>
 
-    <mat-form-field class="field" style = "margin-top: 23px">
-      <mat-label>Email</mat-label>
+    <mat-form-field class="field" style = "margin-top: 23px"> 
       <input type="email" matInput placeholder="Ex. something@gmail.com" formControlName="email" />
       @if (registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')) {
         <mat-error>Please enter a valid email address</mat-error>
@@ -30,31 +29,6 @@
         <mat-error>Email is <strong>required</strong></mat-error>
       }
       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('email')">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-
-    <mat-form-field class="field">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" />
-      @if (registerForm.controls['password'].hasError('required')) {
-        <mat-error>Password is <strong>required</strong></mat-error>
-      }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('password')">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-
-    <mat-form-field class="field">
-      <mat-label>Confirm password</mat-label>
-      <input matInput type="password" formControlName="confirmedPassword" />
-      @if (registerForm.controls['confirmedPassword'].hasError('required') && !registerForm.controls['confirmedPassword'].hasError('match')) {
-        <mat-error>Password confirmation is <strong>required</strong></mat-error>
-      }
-      @if (registerForm.controls['confirmedPassword'].hasError('match')) {
-        <mat-error>Passwords don't match</mat-error>
-      }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('confirmedPassword')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -84,7 +58,6 @@
     </div>
 
     <mat-form-field class="field">
-      <mat-label>Address</mat-label>
       <input type="text" matInput placeholder="Some Street 32" formControlName="address" />
       @if (registerForm.controls['address'].hasError('required')) {
         <mat-error>Address is <strong>required</strong></mat-error>
@@ -95,7 +68,6 @@
     </mat-form-field>
 
     <mat-form-field class="field">
-      <mat-label>Phone Number</mat-label>
       <input type="text" matInput placeholder="Ex. +381 65 57 30 724" formControlName="phoneNumber" />
       @if (registerForm.controls['phoneNumber'].hasError('required') && !registerForm.controls['phoneNumber'].hasError("pattern")) {
         <mat-error>Phone number is <strong>required</strong></mat-error>
@@ -111,7 +83,7 @@
 
   <div id = "button_confirm" style = "display: flex; justify-content: center; margin-top: 25px;">
     <div class = "confirm_registration_container" (click)="register()" type="submit">
-        <p style = "font-size: 21px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">REGISTER</p>
+        <p style = "font-size: 21px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">UPGRADE PROFILE</p>
     </div>
   </div> 
 </form>
