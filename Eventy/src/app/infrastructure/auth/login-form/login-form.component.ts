@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import {UserService} from '../../../user-management/user.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {AuthResponse} from '../model/auth-response.model';
+import {Login} from '../model/login.model';
 
 @Component({
   selector: 'app-login-form',
@@ -16,18 +18,30 @@ export class LoginFormComponent {
     password: new FormControl(),
   });
 
-  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
 
   }
 
-  login() : void {
-    if(this.userService.login(this.loginForm.value.email, this.loginForm.value.password)) {
-      this.router.navigate(['']);
-    } else {
-      this.dialog.open(InvalidInputDataDialogComponent, {
-        data : {
-          title: "Wrong credentials!",
-          message: "Email and password don't match"
+  login(): void {
+
+    if(this.loginForm.valid) {
+      const login: Login = {
+        email: this.loginForm.value.email || "",
+        password: this.loginForm.value.password || ""
+      }
+      this.authService.login(login).subscribe({
+        next: (response: AuthResponse) => {
+          localStorage.setItem('user', response.token);
+          this.authService.setUser();
+          this.router.navigate(['home']);
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Wrong credentials!",
+              message: "Email and password don't match"
+            }
+          });
         }
       });
     }
