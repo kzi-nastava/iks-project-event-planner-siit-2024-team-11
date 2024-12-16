@@ -1,19 +1,26 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {UserService} from '../user.service';
+import {UserService} from '../../../user-management/user.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {Router} from '@angular/router';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
+
+interface ButtonClasses {
+  "role-button" : boolean,
+  "not-selected-button" : boolean
+}
 
 @Component({
-  selector: 'app-register-organizer',
-  templateUrl: './register-organizer.component.html',
-  styleUrl: './register-organizer.component.css'
+  selector: 'app-fast-registration',
+  templateUrl: './fast-registration.component.html',
+  styleUrl: './fast-registration.component.css'
 })
-export class RegisterOrganizerComponent {
+export class FastRegistrationComponent {
+  email: string = "tactac123@gmail.com"
   registerForm : FormGroup = new FormGroup({
     profilePicture: new FormControl('ProfilePicture.png'),
-    email : new FormControl('', [Validators.required, Validators.email]),
+    email : new FormControl({value: this.email, disabled: true}, [Validators.required, Validators.email]),
     password : new FormControl('', [Validators.required]),
     confirmedPassword : new FormControl('', [Validators.required, this.passwordMatching()]),
     firstName : new FormControl('', [Validators.required]),
@@ -21,6 +28,8 @@ export class RegisterOrganizerComponent {
     address : new FormControl('', [Validators.required]),
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });
+  @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
+
 
   constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
 
@@ -38,11 +47,14 @@ export class RegisterOrganizerComponent {
 
   register(): void {
     if(this.registerForm.invalid) {
-      this.dialog.open(InvalidInputDataDialogComponent, {
-          data : {
-            title: "Invalid input",
-            message: "Invalid registration data"
-          }
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true, // prevents closing by clicking outside
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: 'Input Error',
+          message: 'Please make sure that all inputs are valid before registration.',
+        },
       });
 
       this.registerForm.updateValueAndValidity();
@@ -63,8 +75,6 @@ export class RegisterOrganizerComponent {
       reader.readAsDataURL(file);
     }
   }
-
-  @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
 
   pickProfilePicture() : void {
     this.fileInput.nativeElement.click();

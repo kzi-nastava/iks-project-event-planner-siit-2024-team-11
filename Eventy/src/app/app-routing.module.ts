@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
-import {LoginComponent} from './user-management/login/login.component';
-import {RegisterComponent} from './user-management/register/register.component';
+import {LoginComponent} from './infrastructure/auth/login/login.component';
+import {RegisterComponent} from './infrastructure/auth/register/register.component';
 import {EventOrganizationComponent} from './events/event-organization/event-organization.component';
 import { AddServiceComponent } from './services/add-service/add-service.component';
 import {AllEventTypesComponent} from './events/all-event-types/all-event-types.component';
@@ -17,7 +17,7 @@ import {
 import {EditUserComponent} from './user-management/edit-user/edit-user.component';
 import {MyProfilePageComponent} from './user-management/my-profile-page/my-profile-page.component';
 import { CreateReservationComponent } from './services/create-reservation/create-reservation.component';
-import { FastRegistrationComponent } from './user-management/fast-registration/fast-registration.component';
+import { FastRegistrationComponent } from './infrastructure/auth/fast-registration/fast-registration.component';
 
 
 const routes: Routes = [

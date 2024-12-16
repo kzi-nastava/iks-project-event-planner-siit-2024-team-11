@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {UserService} from '../user.service';
+import {UserService} from '../../../user-management/user.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 

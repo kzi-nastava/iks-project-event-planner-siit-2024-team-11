@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginBannerComponent } from './login-banner/login-banner.component';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginComponent } from '../infrastructure/auth/login/login.component';
+import { RegisterComponent } from '../infrastructure/auth/register/register.component';
+import { LoginBannerComponent } from '../infrastructure/auth/login-banner/login-banner.component';
+import { LoginFormComponent } from '../infrastructure/auth/login-form/login-form.component';
 import {MaterialModule} from '../infrastructure/material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
-import { RegisterBannerComponent } from './register-banner/register-banner.component';
-import { RegisterOrganizerComponent } from './register-organizer/register-organizer.component';
-import { RegisterProviderComponent } from './register-provider/register-provider.component';
+import { RegisterBannerComponent } from '../infrastructure/auth/register-banner/register-banner.component';
+import { RegisterOrganizerComponent } from '../infrastructure/auth/register-organizer/register-organizer.component';
+import { RegisterProviderComponent } from '../infrastructure/auth/register-provider/register-provider.component';
 import {SharedModule} from '../shared/shared.module';
 import { OtherUserProfilePageComponent } from './other-user-profile-page/other-user-profile-page.component';
 import {EventsModule} from "../events/events.module";
@@ -21,7 +21,7 @@ import { EditProviderFormComponent } from './edit-provider-form/edit-provider-fo
 import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
-import { FastRegistrationComponent } from './fast-registration/fast-registration.component';
+import { FastRegistrationComponent } from '../infrastructure/auth/fast-registration/fast-registration.component';
 
 @NgModule({
   declarations: [
