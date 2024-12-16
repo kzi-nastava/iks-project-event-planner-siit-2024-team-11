@@ -19,6 +19,7 @@ import {MyProfilePageComponent} from './user-management/my-profile-page/my-profi
 import { CreateReservationComponent } from './services/create-reservation/create-reservation.component';
 import { FastRegistrationComponent } from './infrastructure/auth/fast-registration/fast-registration.component';
 import {AuthGuard} from './infrastructure/auth/auth.guard';
+import {ConfirmRegistrationComponent} from './infrastructure/auth/confirm-registration/confirm-registration.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,8 @@ const routes: Routes = [
     data: {role: ['Organizer']}},
   {path: 'fast-registration', component: FastRegistrationComponent, canActivate: [AuthGuard],
     data: {role: ['AuthenticatedUser']}},
+  {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard],
+    data: {role: []}},
   {path: '**', redirectTo: ''},
 ];
 

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {environment} from '../../../env/constants';
 import {AuthResponse} from './model/auth-response.model';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Login} from './model/login.model';
+import {RegisterData} from './model/register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +25,20 @@ export class AuthService {
     this.user$.next(this.getRole());
   }
 
-  login(auth: any): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(environment.apiHost + this.urlPrefix + '/logIn', auth, {
+  login(auth: Login): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(environment.apiHost + this.urlPrefix + '/login', auth, {
+      headers: this.headers,
+    });
+  }
+
+  register(data: RegisterData): Observable<HttpResponse<string>> {
+    return this.http.post<HttpResponse<string>>(environment.apiHost + this.urlPrefix + '/register', data, {
+      headers: this.headers,
+    });
+  }
+
+  confirmRegistration(requestId: number): Observable<AuthResponse> {
+    return this.http.put<AuthResponse>(environment.apiHost + this.urlPrefix + '/registration-confirmation/' + requestId, {}, {
       headers: this.headers,
     });
   }
