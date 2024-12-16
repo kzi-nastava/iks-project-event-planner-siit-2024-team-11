@@ -9,6 +9,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class AuthService {
+  private urlPrefix: string = "/api/authentication/";
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ export class AuthService {
   }
 
   login(auth: any): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(environment.apiHost + '/logIn', auth, {
+    return this.http.post<AuthResponse>(environment.apiHost + this.urlPrefix + '/logIn', auth, {
       headers: this.headers,
     });
   }
