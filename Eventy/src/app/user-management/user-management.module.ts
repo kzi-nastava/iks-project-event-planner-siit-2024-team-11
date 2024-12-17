@@ -24,6 +24,7 @@ import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import { UpgradeProfileComponent } from './upgrade-profile/upgrade-profile.component';
 import { UpgradeOrganizerComponent } from './upgrade-organizer/upgrade-organizer.component';
 import { UpgradeProviderComponent } from './upgrade-provider/upgrade-provider.component';
+import { FastRegistrationComponent } from './fast-registration/fast-registration.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { UpgradeProviderComponent } from './upgrade-provider/upgrade-provider.co
     UpgradeProfileComponent,
     UpgradeOrganizerComponent,
     UpgradeProviderComponent
+    FastRegistrationComponent,
   ],
   imports: [
     CommonModule,

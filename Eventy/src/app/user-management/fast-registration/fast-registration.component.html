@@ -1,0 +1,138 @@
+<div id = "fast_registration" class="register">
+
+   <div class="left-side">
+      <div class = "welcome_to_container">
+         <p class = "welcome-text">Welcome to</p>
+         <img class = "logo" src = "logo_bg_small.png"/>
+      </div>
+   
+      <div class = "already_have_acc_container">
+         <p class="register-text">Already have an account?</p>
+         <div style = "display: flex; justify-content: center;">
+            <div class = "confirm_filter_container" [routerLink]="['/login']">
+               <p style = "font-size: 1.4vw; letter-spacing: 1.5px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">LOGIN</p>
+            </div>
+         </div>  
+      </div>
+   </div>
+
+   <div class = "right-side">
+      <form class="form" [formGroup]="registerForm">
+         <p class="register-label">FAST REGISTRATION</p>
+      
+         <div class = "welcome_container">
+            <p style = "font-family: Albert Sans; color: rgb(180, 180, 180); font-weight: 600; margin: 0; margin-bottom: 10px; font-size: 20px; margin-left: 32px; margin-right: 32px;">Welcome:</p>
+            <div style = "background: linear-gradient(to left, #777f9d, #95a0be); display: flex; flex-direction: row; padding: 10px; padding-right: 18px; padding-left: 18px; margin-left: 25px; margin-right: 25px; border-radius: 12px;">
+               <p style = "font-family: Albert Sans; font-weight: 700; color: white; font-size: 38px; margin: 0; margin-right: 10px;">‣</p>
+               <p style = "font-family: Albert Sans; font-weight: 500; color: white; font-size: 19px; margin: 0">{{email}}</p>
+            </div>
+         </div>
+
+         <div class = "description_container">
+            <p id = "description" class = "description">You've been invited to an event, and a temporary account has been created for you using "{{email}}"!</p>
+         </div>
+         
+         <div class = "description_container">
+            <p class = "description" style = "margin-bottom: 5px; font-weight: 600; color: rgb(254, 183, 17)">Note:</p>
+            <p id = "description" class = "description">In order to accept the event and access the details, please fill the required fields down below. After completing the registration, your account will be fully created and you will be able to access the event!</p>
+         </div>
+         
+         <div class="line_container">
+            <div class="line"></div>
+            <div class="line-text">Personal Info</div>
+          </div>
+      
+         <div class="fields">   
+            <mat-form-field class="field" style = "margin-top: 20px">
+               <input type="email" matInput formControlName="email"/>
+               @if (registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')) {
+                  <mat-error>Please enter a valid email address</mat-error>
+               }
+               @if (registerForm.controls['email'].hasError('required')) {
+                  <mat-error>Email is <strong>required</strong></mat-error>
+               }
+            </mat-form-field>
+         
+            <mat-form-field class="field">
+               <mat-label>Password</mat-label>
+               <input matInput type="password" formControlName="password" />
+               @if (registerForm.controls['password'].hasError('required')) {
+                  <mat-error>Password is <strong>required</strong></mat-error>
+               }
+               <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('password')">
+                  <mat-icon>close</mat-icon>
+               </button>
+            </mat-form-field>
+         
+            <mat-form-field class="field">
+               <mat-label>Confirm password</mat-label>
+               <input matInput type="password" formControlName="confirmedPassword" />
+               @if (registerForm.controls['confirmedPassword'].hasError('required') && !registerForm.controls['confirmedPassword'].hasError('match')) {
+                  <mat-error>Password confirmation is <strong>required</strong></mat-error>
+               }
+               @if (registerForm.controls['confirmedPassword'].hasError('match')) {
+                  <mat-error>Passwords don't match</mat-error>
+               }
+               <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('confirmedPassword')">
+                  <mat-icon>close</mat-icon>
+               </button>
+            </mat-form-field>
+         
+            <div id = "fast_registration_double_fields" class="name-fields">
+               <mat-form-field class="name-field">
+                  <mat-label>First Name</mat-label>
+                  <input type="text" matInput  formControlName="firstName" />
+                  @if (registerForm.controls['firstName'].hasError('required')) {
+                  <mat-error>First name is <strong>required</strong></mat-error>
+                  }
+                  <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('firstName')">
+                  <mat-icon>close</mat-icon>
+                  </button>
+               </mat-form-field>
+         
+               <mat-form-field class="name-field">
+                  <mat-label>Last Name</mat-label>
+                  <input type="text" matInput formControlName="lastName" />
+                  @if (registerForm.controls['lastName'].hasError('required')) {
+                  <mat-error>Last name is <strong>required</strong></mat-error>
+                  }
+                  <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('lastName')">
+                  <mat-icon>close</mat-icon>
+                  </button>
+               </mat-form-field>
+            </div>
+         
+            <mat-form-field class="field">
+               <mat-label>Address</mat-label>
+               <input type="text" matInput formControlName="address" />
+               @if (registerForm.controls['address'].hasError('required')) {
+                  <mat-error>Address is <strong>required</strong></mat-error>
+               }
+               <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('address')">
+                  <mat-icon>close</mat-icon>
+               </button>
+            </mat-form-field>
+         
+            <mat-form-field class="field">
+               <mat-label>Phone Number</mat-label>
+               <input type="text" matInput placeholder="+381 65 5730 724" formControlName="phoneNumber" />
+               @if (registerForm.controls['phoneNumber'].hasError('required') && !registerForm.controls['phoneNumber'].hasError("pattern")) {
+                  <mat-error>Phone number is <strong>required</strong></mat-error>
+               }
+               @if (registerForm.controls['phoneNumber'].hasError('pattern')) {
+                  <mat-error>Invalid phone number</mat-error>
+               }
+               <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('phoneNumber')">
+                  <mat-icon>close</mat-icon>
+               </button>
+            </mat-form-field>
+         </div>
+      
+         <div id = "button_confirm" style = "display: flex; justify-content: center; margin-top: 25px;">
+            <div class = "confirm_registration_container" (click)="register()" type="submit">
+               <p style = "font-size: 21px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">REGISTER</p>
+            </div>
+         </div>  
+      </form>
+   </div>
+</div>

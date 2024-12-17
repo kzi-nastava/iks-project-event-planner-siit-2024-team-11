@@ -17,7 +17,7 @@ export class AppComponent {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showFooter = !(event.url === '/login' || event.url === '/register' || event.url === '/upgrade-profile');
+        this.showFooter = !(event.url === '/login' || event.url === '/register' || event.url === '/fast-registration' || event.url === '/upgrade-profile');
       }
     });
   }
