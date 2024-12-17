@@ -28,9 +28,6 @@
       @if (registerForm.controls['email'].hasError('required')) {
         <mat-error>Email is <strong>required</strong></mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('email')">
-        <mat-icon>close</mat-icon>
-      </button>
     </mat-form-field>
 
     <div id = "upgrade_organizer_double_fields" class="name-fields">
@@ -62,9 +59,6 @@
       @if (registerForm.controls['address'].hasError('required')) {
         <mat-error>Address is <strong>required</strong></mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('address')">
-        <mat-icon>close</mat-icon>
-      </button>
     </mat-form-field>
 
     <mat-form-field class="field">
@@ -75,9 +69,6 @@
       @if (registerForm.controls['phoneNumber'].hasError('pattern')) {
         <mat-error>Invalid phone number</mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('phoneNumber')">
-        <mat-icon>close</mat-icon>
-      </button>
     </mat-form-field>
   </div>
 

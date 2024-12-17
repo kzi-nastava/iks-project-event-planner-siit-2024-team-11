@@ -20,7 +20,6 @@ export class UpgradeOrganizerComponent {
 
   }
 
-
   ngOnInit(): void {
     // Fetch the user data (assuming it's asynchronous)
     //this.userService.get(5).subscribe((user: User) => {
@@ -35,16 +34,6 @@ export class UpgradeOrganizerComponent {
         phoneNumber : new FormControl({value: this.user.phoneNumber, disabled: true}, [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
       });
     //});
-  }
-
-  private passwordMatching(): ValidatorFn {
-    return (): ValidationErrors | null => {
-      if(this.registerForm) {
-        return this.registerForm.controls['password'].value === this.registerForm.controls['confirmedPassword'].value ? null : { match: true };
-      }
-
-      return null;
-    };
   }
 
   register(): void {
