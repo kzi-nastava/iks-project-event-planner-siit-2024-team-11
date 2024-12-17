@@ -42,7 +42,7 @@ import { FastRegistrationComponent } from './fast-registration/fast-registration
     MyProfilePageComponent,
     UpgradeProfileComponent,
     UpgradeOrganizerComponent,
-    UpgradeProviderComponent
+    UpgradeProviderComponent,
     FastRegistrationComponent,
   ],
   imports: [

@@ -23,8 +23,6 @@ export class FastRegistrationComponent {
     email : new FormControl({value: this.email, disabled: true}, [Validators.required, Validators.email]),
     password : new FormControl('', [Validators.required]),
     confirmedPassword : new FormControl('', [Validators.required, this.passwordMatching()]),
-    firstName : new FormControl('', [Validators.required]),
-    lastName : new FormControl('', [Validators.required]),
     address : new FormControl('', [Validators.required]),
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });

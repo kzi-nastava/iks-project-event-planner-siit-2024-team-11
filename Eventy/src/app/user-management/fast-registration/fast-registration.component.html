@@ -77,31 +77,7 @@
                   <mat-icon>close</mat-icon>
                </button>
             </mat-form-field>
-         
-            <div id = "fast_registration_double_fields" class="name-fields">
-               <mat-form-field class="name-field">
-                  <mat-label>First Name</mat-label>
-                  <input type="text" matInput  formControlName="firstName" />
-                  @if (registerForm.controls['firstName'].hasError('required')) {
-                  <mat-error>First name is <strong>required</strong></mat-error>
-                  }
-                  <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('firstName')">
-                  <mat-icon>close</mat-icon>
-                  </button>
-               </mat-form-field>
-         
-               <mat-form-field class="name-field">
-                  <mat-label>Last Name</mat-label>
-                  <input type="text" matInput formControlName="lastName" />
-                  @if (registerForm.controls['lastName'].hasError('required')) {
-                  <mat-error>Last name is <strong>required</strong></mat-error>
-                  }
-                  <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('lastName')">
-                  <mat-icon>close</mat-icon>
-                  </button>
-               </mat-form-field>
-            </div>
-         
+             
             <mat-form-field class="field">
                <mat-label>Address</mat-label>
                <input type="text" matInput formControlName="address" />
