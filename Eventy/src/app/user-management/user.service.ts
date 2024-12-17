@@ -48,6 +48,10 @@ export class UserService {
     return null;
   }
 
+  get(id: number): User {
+    return this.users[0];
+  }
+
   register(newUser: (Organizer | Provider)) : void {
     this.users.push(newUser);
   }
