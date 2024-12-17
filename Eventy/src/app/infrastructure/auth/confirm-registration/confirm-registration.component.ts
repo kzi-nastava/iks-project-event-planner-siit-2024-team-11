@@ -20,7 +20,7 @@ export class ConfirmRegistrationComponent implements OnInit {
         next: (response: AuthResponse) => {
           localStorage.setItem('user', response.token);
           this.authService.setUser();
-          this.router.navigate(['home']);
+          this.router.navigate(['']);
         }
       });
     });

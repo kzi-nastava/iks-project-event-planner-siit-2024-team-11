@@ -31,8 +31,8 @@ export class AuthService {
     });
   }
 
-  register(data: RegisterData): Observable<HttpResponse<string>> {
-    return this.http.post<HttpResponse<string>>(environment.apiHost + this.urlPrefix + '/register', data, {
+  register(registerData: RegisterData): Observable<HttpResponse<string>> {
+    return this.http.post<HttpResponse<string>>(environment.apiHost + this.urlPrefix + '/registration', registerData, {
       headers: this.headers,
     });
   }
