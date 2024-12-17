@@ -52,8 +52,24 @@ export class RegisterProviderComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      this.authService.register(this.registerForm.value as RegisterData);
-      this.router.navigate(['']);
+      this.authService.register(this.registerForm.value as RegisterData).subscribe({
+        next: (response: string) => {this.dialog.open(InvalidInputDataDialogComponent, {
+          data : {
+            title: "Confirmation needed!",
+            message: "Confirmation email has been sent to you"
+          }
+        });
+          this.router.navigate(['']);
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input!",
+              message: "Invalid registration data"
+            }
+          });
+        }
+      });
     }
   }
 

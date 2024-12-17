@@ -6,6 +6,8 @@ import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-dat
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 import {RegisterData} from '../model/register.model';
+import {AuthResponse} from '../model/auth-response.model';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-register-organizer',
@@ -52,7 +54,24 @@ export class RegisterOrganizerComponent {
     } else {
       let user: RegisterData = this.registerForm.value as RegisterData;
       user.profilePictures = [this.registerForm.controls['profilePicture'].value];
-      this.authService.register(user);
+      this.authService.register(user).subscribe({
+        next: (response: string) => {this.dialog.open(InvalidInputDataDialogComponent, {
+          data : {
+            title: "Confirmation needed!",
+            message: "Confirmation email has been sent to you"
+          }
+        });
+          this.router.navigate(['']);
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input!",
+              message: "Invalid registration data"
+            }
+          });
+        }
+      });
       this.router.navigate(['']);
     }
   }
