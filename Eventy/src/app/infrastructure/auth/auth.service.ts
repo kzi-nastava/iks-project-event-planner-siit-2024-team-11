@@ -26,19 +26,19 @@ export class AuthService {
   }
 
   login(auth: Login): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(environment.apiHost + this.urlPrefix + '/login', auth, {
+    return this.http.post<AuthResponse>(environment.apiHost + this.urlPrefix + 'login', auth, {
       headers: this.headers,
     });
   }
 
   register(registerData: RegisterData): Observable<string> {
-    return this.http.post<string>(environment.apiHost + this.urlPrefix + '/registration', registerData, {
+    return this.http.post<string>(environment.apiHost + this.urlPrefix + 'registration', registerData, {
       headers: this.headers,
     });
   }
 
   confirmRegistration(requestId: number): Observable<AuthResponse> {
-    return this.http.put<AuthResponse>(environment.apiHost + this.urlPrefix + '/registration-confirmation/' + requestId, {}, {
+    return this.http.put<AuthResponse>(environment.apiHost + this.urlPrefix + 'registration-confirmation/' + requestId, {}, {
       headers: this.headers,
     });
   }

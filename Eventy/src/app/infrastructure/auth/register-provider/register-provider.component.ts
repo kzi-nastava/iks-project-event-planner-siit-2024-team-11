@@ -53,13 +53,13 @@ export class RegisterProviderComponent {
       this.registerForm.markAllAsTouched();
     } else {
       this.authService.register(this.registerForm.value as RegisterData).subscribe({
-        next: (response: string) => {this.dialog.open(InvalidInputDataDialogComponent, {
+        next: (response: string) => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
           data : {
             title: "Confirmation needed!",
-            message: "Confirmation email has been sent to you"
+            message: response
           }
-        });
-          this.router.navigate(['']);
+        }).close(this.router.navigate(['']));
         },
         error: () => {
           this.dialog.open(InvalidInputDataDialogComponent, {
