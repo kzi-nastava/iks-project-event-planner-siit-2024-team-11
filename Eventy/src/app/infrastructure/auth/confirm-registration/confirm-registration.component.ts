@@ -8,17 +8,13 @@ import {AuthResponse} from '../model/auth-response.model';
   templateUrl: './confirm-registration.component.html',
   styleUrl: './confirm-registration.component.css'
 })
-export class ConfirmRegistrationComponent implements OnInit {
+export class ConfirmRegistrationComponent {
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
-
-  }
-
-  ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       let id: number = Number(params.get('requestId'));
       this.authService.confirmRegistration(isNaN(id) ? undefined : id).subscribe({
         next: (response: AuthResponse) => {
-          localStorage.setItem('user', response.token);
+          localStorage.setItem('user', response.accessToken);
           this.authService.setUser();
           this.router.navigate(['']);
         }

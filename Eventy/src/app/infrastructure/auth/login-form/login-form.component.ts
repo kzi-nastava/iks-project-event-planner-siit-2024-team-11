@@ -31,7 +31,7 @@ export class LoginFormComponent {
       }
       this.authService.login(login).subscribe({
         next: (response: AuthResponse) => {
-          localStorage.setItem('user', response.token);
+          localStorage.setItem('user', response.accessToken);
           this.authService.setUser();
           this.router.navigate(['']);
         },

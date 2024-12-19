@@ -59,7 +59,7 @@ export class RegisterProviderComponent {
             title: "Confirmation needed!",
             message: response
           }
-        }).close(this.router.navigate(['']));
+        }).afterClosed().subscribe(() => this.router.navigate(['']));
         },
         error: () => {
           this.dialog.open(InvalidInputDataDialogComponent, {
