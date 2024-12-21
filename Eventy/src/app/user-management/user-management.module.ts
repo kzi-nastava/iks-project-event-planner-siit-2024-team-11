@@ -1,15 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from '../infrastructure/auth/login/login.component';
-import { RegisterComponent } from '../infrastructure/auth/register/register.component';
-import { LoginBannerComponent } from '../infrastructure/auth/login-banner/login-banner.component';
-import { LoginFormComponent } from '../infrastructure/auth/login-form/login-form.component';
 import {MaterialModule} from '../infrastructure/material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
-import { RegisterBannerComponent } from '../infrastructure/auth/register-banner/register-banner.component';
-import { RegisterOrganizerComponent } from '../infrastructure/auth/register-organizer/register-organizer.component';
-import { RegisterProviderComponent } from '../infrastructure/auth/register-provider/register-provider.component';
 import {SharedModule} from '../shared/shared.module';
 import { OtherUserProfilePageComponent } from './other-user-profile-page/other-user-profile-page.component';
 import {EventsModule} from "../events/events.module";
@@ -24,17 +17,10 @@ import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import { UpgradeProfileComponent } from './upgrade-profile/upgrade-profile.component';
 import { UpgradeOrganizerComponent } from './upgrade-organizer/upgrade-organizer.component';
 import { UpgradeProviderComponent } from './upgrade-provider/upgrade-provider.component';
-import { FastRegistrationComponent } from '../infrastructure/auth/fast-registration/fast-registration.component';
+import {AuthModule} from '../infrastructure/auth/auth.module';
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    RegisterComponent,
-    LoginBannerComponent,
-    LoginFormComponent,
-    RegisterBannerComponent,
-    RegisterOrganizerComponent,
-    RegisterProviderComponent,
     OtherUserProfilePageComponent,
     EditUserComponent,
     EditUserFormComponent,
@@ -43,7 +29,6 @@ import { FastRegistrationComponent } from '../infrastructure/auth/fast-registrat
     UpgradeProfileComponent,
     UpgradeOrganizerComponent,
     UpgradeProviderComponent,
-    FastRegistrationComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +40,7 @@ import { FastRegistrationComponent } from '../infrastructure/auth/fast-registrat
     EventsModule,
     ProductsModule,
     ServicesModule,
+    AuthModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
