@@ -1,5 +1,6 @@
-import { EventType } from "./event-type.model";
+import { EventTypeForCards } from "./event-type.model";
 import { Location } from "./location.model";
+import {CategoryWithId} from '../../solutions/model/category-with-id.model';
 
 export interface IActivity {
   name: string;
@@ -9,7 +10,7 @@ export interface IActivity {
 }
 
 export enum PrivacyType {
-  PUBLIC, 
+  PUBLIC,
   PRIVATE
 }
 
@@ -20,16 +21,38 @@ export interface Event {
   privacyType: PrivacyType,
   date: Date,
   location: Location
-  eventType: EventType
+  eventType: EventTypeForCards
 }
 
-export interface IEventType {
+export interface EventType {
+  id: number;
   name: string;
   description: string;
-  recommendedCategories: ICategory[];
+  recommendedSolutionCategories: CategoryWithId[];
 }
 
-export interface ICategory {
+export interface EventTypeWithActivity {
+  id: number;
   name: string;
   description: string;
+  recommendedSolutionCategories: CategoryWithId[];
+  isActive: boolean;
+}
+
+export interface CreateEventType {
+  name: string;
+  description: string;
+  recommendedSolutionCategoriesIds: number[];
+}
+
+export interface UpdateEventType {
+  id: number;
+  name: string;
+  description: string;
+  recommendedSolutionCategoriesIds: number[];
+}
+
+export interface EventTypeCard {
+  id: number;
+  name: string;
 }

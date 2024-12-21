@@ -40,7 +40,7 @@ export class EventCreationBasicInformationComponent {
     readonly ftnCoordinates: [number, number] = [45.2445, 19.8484];
 
     constructor(private eventTypeService: EventTypeService) {
-      this.eventTypes = this.eventTypeService.getAll();
+      this.eventTypes = this.eventTypeService.getEventTypes();
     }
 
     ngOnInit(): void {

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {IEventType} from '../model/events.model';
+import {EventTypeCard, EventTypeWithActivity} from '../model/events.model';
 import {EventTypeService} from '../event-type.service';
 import {PageEvent} from '@angular/material/paginator';
+import {PagedResponse} from '../../shared/model/paged-response.model';
 
 interface ICardClasses {
   "event-type-card": boolean,
@@ -14,19 +15,17 @@ interface ICardClasses {
 })
 export class AllEventTypesComponent implements OnInit {
   searchQuery: string = "";
-  eventTypes: IEventType[] = [];
-  selectedEventType: IEventType;
+  selectedEventType: EventTypeWithActivity;
   pageSize: number = 12;
   currentPage: number = 0;
-  paginatedEventTypes: IEventType[] = [];
+  paginatedEventTypes: EventTypeCard[] = [];
+  totalCount: number = 0;
 
   constructor(private eventTypeService: EventTypeService) {
 
   }
 
   ngOnInit(): void {
-    this.eventTypes = this.eventTypeService.getAll();
-
     this.updatePaginatedEventTypes();
   }
 
@@ -34,11 +33,15 @@ export class AllEventTypesComponent implements OnInit {
     this.searchQuery = "";
   }
 
-  selectType(eventType: IEventType): void {
-    if(this.selectedEventType === eventType) {
+  selectType(eventType: EventTypeCard): void {
+    if(this.selectedEventType.id === eventType.id) {
       this.selectedEventType = null;
     } else {
-      this.selectedEventType = eventType;
+      this.eventTypeService.get(eventType.id).subscribe({
+        next: (response: EventTypeWithActivity) => {
+          this.selectedEventType = response;
+        }
+      });
     }
   }
 
@@ -73,10 +76,10 @@ export class AllEventTypesComponent implements OnInit {
     return triplet;
   }
 
-  getCardClasses(eventType: IEventType): ICardClasses {
+  getCardClasses(eventType: EventTypeCard): ICardClasses {
     return {
       "event-type-card" : true,
-      "selected-card": this.selectedEventType && this.selectedEventType.name === eventType.name
+      "selected-card": this.selectedEventType && this.selectedEventType.id === eventType.id
     }
   }
 
@@ -87,19 +90,25 @@ export class AllEventTypesComponent implements OnInit {
   }
 
   private updatePaginatedEventTypes(): void {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedEventTypes = this.eventTypes.slice(startIndex, endIndex);
+    this.eventTypeService.getEventTypes(this.searchQuery, {
+      page: this.currentPage,
+      size: this.pageSize,
+    })
+      .subscribe( {
+        next: (response: PagedResponse<EventTypeCard>) => {
+          this.paginatedEventTypes = response.content;
+          this.totalCount = response.totalElements;
+        }
+      });
   }
 
   search(): void {
-    this.eventTypes = this.eventTypeService.search(this.searchQuery);
+    this.currentPage = 0;
     this.updatePaginatedEventTypes();
   }
 
   deleteType(): void {
-    this.eventTypeService.delete(this.selectedEventType);
-    this.eventTypes = this.eventTypeService.getAll();
+    this.eventTypeService.toggleActivate(this.selectedEventType.id);
     this.updatePaginatedEventTypes();
   }
 }

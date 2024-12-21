@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Organizer, Provider, User} from './model/users.model';
 import {EventCard} from '../events/model/event-card.model';
-import {EventType} from '../events/model/event-type.model';
+import {EventTypeForCards} from '../events/model/event-type.model';
 import {Location} from '../events/model/location.model';
 import {Event, PrivacyType} from '../events/model/events.model';
 import {SolutionCard} from '../solutions/model/solution-card.model';
@@ -58,11 +58,11 @@ export class UserService {
 
   getMyEvents(): EventCard[] {
     // Event Types
-    const weddingType: EventType = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };
-    const conferenceType: EventType = { name: 'Conference', description: 'Professional gathering for knowledge exchange', isActive: true };
-    const concertType: EventType = { name: 'Concert', description: 'Live musical performance', isActive: true };
-    const partyType: EventType = { name: 'Party', description: 'A social gathering with music and dancing', isActive: true };
-    const meetingType: EventType = { name: 'Meeting', description: 'A formal gathering of individuals for a specific purpose', isActive: true };
+    const weddingType: EventTypeForCards = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };
+    const conferenceType: EventTypeForCards = { name: 'Conference', description: 'Professional gathering for knowledge exchange', isActive: true };
+    const concertType: EventTypeForCards = { name: 'Concert', description: 'Live musical performance', isActive: true };
+    const partyType: EventTypeForCards = { name: 'Party', description: 'A social gathering with music and dancing', isActive: true };
+    const meetingType: EventTypeForCards = { name: 'Meeting', description: 'A formal gathering of individuals for a specific purpose', isActive: true };
 
     // Locations
     const weddingLocation: Location = { name: 'Grand Hall', address: '123 Wedding St, Cityville', latitude: 40.7128, longitude: -74.0060 };
@@ -231,37 +231,37 @@ export class UserService {
       specifics: undefined,
     };
 
-    const eventType1 : EventType = {
+    const eventType1 : EventTypeForCards = {
       name: "Wedding",
       description: "A celebration of marriage, bringing families together to celebrate love and commitment.",
       isActive: true
     }
 
-    const eventType2 : EventType = {
+    const eventType2 : EventTypeForCards = {
       name: "Conference",
       description: "A professional gathering focused on knowledge sharing, networking, and industry discussions.",
       isActive: true
     }
 
-    const eventType3 : EventType = {
+    const eventType3 : EventTypeForCards = {
       name: "Concert",
       description: "A live musical performance featuring various artists or bands, offering an unforgettable entertainment experience.",
       isActive: true
     }
 
-    const eventType4 : EventType = {
+    const eventType4 : EventTypeForCards = {
       name: "Party",
       description: "A social gathering with music, dancing, and fun activities, ideal for celebrations and networking.",
       isActive: true
     }
 
-    const eventType5 : EventType = {
+    const eventType5 : EventTypeForCards = {
       name: "Meeting",
       description: "A formal gathering for discussing specific business or personal matters, focused on decision-making.",
       isActive: true
     }
 
-    const eventType6 : EventType = {
+    const eventType6 : EventTypeForCards = {
       name: "Workshop",
       description: "An interactive session aimed at learning new skills, with hands-on activities and expert guidance.",
       isActive: true

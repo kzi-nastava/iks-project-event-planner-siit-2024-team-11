@@ -1,128 +1,49 @@
 import { Injectable } from '@angular/core';
-import {IEventType} from './model/events.model';
+import {CreateEventType, EventType, EventTypeCard, EventTypeWithActivity, UpdateEventType} from './model/events.model';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from '../../env/constants';
+import {Observable} from 'rxjs';
+import {PageProperties} from '../shared/model/page-properties.model';
+import {PagedResponse} from '../shared/model/paged-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventTypeService {
-  private eventTypes: IEventType[] = [
-    {
-      name: "Wedding",
-      description: "Celebrate two people that are getting married!",
-      recommendedCategories: [
-        {
-          name: "Music",
-          description: "Great atmosphere and ambient at your event through MUSIC!"
-        }
-      ]
-    },
-    {
-      name: "Birthday",
-      description: "Celebrate day when your person was born!",
-      recommendedCategories: [
-        {
-          name: "Food",
-          description: "Let your guests eat well!"
-        }
-      ]
-    },
-    {
-      name: "Wedding2",
-      description: "Celebrate two people that are getting married!",
-      recommendedCategories: [
-        {
-          name: "Music",
-          description: "Great atmosphere and ambient at your event through MUSIC!"
-        }
-      ]
-    },
-    {
-      name: "Birthday2",
-      description: "Celebrate day when your person was born!",
-      recommendedCategories: [
-        {
-          name: "Food",
-          description: "Let your guests eat well!"
-        }
-      ]
-    },
-    {
-      name: "Wedding3",
-      description: "Celebrate two people that are getting married!",
-      recommendedCategories: [
-        {
-          name: "Music",
-          description: "Great atmosphere and ambient at your event through MUSIC!"
-        }
-      ]
-    },
-    {
-      name: "Birthday3",
-      description: "Celebrate day when your person was born!",
-      recommendedCategories: [
-        {
-          name: "Food",
-          description: "Let your guests eat well!"
-        }
-      ]
-    },
-    {
-      name: "Wedding4",
-      description: "Celebrate two people that are getting married!",
-      recommendedCategories: [
-        {
-          name: "Music",
-          description: "Great atmosphere and ambient at your event through MUSIC!"
-        }
-      ]
-    },
-    {
-      name: "Birthday4",
-      description: "Celebrate day when your person was born!",
-      recommendedCategories: [
-        {
-          name: "Food",
-          description: "Let your guests eat well!"
-        }
-      ]
+  private urlPrefix: string = "/api/events/types/";
+
+  constructor (private httpClient: HttpClient) {
+
+  }
+
+  getEventTypes(search?: string, pageProperties?: PageProperties): Observable<PagedResponse<EventTypeCard>> {
+    let params = new HttpParams();
+    if(search) {
+      params = params.set('search', search);
     }
-  ];
 
-  constructor() {
+    if(pageProperties) {
+      params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
+    }
 
+    return this.httpClient.get<PagedResponse<EventTypeCard>>(environment.apiHost + this.urlPrefix, { params: params });
   }
 
-  getAll(): IEventType[] {
-    return this.eventTypes;
-  }
-
-  get(name: string): IEventType {
-    return this.eventTypes.find(x => x.name === name);
+  get(id: number): Observable<EventTypeWithActivity> {
+    return this.httpClient.get<EventTypeWithActivity>(environment.apiHost + this.urlPrefix + id);
 }
 
-  add(type: IEventType): void {
-    this.eventTypes.push(type);
+  add(type: CreateEventType): Observable<EventType> {
+    return this.httpClient.post<EventTypeWithActivity>(environment.apiHost + this.urlPrefix, type);
   }
 
-  delete(type: IEventType): void {
-    this.eventTypes = this.eventTypes.filter((e) => e.name !== type.name);
+  toggleActivate(id: number): Observable<EventType> {
+    return this.httpClient.put<EventTypeWithActivity>(environment.apiHost + this.urlPrefix + id + '/activation', {});
   }
 
-  update(type: IEventType): void {
-    if (!type || !type.name) {
-      console.error('Invalid type: missing data or ID.');
-      return;
-    }
-
-    const index = this.eventTypes.findIndex(t => t.name === type.name);
-    if (index !== -1) {
-      this.eventTypes[index] = { ...this.eventTypes[index], ...type };
-    } else {
-      console.error('Event type not found.');
-    }
-  }
-
-  search(text: string): IEventType[] {
-    return this.eventTypes.filter(x => x.name === text);
+  update(type: UpdateEventType): Observable<EventType> {
+    return this.httpClient.put<EventTypeWithActivity>(environment.apiHost + this.urlPrefix, type);
   }
 }

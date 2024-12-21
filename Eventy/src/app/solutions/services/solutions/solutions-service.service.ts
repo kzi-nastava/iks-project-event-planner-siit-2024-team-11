@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Service } from '../../model/services.model';
 import { Status } from '../../model/category.model';
-import { EventType } from '../../../events/model/event-type.model';
+import { EventTypeForCards } from '../../../events/model/event-type.model';
 import { ReservationConfirmationType } from '../../model/services.model';
 import { Product } from '../../model/products.model';
 import { SolutionCard } from '../../model/solution-card.model';
@@ -14,7 +14,7 @@ export class SolutionsServiceService {
   allSolutions: SolutionCard[];
   featuredSolutions:  SolutionCard[];
 
-  constructor() { 
+  constructor() {
     this.allSolutions = this.getAllSolutions();
     this.featuredSolutions = this.getFeaturedSolutions();
   }
@@ -100,107 +100,107 @@ export class SolutionsServiceService {
       specifics: undefined,
     };
 
-    const eventType1 : EventType = {
+    const eventType1 : EventTypeForCards = {
       name: "Wedding",
       description: "A celebration of marriage, bringing families together to celebrate love and commitment.",
       isActive: true
     }
 
-    const eventType2 : EventType = {
+    const eventType2 : EventTypeForCards = {
       name: "Conference",
       description: "A professional gathering focused on knowledge sharing, networking, and industry discussions.",
       isActive: true
     }
 
-    const eventType3 : EventType = {
+    const eventType3 : EventTypeForCards = {
       name: "Concert",
       description: "A live musical performance featuring various artists or bands, offering an unforgettable entertainment experience.",
       isActive: true
     }
 
-    const eventType4 : EventType = {
+    const eventType4 : EventTypeForCards = {
       name: "Party",
       description: "A social gathering with music, dancing, and fun activities, ideal for celebrations and networking.",
       isActive: true
     }
 
-    const eventType5 : EventType = {
+    const eventType5 : EventTypeForCards = {
       name: "Meeting",
       description: "A formal gathering for discussing specific business or personal matters, focused on decision-making.",
       isActive: true
     }
 
-    const eventType6 : EventType = {
+    const eventType6 : EventTypeForCards = {
       name: "Workshop",
       description: "An interactive session aimed at learning new skills, with hands-on activities and expert guidance.",
       isActive: true
     }
-    
+
     return [
-      { 
+      {
         service: service1,
         product: undefined,
         provider: "Tamara Jezickovic",
         providerImage: "organiser1.jpg",
         eventTypes: [eventType1, eventType4, eventType2]
       },
-      { 
+      {
         service: undefined,
         product: product1,
         provider: "Zeko Zekic",
         providerImage: "organiser2.jpg",
         eventTypes: [eventType2, eventType4, eventType5]
       },
-      { 
+      {
         service: service2,
         product: undefined,
         provider: "Taca Jezickovic",
         providerImage: "organiser3.png",
         eventTypes: [eventType1, eventType2, eventType6]
       },
-      { 
+      {
         service: service3,
         product: undefined,
         provider: "Veselin Jezickovic",
         providerImage: "organiser4.jpg",
         eventTypes: [eventType6, eventType5, eventType2]
       },
-      { 
+      {
         service: undefined,
         product: product2,
         provider: "Taca Jezic",
         providerImage: "organiser5.jpg",
         eventTypes: [eventType5, eventType3, eventType4]
       },
-      { 
+      {
         service: service1,
         product: undefined,
         provider: "Tamara Jezickovic",
         providerImage: "organiser1.jpg",
         eventTypes: [eventType1, eventType4, eventType2]
       },
-      { 
+      {
         service: undefined,
         product: product1,
         provider: "Zeko Zekic",
         providerImage: "organiser2.jpg",
         eventTypes: [eventType2, eventType4, eventType5]
       },
-      { 
+      {
         service: service2,
         product: undefined,
         provider: "Taca Jezickovic",
         providerImage: "organiser3.png",
         eventTypes: [eventType1, eventType2, eventType6]
       },
-      { 
+      {
         service: service3,
         product: undefined,
         provider: "Veselin Jezickovic",
         providerImage: "organiser4.jpg",
         eventTypes: [eventType6, eventType5, eventType2]
       },
-      { 
+      {
         service: undefined,
         product: product2,
         provider: "Taca Jezic",
@@ -291,72 +291,72 @@ export class SolutionsServiceService {
       specifics: undefined,
     };
 
-    const eventType1 : EventType = {
+    const eventType1 : EventTypeForCards = {
       name: "Wedding",
       description: "A celebration of marriage, bringing families together to celebrate love and commitment.",
       isActive: true
     }
 
-    const eventType2 : EventType = {
+    const eventType2 : EventTypeForCards = {
       name: "Conference",
       description: "A professional gathering focused on knowledge sharing, networking, and industry discussions.",
       isActive: true
     }
 
-    const eventType3 : EventType = {
+    const eventType3 : EventTypeForCards = {
       name: "Concert",
       description: "A live musical performance featuring various artists or bands, offering an unforgettable entertainment experience.",
       isActive: true
     }
 
-    const eventType4 : EventType = {
+    const eventType4 : EventTypeForCards = {
       name: "Party",
       description: "A social gathering with music, dancing, and fun activities, ideal for celebrations and networking.",
       isActive: true
     }
 
-    const eventType5 : EventType = {
+    const eventType5 : EventTypeForCards = {
       name: "Meeting",
       description: "A formal gathering for discussing specific business or personal matters, focused on decision-making.",
       isActive: true
     }
 
-    const eventType6 : EventType = {
+    const eventType6 : EventTypeForCards = {
       name: "Workshop",
       description: "An interactive session aimed at learning new skills, with hands-on activities and expert guidance.",
       isActive: true
     }
-    
+
     return [
-      { 
+      {
         service: service1,
         product: undefined,
         provider: "Tamara Jezickovic",
         providerImage: "organiser1.jpg",
         eventTypes: [eventType1, eventType4, eventType2]
       },
-      { 
+      {
         service: undefined,
         product: product1,
         provider: "Zeko Zekic",
         providerImage: "organiser2.jpg",
         eventTypes: [eventType2, eventType4, eventType5]
       },
-      { 
+      {
         service: service2,
         product: undefined,
         provider: "Taca Jezickovic",
         providerImage: "organiser3.png",
         eventTypes: [eventType1, eventType2, eventType6]
       },
-      { 
+      {
         service: service3,
         product: undefined,
         provider: "Veselin Jezickovic",
         providerImage: "organiser4.jpg",
         eventTypes: [eventType6, eventType5, eventType2]
       },
-      { 
+      {
         service: undefined,
         product: product2,
         provider: "Taca Jezic",
