@@ -1,46 +1,39 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {UserService} from '../../../user-management/user.service';
+import {UserService} from '../user.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {Router} from '@angular/router';
-import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
-
-interface ButtonClasses {
-  "role-button" : boolean,
-  "not-selected-button" : boolean
-}
+import { User } from '../model/users.model';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 @Component({
-  selector: 'app-fast-registration',
-  templateUrl: './fast-registration.component.html',
-  styleUrl: './fast-registration.component.css'
+  selector: 'app-upgrade-organizer',
+  templateUrl: './upgrade-organizer.component.html',
+  styleUrl: './upgrade-organizer.component.css'
 })
-export class FastRegistrationComponent {
-  email: string = "tactac123@gmail.com"
-  registerForm : FormGroup = new FormGroup({
-    profilePicture: new FormControl('ProfilePicture.png'),
-    email : new FormControl({value: this.email, disabled: true}, [Validators.required, Validators.email]),
-    password : new FormControl('', [Validators.required]),
-    confirmedPassword : new FormControl('', [Validators.required, this.passwordMatching()]),
-    address : new FormControl('', [Validators.required]),
-    phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
-  });
-  @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
-
+export class UpgradeOrganizerComponent {
+  user: User;
+  registerForm: FormGroup;
 
   constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
 
   }
 
-  private passwordMatching(): ValidatorFn {
-    return (): ValidationErrors | null => {
-      if(this.registerForm) {
-        return this.registerForm.controls['password'].value === this.registerForm.controls['confirmedPassword'].value ? null : { match: true };
-      }
-
-      return null;
-    };
+  ngOnInit(): void {
+    // Fetch the user data (assuming it's asynchronous)
+    //this.userService.get(5).subscribe((user: User) => {
+      this.user = this.userService.get(5);
+  
+      this.registerForm = new FormGroup({
+        profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
+        email : new FormControl({value: this.user.email, disabled: true}, [Validators.required, Validators.email]),
+        firstName : new FormControl('', [Validators.required]),
+        lastName : new FormControl('', [Validators.required]),
+        address : new FormControl({value: this.user.address, disabled: true}, [Validators.required]),
+        phoneNumber : new FormControl({value: this.user.phoneNumber, disabled: true}, [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
+      });
+    //});
   }
 
   register(): void {
@@ -50,8 +43,8 @@ export class FastRegistrationComponent {
         disableClose: true, // prevents closing by clicking outside
         backdropClass: 'blurred_backdrop_dialog',
         data: {
-          title: 'Input Error',
-          message: 'Please make sure that all inputs are valid before registration.',
+          title: 'Input Error', 
+          message: 'Please make sure that all inputs are valid before upgrading profile.',
         },
       });
 
@@ -73,6 +66,8 @@ export class FastRegistrationComponent {
       reader.readAsDataURL(file);
     }
   }
+
+  @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
 
   pickProfilePicture() : void {
     this.fileInput.nativeElement.click();

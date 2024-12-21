@@ -1,0 +1,96 @@
+<form class="form" [formGroup]="registerForm">
+  <p class="register-label">UPGRADE PROFILE</p>
+ 
+  <div class = "selected_role_container">
+    <div class = "role_container">
+      <p style = "font-weight: 500; font-family: Albert Sans; font-size: 15.5px; color: rgb(171, 171, 171); margin-bottom: 0px; margin-top: 10px; margin-left: 15px; margin-right: 15px;">Selected role:</p>
+      <p style = "font-weight: 600; font-family: Albert Sans; font-size: 20px; color: #929AB7; margin-bottom: 10px; margin-left: 15px; margin-right: 15px;">Solution Provider</p>
+    </div>
+  </div>
+
+  <div class="fields">
+    <div class="profile-picture-picker">
+      <div class="carousel">
+        <img (click)="triggerFileInput()" [src]="registerForm.controls['profilePictures'].value[pictureIndex]" alt="Profile picture" />
+        <div class="carousel-buttons">
+          <div style = "display: flex; justify-content: center; margin-top: 8px; margin-bottom: 4px">
+            <div class = "next_picture_container" (click)="previousPicture()" [ngClass]="{'button_disabled': pictureIndex === 0}">
+              <mat-icon>arrow_back</mat-icon>            
+            </div>
+          </div>
+          <div style = "display: flex; justify-content: center; margin-top: 8px; margin-bottom: 4px">
+            <div class = "next_picture_container" (click)="nextPicture()" [ngClass]="{'button_disabled': pictureIndex === registerForm.controls['profilePictures'].value.length - 1}">
+              <mat-icon>arrow_forward</mat-icon>            
+            </div>
+          </div>
+        </div>
+      </div>
+      <input #picturesPickerId id="picturesPicker" type="file" (change)="onFilesSelected($event)" accept="image/*" multiple />
+      <div class="change-picture-note" (click)="triggerFileInput()">Select Pictures</div>
+    </div>
+
+    <div class="line-container">
+      <div class="line"></div>
+      <div class="line-text">Personal Info</div>
+    </div>
+
+    <mat-form-field id = "upgrade_provider" class="field">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Ex. something@gmail.com" formControlName="email" />
+      @if (registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+      @if (registerForm.controls['email'].hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field id = "upgrade_provider" class="field">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput placeholder="Company Name" formControlName="name" />
+      @if (registerForm.controls['name'].hasError('required')) {
+        <mat-error>Name is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('name')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field id = "upgrade_provider_desc" class="field">
+      <mat-label>Description</mat-label>
+      <textarea type="text" matInput placeholder="Your Description" formControlName="description"></textarea>
+      @if (registerForm.controls['description'].hasError('required')) {
+        <mat-error>Description is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('description')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field id = "upgrade_provider" class="field">
+      <mat-label>Address</mat-label>
+      <input type="text" matInput placeholder="Ex. Some Street 32" formControlName="address" />
+      @if (registerForm.controls['address'].hasError('required')) {
+        <mat-error>Address is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field id = "upgrade_provider" class="field">
+      <mat-label>Phone Number</mat-label>
+      <input type="text" matInput placeholder="Ex. +381 65 57 30 724" formControlName="phoneNumber" />
+      @if (registerForm.controls['phoneNumber'].hasError('required') && !registerForm.controls['phoneNumber'].hasError("pattern")) {
+        <mat-error>Phone number is <strong>required</strong></mat-error>
+      }
+      @if (registerForm.controls['phoneNumber'].hasError('pattern')) {
+        <mat-error>Invalid phone number</mat-error>
+      }
+    </mat-form-field>
+  </div>
+ 
+  <div id = "button_confirm" style = "display: flex; justify-content: center; margin-top: 25px;">
+    <div class = "confirm_registration_container" (click)="register()" type="submit">
+      <p style = "font-size: 21px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">UPGRADE PROFILE</p>
+    </div>
+  </div>
+ </form>
+ 
