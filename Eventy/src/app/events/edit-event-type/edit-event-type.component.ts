@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ICategory, IEventType} from '../model/events.model';
 import {EventTypeService} from '../event-type.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CategoryWithId} from '../../solutions/model/category-with-id.model';
+import {EventTypeWithActivity} from '../model/events.model';
+import {SolutionCategoryService} from '../../solutions/services/solutions/solution-category.service';
+import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-event-type',
@@ -11,34 +15,36 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EditEventTypeComponent {
   eventTypeFormGroup: FormGroup = new FormGroup({
+    id: new FormControl(),
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    recommendedCategories: new FormControl([], Validators.required),
+    recommendedSolutionCategoriesIds: new FormControl([], Validators.required),
   });
 
-  categories: ICategory[] = [
-    {
-      name: "Music",
-      description: "Great atmosphere and ambient at your event through MUSIC!"
-    },
-    {
-      name: "Food",
-      description: "Let your guests eat well!"
-    }
-  ];
+  categories: CategoryWithId[] = [];
 
   categoryInputFormControl: FormControl = new FormControl(null, Validators.required);
 
-  name: string;
+  id: number;
 
-  constructor(private eventTypeService: EventTypeService, private router: Router, private route: ActivatedRoute) {
-    this.name = this.route.snapshot.paramMap.get('id') || '';
+  constructor(private eventTypeService: EventTypeService, private router: Router, private route: ActivatedRoute,
+              private categoryService: SolutionCategoryService, private dialog: MatDialog) {
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
 
-    let type: IEventType = this.eventTypeService.get(this.name);
+    this.eventTypeService.get(this.id).subscribe({
+      next: (type: EventTypeWithActivity) => {
+        this.eventTypeFormGroup.controls['id'].setValue(type['id']);
+        this.eventTypeFormGroup.controls['name'].setValue(type['name']);
+        this.eventTypeFormGroup.controls['description'].setValue(type['description']);
+        this.eventTypeFormGroup.controls['recommendedSolutionCategoriesIds'].setValue(type['recommendedSolutionCategories'].map((category: CategoryWithId) => category.id));
+      }
+    });
 
-    this.eventTypeFormGroup.controls['name'].setValue(type['name']);
-    this.eventTypeFormGroup.controls['description'].setValue(type['description']);
-    this.eventTypeFormGroup.controls['recommendedCategories'].setValue(type['recommendedCategories']);
+    this.categoryService.getAll().subscribe({
+      next: (categories: CategoryWithId[]) => {
+       this.categories = categories;
+      }
+    });
   }
 
 
@@ -47,36 +53,62 @@ export class EditEventTypeComponent {
       this.eventTypeService.update(this.eventTypeFormGroup.value);
       this.router.navigate(['/event-types']);
     } else {
-      // dialog pop up?
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true, // prevents closing by clicking outside
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: 'Input Error',
+          message: 'Please make sure that all inputs are valid before adding an event type.',
+        },
+      });
     }
   }
 
   addCategory(): void {
-    for(let category of this.eventTypeFormGroup.controls['recommendedCategories'].value) {
-      if(category.name === this.categoryInputFormControl.value.name) {
-        //dialog pop up?
+    for(let categoryId of this.eventTypeFormGroup.controls['recommendedSolutionCategoriesIds'].value) {
+      if(this.findCategoryName(categoryId) === this.categoryInputFormControl.value.name) {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true, // prevents closing by clicking outside
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: 'Input Error',
+            message: 'Category already added!',
+          },
+        });
         return;
       }
     }
 
     if(this.categoryInputFormControl.value) {
-      this.eventTypeFormGroup.controls['recommendedCategories'].setValue([
-        ...(this.eventTypeFormGroup.controls['recommendedCategories'].value), this.categoryInputFormControl.value
+      this.eventTypeFormGroup.controls['recommendedSolutionCategoriesIds'].setValue([
+        ...(this.eventTypeFormGroup.controls['recommendedSolutionCategoriesIds'].value), this.categoryInputFormControl.value
       ]);
       this.categoryInputFormControl.reset();
       this.categoryInputFormControl.setErrors(null);
     }
   }
 
-  removeCategory(categoryName: string): void {
-    let newRecommendedCategoryList: ICategory[] = [];
+  removeCategory(id: number): void {
+    let newRecommendedCategoryList: number[] = [];
 
-    for(let category of this.eventTypeFormGroup.controls['recommendedCategories'].value) {
-      if(category.name !== categoryName) {
-        newRecommendedCategoryList.push(category);
+    for(let categoryId of this.eventTypeFormGroup.controls['recommendedSolutionCategoriesIds'].value) {
+      if(categoryId !== id) {
+        newRecommendedCategoryList.push(categoryId);
       }
     }
 
-    this.eventTypeFormGroup.controls['recommendedCategories'].setValue(newRecommendedCategoryList);
+    this.eventTypeFormGroup.controls['recommendedSolutionCategoriesIds'].setValue(newRecommendedCategoryList);
+  }
+
+  findCategoryName(id: number): string {
+    for(let category of this.categories) {
+      if(category.id === id){
+        return category.name;
+      }
+    }
+
+    return null;
   }
 }
