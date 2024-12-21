@@ -1,10 +1,10 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {UserService} from '../user.service';
+import {UserService} from '../../../user-management/user.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {Router} from '@angular/router';
-import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
 
 interface ButtonClasses {
   "role-button" : boolean,
@@ -27,10 +27,10 @@ export class FastRegistrationComponent {
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });
   @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
-  
+
 
   constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
-  
+
   }
 
   private passwordMatching(): ValidatorFn {
@@ -50,7 +50,7 @@ export class FastRegistrationComponent {
         disableClose: true, // prevents closing by clicking outside
         backdropClass: 'blurred_backdrop_dialog',
         data: {
-          title: 'Input Error', 
+          title: 'Input Error',
           message: 'Please make sure that all inputs are valid before registration.',
         },
       });

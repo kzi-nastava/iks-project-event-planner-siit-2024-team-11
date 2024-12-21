@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
-import {LoginComponent} from './user-management/login/login.component';
-import {RegisterComponent} from './user-management/register/register.component';
+import {LoginComponent} from './infrastructure/auth/login/login.component';
+import {RegisterComponent} from './infrastructure/auth/register/register.component';
 import {EventOrganizationComponent} from './events/event-organization/event-organization.component';
 import { AddServiceComponent } from './services/add-service/add-service.component';
 import {AllEventTypesComponent} from './events/all-event-types/all-event-types.component';
@@ -17,8 +17,10 @@ import {
 import {EditUserComponent} from './user-management/edit-user/edit-user.component';
 import {MyProfilePageComponent} from './user-management/my-profile-page/my-profile-page.component';
 import { CreateReservationComponent } from './services/create-reservation/create-reservation.component';
-import { UpgradeProfileComponent } from './user-management/upgrade-profile/upgrade-profile.component';
-import { FastRegistrationComponent } from './user-management/fast-registration/fast-registration.component';
+import { FastRegistrationComponent } from './infrastructure/auth/fast-registration/fast-registration.component';
+import {AuthGuard} from './infrastructure/auth/auth.guard';
+import {ConfirmRegistrationComponent} from './infrastructure/auth/confirm-registration/confirm-registration.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -36,9 +38,41 @@ const routes: Routes = [
   {path: 'profile/edit', component: EditUserComponent},
   {path: 'profile', component: MyProfilePageComponent},
   {path: 'create-reservation', component: CreateReservationComponent},
-  {path: 'upgrade-profile', component: UpgradeProfileComponent},
   {path: 'fast-registration', component: FastRegistrationComponent},
   {path: '**', redirectTo: ''},
+  // {path: '', component: HomeComponent},
+  // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
+  //   data: {role: []}},
+  // {path: 'register', component: RegisterComponent, canActivate: [AuthGuard],
+  //   data: {role: []}},
+  // {path: 'organize-event', component: EventOrganizationComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Organizer']}},
+  // {path: 'add-service', component: AddServiceComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Provider']}},
+  // {path: 'event-types', component: AllEventTypesComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Admin']}},
+  // {path: 'add-event-types', component: CreateEventTypeComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Admin']}},
+  // {path: 'edit-event-type/:id', component: EditEventTypeComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Admin']}},
+  // {path: 'edit-service/:id', component: EditServiceComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Provider']}},
+  // {path: 'my-services', component: MyServicesViewComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Provider']}},
+  // {path: 'solution-categories', component: SolutionCategoryManagementComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Admin']}},
+  // {path: 'users/:id', component: OtherUserProfilePageComponent},
+  // {path: 'profile/edit', component: EditUserComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Provider', 'ROLE_Organizer', 'ROLE_AuthenticatedUser', 'ROLE_Admin']}},
+  // {path: 'profile', component: MyProfilePageComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Provider', 'ROLE_Organizer', 'ROLE_AuthenticatedUser', 'ROLE_Admin']}},
+  // {path: 'create-reservation', component: CreateReservationComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Organizer']}},
+  // {path: 'fast-registration', component: FastRegistrationComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_AuthenticatedUser']}},
+  // {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard],
+  //   data: {role: []}},
+  // {path: '**', redirectTo: ''},
 ];
 
 @NgModule({

@@ -1,9 +1,11 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {UserService} from '../user.service';
+import {UserService} from '../../../user-management/user.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {RegisterData} from '../model/register.model';
 
 @Component({
   selector: 'app-register-provider',
@@ -24,7 +26,7 @@ export class RegisterProviderComponent {
 
   public pictureIndex: number = 0;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
 
   }
 
@@ -39,7 +41,7 @@ export class RegisterProviderComponent {
   }
 
   register(): void {
-    if(this.registerForm.invalid) {
+    if(this.registerForm.invalid || this.registerForm.controls['password'].value !== this.registerForm.controls['confirmedPassword'].value) {
       this.dialog.open(InvalidInputDataDialogComponent, {
         data : {
           title: "Invalid input",
@@ -50,8 +52,24 @@ export class RegisterProviderComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      this.userService.register(this.registerForm.value);
-      this.router.navigate(['']);
+      this.authService.register(this.registerForm.value as RegisterData).subscribe({
+        next: (response: string) => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+          data : {
+            title: "Confirmation needed!",
+            message: response
+          }
+        }).afterClosed().subscribe(() => this.router.navigate(['']));
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input!",
+              message: "Invalid registration data"
+            }
+          });
+        }
+      });
     }
   }
 

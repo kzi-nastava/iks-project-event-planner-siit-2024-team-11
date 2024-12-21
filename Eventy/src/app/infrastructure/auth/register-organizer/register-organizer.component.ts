@@ -1,9 +1,13 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {UserService} from '../user.service';
+import {UserService} from '../../../user-management/user.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {RegisterData} from '../model/register.model';
+import {AuthResponse} from '../model/auth-response.model';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-register-organizer',
@@ -22,7 +26,7 @@ export class RegisterOrganizerComponent {
     phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
   });
 
-  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
 
   }
 
@@ -37,7 +41,7 @@ export class RegisterOrganizerComponent {
   }
 
   register(): void {
-    if(this.registerForm.invalid) {
+    if(this.registerForm.invalid || this.registerForm.controls['password'].value !== this.registerForm.controls['confirmedPassword'].value) {
       this.dialog.open(InvalidInputDataDialogComponent, {
           data : {
             title: "Invalid input",
@@ -48,8 +52,26 @@ export class RegisterOrganizerComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      this.userService.register(this.registerForm.value);
-      this.router.navigate(['']);
+      let user: RegisterData = this.registerForm.value as RegisterData;
+      user.profilePictures = [this.registerForm.controls['profilePicture'].value];
+      this.authService.register(user).subscribe({
+        next: (response: string) => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+          data : {
+            title: "Confirmation needed!",
+            message: response
+          }
+        }).afterClosed().subscribe(() => this.router.navigate(['']));
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input!",
+              message: "Invalid registration data"
+            }
+          });
+        }
+      });
     }
   }
 
