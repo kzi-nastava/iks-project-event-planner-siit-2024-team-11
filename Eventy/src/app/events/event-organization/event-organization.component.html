@@ -11,6 +11,9 @@
   Because we need it to keep the data? Or maybe also keep the data here? We will see... -->
   <app-event-creation-basic-information
     *ngIf="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION"
+    [basicInformationForm]="basicInformationForm"
+    [selectedAddress]="selectedAddress"
+    [selectedLatLng]="selectedLatLng"
   />
   <app-agenda-creation
     *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"

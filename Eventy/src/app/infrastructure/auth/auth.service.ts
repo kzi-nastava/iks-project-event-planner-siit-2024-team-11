@@ -11,7 +11,7 @@ import {RegisterData} from './model/register.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private urlPrefix: string = "/api/authentication/";
+  private readonly urlPrefix: string = "/api/authentication/";
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ export class EventsServiceService {
   allEvents: EventCard[] = [];
   featuredEvents: EventCard[] = [];
 
-  private urlPrefix: string = "/api/events/";
+  private readonly urlPrefix: string = "/api/events/";
 
   constructor(private httpClient: HttpClient) {
     this.allEvents = this.getAllEvents();

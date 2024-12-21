@@ -4,8 +4,9 @@ import {EventsServiceService} from '../services/events/events-service.service';
 import {Activity, EventBasicInformation, OrganizeEvent} from '../model/events.model';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {Location} from '../model/location.model';
 import {AuthService} from '../../infrastructure/auth/auth.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import * as L from 'leaflet';
 
 enum EventOrganizationStage {
   BASIC_INFORMATION,
@@ -26,7 +27,20 @@ export class EventOrganizationComponent {
    titleMap: Map<EventOrganizationStage, string>;
    invitedEmails: string[] = [];
    agenda: Activity[] = [];
-   basicInformation: EventBasicInformation;
+
+  basicInformationForm: FormGroup = new FormGroup({
+    name : new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    maxNumberParticipants: new FormControl(0, [Validators.required, Validators.pattern("^[1-9]\\d*$")]),
+    isPublic: new FormControl(true),
+    eventType: new FormControl('', Validators.required),
+    dateRange: new FormGroup({
+      startDate: new FormControl('', [Validators.required]),
+      endDate: new FormControl('', [Validators.required])
+    })
+  });
+  selectedAddress: string | undefined;
+  selectedLatLng: L.LatLng | undefined;
 
    constructor(private router: Router, private eventsService: EventsServiceService,
                private dialog : MatDialog, private authService: AuthService) {
@@ -67,19 +81,20 @@ export class EventOrganizationComponent {
       this.agenda = activites;
     }
 
-    collectBasicInformation(basicInformation: EventBasicInformation): void {
-      this.basicInformation = basicInformation;
-    }
-
     submit(): void {
      let event: OrganizeEvent = {
-       name: this.basicInformation.name,
-       description: this.basicInformation.description,
-       maxNumberParticipants: this.basicInformation.maxNumberParticipants,
-       isPublic: this.basicInformation.isPublic,
-       eventTypeId: this.basicInformation.eventTypeId,
-       createLocationDTO: this.basicInformation.createLocationDTO,
-       date: this.basicInformation.date,
+       name: this.basicInformationForm.controls['name'].value,
+       description: this.basicInformationForm.controls['description'].value,
+       maxNumberParticipants: this.basicInformationForm.controls['maxNumberParticipants'].value,
+       isPublic: this.basicInformationForm.controls['isPublic'].value,
+       eventTypeId: this.basicInformationForm.controls['eventTypeId'].value,
+       createLocationDTO: {
+         name: this.selectedAddress,
+         address: this.selectedAddress,
+         latitude: this.selectedLatLng.lat,
+         longitude: this.selectedLatLng.lng
+       },
+       date: this.basicInformationForm.controls['dateRange'].value[0],
        agenda: this.agenda,
        emails: this.invitedEmails,
        organizerId: this.authService.getId()

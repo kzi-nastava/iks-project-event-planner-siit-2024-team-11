@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import * as L from 'leaflet';
 import {EventTypeService} from '../event-type.service';
-import {IEventType} from '../model/events.model';
+import {EventTypeCard} from '../model/events.model';
+import {LatLng} from 'leaflet';
 
 @Component({
   selector: 'app-event-creation-basic-information',
@@ -12,35 +13,28 @@ import {IEventType} from '../model/events.model';
   providers: [provideNativeDateAdapter()] // is it okay to have a provider like this?
 })
 export class EventCreationBasicInformationComponent {
-    basicInformationForm: FormGroup = new FormGroup({
-      name : new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      maxNumberParticipants: new FormControl(0, [Validators.required, Validators.pattern("^[1-9]\\d*$")]),
-      isPublic: new FormControl(true),
-      eventType: new FormControl('', Validators.required),
-      location: new FormControl('', Validators.required),
-      dateRange: new FormGroup({
-        startDate: new FormControl('', [Validators.required]),
-        endDate: new FormControl('', [Validators.required])
-      })
-    });
+    @Input() basicInformationForm!: FormGroup;
 
     get dateRangeGroup() : FormGroup {
       return this.basicInformationForm.controls['dateRange'] as FormGroup;
     }
 
-    eventTypes: IEventType[] = [];
+    eventTypes: EventTypeCard[] = [];
 
     minDate: Date = new Date();
 
     map: L.Map | undefined;
-    selectedLatLng: L.LatLng | undefined;
+    @Input() selectedLatLng!: LatLng;
     currentMarker: L.Marker | undefined;
-    selectedAddress: string | undefined;
+    @Input() selectedAddress!: string;
     readonly ftnCoordinates: [number, number] = [45.2445, 19.8484];
 
     constructor(private eventTypeService: EventTypeService) {
-      this.eventTypes = this.eventTypeService.getEventTypes();
+      this.eventTypeService.getActiveEventTypes().subscribe({
+        next: (response: EventTypeCard[]) => {
+          this.eventTypes = response;
+        }
+      });
     }
 
     ngOnInit(): void {
