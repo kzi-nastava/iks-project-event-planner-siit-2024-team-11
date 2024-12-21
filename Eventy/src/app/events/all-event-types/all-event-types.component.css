@@ -115,6 +115,11 @@
   margin-left: 1vw;
 }
 
+.activate-button {
+  background-color: #408A56 !important;
+  margin-left: 1vw;
+}
+
 .shown-card-top {
   display: flex;
   flex-direction: row;

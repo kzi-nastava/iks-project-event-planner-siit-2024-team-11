@@ -107,8 +107,14 @@ export class AllEventTypesComponent implements OnInit {
     this.updatePaginatedEventTypes();
   }
 
-  deleteType(): void {
+  toggleActivate(): void {
     this.eventTypeService.toggleActivate(this.selectedEventType.id);
     this.updatePaginatedEventTypes();
+
+    this.eventTypeService.get(this.selectedEventType.id).subscribe({
+      next: (response: EventTypeWithActivity) => {
+        this.selectedEventType = response;
+      }
+    });
   }
 }
