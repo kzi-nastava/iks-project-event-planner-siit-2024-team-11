@@ -18,7 +18,7 @@ export class EditEventTypeComponent {
     id: new FormControl(),
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    recommendedSolutionCategoriesIds: new FormControl([], Validators.required),
+    recommendedSolutionCategoriesIds: new FormControl([]),
   });
 
   categories: CategoryWithId[] = [];

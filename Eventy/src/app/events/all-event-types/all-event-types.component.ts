@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EventTypeCard, EventTypeWithActivity} from '../model/events.model';
+import {EventType, EventTypeCard, EventTypeWithActivity} from '../model/events.model';
 import {EventTypeService} from '../event-type.service';
 import {PageEvent} from '@angular/material/paginator';
 import {PagedResponse} from '../../shared/model/paged-response.model';
@@ -34,7 +34,7 @@ export class AllEventTypesComponent implements OnInit {
   }
 
   selectType(eventType: EventTypeCard): void {
-    if(this.selectedEventType.id === eventType.id) {
+    if(this.selectedEventType && this.selectedEventType.id === eventType.id) {
       this.selectedEventType = null;
     } else {
       this.eventTypeService.get(eventType.id).subscribe({
@@ -108,12 +108,16 @@ export class AllEventTypesComponent implements OnInit {
   }
 
   toggleActivate(): void {
-    this.eventTypeService.toggleActivate(this.selectedEventType.id);
-    this.updatePaginatedEventTypes();
+    this.eventTypeService.toggleActivate(this.selectedEventType.id).subscribe({
+      next: (response: EventType) => {
+        this.updatePaginatedEventTypes();
 
-    this.eventTypeService.get(this.selectedEventType.id).subscribe({
-      next: (response: EventTypeWithActivity) => {
-        this.selectedEventType = response;
+        this.eventTypeService.get(this.selectedEventType.id).subscribe({
+          next: (response: EventTypeWithActivity) => {
+            console.log(response);
+            this.selectedEventType = response;
+          }
+        });
       }
     });
   }

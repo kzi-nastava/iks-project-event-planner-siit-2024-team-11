@@ -3,7 +3,7 @@
     <a mat-mini-fab [routerLink]="['/event-types']">
       <mat-icon>arrow_back</mat-icon>
     </a>
-    <span>Edit {{ id }}</span>
+    <span>Edit {{ this.eventTypeFormGroup.controls['name'].value }}</span>
   </div>
 
   <div class="main-content">
@@ -56,5 +56,5 @@
     </div>
   </div>
 
-  <button mat-flat-button class="button add-button" type="submit" (click)="editEvent()"><mat-icon>edit</mat-icon>EDIT {{ id }}</button>
+  <button mat-flat-button class="button add-button" type="submit" (click)="editEvent()"><mat-icon>edit</mat-icon>EDIT {{ this.eventTypeFormGroup.controls['name'].value }}</button>
 </div>

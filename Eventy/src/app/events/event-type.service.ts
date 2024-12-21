@@ -44,7 +44,7 @@ export class EventTypeService {
   }
 
   toggleActivate(id: number): Observable<EventType> {
-    return this.httpClient.put<EventTypeWithActivity>(environment.apiHost + this.urlPrefix + "/" + id + '/activation', {});
+    return this.httpClient.put<EventType>(environment.apiHost + this.urlPrefix + "/" + id + '/activation', {});
   }
 
   update(type: UpdateEventType): Observable<EventType> {
