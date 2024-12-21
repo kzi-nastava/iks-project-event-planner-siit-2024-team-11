@@ -17,7 +17,7 @@ export class CreateEventTypeComponent {
   eventTypeFormGroup: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    recommendedSolutionCategoriesIds: new FormControl([], Validators.required),
+    recommendedSolutionCategoriesIds: new FormControl([]),
   });
 
   categories: CategoryWithId[] = [];

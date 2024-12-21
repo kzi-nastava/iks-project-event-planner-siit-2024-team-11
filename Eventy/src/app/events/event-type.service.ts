@@ -10,7 +10,7 @@ import {PagedResponse} from '../shared/model/paged-response.model';
   providedIn: 'root'
 })
 export class EventTypeService {
-  private readonly urlPrefix: string = "/api/events/types/";
+  private readonly urlPrefix: string = "/api/events/types";
 
   constructor (private httpClient: HttpClient) {
 
@@ -32,11 +32,11 @@ export class EventTypeService {
   }
 
   getActiveEventTypes(): Observable<EventTypeCard[]> {
-    return this.httpClient.get<EventTypeCard[]>(environment.apiHost + this.urlPrefix + "active");
+    return this.httpClient.get<EventTypeCard[]>(environment.apiHost + this.urlPrefix + "/active");
   }
 
   get(id: number): Observable<EventTypeWithActivity> {
-    return this.httpClient.get<EventTypeWithActivity>(environment.apiHost + this.urlPrefix + id);
+    return this.httpClient.get<EventTypeWithActivity>(environment.apiHost + this.urlPrefix + "/" + id);
 }
 
   add(type: CreateEventType): Observable<EventType> {
@@ -44,7 +44,7 @@ export class EventTypeService {
   }
 
   toggleActivate(id: number): Observable<EventType> {
-    return this.httpClient.put<EventTypeWithActivity>(environment.apiHost + this.urlPrefix + id + 'activation', {});
+    return this.httpClient.put<EventTypeWithActivity>(environment.apiHost + this.urlPrefix + "/" + id + '/activation', {});
   }
 
   update(type: UpdateEventType): Observable<EventType> {
