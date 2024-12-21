@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EventTypeService} from '../event-type.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryWithId} from '../../solutions/model/category-with-id.model';
-import {EventTypeWithActivity} from '../model/events.model';
+import {EventType, EventTypeWithActivity} from '../model/events.model';
 import {SolutionCategoryService} from '../../solutions/services/solutions/solution-category.service';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -50,8 +50,11 @@ export class EditEventTypeComponent {
 
   editEvent(): void {
     if(this.eventTypeFormGroup.valid){
-      this.eventTypeService.update(this.eventTypeFormGroup.value);
-      this.router.navigate(['/event-types']);
+      this.eventTypeService.update(this.eventTypeFormGroup.value).subscribe({
+        next: (eventType: EventType) => {
+          this.router.navigate(['/event-types']);
+        }
+      });
     } else {
       this.dialog.open(ErrorDialogComponent, {
         width: '400px',

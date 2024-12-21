@@ -6,6 +6,7 @@ import {CategoryWithId} from '../../solutions/model/category-with-id.model';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {SolutionCategoryService} from '../../solutions/services/solutions/solution-category.service';
 import {MatDialog} from '@angular/material/dialog';
+import {EventType} from '../model/events.model';
 
 @Component({
   selector: 'app-create-event-type',
@@ -35,8 +36,11 @@ export class CreateEventTypeComponent {
 
   addEvent(): void {
     if(this.eventTypeFormGroup.valid){
-      this.eventTypeService.add(this.eventTypeFormGroup.value);
-      this.router.navigate(['/event-types']);
+      this.eventTypeService.add(this.eventTypeFormGroup.value).subscribe({
+        next: (eventType: EventType) => {
+          this.router.navigate(['/event-types']);
+        }
+      })
     } else {
       this.dialog.open(ErrorDialogComponent, {
         width: '400px',

@@ -9,9 +9,13 @@
 
   <!-- Maybe not *ngIf, maybe it should just be with a class that makes it to dissapear?
   Because we need it to keep the data? Or maybe also keep the data here? We will see... -->
-  <app-event-creation-basic-information *ngIf="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION"></app-event-creation-basic-information>
-  <app-agenda-creation *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"></app-agenda-creation>
-  <app-invitations-sending  
+  <app-event-creation-basic-information
+    *ngIf="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION"
+  />
+  <app-agenda-creation
+    *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"
+    (AgendaEventEmitter)="collectAgenda($event)"/>
+  <app-invitations-sending
     *ngIf="eventOrganizationStage === EventOrganizationStage.INVITATIONS_SENDING"
     (invitedEmailsEventEmitter)="collectInvitedEmails($event)"
   />
@@ -26,5 +30,5 @@
       </div>
     </div>
  </div>
-  
+
 </div>

@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { EventCard } from '../../model/event-card.model';
 import { EventTypeForCards } from '../../model/event-type.model';
 import { Location } from '../../model/location.model';
-import { Event } from '../../model/events.model';
+import {Event, OrganizeEvent} from '../../model/events.model';
 import { PrivacyType } from '../../model/events.model';
-
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../env/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,9 @@ export class EventsServiceService {
   allEvents: EventCard[] = [];
   featuredEvents: EventCard[] = [];
 
-  constructor() {
+  private urlPrefix: string = "/api/events/";
+
+  constructor(private httpClient: HttpClient) {
     this.allEvents = this.getAllEvents();
     this.featuredEvents = this.getFeaturedEvents();
   }
@@ -229,5 +233,9 @@ export class EventsServiceService {
         organiserImage: "organiser5.jpg",
       },
     ]
+  }
+
+  organizeEvent(event: OrganizeEvent): Observable<Event> {
+    return this.httpClient.post<Event>(environment.apiHost + this.urlPrefix, event);
   }
 }

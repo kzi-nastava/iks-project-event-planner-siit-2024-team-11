@@ -2,11 +2,12 @@ import { EventTypeForCards } from "./event-type.model";
 import { Location } from "./location.model";
 import {CategoryWithId} from '../../solutions/model/category-with-id.model';
 
-export interface IActivity {
+export interface Activity {
   name: string;
   description: string;
   location: string;
-  timeRange: [Date, Date]
+  startTime: Date;
+  endTime: Date;
 }
 
 export enum PrivacyType {
@@ -55,4 +56,27 @@ export interface UpdateEventType {
 export interface EventTypeCard {
   id: number;
   name: string;
+}
+
+export interface OrganizeEvent {
+  name: string;
+  description: string;
+  maxNumberParticipants: number;
+  isPublic: boolean;
+  eventTypeId: number;
+  createLocationDTO: Location;
+  date: Date;
+  agenda: Activity[];
+  emails: string[];
+  organizerId: number;
+}
+
+export interface EventBasicInformation {
+  name: string;
+  description: string;
+  maxNumberParticipants: number;
+  isPublic: boolean;
+  eventTypeId: number;
+  createLocationDTO: Location;
+  date: Date;
 }

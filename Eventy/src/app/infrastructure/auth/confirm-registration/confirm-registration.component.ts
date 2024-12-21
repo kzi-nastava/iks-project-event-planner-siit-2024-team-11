@@ -16,6 +16,7 @@ export class ConfirmRegistrationComponent {
         next: (response: AuthResponse) => {
           localStorage.setItem('user', response.accessToken);
           this.authService.setUser();
+          this.authService.setId(response.userId);
           this.router.navigate(['']);
         }
       });
