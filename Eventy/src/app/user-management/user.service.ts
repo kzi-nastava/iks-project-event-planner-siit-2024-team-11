@@ -25,6 +25,14 @@ export class UserService {
     return this.httpClient.get<User>(environment.apiHost + this.userProfilePrefix + "/" + id);
   }
 
+  edit() {
+
+  }
+
+  deactivate(id: number): any {
+    return this.httpClient.delete(environment.apiHost + this.userProfilePrefix + "/" + id);
+  }
+
   getMyEvents(): EventCard[] {
     // Event Types
     const weddingType: EventTypeForCards = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };

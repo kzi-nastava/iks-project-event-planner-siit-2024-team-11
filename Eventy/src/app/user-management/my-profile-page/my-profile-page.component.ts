@@ -6,6 +6,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {CalendarEvent} from 'angular-calendar';
 import {User} from '../model/users.model';
 import {AuthService} from '../../infrastructure/auth/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-profile-page',
@@ -24,7 +25,7 @@ export class MyProfilePageComponent {
   searchMyFavEvents: string;
   searchMyFavSolutions: string;
 
-  constructor(private userService: UserService, private authService: AuthService) {
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {
     this.myEvents = this.userService.getMyEvents();
     this.mySolutions = this.userService.getMySolutions();
 
@@ -191,5 +192,15 @@ export class MyProfilePageComponent {
 
   nextMonth(): void {
     this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() + 1));
+  }
+
+  deactivate(): void {
+    this.userService.deactivate(this.authService.getId()).subscribe({
+      next: () => {
+        localStorage.removeItem('user');
+        this.authService.setUser();
+        this.router.navigate(['login']);
+      }
+    });
   }
 }
