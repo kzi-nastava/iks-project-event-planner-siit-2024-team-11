@@ -18,7 +18,8 @@
   />
   <app-agenda-creation
     *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"
-    (AgendaEventEmitter)="collectAgenda($event)"/>
+    (AgendaEventEmitter)="collectAgenda($event)"
+    [minStartTime]="getStartMinDateForAgenda()"/>
   <app-invitations-sending
     *ngIf="eventOrganizationStage === EventOrganizationStage.INVITATIONS_SENDING"
     (invitedEmailsEventEmitter)="collectInvitedEmails($event)"

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {Activity} from '../model/events.model';
 import {provideNativeDateAdapter} from '@angular/material/core';
@@ -24,8 +24,8 @@ export class AgendaCreationComponent {
   displayedColumns: string[] = ['name', 'description', 'location', 'startTime', 'endTime'];
   agenda: Activity[] = [];
 
-  minStartTime: Date = new Date();
   @Output() AgendaEventEmitter = new EventEmitter<Activity[]>();
+  @Input() minStartTime!: Date;
 
   constructor(private dialog: MatDialog) {
   }

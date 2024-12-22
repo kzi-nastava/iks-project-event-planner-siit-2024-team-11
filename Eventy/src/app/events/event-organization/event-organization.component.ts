@@ -87,6 +87,10 @@ export class EventOrganizationComponent {
       this.selectedLatLng = address[1];
     }
 
+    getStartMinDateForAgenda(): Date {
+       return (this.basicInformationForm.controls['dateRange'] as FormGroup).controls['startDate'].value;
+    }
+
     submit(): void {
      let event: OrganizeEvent = {
        name: this.basicInformationForm.controls['name'].value,
