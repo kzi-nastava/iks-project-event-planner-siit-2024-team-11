@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {
   InvalidInputDataDialogComponent
 } from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
-import {Provider} from '../model/users.model';
+import {User} from '../model/users.model';
 
 @Component({
   selector: 'app-edit-provider-form',
@@ -15,7 +15,7 @@ import {Provider} from '../model/users.model';
 })
 export class EditProviderFormComponent implements OnInit{
   @Input()
-  user: Provider;
+  user: User;
 
   editForm: FormGroup;
 

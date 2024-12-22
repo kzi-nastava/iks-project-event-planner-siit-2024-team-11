@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {Organizer, Provider} from '../model/users.model';
 import {EventCard} from '../../events/model/event-card.model';
 import {UserService} from '../user.service';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
 import {PageEvent} from '@angular/material/paginator';
+import {User} from '../model/users.model';
 
 @Component({
   selector: 'app-other-user-profile-page',
@@ -11,14 +11,18 @@ import {PageEvent} from '@angular/material/paginator';
   styleUrl: './other-user-profile-page.component.css'
 })
 export class OtherUserProfilePageComponent {
-  user: (Organizer | Provider) = {
-    "profilePicture" : null,
+  user: User = {
+    id: 1,
+    userType: "org",
+    "profilePictures" : null,
     "firstName": "Tac Tac",
     "lastName": "Jezickovic",
     "email": "tactacjezickovic@doe.com",
     "password": "njamnjamjez",
     "address": "Najblizi zbunic za hibernaciju",
-    "phoneNumber": "+324 24 232 33"
+    "phoneNumber": "+324 24 232 33",
+    "name" : null,
+    "description" : null
   };
 
   myEvents: EventCard[];
@@ -38,17 +42,14 @@ export class OtherUserProfilePageComponent {
 
   getName(): string {
     if(this.isOrganizer()) {
-      this.user = (this.user as Organizer);
       return this.user.firstName + " " + this.user.lastName;
     }
 
-    this.user = (this.user as Provider);
     return this.user.name;
   }
 
   getDescription(): string {
     if(!this.isOrganizer()) {
-      this.user = (this.user as Provider);
       return this.user.description;
     }
 
@@ -57,9 +58,8 @@ export class OtherUserProfilePageComponent {
 
   getOrganizerProfilePicture(): string {
     if(this.isOrganizer()) {
-      this.user = (this.user as Organizer);
-      if(this.user.profilePicture) {
-        return this.user.profilePicture;
+      if(this.user.profilePictures) {
+        return this.user.profilePictures[0];
       }
 
       return "ProfilePicture.png";
@@ -72,7 +72,6 @@ export class OtherUserProfilePageComponent {
 
   getProviderProfilePictures(): string[] {
     if(!this.isOrganizer()) {
-      this.user = (this.user as Provider);
       if(this.user.profilePictures && this.user.profilePictures.length > 0) {
         return this.user.profilePictures;
       }

@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {
   InvalidInputDataDialogComponent
 } from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
-import {Organizer} from '../model/users.model';
+import {User} from '../model/users.model';
 
 @Component({
   selector: 'app-edit-user-form',
@@ -15,7 +15,7 @@ import {Organizer} from '../model/users.model';
 })
 export class EditUserFormComponent implements OnInit {
   @Input()
-  user: Organizer;
+  user: User;
 
   editForm : FormGroup;
 
@@ -25,7 +25,7 @@ export class EditUserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.editForm = new FormGroup({
-      profilePicture: new FormControl(this.user.profilePicture || 'ProfilePicture.png'),
+      profilePicture: new FormControl(this.user.profilePictures || 'ProfilePicture.png'),
       email : new FormControl({value: this.user.email, disabled: true }),
       oldPassword: new FormControl('', [Validators.required]),
       password : new FormControl('', [Validators.required]),

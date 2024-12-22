@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Organizer, Provider, User} from './model/users.model';
+import {User} from './model/users.model';
 import {EventCard} from '../events/model/event-card.model';
 import {EventTypeForCards} from '../events/model/event-type.model';
 import {Location} from '../events/model/location.model';
@@ -8,52 +8,21 @@ import {SolutionCard} from '../solutions/model/solution-card.model';
 import {ReservationConfirmationType, Service} from '../solutions/model/services.model';
 import {Status} from '../solutions/model/category.model';
 import {Product} from '../solutions/model/products.model';
+import {environment} from '../../env/constants';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private users : (Organizer | Provider | User)[] = [
-    {
-      email : "user1@gmail.com",
-      password : "password1",
-      address : "Neka Ulica 4",
-      phoneNumber : "05334564",
-      firstName : "Ime",
-      lastName : "Prezime"
-    },
-    {
-      email : "user2@gmail.com",
-      password : "password2",
-      address : "Jos Neka Ulica 28",
-      phoneNumber : "0493913438",
-      name : "Moja kompanija",
-      description : "Opis kompanije"
-    },
-    {
-      email : "user3@gmail.com",
-      password : "password3",
-      address : "Ulica Ovo 32",
-      phoneNumber : "+3224 3234 13"
-    }
-  ];
+  private readonly userProfilePrefix: string = "/api/users";
 
-  login(email : string, password : string) : User | Provider | Organizer | null {
-    for(let user of this.users) {
-      if(user.email === email && user.password === password ) {
-        return user;
-      }
-    }
-
-    return null;
+  constructor(private httpClient: HttpClient) {
   }
 
-  get(id: number): User {
-    return this.users[0];
-  }
-
-  register(newUser: (Organizer | Provider)) : void {
-    this.users.push(newUser);
+  get(id: number): Observable<User> {
+    return this.httpClient.get<User>(environment.apiHost + this.userProfilePrefix + "/" + id);
   }
 
   getMyEvents(): EventCard[] {

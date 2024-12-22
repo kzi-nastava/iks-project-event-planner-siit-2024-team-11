@@ -58,7 +58,8 @@ export class FastRegistrationComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      this.userService.register(this.registerForm.value);
+      // we can add normal register function here, or something specific, we will see
+      //this.userService.register(this.registerForm.value);
       this.router.navigate(['']);
     }
   }
