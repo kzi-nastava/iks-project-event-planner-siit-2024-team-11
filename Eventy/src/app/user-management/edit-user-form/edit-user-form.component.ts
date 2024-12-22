@@ -61,7 +61,10 @@ export class EditUserFormComponent implements OnInit {
       this.editForm.markAllAsTouched();
     } else {
       let user: UpdateUser = this.editForm.value as UpdateUser;
-      user.profilePictures = [this.editForm.controls['profilePicture'].value];
+      user.profilePictures = this.editForm.controls['profilePicture'].value;
+      user.email = this.user.email;
+      user.id = this.user.id;
+
       this.userService.edit(user).subscribe({
         next: () => {
           this.router.navigate(['/users', this.user.id]);

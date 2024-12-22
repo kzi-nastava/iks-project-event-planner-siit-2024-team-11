@@ -61,7 +61,10 @@ export class EditProviderFormComponent implements OnInit{
       this.editForm.updateValueAndValidity();
       this.editForm.markAllAsTouched();
     } else {
-      this.userService.edit(this.editForm.value as UpdateUser).subscribe({
+      let user: UpdateUser = this.editForm.value as UpdateUser;
+      user.email = this.user.email;
+      user.id = this.user.id;
+      this.userService.edit(user).subscribe({
         next: () => {
           this.router.navigate(['/users', this.user.id]);
         },
