@@ -6,7 +6,8 @@ import {Router} from '@angular/router';
 import {
   InvalidInputDataDialogComponent
 } from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
-import {User} from '../model/users.model';
+import {UpdateUser, User} from '../model/users.model';
+import {RegisterData} from '../../infrastructure/auth/model/register.model';
 
 @Component({
   selector: 'app-edit-user-form',
@@ -59,8 +60,21 @@ export class EditUserFormComponent implements OnInit {
       this.editForm.updateValueAndValidity();
       this.editForm.markAllAsTouched();
     } else {
-      // edit method from service
-      this.router.navigate(['/users', this.user.firstName + " " + this.user.lastName]);
+      let user: UpdateUser = this.editForm.value as UpdateUser;
+      user.profilePictures = [this.editForm.controls['profilePicture'].value];
+      this.userService.edit(user).subscribe({
+        next: () => {
+          this.router.navigate(['/users', this.user.id]);
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input",
+              message: "Invalid edit data"
+            }
+          });
+        }
+      });
     }
   }
 

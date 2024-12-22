@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {User} from './model/users.model';
+import {UpdateUser, User} from './model/users.model';
 import {EventCard} from '../events/model/event-card.model';
 import {EventTypeForCards} from '../events/model/event-type.model';
 import {Location} from '../events/model/location.model';
@@ -25,8 +25,8 @@ export class UserService {
     return this.httpClient.get<User>(environment.apiHost + this.userProfilePrefix + "/" + id);
   }
 
-  edit() {
-
+  edit(updateUser: UpdateUser): Observable<User> {
+    return this.httpClient.put<User>(environment.apiHost + this.userProfilePrefix, updateUser);
   }
 
   deactivate(id: number): any {

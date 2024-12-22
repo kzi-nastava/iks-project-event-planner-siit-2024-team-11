@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {
   InvalidInputDataDialogComponent
 } from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
-import {User} from '../model/users.model';
+import {UpdateUser, User} from '../model/users.model';
 
 @Component({
   selector: 'app-edit-provider-form',
@@ -61,8 +61,19 @@ export class EditProviderFormComponent implements OnInit{
       this.editForm.updateValueAndValidity();
       this.editForm.markAllAsTouched();
     } else {
-      // service edit method
-      this.router.navigate(['']);
+      this.userService.edit(this.editForm.value as UpdateUser).subscribe({
+        next: () => {
+          this.router.navigate(['/users', this.user.id]);
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input",
+              message: "Invalid edit data"
+            }
+          });
+        }
+      });
     }
   }
 
