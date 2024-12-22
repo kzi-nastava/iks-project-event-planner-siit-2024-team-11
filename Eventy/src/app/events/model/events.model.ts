@@ -64,7 +64,7 @@ export interface OrganizeEvent {
   maxNumberParticipants: number;
   isPublic: boolean;
   eventTypeId: number;
-  createLocationDTO: Location;
+  location: Location;
   date: Date;
   agenda: Activity[];
   emails: string[];

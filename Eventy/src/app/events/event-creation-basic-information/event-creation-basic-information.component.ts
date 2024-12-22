@@ -28,6 +28,7 @@ export class EventCreationBasicInformationComponent {
     currentMarker: L.Marker | undefined;
     @Input() selectedAddress!: string;
     readonly ftnCoordinates: [number, number] = [45.2445, 19.8484];
+    @Output() getAdress = new EventEmitter<[string, LatLng]>();
 
     constructor(private eventTypeService: EventTypeService) {
       this.eventTypeService.getActiveEventTypes().subscribe({
@@ -80,6 +81,7 @@ export class EventCreationBasicInformationComponent {
         .then(response => response.json())
         .then(data => {
           this.selectedAddress = data.display_name;
+          this.getAdress.emit([this.selectedAddress, this.selectedLatLng]);
         })
         .catch(error => console.error('Error fetching address:', error));
     }

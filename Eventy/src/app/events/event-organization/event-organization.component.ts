@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {EventsServiceService} from '../services/events/events-service.service';
-import {Activity, EventBasicInformation, OrganizeEvent} from '../model/events.model';
+import {Activity, OrganizeEvent} from '../model/events.model';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as L from 'leaflet';
+import {LatLng} from 'leaflet';
 
 enum EventOrganizationStage {
   BASIC_INFORMATION,
@@ -81,20 +82,25 @@ export class EventOrganizationComponent {
       this.agenda = activites;
     }
 
+    getAddress(address: [string, LatLng]): void {
+      this.selectedAddress = address[0];
+      this.selectedLatLng = address[1];
+    }
+
     submit(): void {
      let event: OrganizeEvent = {
        name: this.basicInformationForm.controls['name'].value,
        description: this.basicInformationForm.controls['description'].value,
        maxNumberParticipants: this.basicInformationForm.controls['maxNumberParticipants'].value,
        isPublic: this.basicInformationForm.controls['isPublic'].value,
-       eventTypeId: this.basicInformationForm.controls['eventTypeId'].value,
-       createLocationDTO: {
+       eventTypeId: this.basicInformationForm.controls['eventType'].value,
+       location: {
          name: this.selectedAddress,
          address: this.selectedAddress,
          latitude: this.selectedLatLng.lat,
          longitude: this.selectedLatLng.lng
        },
-       date: this.basicInformationForm.controls['dateRange'].value[0],
+       date: (this.basicInformationForm.controls['dateRange'] as FormGroup).controls['startDate'].value,
        agenda: this.agenda,
        emails: this.invitedEmails,
        organizerId: this.authService.getId()
