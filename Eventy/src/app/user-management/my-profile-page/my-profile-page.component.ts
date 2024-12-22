@@ -5,6 +5,7 @@ import {UserService} from '../user.service';
 import {PageEvent} from '@angular/material/paginator';
 import {CalendarEvent} from 'angular-calendar';
 import {User} from '../model/users.model';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-my-profile-page',
@@ -12,19 +13,7 @@ import {User} from '../model/users.model';
   styleUrl: './my-profile-page.component.css'
 })
 export class MyProfilePageComponent {
-  user: User = {
-    id: 1,
-    userType: "org",
-    "profilePictures" : null,
-    "firstName": "Tac Tac",
-    "lastName": "Jezickovic",
-    "email": "tactacjezickovic@doe.com",
-    "password": "njamnjamjez",
-    "address": "Najblizi zbunic za hibernaciju",
-    "phoneNumber": "+324 24 232 33",
-    "name" : null,
-    "description" : null
-  };
+  user: User;
 
   myEvents: EventCard[];
   mySolutions: SolutionCard[];
@@ -35,9 +24,15 @@ export class MyProfilePageComponent {
   searchMyFavEvents: string;
   searchMyFavSolutions: string;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private authService: AuthService) {
     this.myEvents = this.userService.getMyEvents();
     this.mySolutions = this.userService.getMySolutions();
+
+    this.userService.get(this.authService.getId()).subscribe({
+      next: (result: User) => {
+        this.user = result;
+      }
+    });
     // will create calendarEvents from events and solutions, but for now...
     this.calendarEvents = [
       {
