@@ -70,11 +70,11 @@ export class MyProfilePageComponent {
   }
 
   isOtherUser(): boolean {
-    return "firstName" in this.user && false;
+    return this.user.firstName != null && this.user.userType !== "ORGANIZER";
   }
 
   isOrganizer(): boolean {
-    return "firstName" in this.user && true;
+    return this.user.userType === "ORGANIZER";
   }
 
   isProvider(): boolean {
