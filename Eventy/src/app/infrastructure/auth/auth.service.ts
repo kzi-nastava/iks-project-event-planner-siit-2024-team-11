@@ -11,7 +11,7 @@ import {RegisterData} from './model/register.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private urlPrefix: string = "/api/authentication/";
+  private readonly urlPrefix: string = "/api/authentication/";
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -20,6 +20,8 @@ export class AuthService {
 
   user$ = new BehaviorSubject("");
   userState = this.user$.asObservable();
+
+  id: number = null;
 
   constructor(private http: HttpClient) {
     this.user$.next(this.getRole());
@@ -44,13 +46,21 @@ export class AuthService {
     });
   }
 
-  getRole(): any {
+  getRole(): string {
     if (this.isLoggedIn()) {
       const accessToken: any = localStorage.getItem('user');
       const helper = new JwtHelperService();
       return helper.decodeToken(accessToken).role;
     }
     return null;
+  }
+
+  setId(id: number): void {
+    this.id = id;
+  }
+
+  getId(): number {
+    return this.id;
   }
 
   isLoggedIn(): boolean {

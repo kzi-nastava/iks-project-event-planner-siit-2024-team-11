@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { EventCard } from '../../model/event-card.model';
-import { EventType } from '../../model/event-type.model';
+import { EventTypeForCards } from '../../model/event-type.model';
 import { Location } from '../../model/location.model';
-import { Event } from '../../model/events.model';
+import {Event, OrganizeEvent} from '../../model/events.model';
 import { PrivacyType } from '../../model/events.model';
-
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../env/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +15,20 @@ export class EventsServiceService {
   allEvents: EventCard[] = [];
   featuredEvents: EventCard[] = [];
 
-  constructor() {
+  private readonly urlPrefix: string = "/api/events";
+
+  constructor(private httpClient: HttpClient) {
     this.allEvents = this.getAllEvents();
     this.featuredEvents = this.getFeaturedEvents();
   }
 
   getAllEvents(): EventCard[] {
     // Event Types
-    const weddingType: EventType = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };
-    const conferenceType: EventType = { name: 'Conference', description: 'Professional gathering for knowledge exchange', isActive: true };
-    const concertType: EventType = { name: 'Concert', description: 'Live musical performance', isActive: true };
-    const partyType: EventType = { name: 'Party', description: 'A social gathering with music and dancing', isActive: true };
-    const meetingType: EventType = { name: 'Meeting', description: 'A formal gathering of individuals for a specific purpose', isActive: true };
+    const weddingType: EventTypeForCards = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };
+    const conferenceType: EventTypeForCards = { name: 'Conference', description: 'Professional gathering for knowledge exchange', isActive: true };
+    const concertType: EventTypeForCards = { name: 'Concert', description: 'Live musical performance', isActive: true };
+    const partyType: EventTypeForCards = { name: 'Party', description: 'A social gathering with music and dancing', isActive: true };
+    const meetingType: EventTypeForCards = { name: 'Meeting', description: 'A formal gathering of individuals for a specific purpose', isActive: true };
 
     // Locations
     const weddingLocation: Location = { name: 'Grand Hall', address: '123 Wedding St, Cityville', latitude: 40.7128, longitude: -74.0060 };
@@ -82,54 +86,54 @@ export class EventsServiceService {
       location: meetingLocation,
       eventType: meetingType
     }
-    
+
     return [
-      { 
+      {
         event: event1,
         organiser: "Tamara Jezickovic",
         organiserImage: "organiser1.jpg",
       },
-      { 
+      {
         event: event2,
         organiser: "Zeko Zekic",
         organiserImage: "organiser2.jpg",
       },
-      { 
+      {
         event: event3,
         organiser: "Taca Jezickovic",
         organiserImage: "organiser3.png",
       },
-      { 
+      {
         event: event4,
         organiser: "Veselin Jezickovic",
         organiserImage: "organiser4.jpg",
       },
-      { 
+      {
         event: event5,
         organiser: "Taca Jezic",
         organiserImage: "organiser5.jpg",
       },
-      { 
+      {
         event: event1,
         organiser: "Tamara Jezickovic",
         organiserImage: "organiser1.jpg",
       },
-      { 
+      {
         event: event2,
         organiser: "Zeko Zekic",
         organiserImage: "organiser2.jpg",
       },
-      { 
+      {
         event: event3,
         organiser: "Taca Jezickovic",
         organiserImage: "organiser3.png",
       },
-      { 
+      {
         event: event4,
         organiser: "Veselin Jezickovic",
         organiserImage: "organiser4.jpg",
       },
-      { 
+      {
         event: event5,
         organiser: "Taca Jezic",
         organiserImage: "organiser5.jpg",
@@ -139,11 +143,11 @@ export class EventsServiceService {
 
   getFeaturedEvents(): EventCard[] {
     // Event Types
-    const weddingType: EventType = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };
-    const conferenceType: EventType = { name: 'Conference', description: 'Professional gathering for knowledge exchange', isActive: true };
-    const concertType: EventType = { name: 'Concert', description: 'Live musical performance', isActive: true };
-    const partyType: EventType = { name: 'Party', description: 'A social gathering with music and dancing', isActive: true };
-    const meetingType: EventType = { name: 'Meeting', description: 'A formal gathering of individuals for a specific purpose', isActive: true };
+    const weddingType: EventTypeForCards = { name: 'Wedding', description: 'A celebration of marriage', isActive: true };
+    const conferenceType: EventTypeForCards = { name: 'Conference', description: 'Professional gathering for knowledge exchange', isActive: true };
+    const concertType: EventTypeForCards = { name: 'Concert', description: 'Live musical performance', isActive: true };
+    const partyType: EventTypeForCards = { name: 'Party', description: 'A social gathering with music and dancing', isActive: true };
+    const meetingType: EventTypeForCards = { name: 'Meeting', description: 'A formal gathering of individuals for a specific purpose', isActive: true };
 
     // Locations
     const weddingLocation: Location = { name: 'Grand Hall', address: '123 Wedding St, Cityville', latitude: 40.7128, longitude: -74.0060 };
@@ -201,33 +205,37 @@ export class EventsServiceService {
       location: meetingLocation,
       eventType: meetingType
     }
-    
+
     return [
-      { 
+      {
         event: event1,
         organiser: "Tamara Jezickovic",
         organiserImage: "organiser1.jpg",
       },
-      { 
+      {
         event: event2,
         organiser: "Zeko Zekic",
         organiserImage: "organiser2.jpg",
       },
-      { 
+      {
         event: event3,
         organiser: "Taca Jezickovic",
         organiserImage: "organiser3.png",
       },
-      { 
+      {
         event: event4,
         organiser: "Veselin Jezickovic",
         organiserImage: "organiser4.jpg",
       },
-      { 
+      {
         event: event5,
         organiser: "Taca Jezic",
         organiserImage: "organiser5.jpg",
       },
     ]
+  }
+
+  organizeEvent(event: OrganizeEvent): Observable<Event> {
+    return this.httpClient.post<Event>(environment.apiHost + this.urlPrefix, event);
   }
 }

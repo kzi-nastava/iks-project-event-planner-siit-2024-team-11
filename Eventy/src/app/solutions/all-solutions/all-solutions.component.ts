@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Service } from '../model/services.model';
 import { Product } from '../model/products.model';
-import { EventType } from '../../events/model/event-type.model';
+import { EventTypeForCards } from '../../events/model/event-type.model';
 import { SolutionCard } from '../model/solution-card.model';
 import { ReservationConfirmationType } from '../model/services.model';
 import { Status } from '../model/category.model';
@@ -18,7 +18,7 @@ import { SolutionsServiceService } from '../services/solutions/solutions-service
 export class AllSolutionsComponent {
   allSolutions: SolutionCard[];
   sortValue: string = "Category";
-  
+
   constructor(solutionsService: SolutionsServiceService) {
     this.allSolutions = solutionsService.getAllSolutions();
   }

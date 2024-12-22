@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <mat-paginator [length]="eventTypes.length" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+    <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
     </mat-paginator>
   </div>
 
@@ -37,8 +37,13 @@
       </span>
 
       <div>
-        <a mat-flat-button class="button" [routerLink]="['/edit-event-type', this.selectedEventType.name]"><mat-icon>edit</mat-icon>Edit</a>
-        <button mat-flat-button class="button deactivate-button" (click)="deleteType()"><mat-icon>delete</mat-icon>Deactivate</button>
+        <a mat-flat-button class="button" [routerLink]="['/edit-event-type', this.selectedEventType.id]"><mat-icon>edit</mat-icon>Edit</a>
+        <button *ngIf="selectedEventType.isActive" mat-flat-button class="button deactivate-button" (click)="toggleActivate()">
+          <mat-icon>delete</mat-icon>Deactivate
+        </button>
+        <button *ngIf="!selectedEventType.isActive" mat-flat-button class="button activate-button" (click)="toggleActivate()">
+          <mat-icon>add</mat-icon>Activate
+        </button>
       </div>
     </div>
 
@@ -51,7 +56,7 @@
     </p>
 
     <div class="category-container">
-      <div class="triplet-container" *ngFor="let triplet of getItemsTypesAsTriplets(selectedEventType.recommendedCategories)">
+      <div class="triplet-container" *ngFor="let triplet of getItemsTypesAsTriplets(selectedEventType.recommendedSolutionCategories)">
         <div class="category-card" *ngFor="let category of filterTriplet(triplet)">
           {{ category.name }}
         </div>

@@ -4,7 +4,7 @@ import { SolutionsServiceService } from '../solutions/services/solutions/solutio
 import { SolutionCard } from '../solutions/model/solution-card.model';
 import { Status } from '../solutions/model/category.model';
 import { ReservationConfirmationType } from '../solutions/model/services.model';
-import { EventType } from '../events/model/event-type.model';
+import { EventTypeForCards } from '../events/model/event-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,24 +39,24 @@ export class ServicesService {
       reservationType: ReservationConfirmationType.AUTOMATIC
     };
 
-    const eventType1 : EventType = {
+    const eventType1 : EventTypeForCards = {
       name: "Wedding",
       description: "A celebration of marriage, bringing families together to celebrate love and commitment.",
       isActive: true
     };
 
-    const eventType2 : EventType = {
+    const eventType2 : EventTypeForCards = {
       name: "Conference",
       description: "A professional gathering focused on knowledge sharing, networking, and industry discussions.",
       isActive: true
     }
 
-    const eventType3 : EventType = {
+    const eventType3 : EventTypeForCards = {
       name: "Concert",
       description: "A live musical performance featuring various artists or bands, offering an unforgettable entertainment experience.",
       isActive: true
     }
-    return { 
+    return {
       service: service1,
       product: undefined,
       provider: "Tamara Jezickovic",
