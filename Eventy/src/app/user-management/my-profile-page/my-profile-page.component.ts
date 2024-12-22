@@ -77,7 +77,7 @@ export class MyProfilePageComponent {
   }
 
   isProvider(): boolean {
-    return "name" in this.user;
+    return this.user.name != null;
   }
 
   getName(): string {
