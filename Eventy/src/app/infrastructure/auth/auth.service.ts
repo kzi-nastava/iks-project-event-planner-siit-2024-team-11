@@ -21,8 +21,6 @@ export class AuthService {
   user$ = new BehaviorSubject("");
   userState = this.user$.asObservable();
 
-  id: number = null;
-
   constructor(private http: HttpClient) {
     this.user$.next(this.getRole());
   }
@@ -55,12 +53,14 @@ export class AuthService {
     return null;
   }
 
-  setId(id: number): void {
-    this.id = id;
-  }
-
   getId(): number {
-    return this.id;
+    if (this.isLoggedIn()) {
+      const accessToken: any = localStorage.getItem('user');
+      const helper = new JwtHelperService();
+      return Number(helper.decodeToken(accessToken).id);
+    }
+
+    return null;
   }
 
   isLoggedIn(): boolean {
