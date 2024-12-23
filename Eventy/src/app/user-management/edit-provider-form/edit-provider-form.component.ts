@@ -66,7 +66,7 @@ export class EditProviderFormComponent implements OnInit{
       user.id = this.user.id;
       this.userService.edit(user).subscribe({
         next: () => {
-          this.router.navigate(['/users', this.user.id]);
+          this.router.navigate(['/profile']);
         },
         error: () => {
           this.dialog.open(InvalidInputDataDialogComponent, {
