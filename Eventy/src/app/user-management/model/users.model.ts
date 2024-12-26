@@ -26,3 +26,11 @@ export interface UpdateUser {
   address: string;
   phoneNumber: string;
 }
+
+export interface CalendarOccupancy {
+  title: string;
+  id: number;
+  occupancyType: "EVENT" | "PRODUCT" | "SERVICE";
+  occupationStartDate: Date;
+  occupationEndDate: Date;
+}

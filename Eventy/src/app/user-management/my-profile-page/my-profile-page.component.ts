@@ -4,9 +4,35 @@ import {SolutionCard} from '../../solutions/model/solution-card.model';
 import {UserService} from '../user.service';
 import {PageEvent} from '@angular/material/paginator';
 import {CalendarEvent} from 'angular-calendar';
-import {User} from '../model/users.model';
+import {CalendarOccupancy, User} from '../model/users.model';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 import {Router} from '@angular/router';
+
+interface ColorScheme {
+  primary: string;
+  secondary: string;
+}
+
+interface CalendarColors {
+  EVENT: ColorScheme;
+  PRODUCT: ColorScheme;
+  SERVICE: ColorScheme;
+}
+
+const calendarColors: CalendarColors = {
+  "EVENT": {
+    primary: "#808AAC",
+    secondary: "#bfc4d5"
+  },
+  "PRODUCT": {
+    primary: "#FAD609",
+    secondary: "#fdee9c"
+  },
+  "SERVICE": {
+    primary: "#DD79AE",
+    secondary: "#f4d6e6"
+  }
+}
 
 @Component({
   selector: 'app-my-profile-page',
@@ -34,39 +60,23 @@ export class MyProfilePageComponent {
         this.user = result;
       }
     });
-    // will create calendarEvents from events and solutions, but for now...
-    this.calendarEvents = [
-      {
-        id: 1,
-        start: new Date(),
-        end: new Date(),
-        title: 'Today’s Event',
-        color: {
-          primary: "#808AAC",
-          secondary: "#bfc4d5"
-        }
-      },
-      {
-        id: 2,
-        start: new Date(new Date().setDate(new Date().getDate() + 2)),
-        end: new Date(new Date().setDate(new Date().getDate() + 4)),
-        title: 'Event in Two Days Product',
-        color: {
-          primary: "#FAD609",
-          secondary: "#fdee9c"
-        }
-      },
-      {
-        id: 3,
-        start: new Date(new Date().setDate(new Date().getDate() + 10)),
-        end: new Date(new Date().setDate(new Date().getDate() + 10)),
-        title: 'Last Event Service',
-        color: {
-          primary: "#DD79AE",
-          secondary: "#f4d6e6"
-        }
-      },
-    ];
+
+    let endOfCalendarDate: Date = this.viewDate;
+    endOfCalendarDate.setDate(endOfCalendarDate.getDate() + 35);
+
+    this.userService.getMyCalendar(this.authService.getId(), this.viewDate, endOfCalendarDate).subscribe({
+      next: (resultOccupancies: CalendarOccupancy[]) => {
+        resultOccupancies.forEach(occupancy => {
+          this.calendarEvents.push({
+            id: occupancy.id,
+            start: occupancy.occupationStartDate,
+            end: occupancy.occupationEndDate,
+            title: occupancy.title,
+            color: calendarColors[occupancy.occupancyType]
+          })
+        });
+      }
+    });
   }
 
   isOtherUser(): boolean {

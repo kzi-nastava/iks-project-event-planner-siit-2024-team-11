@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {UpdateUser, User} from './model/users.model';
+import {CalendarOccupancy, UpdateUser, User} from './model/users.model';
 import {EventCard} from '../events/model/event-card.model';
 import {EventTypeForCards} from '../events/model/event-type.model';
 import {Location} from '../events/model/location.model';
@@ -10,7 +10,7 @@ import {Status} from '../solutions/model/category.model';
 import {Product} from '../solutions/model/products.model';
 import {environment} from '../../env/constants';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,19 @@ export class UserService {
 
   deactivate(id: number): any {
     return this.httpClient.delete(environment.apiHost + this.userProfilePrefix + "/" + id);
+  }
+
+  // ADD START AND END DATE PARAMS!!! EXAMPLE EXISTS SOMEWHERE, MAYBE ON GET EVENT TYPES
+  getMyCalendar(id: number, startDate: Date, endDate: Date): Observable<CalendarOccupancy[]> {
+    let params = new HttpParams();
+
+    if(startDate && endDate) {
+      params = params
+        .set('startDate', startDate.toString())
+        .set('endDate', endDate.toString()); // will this as a string work?
+    }
+
+    return this.httpClient.get<CalendarOccupancy[]>(environment.apiHost + this.userProfilePrefix + "/" + id + "/calendar", { params: params });
   }
 
   getMyEvents(): EventCard[] {
