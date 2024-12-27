@@ -42,10 +42,10 @@ const calendarColors: CalendarColors = {
 export class MyProfilePageComponent {
   user: User;
 
-  myEvents: EventCard[];
-  mySolutions: SolutionCard[];
+  myEvents: EventCard[] = [];
+  mySolutions: SolutionCard[] = [];
 
-  calendarEvents: CalendarEvent[];
+  calendarEvents: CalendarEvent[] = [];
 
   searchMyEventsSolutions: string;
   searchMyFavEvents: string;
@@ -61,22 +61,7 @@ export class MyProfilePageComponent {
       }
     });
 
-    let endOfCalendarDate: Date = this.viewDate;
-    endOfCalendarDate.setDate(endOfCalendarDate.getDate() + 35);
-
-    this.userService.getMyCalendar(this.authService.getId(), this.viewDate, endOfCalendarDate).subscribe({
-      next: (resultOccupancies: CalendarOccupancy[]) => {
-        resultOccupancies.forEach(occupancy => {
-          this.calendarEvents.push({
-            id: occupancy.id,
-            start: occupancy.occupationStartDate,
-            end: occupancy.occupationEndDate,
-            title: occupancy.title,
-            color: calendarColors[occupancy.occupancyType]
-          })
-        });
-      }
-    });
+    this.fetchCalendarOccupancies();
   }
 
   isOtherUser(): boolean {
@@ -198,10 +183,48 @@ export class MyProfilePageComponent {
 
   previousMonth(): void {
     this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() - 1));
+    this.fetchCalendarOccupancies();
   }
 
   nextMonth(): void {
     this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() + 1));
+    this.fetchCalendarOccupancies();
+  }
+
+  fetchCalendarOccupancies(): void {
+    let [startDate, endDate] = this.calculateFirstAndLastDates();
+
+    this.userService.getMyCalendar(this.authService.getId(), startDate, endDate).subscribe({
+      next: (resultOccupancies: CalendarOccupancy[]) => {
+        this.calendarEvents = [];
+
+        resultOccupancies.forEach(occupancy => {
+          this.calendarEvents.push({
+            id: occupancy.id,
+            start: new Date(occupancy.occupationStartDate),
+            end: new Date(occupancy.occupationEndDate),
+            title: occupancy.title,
+            color: calendarColors[occupancy.occupancyType]
+          })
+        });
+
+        this.calendarEvents = [...this.calendarEvents];
+      }
+    });
+  }
+
+  private calculateFirstAndLastDates(): [Date, Date] {
+    const startOfMonth = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
+    const startDayOfWeek = startOfMonth.getDay();
+    const firstDate = new Date(startOfMonth);
+    firstDate.setDate(firstDate.getDate() - startDayOfWeek);
+
+    const endOfMonth = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
+    const endDayOfWeek = endOfMonth.getDay();
+    const lastDate = new Date(endOfMonth);
+    lastDate.setDate(lastDate.getDate() + (6 - endDayOfWeek));
+
+    return [firstDate, lastDate];
   }
 
   deactivate(): void {

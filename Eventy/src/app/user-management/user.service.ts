@@ -11,6 +11,7 @@ import {Product} from '../solutions/model/products.model';
 import {environment} from '../../env/constants';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {formatDate} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +39,12 @@ export class UserService {
     let params = new HttpParams();
 
     if(startDate && endDate) {
+      const formattedStartDate = formatDate(startDate, 'yyyy-MM-dd', 'en-US');
+      const formattedEndDate = formatDate(endDate, 'yyyy-MM-dd', 'en-US');
+
       params = params
-        .set('startDate', startDate.toString())
-        .set('endDate', endDate.toString()); // will this as a string work?
+        .set('startDate', formattedStartDate)
+        .set('endDate', formattedEndDate);
     }
 
     return this.httpClient.get<CalendarOccupancy[]>(environment.apiHost + this.userProfilePrefix + "/" + id + "/calendar", { params: params });
