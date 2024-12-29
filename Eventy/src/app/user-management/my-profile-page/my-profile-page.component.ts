@@ -7,6 +7,8 @@ import {CalendarEvent} from 'angular-calendar';
 import {CalendarOccupancy, User} from '../model/users.model';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 import {Router} from '@angular/router';
+import {PagedResponse} from '../../shared/model/paged-response.model';
+import {EventTypeCard} from '../../events/model/events.model';
 
 interface ColorScheme {
   primary: string;
@@ -44,6 +46,8 @@ export class MyProfilePageComponent {
 
   myEvents: EventCard[] = [];
   mySolutions: SolutionCard[] = [];
+  favEvents: EventCard[] = [];
+  favSolutions: SolutionCard[] = [];
 
   calendarEvents: CalendarEvent[] = [];
 
@@ -52,12 +56,13 @@ export class MyProfilePageComponent {
   searchMyFavSolutions: string;
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {
-    this.myEvents = this.userService.getMyEvents();
-    this.mySolutions = this.userService.getMySolutions();
-
     this.userService.get(this.authService.getId()).subscribe({
       next: (result: User) => {
         this.user = result;
+
+        this.fetchMyEventsSolutions();
+        this.fetchFavEvents();
+        this.fetchFavSolutions();
       }
     });
 
@@ -138,37 +143,101 @@ export class MyProfilePageComponent {
     return (solutionCard.service === undefined);
   }
 
+  myEventsSolutionsPageSize: number = 3;
+  myEventsSolutionsCurrentPage: number = 0;
+  myEventsSolutionsTotalCount: number = 0;
+
   searchMyStuff(): void {
-    // search
+    this.myEventsSolutionsCurrentPage = 0;
+    this.fetchMyEventsSolutions();
     this.searchMyEventsSolutions = "";
   }
 
+  onMyEventsSolutionsPageChange(event: PageEvent): void {
+    this.myEventsSolutionsPageSize = event.pageSize;
+    this.myEventsSolutionsCurrentPage = event.pageIndex;
+    this.fetchMyEventsSolutions();
+  }
+
+  private fetchMyEventsSolutions(): void {
+    if (this.user.userType === "ORGANIZER") {
+      this.userService.getMyEvents(this.user.id, this.searchMyEventsSolutions, {
+        page: this.myEventsSolutionsCurrentPage,
+        size: this.myEventsSolutionsPageSize,
+      }).subscribe({
+        next: (result: PagedResponse<EventCard>) => {
+          this.myEvents = result.content;
+          this.myEventsSolutionsTotalCount = result.totalElements;
+        }
+      });
+    }
+    else if(this.user.userType === "PROVIDER") {
+      this.userService.getMySolutions(this.user.id, this.searchMyEventsSolutions, {
+        page: this.myEventsSolutionsCurrentPage,
+        size: this.myEventsSolutionsPageSize,
+      }).subscribe({
+        next: (result: PagedResponse<SolutionCard>) => {
+          this.mySolutions = result.content;
+          this.myEventsSolutionsTotalCount = result.totalElements;
+        }
+      });
+    }
+  }
+
+  favEventsPageSize: number = 3;
+  favEventsCurrentPage: number = 0;
+  favEventsTotalCount: number = 0;
+
   searchFavEvents(): void {
-    // search
+    this.favEventsCurrentPage = 0;
+    this.fetchFavEvents();
     this.searchMyFavEvents = "";
   }
 
+  onFavEventsPageChange(event: PageEvent): void {
+    this.favEventsPageSize = event.pageSize;
+    this.favEventsCurrentPage = event.pageIndex;
+    this.fetchFavEvents();
+  }
+
+  private fetchFavEvents(): void {
+    this.userService.getMyFavoriteEvents(this.user.id, this.searchMyFavEvents, {
+      page: this.favEventsCurrentPage,
+      size: this.favEventsPageSize
+    }).subscribe({
+      next: (result: PagedResponse<EventCard>) => {
+        this.favEvents = result.content;
+        this.favEventsTotalCount = result.totalElements;
+      }
+    });
+  }
+
+  favSolutionsPageSize: number = 3;
+  favSolutionsCurrentPage: number = 0;
+  favSolutionsTotalCount: number = 0;
+
   searchFavSolutions(): void {
+    this.favSolutionsCurrentPage = 0;
+    this.fetchFavSolutions();
     this.searchMyFavSolutions = "";
   }
 
-  pageSize: number = 3;
-  currentPage: number = 0;
-
-  getPaginatorItemsLength(): number {
-    return this.isOrganizer() ? this.myEvents.length : this.mySolutions.length;
+  onFavSolutionsPageChange(event: PageEvent): void {
+    this.favSolutionsPageSize = event.pageSize;
+    this.favSolutionsCurrentPage = event.pageIndex;
+    this.fetchFavSolutions();
   }
 
-  onPageChange(event: PageEvent): void {
-    this.pageSize = event.pageSize;
-    this.currentPage = event.pageIndex;
-    this.updatePaginatedEventTypes();
-  }
-
-  private updatePaginatedEventTypes(): void {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    // service call
+  private fetchFavSolutions(): void {
+    this.userService.getMyFavoriteSolutions(this.user.id, this.searchMyFavSolutions, {
+      page: this.favSolutionsCurrentPage,
+      size: this.favSolutionsPageSize
+    }).subscribe({
+      next: (result: PagedResponse<SolutionCard>) => {
+        this.favSolutions = result.content;
+        this.favSolutionsTotalCount = result.totalElements;
+      }
+    });
   }
 
   viewDate: Date = new Date();
