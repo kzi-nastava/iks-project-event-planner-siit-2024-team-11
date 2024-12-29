@@ -2,27 +2,27 @@
   <img src="logo-background.png" alt="Eventy logo" />
 </a>
 <mat-nav-list>
-<!--  <a class="sidenav-link" [routerLink]="['']" (click)="drawer.toggle()"><mat-icon>home</mat-icon> Home</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['login']" (click)="drawer.toggle()"><mat-icon>badge</mat-icon> Login</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['register']" (click)="drawer.toggle()"><mat-icon>person_add</mat-icon> Register</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['organize-event']" (click)="drawer.toggle()"><mat-icon>event_note</mat-icon> Organize Event</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['add-service']" (click)="drawer.toggle()"><mat-icon>face</mat-icon> Add Service</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['event-types']" (click)="drawer.toggle()"><mat-icon>theater_comedy</mat-icon> Event Types</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['my-services']" (click)="drawer.toggle()"><mat-icon>sentiment_very_satisfied</mat-icon> My services</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['solution-categories']" (click)="drawer.toggle()"><mat-icon>hardware</mat-icon> Solution categories</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['create-reservation']" (click)="drawer.toggle()"><mat-icon>event_available</mat-icon> Create Reservation</a>-->
-<!--  <a class="sidenav-link" [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>-->
-  <!-- TO-DO: TAKE A GOOD LOOK HERE EVERYONE, MAYBE I ADDED SOME WRONG ROLE CHECK, CHECK YOUR PAGES -->
   <a class="sidenav-link" [routerLink]="['']" (click)="drawer.toggle()"><mat-icon>home</mat-icon> Home</a>
-  <a class="sidenav-link" *ngIf="role === null" [routerLink]="['login']" (click)="drawer.toggle()"><mat-icon>badge</mat-icon> Login</a>
-  <a class="sidenav-link" *ngIf="role === null" [routerLink]="['register']" (click)="drawer.toggle()"><mat-icon>person_add</mat-icon> Register</a>
-  <a class="sidenav-link" *ngIf="role === 'ROLE_Organizer'" [routerLink]="['organize-event']" (click)="drawer.toggle()"><mat-icon>event_note</mat-icon> Organize Event</a>
-  <a class="sidenav-link" *ngIf="role === 'ROLE_Provider'" [routerLink]="['add-service']" (click)="drawer.toggle()"><mat-icon>face</mat-icon> Add Service</a>
-  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin'" [routerLink]="['event-types']" (click)="drawer.toggle()"><mat-icon>theater_comedy</mat-icon> Event Types</a>
-  <a class="sidenav-link" *ngIf="role === 'ROLE_Provider'" [routerLink]="['my-services']" (click)="drawer.toggle()"><mat-icon>sentiment_very_satisfied</mat-icon> My services</a>
-  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin'" [routerLink]="['solution-categories']" (click)="drawer.toggle()"><mat-icon>hardware</mat-icon> Solution categories</a>
-  <a class="sidenav-link" *ngIf="role === 'ROLE_Organizer'" [routerLink]="['create-reservation']" (click)="drawer.toggle()"><mat-icon>event_available</mat-icon> Create Reservation</a>
-  <a class="sidenav-link" *ngIf="role === null"  [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>
-  <a class="sidenav-link" *ngIf="role === 'ROLE_AuthenticatedUser'" [routerLink]="['upgrade-profile']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Upgrade Profile</a>
+  <a class="sidenav-link" [routerLink]="['login']" (click)="drawer.toggle()"><mat-icon>badge</mat-icon> Login</a>
+  <a class="sidenav-link" [routerLink]="['register']" (click)="drawer.toggle()"><mat-icon>person_add</mat-icon> Register</a>
+  <a class="sidenav-link" [routerLink]="['organize-event']" (click)="drawer.toggle()"><mat-icon>event_note</mat-icon> Organize Event</a>
+  <a class="sidenav-link" [routerLink]="['add-service']" (click)="drawer.toggle()"><mat-icon>face</mat-icon> Add Service</a>
+  <a class="sidenav-link" [routerLink]="['event-types']" (click)="drawer.toggle()"><mat-icon>theater_comedy</mat-icon> Event Types</a>
+  <a class="sidenav-link" [routerLink]="['my-services']" (click)="drawer.toggle()"><mat-icon>sentiment_very_satisfied</mat-icon> My services</a>
+  <a class="sidenav-link" [routerLink]="['solution-categories']" (click)="drawer.toggle()"><mat-icon>hardware</mat-icon> Solution categories</a>
+  <a class="sidenav-link" [routerLink]="['create-reservation']" (click)="drawer.toggle()"><mat-icon>event_available</mat-icon> Create Reservation</a>
+  <a class="sidenav-link" [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>
+  <!-- TO-DO: TAKE A GOOD LOOK HERE EVERYONE, MAYBE I ADDED SOME WRONG ROLE CHECK, CHECK YOUR PAGES -->
+<!--  <a class="sidenav-link" [routerLink]="['']" (click)="drawer.toggle()"><mat-icon>home</mat-icon> Home</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === null" [routerLink]="['login']" (click)="drawer.toggle()"><mat-icon>badge</mat-icon> Login</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === null" [routerLink]="['register']" (click)="drawer.toggle()"><mat-icon>person_add</mat-icon> Register</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Organizer'" [routerLink]="['organize-event']" (click)="drawer.toggle()"><mat-icon>event_note</mat-icon> Organize Event</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Provider'" [routerLink]="['add-service']" (click)="drawer.toggle()"><mat-icon>face</mat-icon> Add Service</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin'" [routerLink]="['event-types']" (click)="drawer.toggle()"><mat-icon>theater_comedy</mat-icon> Event Types</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Provider'" [routerLink]="['my-services']" (click)="drawer.toggle()"><mat-icon>sentiment_very_satisfied</mat-icon> My services</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin'" [routerLink]="['solution-categories']" (click)="drawer.toggle()"><mat-icon>hardware</mat-icon> Solution categories</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Organizer'" [routerLink]="['create-reservation']" (click)="drawer.toggle()"><mat-icon>event_available</mat-icon> Create Reservation</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === null"  [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>-->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_AuthenticatedUser'" [routerLink]="['upgrade-profile']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Upgrade Profile</a>-->
 </mat-nav-list>
 
