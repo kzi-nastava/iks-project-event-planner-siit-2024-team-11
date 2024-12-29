@@ -20,6 +20,7 @@ import { CreateReservationComponent } from './services/create-reservation/create
 import { FastRegistrationComponent } from './infrastructure/auth/fast-registration/fast-registration.component';
 import {AuthGuard} from './infrastructure/auth/auth.guard';
 import {ConfirmRegistrationComponent} from './infrastructure/auth/confirm-registration/confirm-registration.component';
+import {UpgradeProfileComponent} from './user-management/upgrade-profile/upgrade-profile.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'profile/edit', component: EditUserComponent},
   {path: 'profile', component: MyProfilePageComponent},
   {path: 'create-reservation', component: CreateReservationComponent},
+  {path: 'upgrade-profile', component: UpgradeProfileComponent},
   {path: 'fast-registration', component: FastRegistrationComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
@@ -68,6 +70,8 @@ const routes: Routes = [
   //   data: {role: ['ROLE_Provider', 'ROLE_Organizer', 'ROLE_AuthenticatedUser', 'ROLE_Admin']}},
   // {path: 'create-reservation', component: CreateReservationComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_Organizer']}},
+  // {path: 'upgrade-profile', component: UpgradeProfileComponent, canActivate: [AuthGuard],
+  //     data: {role: ['ROLE_AuthenticatedUser']}},
   // {path: 'fast-registration', component: FastRegistrationComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_AuthenticatedUser']}},
   // {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard],
