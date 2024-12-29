@@ -1,10 +1,40 @@
 import {Component} from '@angular/core';
-import {Organizer, Provider} from '../model/users.model';
 import {EventCard} from '../../events/model/event-card.model';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
 import {UserService} from '../user.service';
 import {PageEvent} from '@angular/material/paginator';
 import {CalendarEvent} from 'angular-calendar';
+import {CalendarOccupancy, User} from '../model/users.model';
+import {AuthService} from '../../infrastructure/auth/auth.service';
+import {Router} from '@angular/router';
+import {PagedResponse} from '../../shared/model/paged-response.model';
+import {EventTypeCard} from '../../events/model/events.model';
+
+interface ColorScheme {
+  primary: string;
+  secondary: string;
+}
+
+interface CalendarColors {
+  EVENT: ColorScheme;
+  PRODUCT: ColorScheme;
+  SERVICE: ColorScheme;
+}
+
+const calendarColors: CalendarColors = {
+  "EVENT": {
+    primary: "#808AAC",
+    secondary: "#bfc4d5"
+  },
+  "PRODUCT": {
+    primary: "#FAD609",
+    secondary: "#fdee9c"
+  },
+  "SERVICE": {
+    primary: "#DD79AE",
+    secondary: "#f4d6e6"
+  }
+}
 
 @Component({
   selector: 'app-my-profile-page',
@@ -12,88 +42,55 @@ import {CalendarEvent} from 'angular-calendar';
   styleUrl: './my-profile-page.component.css'
 })
 export class MyProfilePageComponent {
-  user: (Organizer | Provider) = {
-    "profilePicture" : null,
-    "firstName": "Tac Tac",
-    "lastName": "Jezickovic",
-    "email": "tactacjezickovic@doe.com",
-    "password": "njamnjamjez",
-    "address": "Najblizi zbunic za hibernaciju",
-    "phoneNumber": "+324 24 232 33"
-  };
+  user: User;
 
-  myEvents: EventCard[];
-  mySolutions: SolutionCard[];
+  myEvents: EventCard[] = [];
+  mySolutions: SolutionCard[] = [];
+  favEvents: EventCard[] = [];
+  favSolutions: SolutionCard[] = [];
 
-  calendarEvents: CalendarEvent[];
+  calendarEvents: CalendarEvent[] = [];
 
   searchMyEventsSolutions: string;
   searchMyFavEvents: string;
   searchMyFavSolutions: string;
 
-  constructor(private userService: UserService) {
-    this.myEvents = this.userService.getMyEvents();
-    this.mySolutions = this.userService.getMySolutions();
-    // will create calendarEvents from events and solutions, but for now...
-    this.calendarEvents = [
-      {
-        id: 1,
-        start: new Date(),
-        end: new Date(),
-        title: 'Today’s Event',
-        color: {
-          primary: "#808AAC",
-          secondary: "#bfc4d5"
-        }
-      },
-      {
-        id: 2,
-        start: new Date(new Date().setDate(new Date().getDate() + 2)),
-        end: new Date(new Date().setDate(new Date().getDate() + 4)),
-        title: 'Event in Two Days Product',
-        color: {
-          primary: "#FAD609",
-          secondary: "#fdee9c"
-        }
-      },
-      {
-        id: 3,
-        start: new Date(new Date().setDate(new Date().getDate() + 10)),
-        end: new Date(new Date().setDate(new Date().getDate() + 10)),
-        title: 'Last Event Service',
-        color: {
-          primary: "#DD79AE",
-          secondary: "#f4d6e6"
-        }
-      },
-    ];
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {
+    this.userService.get(this.authService.getId()).subscribe({
+      next: (result: User) => {
+        this.user = result;
+
+        this.fetchMyEventsSolutions();
+        this.fetchFavEvents();
+        this.fetchFavSolutions();
+      }
+    });
+
+    this.fetchCalendarOccupancies();
   }
 
   isOtherUser(): boolean {
-    return "firstName" in this.user && false;
+    return this.user.firstName != null && this.user.userType !== "ORGANIZER";
   }
 
   isOrganizer(): boolean {
-    return "firstName" in this.user && true;
+    return this.user.userType === "ORGANIZER";
   }
 
   isProvider(): boolean {
-    return "name" in this.user;
+    return this.user.name != null;
   }
 
   getName(): string {
     if(this.isOrganizer()) {
-      this.user = (this.user as Organizer);
       return this.user.firstName + " " + this.user.lastName;
     }
 
-    this.user = (this.user as Provider);
     return this.user.name;
   }
 
   getDescription(): string {
     if(!this.isOrganizer()) {
-      this.user = (this.user as Provider);
       return this.user.description;
     }
 
@@ -102,9 +99,8 @@ export class MyProfilePageComponent {
 
   getUserProfilePicture(): string {
     if(this.isOrganizer() || this.isOtherUser()) {
-      this.user = (this.user as Organizer);
-      if(this.user.profilePicture) {
-        return this.user.profilePicture;
+      if(this.user.profilePictures) {
+        return this.user.profilePictures[0];
       }
 
       return "ProfilePicture.png";
@@ -117,7 +113,6 @@ export class MyProfilePageComponent {
 
   getProviderProfilePictures(): string[] {
     if(!this.isOrganizer()) {
-      this.user = (this.user as Provider);
       if(this.user.profilePictures && this.user.profilePictures.length > 0) {
         return this.user.profilePictures;
       }
@@ -148,37 +143,101 @@ export class MyProfilePageComponent {
     return (solutionCard.service === undefined);
   }
 
+  myEventsSolutionsPageSize: number = 3;
+  myEventsSolutionsCurrentPage: number = 0;
+  myEventsSolutionsTotalCount: number = 0;
+
   searchMyStuff(): void {
-    // search
+    this.myEventsSolutionsCurrentPage = 0;
+    this.fetchMyEventsSolutions();
     this.searchMyEventsSolutions = "";
   }
 
+  onMyEventsSolutionsPageChange(event: PageEvent): void {
+    this.myEventsSolutionsPageSize = event.pageSize;
+    this.myEventsSolutionsCurrentPage = event.pageIndex;
+    this.fetchMyEventsSolutions();
+  }
+
+  private fetchMyEventsSolutions(): void {
+    if (this.user.userType === "ORGANIZER") {
+      this.userService.getMyEvents(this.user.id, this.searchMyEventsSolutions, {
+        page: this.myEventsSolutionsCurrentPage,
+        size: this.myEventsSolutionsPageSize,
+      }).subscribe({
+        next: (result: PagedResponse<EventCard>) => {
+          this.myEvents = result.content;
+          this.myEventsSolutionsTotalCount = result.totalElements;
+        }
+      });
+    }
+    else if(this.user.userType === "PROVIDER") {
+      this.userService.getMySolutions(this.user.id, this.searchMyEventsSolutions, {
+        page: this.myEventsSolutionsCurrentPage,
+        size: this.myEventsSolutionsPageSize,
+      }).subscribe({
+        next: (result: PagedResponse<SolutionCard>) => {
+          this.mySolutions = result.content;
+          this.myEventsSolutionsTotalCount = result.totalElements;
+        }
+      });
+    }
+  }
+
+  favEventsPageSize: number = 3;
+  favEventsCurrentPage: number = 0;
+  favEventsTotalCount: number = 0;
+
   searchFavEvents(): void {
-    // search
+    this.favEventsCurrentPage = 0;
+    this.fetchFavEvents();
     this.searchMyFavEvents = "";
   }
 
+  onFavEventsPageChange(event: PageEvent): void {
+    this.favEventsPageSize = event.pageSize;
+    this.favEventsCurrentPage = event.pageIndex;
+    this.fetchFavEvents();
+  }
+
+  private fetchFavEvents(): void {
+    this.userService.getMyFavoriteEvents(this.user.id, this.searchMyFavEvents, {
+      page: this.favEventsCurrentPage,
+      size: this.favEventsPageSize
+    }).subscribe({
+      next: (result: PagedResponse<EventCard>) => {
+        this.favEvents = result.content;
+        this.favEventsTotalCount = result.totalElements;
+      }
+    });
+  }
+
+  favSolutionsPageSize: number = 3;
+  favSolutionsCurrentPage: number = 0;
+  favSolutionsTotalCount: number = 0;
+
   searchFavSolutions(): void {
+    this.favSolutionsCurrentPage = 0;
+    this.fetchFavSolutions();
     this.searchMyFavSolutions = "";
   }
 
-  pageSize: number = 3;
-  currentPage: number = 0;
-
-  getPaginatorItemsLength(): number {
-    return this.isOrganizer() ? this.myEvents.length : this.mySolutions.length;
+  onFavSolutionsPageChange(event: PageEvent): void {
+    this.favSolutionsPageSize = event.pageSize;
+    this.favSolutionsCurrentPage = event.pageIndex;
+    this.fetchFavSolutions();
   }
 
-  onPageChange(event: PageEvent): void {
-    this.pageSize = event.pageSize;
-    this.currentPage = event.pageIndex;
-    this.updatePaginatedEventTypes();
-  }
-
-  private updatePaginatedEventTypes(): void {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    // service call
+  private fetchFavSolutions(): void {
+    this.userService.getMyFavoriteSolutions(this.user.id, this.searchMyFavSolutions, {
+      page: this.favSolutionsCurrentPage,
+      size: this.favSolutionsPageSize
+    }).subscribe({
+      next: (result: PagedResponse<SolutionCard>) => {
+        this.favSolutions = result.content;
+        this.favSolutionsTotalCount = result.totalElements;
+      }
+    });
   }
 
   viewDate: Date = new Date();
@@ -193,9 +252,57 @@ export class MyProfilePageComponent {
 
   previousMonth(): void {
     this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() - 1));
+    this.fetchCalendarOccupancies();
   }
 
   nextMonth(): void {
     this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() + 1));
+    this.fetchCalendarOccupancies();
+  }
+
+  fetchCalendarOccupancies(): void {
+    let [startDate, endDate] = this.calculateFirstAndLastDates();
+
+    this.userService.getMyCalendar(this.authService.getId(), startDate, endDate).subscribe({
+      next: (resultOccupancies: CalendarOccupancy[]) => {
+        this.calendarEvents = [];
+
+        resultOccupancies.forEach(occupancy => {
+          this.calendarEvents.push({
+            id: occupancy.id,
+            start: new Date(occupancy.occupationStartDate),
+            end: new Date(occupancy.occupationEndDate),
+            title: occupancy.title,
+            color: calendarColors[occupancy.occupancyType]
+          })
+        });
+
+        this.calendarEvents = [...this.calendarEvents];
+      }
+    });
+  }
+
+  private calculateFirstAndLastDates(): [Date, Date] {
+    const startOfMonth = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
+    const startDayOfWeek = startOfMonth.getDay();
+    const firstDate = new Date(startOfMonth);
+    firstDate.setDate(firstDate.getDate() - startDayOfWeek);
+
+    const endOfMonth = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
+    const endDayOfWeek = endOfMonth.getDay();
+    const lastDate = new Date(endOfMonth);
+    lastDate.setDate(lastDate.getDate() + (6 - endDayOfWeek));
+
+    return [firstDate, lastDate];
+  }
+
+  deactivate(): void {
+    this.userService.deactivate(this.authService.getId()).subscribe({
+      next: () => {
+        localStorage.removeItem('user');
+        this.authService.setUser();
+        this.router.navigate(['login']);
+      }
+    });
   }
 }

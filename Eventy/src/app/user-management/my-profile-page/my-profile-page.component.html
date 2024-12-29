@@ -25,7 +25,7 @@
 
       <div class="basic-info-buttons">
         <button mat-flat-button class="button" [routerLink]="['/profile', 'edit']"><mat-icon>edit</mat-icon> Edit</button>
-        <button mat-flat-button class="button negative-button"><mat-icon>delete</mat-icon> Deactivate account</button>
+        <button mat-flat-button class="button negative-button" (click)="deactivate()"><mat-icon>delete</mat-icon> Deactivate account</button>
       </div>
 
       <button *ngIf="isOtherUser()" mat-flat-button class="button" [routerLink]="['/register']"><mat-icon>arrow_drop_up</mat-icon> Upgrade to Organizer/Provider</button>
@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+      <mat-paginator [length]="myEventsSolutionsTotalCount" [pageSize]="myEventsSolutionsPageSize" (page)="onMyEventsSolutionsPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
       </mat-paginator>
     </div>
 
@@ -99,11 +99,11 @@
         </div>
       </div>
 
-      <div *ngFor="let eventCard of myEvents;">
+      <div *ngFor="let eventCard of favEvents;">
         <app-event-card [eventCard]="eventCard" />
       </div>
 
-      <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+      <mat-paginator [length]="favEventsTotalCount" [pageSize]="favEventsPageSize" (page)="onFavEventsPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
       </mat-paginator>
     </div>
 
@@ -119,12 +119,12 @@
         </div>
       </div>
 
-      <div *ngFor="let solutionCard of mySolutions; let i = index">
+      <div *ngFor="let solutionCard of favSolutions; let i = index">
         <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
         <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
       </div>
 
-      <mat-paginator [length]="getPaginatorItemsLength()" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+      <mat-paginator [length]="favSolutionsTotalCount" [pageSize]="favSolutionsPageSize" (page)="onFavSolutionsPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
       </mat-paginator>
     </div>
   </div>

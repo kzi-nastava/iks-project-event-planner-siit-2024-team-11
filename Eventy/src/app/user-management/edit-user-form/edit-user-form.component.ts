@@ -6,7 +6,8 @@ import {Router} from '@angular/router';
 import {
   InvalidInputDataDialogComponent
 } from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
-import {Organizer} from '../model/users.model';
+import {UpdateUser, User} from '../model/users.model';
+import {RegisterData} from '../../infrastructure/auth/model/register.model';
 
 @Component({
   selector: 'app-edit-user-form',
@@ -15,7 +16,7 @@ import {Organizer} from '../model/users.model';
 })
 export class EditUserFormComponent implements OnInit {
   @Input()
-  user: Organizer;
+  user: User;
 
   editForm : FormGroup;
 
@@ -25,7 +26,7 @@ export class EditUserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.editForm = new FormGroup({
-      profilePicture: new FormControl(this.user.profilePicture || 'ProfilePicture.png'),
+      profilePicture: new FormControl(this.user.profilePictures || 'ProfilePicture.png'),
       email : new FormControl({value: this.user.email, disabled: true }),
       oldPassword: new FormControl('', [Validators.required]),
       password : new FormControl('', [Validators.required]),
@@ -59,8 +60,24 @@ export class EditUserFormComponent implements OnInit {
       this.editForm.updateValueAndValidity();
       this.editForm.markAllAsTouched();
     } else {
-      // edit method from service
-      this.router.navigate(['/users', this.user.firstName + " " + this.user.lastName]);
+      let user: UpdateUser = this.editForm.value as UpdateUser;
+      user.profilePictures = this.editForm.controls['profilePicture'].value;
+      user.email = this.user.email;
+      user.id = this.user.id;
+
+      this.userService.edit(user).subscribe({
+        next: () => {
+          this.router.navigate(['/profile']);
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input",
+              message: "Invalid edit data"
+            }
+          });
+        }
+      });
     }
   }
 

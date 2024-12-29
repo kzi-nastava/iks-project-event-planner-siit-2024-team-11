@@ -6,6 +6,7 @@ import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-d
 import {Router} from '@angular/router';
 import { User } from '../model/users.model';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-upgrade-organizer',
@@ -16,24 +17,26 @@ export class UpgradeOrganizerComponent {
   user: User;
   registerForm: FormGroup;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
+  constructor(private userService: UserService, private dialog: MatDialog, private router: Router, private authService: AuthService) {
 
   }
 
   ngOnInit(): void {
     // Fetch the user data (assuming it's asynchronous)
-    //this.userService.get(5).subscribe((user: User) => {
-      this.user = this.userService.get(5);
-  
-      this.registerForm = new FormGroup({
-        profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
-        email : new FormControl({value: this.user.email, disabled: true}, [Validators.required, Validators.email]),
-        firstName : new FormControl('', [Validators.required]),
-        lastName : new FormControl('', [Validators.required]),
-        address : new FormControl({value: this.user.address, disabled: true}, [Validators.required]),
-        phoneNumber : new FormControl({value: this.user.phoneNumber, disabled: true}, [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
+      this.userService.get(this.authService.getId()).subscribe({
+        next: (response: User) => {
+          this.user = response;
+
+          this.registerForm = new FormGroup({
+            profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
+            email : new FormControl({value: this.user.email, disabled: true}, [Validators.required, Validators.email]),
+            firstName : new FormControl('', [Validators.required]),
+            lastName : new FormControl('', [Validators.required]),
+            address : new FormControl({value: this.user.address, disabled: true}, [Validators.required]),
+            phoneNumber : new FormControl({value: this.user.phoneNumber, disabled: true}, [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
+          });
+        }
       });
-    //});
   }
 
   register(): void {
@@ -43,7 +46,7 @@ export class UpgradeOrganizerComponent {
         disableClose: true, // prevents closing by clicking outside
         backdropClass: 'blurred_backdrop_dialog',
         data: {
-          title: 'Input Error', 
+          title: 'Input Error',
           message: 'Please make sure that all inputs are valid before upgrading profile.',
         },
       });
@@ -51,7 +54,8 @@ export class UpgradeOrganizerComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      this.userService.register(this.registerForm.value);
+      // we can add normal register function here, or something specific, we will see
+      //this.userService.register(this.registerForm.value);
       this.router.navigate(['']);
     }
   }
