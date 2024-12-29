@@ -4,6 +4,8 @@ import {UserService} from '../user.service';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
 import {PageEvent} from '@angular/material/paginator';
 import {User} from '../model/users.model';
+import {ActivatedRoute} from '@angular/router';
+import {PagedResponse} from '../../shared/model/paged-response.model';
 
 @Component({
   selector: 'app-other-user-profile-page',
@@ -11,28 +13,22 @@ import {User} from '../model/users.model';
   styleUrl: './other-user-profile-page.component.css'
 })
 export class OtherUserProfilePageComponent {
-  user: User = {
-    id: 1,
-    userType: "org",
-    "profilePictures" : null,
-    "firstName": "Tac Tac",
-    "lastName": "Jezickovic",
-    "email": "tactacjezickovic@doe.com",
-    "password": "njamnjamjez",
-    "address": "Najblizi zbunic za hibernaciju",
-    "phoneNumber": "+324 24 232 33",
-    "name" : null,
-    "description" : null
-  };
+  user: User;
 
   myEvents: EventCard[];
   mySolutions: SolutionCard[];
 
   searchQuery: string;
 
-  constructor(private userService: UserService) {
-    this.myEvents = this.userService.getMyEvents();
-    this.mySolutions = this.userService.getMySolutions();
+  constructor(private userService: UserService, private route: ActivatedRoute) {
+    let id: number = route.snapshot.params['id'];
+
+    this.userService.get(id).subscribe({
+      next: (user: User) => {
+        this.user = user;
+        this.fetchMyEventsSolutions();
+      }
+    });
   }
 
 
@@ -103,26 +99,43 @@ export class OtherUserProfilePageComponent {
   }
 
   search(): void {
-    // search
+    this.currentPage = 0;
+    this.fetchMyEventsSolutions();
     this.searchQuery = "";
   }
 
   pageSize: number = 12;
   currentPage: number = 0;
-
-  getPaginatorItemsLength(): number {
-    return this.isOrganizer() ? this.myEvents.length : this.mySolutions.length;
-  }
+  totalCount: number = 0;
 
   onPageChange(event: PageEvent): void {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
-    this.updatePaginatedEventTypes();
+    this.fetchMyEventsSolutions();
   }
 
-  private updatePaginatedEventTypes(): void {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    // service call
+  private fetchMyEventsSolutions(): void {
+    if(this.user.userType === "ORGANIZER") {
+      this.userService.getMyEvents(this.user.id, this.searchQuery, {
+        page: this.currentPage,
+        size: this.pageSize,
+      }).subscribe({
+        next: (result: PagedResponse<EventCard>) => {
+          this.myEvents = result.content;
+          this.totalCount = result.totalElements;
+        }
+      });
+    }
+    else if(this.user.userType === "PROVIDER") {
+      this.userService.getMySolutions(this.user.id, this.searchQuery, {
+        page: this.currentPage,
+        size: this.pageSize,
+      }).subscribe({
+        next: (result: PagedResponse<SolutionCard>) => {
+          this.mySolutions = result.content;
+          this.totalCount = result.totalElements;
+        }
+      });
+    }
   }
 }
