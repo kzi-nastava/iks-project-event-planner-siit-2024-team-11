@@ -1,7 +1,15 @@
-import { Event } from "./events.model";
 
 export interface EventCard {
-   event: Event,
-   organiser: string,
-   organiserImage: string,
+  eventId: number;
+  name: String;
+  description: String;
+  maxNumberParticipants: number;
+  isOpen: Boolean;
+  eventTypeName: String;
+  locationName: String;
+  startDate: Date;
+  endDate: Date;
+  organiserId: Number; // when we click on picture/name it shows organiser profile
+  organiserName: String;
+  organiserImage: String;
  }
