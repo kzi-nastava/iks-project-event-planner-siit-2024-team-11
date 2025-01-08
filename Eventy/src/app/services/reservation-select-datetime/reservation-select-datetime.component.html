@@ -55,35 +55,35 @@
       <div class = "event_details" [routerLink]="['/users', selectedService.provider]">
          <div class = "left_side_container">
             <div class = "title_container">
-               <p id = "title" class = "title">{{selectedEvent.event.name}}</p>
+               <p id = "title" class = "title">{{selectedEvent.name}}</p>
             </div>
       
             <div class = "type_container">
                <p style = "margin-right: 5px;" class = "type">Type:</p>
-               <p id = "type" class = "type">{{selectedEvent.event.eventType.name}}</p>
+               <p id = "type" class = "type">{{selectedEvent.eventTypeName}}</p>
             </div>
       
             <div class = "max_participants_container">
                <p style = "margin-right: 5px;" class = "max_participants">Max participants:</p>
-               <p id = "max_participants" class = "max_participants">{{selectedEvent.event.maxParticipants}}</p>
+               <p id = "max_participants" class = "max_participants">{{selectedEvent.maxNumberParticipants}}</p>
             </div>
       
             <div class = "date_location_container">
                <div style = "display: flex; flex-direction: row;">
                   <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
-                  <p id = "date" class = "date">{{selectedEvent.event.date.toLocaleDateString()}}</p>
+                  <p id = "date" class = "date">{{selectedEvent.startDate.toLocaleDateString()}}</p>
                </div>
       
                <div style = "display: flex; flex-direction: row;">
                   <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.8px;">location_pin</mat-icon>
-                  <p id = "location" class = "location">{{selectedEvent.event.location.name}}</p>
+                  <p id = "location" class = "location">{{selectedEvent.locationName}}</p>
                </div>
             </div>
       
             <div class = "description_container">
                <div style = "display: flex; flex: 1; flex-direction: column; padding: 4px; padding-left: 10px; padding-right: 10px; padding-bottom: 9px;">
                   <p style = "margin: 0; font-size: 15px; color: #AEAAAA;  margin-bottom: 2px"> Description: </p>
-                  <p id = "description" class = "description"> {{selectedEvent.event.description}} </p>
+                  <p id = "description" class = "description"> {{selectedEvent.description}} </p>
                </div>
             </div>
          </div>
