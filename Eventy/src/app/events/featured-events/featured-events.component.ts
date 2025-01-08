@@ -11,7 +11,16 @@ import { EventsServiceService } from '../services/events/events-service.service'
 export class FeaturedEventsComponent {
   featuredEvents: EventCard[] = [];
 
-  constructor(eventsService: EventsServiceService) {
-    this.featuredEvents = eventsService.getFeaturedEvents();
+  constructor(private eventsService: EventsServiceService) {}
+
+  ngOnInit(): void {
+    this.eventsService.getFeaturedEvents().subscribe({
+      next: (featuredEvents) => {
+        this.featuredEvents = featuredEvents;
+      },
+      error: (err) => {
+        console.error('Failed to fetch featured events:', err);
+      },
+    });
   }
 }
