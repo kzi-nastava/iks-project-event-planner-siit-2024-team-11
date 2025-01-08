@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Output, EventEmitter} from '@angular/core';
 import {FormBuilder, FormControl} from '@angular/forms';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
@@ -20,14 +20,14 @@ export class EventFiltersComponent {
 
   // filter values
   maxParticipantsValue: number = null;
-
   eventTypes = new FormControl('');
-
   locations = new FormControl('');
   locationOptions: string[] = ['Belgrade', 'Gradiska', 'Novi Sad', 'Paris', 'New York', 'Kuala Lumpur'];
   filteredLocationOptions: Observable<string[]>;
-
   dateRangeForm: FormGroup;
+
+  @Output() filtersChanged = new EventEmitter<any>();
+  @Output() filtersReset = new EventEmitter<void>();
   //
 
   constructor (private fb: FormBuilder) {
@@ -57,6 +57,16 @@ export class EventFiltersComponent {
     const startDate = start;
     const endDate = end;
 
+    const filters = {
+      eventTypes: this.eventTypes.value,
+      maxParticipants: this.maxParticipantsValue,
+      location: this.locations.value,
+      startDate: start,
+      endDate: end,
+    };
+
+    this.filtersChanged.emit(filters); // Emit filters to parent
+
     const message: string = "FILTER:\n" +
                    "Event types: " + this.eventTypes.value + ";   " + 
                    "Max Participants: " + this.maxParticipantsValue + ";   " +
@@ -69,8 +79,11 @@ export class EventFiltersComponent {
 
   resetFilters(): void {
     this.maxParticipantsValue = null;
-    this.eventTypes = new FormControl('');
-    this.locations = new FormControl('');
+    this.eventTypes.setValue('');
+    this.locations.setValue('');
     this.dateRangeForm.get('dateRange')?.reset();
+
+    this.filtersReset.emit(); // Notify parent that filters were reset
+    this._snackBar.open("Filters reset", "OK!");
   }
 }
