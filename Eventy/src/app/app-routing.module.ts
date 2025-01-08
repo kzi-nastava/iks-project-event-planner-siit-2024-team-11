@@ -41,6 +41,7 @@ const routes: Routes = [
   {path: 'create-reservation', component: CreateReservationComponent},
   {path: 'upgrade-profile', component: UpgradeProfileComponent},
   {path: 'fast-registration', component: FastRegistrationComponent},
+  {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
@@ -74,7 +75,7 @@ const routes: Routes = [
   //     data: {role: ['ROLE_AuthenticatedUser']}},
   // {path: 'fast-registration', component: FastRegistrationComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_AuthenticatedUser']}},
-  // {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard],
+  // {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard]},
   //   data: {role: []}},
   // {path: '**', redirectTo: ''},
 ];
