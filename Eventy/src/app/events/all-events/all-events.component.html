@@ -4,8 +4,12 @@
    <!-- SEARCH & FILTER -->
    <div class = "search_and_filter_container"> 
       <div class = "search_container">
-         <input class = "search_form" placeholder="Search..">  
-         <div class = "search_icon_container">
+         <input 
+            class = "search_form" 
+            placeholder="Search.." 
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput()">  
+         <div class = "search_icon_container" (click)="applySearchAndFilters()">
             <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
          </div>    
       </div>
@@ -35,7 +39,7 @@
    </div>
 
    <!-- ALL EVENTS -->
-   <div *ngFor="let eventCard of allEvents;">
+   <div *ngFor="let eventCard of paginatedEvents;">
       <div 
          (click)="handleCardClick(eventCard)" 
          [ngClass]="{'selected_event_border': eventCard === selectedEventCard}" 
@@ -47,5 +51,14 @@
          />     
       </div>   
    </div>
+
+   <mat-paginator 
+      [length]="totalCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[1, 2, 5, 10]"
+      aria-label="Select page"
+      (page)="onPageChange($event)"
+      >
+   </mat-paginator>
 </div>
 
