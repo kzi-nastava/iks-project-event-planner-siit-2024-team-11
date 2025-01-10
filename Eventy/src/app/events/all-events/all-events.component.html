@@ -1,6 +1,5 @@
-
 <div class = "container">
-   
+
    <!-- SEARCH & FILTER -->
    <div class = "search_and_filter_container"> 
       <div class = "search_container">
@@ -24,14 +23,14 @@
          <div id = "all_events" style = "display: flex; flex-direction: row; align-items: center; color: #8F8B8B; margin-left: 50px;">
             <p style = "font-weight: 450; margin: 0; margin-top: -13px; margin-right: 10px; font-family: Albert Sans;">Sort by:</p>
             <mat-form-field>
-               <mat-select [(value)]="sortValue">
-                  <mat-option [value]="sortValue">Event Type</mat-option>  
-                  <mat-option [value]="sortValue">Name</mat-option>    
-                  <mat-option [value]="sortValue">Max Participants (ASC)</mat-option> 
-                  <mat-option [value]="sortValue">Max Participants (DESC)</mat-option>       
-                  <mat-option [value]="sortValue">Location</mat-option>      
-                  <mat-option [value]="sortValue">Date (ASC)</mat-option>    
-                  <mat-option [value]="sortValue">Date (DESC)</mat-option>
+               <mat-select [(value)]="sortValue" (selectionChange)="onSortChange($event)">
+                  <mat-option [value]="'type'">Event Type</mat-option>  
+                  <mat-option [value]="'name'">Name</mat-option>    
+                  <mat-option [value]="'maxNumberParticipants,asc'">Max Participants (ASC)</mat-option> 
+                  <mat-option [value]="'maxNumberParticipants,desc'">Max Participants (DESC)</mat-option>       
+                  <mat-option [value]="'location'">Location</mat-option>      
+                  <mat-option [value]="'date,asc'">Date (ASC)</mat-option>    
+                  <mat-option [value]="'date,desc'">Date (DESC)</mat-option>
                </mat-select>
             </mat-form-field>
          </div>
@@ -52,13 +51,16 @@
       </div>   
    </div>
 
+ 
+</div>
+
+<div class = "paginator_container">
    <mat-paginator 
       [length]="totalCount"
       [pageSize]="pageSize"
       [pageSizeOptions]="[1, 2, 5, 10]"
       aria-label="Select page"
       (page)="onPageChange($event)"
-      >
-   </mat-paginator>
+   />
 </div>
 
