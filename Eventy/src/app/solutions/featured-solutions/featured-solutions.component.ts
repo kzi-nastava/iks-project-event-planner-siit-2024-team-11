@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { SolutionCard } from '../model/solution-card.model';
-import { SolutionsServiceService } from '../services/solutions/solutions-service.service';
-import { ServiceCardComponent } from '../../services/service-card/service-card.component';
-import { ServicesModule } from '../../services/services.module';
-import { ProductsModule } from '../../products/products.module';
+import { SolutionsService } from '../services/solutions/solutions-service.service';
 
 @Component({
   selector: 'app-featured-solutions',
@@ -11,17 +8,26 @@ import { ProductsModule } from '../../products/products.module';
   styleUrl: './featured-solutions.component.css',
 })
 export class FeaturedSolutionsComponent {
-  featuredSolutions: SolutionCard[];
+  featuredSolutions: SolutionCard[] = [];
 
-  constructor(solutionsService: SolutionsServiceService ) {
-    this.featuredSolutions = solutionsService.getFeaturedSolutions();
+  constructor(private solutionsService: SolutionsService ) {}
+
+  ngOnInit(): void {
+    this.solutionsService.getFeaturedSolutions().subscribe({
+      next: (featuredSolutions) => {
+        this.featuredSolutions = featuredSolutions;
+      },
+      error: (err) => {
+        console.error('Failed to fetch featured solutions:', err);
+      },
+    });
   }
 
   isService(solutionCard: SolutionCard): boolean {
-    return (solutionCard.product === undefined);
+    return (solutionCard.type === "SERVICE");
   }
 
   isProduct(solutionCard: SolutionCard): boolean {
-    return (solutionCard.service === undefined);
+    return (solutionCard.type === "PRODUCT");
   }
 }

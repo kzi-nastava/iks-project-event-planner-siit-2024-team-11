@@ -1,11 +1,10 @@
-import {Component, inject} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {ChangeDetectionStrategy} from '@angular/core';
-import {provideNativeDateAdapter} from '@angular/material/core';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import { MatDateRangeInput } from '@angular/material/datepicker';
+import { Component, inject, Output, EventEmitter  } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 
@@ -22,23 +21,23 @@ export class SolutionFiltersComponent {
 
   // filter values
   type: string = "Any";
-
   solutionCategories = new FormControl('');
-  
   eventTypes = new FormControl('');
-  eventTypesValue: string = "Wedding";
-
   company = new FormControl('');
-  companyOptions: string[] = ['B.G. DOO', 'M&M DOO', 'VIT DOO', 'H&M', 'Apple', 'Samsung'];
-  filteredLCompanyOptions: Observable<string[]>;
-
   minPrice: number = null;
   maxPrice: number = null;
-
   dateRangeForm: FormGroup;
-
   isAvailable: boolean = true;
-  // 
+
+  @Output() filtersChanged = new EventEmitter<any>();
+  @Output() filtersReset = new EventEmitter<void>();
+
+  // view options
+  eventTypesValue: string = "Wedding";
+  companyOptions: string[] = ['B.G. DOO', 'M&M DOO', 'VIT DOO', 'H&M', 'Apple', 'Samsung'];
+  filteredCompanyOptions: Observable<string[]>;
+
+  ////////////////////////////////////
 
   constructor (private fb: FormBuilder) {
     this.dateRangeForm = this.fb.group({
@@ -49,16 +48,15 @@ export class SolutionFiltersComponent {
     });
   }
 
+  // for locations
   ngOnInit() {
-    this.filteredLCompanyOptions = this.company.valueChanges.pipe(
+    this.filteredCompanyOptions = this.company.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
   }
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.companyOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
@@ -66,7 +64,6 @@ export class SolutionFiltersComponent {
     if (value >= 1000) {
       return Math.round(value / 1000) + 'k';
     }
-
     return `${value}`;
   }
 
@@ -74,6 +71,21 @@ export class SolutionFiltersComponent {
     const { start, end } = this.dateRangeForm.get('dateRange')?.value;
     const startDate = start;
     const endDate = end;
+
+    const filters = {
+      type: this.type,
+      categories: this.solutionCategories,
+      eventTypes: this.eventTypes.value,
+      eventTypesSize: this.eventTypes.value.length,
+      company: this.company,
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      startDate: start,
+      endDate: end,
+      isAvailable: this.isAvailable
+    };
+
+    this.filtersChanged.emit(filters); // Emit filters to parent
 
     const message: string = "FILTER:\n" +
                    "Type: " + this.type + ";   " + 
@@ -98,5 +110,7 @@ export class SolutionFiltersComponent {
     this.maxPrice = null;
     this.dateRangeForm.get('dateRange')?.reset();
     this.isAvailable = true;
+
+    this.filtersReset.emit(); // notify parent that filters were reset
   }
 }
