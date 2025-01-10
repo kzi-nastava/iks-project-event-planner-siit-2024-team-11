@@ -1,8 +1,8 @@
-import { Component, Input, Output, inject, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { EventCard } from '../model/event-card.model';
 import { ViewEncapsulation } from '@angular/core';
-import { EventsServiceService } from '../services/events/events-service.service';
-import {PagedResponse} from '../../shared/model/paged-response.model';
+import { EventsService } from '../services/events/events-service.service';
+import { PagedResponse } from '../../shared/model/paged-response.model';
 import { PageEvent } from '@angular/material/paginator';
 
 //{ search: 'Jane & Mark Wedding', eventTypes: ['Wedding', 'Party'], location: 'BeachResort', startDate: new Date('2024-05-01T00:00:00'), endDate: new Date('2024-05-01T00:00:00') }
@@ -45,7 +45,7 @@ export class AllEventsComponent {
 
   //////////////////////////////////////
 
-  constructor(private eventsService: EventsServiceService) {}
+  constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
      this.updatePaginatedEvents();
@@ -73,7 +73,10 @@ export class AllEventsComponent {
       next: (response: PagedResponse<EventCard>) => {
         this.paginatedEvents = response.content;
         this.totalCount = response.totalElements;
-      }
+      },
+      error: (err) => {
+        console.error('Failed to fetch events:', err);
+      },
     });
   }
 

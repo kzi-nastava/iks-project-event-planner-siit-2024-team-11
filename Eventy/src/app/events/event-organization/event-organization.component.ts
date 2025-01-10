@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
-import {EventsServiceService} from '../services/events/events-service.service';
+import {EventsService} from '../services/events/events-service.service';
 import {Activity, OrganizeEvent} from '../model/events.model';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -43,7 +43,7 @@ export class EventOrganizationComponent {
   selectedAddress: string | undefined;
   selectedLatLng: L.LatLng | undefined;
 
-   constructor(private router: Router, private eventsService: EventsServiceService,
+   constructor(private router: Router, private eventsService: EventsService,
                private dialog : MatDialog, private authService: AuthService) {
      this.titleMap = new Map<EventOrganizationStage, string>();
      this.titleMap.set(EventOrganizationStage.BASIC_INFORMATION, "Organize an Event");

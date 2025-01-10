@@ -75,7 +75,7 @@
                          [formControl]="company"
                          [matAutocomplete]="auto">
                   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                     @for (companyOptions of filteredLCompanyOptions | async; track companyOptions) {
+                     @for (companyOptions of filteredCompanyOptions | async; track companyOptions) {
                      <mat-option [value]="companyOptions">{{companyOptions}}</mat-option>
                      }
                   </mat-autocomplete>

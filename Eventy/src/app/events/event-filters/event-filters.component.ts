@@ -1,10 +1,9 @@
-import {Component, inject, Output, EventEmitter} from '@angular/core';
-import {FormBuilder, FormControl} from '@angular/forms';
-import {ChangeDetectionStrategy} from '@angular/core';
-import {provideNativeDateAdapter} from '@angular/material/core';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 
 
@@ -26,7 +25,8 @@ export class EventFiltersComponent {
 
   @Output() filtersChanged = new EventEmitter<any>();
   @Output() filtersReset = new EventEmitter<void>();
-  //
+  
+  ////////////////////////////////////
 
   constructor (private fb: FormBuilder) {
     this.dateRangeForm = this.fb.group({
@@ -51,8 +51,6 @@ export class EventFiltersComponent {
 
   filterEvents(): void {
     const { start, end } = this.dateRangeForm.get('dateRange')?.value;
-    const startDate = start;
-    const endDate = end;
 
     const filters = {
       eventTypes: this.eventTypes.value,

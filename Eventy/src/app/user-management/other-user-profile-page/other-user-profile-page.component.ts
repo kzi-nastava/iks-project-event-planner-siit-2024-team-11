@@ -91,11 +91,11 @@ export class OtherUserProfilePageComponent {
   }
 
   isService(solutionCard: SolutionCard): boolean {
-    return (solutionCard.product === undefined);
+    return (solutionCard.type === "SERVICE");
   }
 
   isProduct(solutionCard: SolutionCard): boolean {
-    return (solutionCard.service === undefined);
+    return (solutionCard.type === "PRODUCT");
   }
 
   search(): void {
