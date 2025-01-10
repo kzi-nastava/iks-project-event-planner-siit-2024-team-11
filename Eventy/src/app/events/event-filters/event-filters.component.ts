@@ -16,8 +16,6 @@ import { FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventFiltersComponent {
-  private _snackBar = inject(MatSnackBar);
-
   // filter values
   maxParticipantsValue: number = null;
   eventTypes = new FormControl('');
@@ -66,14 +64,13 @@ export class EventFiltersComponent {
 
     this.filtersChanged.emit(filters); // Emit filters to parent
 
+    /*
     const message: string = "FILTER:\n" +
                    "Event types: " + this.eventTypes.value + ";   " + 
                    "Max Participants: " + this.maxParticipantsValue + ";   " +
                    "Location: " + this.locations.value + ";   " +         
                    "Date start: " + startDate + "; " +
-                   "Date end: " + endDate;
-
-    this._snackBar.open(message, "OK!");
+                   "Date end: " + endDate;*/
   }
 
   resetFilters(): void {
@@ -82,7 +79,6 @@ export class EventFiltersComponent {
     this.locations.setValue('');
     this.dateRangeForm.get('dateRange')?.reset();
 
-    this.filtersReset.emit(); // Notify parent that filters were reset
-    this._snackBar.open("Filters reset", "OK!");
+    this.filtersReset.emit(); // notify parent that filters were reset
   }
 }
