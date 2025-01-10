@@ -75,7 +75,7 @@ const routes: Routes = [
   //     data: {role: ['ROLE_AuthenticatedUser']}},
   // {path: 'fast-registration', component: FastRegistrationComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_AuthenticatedUser']}},
-  // {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard]},
+  // {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard],
   //   data: {role: []}},
   // {path: '**', redirectTo: ''},
 ];
