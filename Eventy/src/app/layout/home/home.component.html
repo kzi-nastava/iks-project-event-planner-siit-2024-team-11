@@ -43,8 +43,12 @@
    <!-- ALL SOLUTIONS -->
    <div *ngIf="!isEventsSelected" style = "background-color: #F1F1F1; width: 100%;">
       <!-- SOLUTIONS FILTER -->
-      <app-solution-filters> </app-solution-filters>
+      <app-solution-filters
+         (filtersChanged)="handleFiltersChanged($event)" 
+         (filtersReset)="handleFiltersReset()"/>
       <!-- ALL SOLUTIONS -->
-      <app-all-solutions> </app-all-solutions>
+      <app-all-solutions
+         [filters]="filters" 
+         [searchQuery]="searchQuery"/>
    </div>
 </div>
