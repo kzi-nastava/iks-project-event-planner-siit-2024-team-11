@@ -54,7 +54,7 @@ export class EventsServiceService {
       if (filters.location) {
         params = params.set('location', filters.location);
       }
-      if (filters.maxParticipants !== undefined) {
+      if (filters.maxParticipants) {
         params = params.set('maxParticipants', filters.maxParticipants.toString());
       }
       if (filters.startDate) {

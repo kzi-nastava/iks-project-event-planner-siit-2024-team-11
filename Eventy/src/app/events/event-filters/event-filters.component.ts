@@ -39,16 +39,15 @@ export class EventFiltersComponent {
     });
   }
 
+  // for locations
   ngOnInit() {
     this.filteredLocationOptions = this.locations.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
   }
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.locationOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 

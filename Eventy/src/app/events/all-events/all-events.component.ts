@@ -1,10 +1,21 @@
 import { Component, Input, Output, inject, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { EventCard } from '../model/event-card.model';
 import { ViewEncapsulation } from '@angular/core';
 import { EventsServiceService } from '../services/events/events-service.service';
 import {PagedResponse} from '../../shared/model/paged-response.model';
 import { PageEvent } from '@angular/material/paginator';
+
+//{ search: 'Jane & Mark Wedding', eventTypes: ['Wedding', 'Party'], location: 'BeachResort', startDate: new Date('2024-05-01T00:00:00'), endDate: new Date('2024-05-01T00:00:00') }
+  
+/* filters: (from event-filters.ts)
+const filters = {
+  eventTypes: this.eventTypes.value,
+  maxParticipants: this.maxParticipantsValue,
+  location: this.locations.value,
+  startDate: start,
+  endDate: end,
+};  
+*/
 
 @Component({
   selector: 'app-all-events',
@@ -13,8 +24,6 @@ import { PageEvent } from '@angular/material/paginator';
   encapsulation: ViewEncapsulation.None,
 })
 export class AllEventsComponent {
-  private _snackBar = inject(MatSnackBar);
- 
   // "all" events
   paginatedEvents: EventCard[] = [];
   
@@ -25,7 +34,7 @@ export class AllEventsComponent {
   totalCount: number = 100;
 
   // filter, sort and search 
-  sortValue: string = "Event Type"; // from this component
+  sortValue: string = "type"; // from this component
   @Input() searchQuery: string = ''; // from home.ts component
   @Input() filters: any = {}; // from home.ts component
   
@@ -56,20 +65,9 @@ export class AllEventsComponent {
 
   private updatePaginatedEvents(): void {
     const params = { search: this.searchQuery, ...this.filters,};
-    //{ search: 'Jane & Mark Wedding', eventTypes: ['Wedding', 'Party'], location: 'BeachResort', startDate: new Date('2024-05-01T00:00:00'), endDate: new Date('2024-05-01T00:00:00') }
-
-    /* filters: (from event-filters.ts)
-    const filters = {
-      eventTypes: this.eventTypes.value,
-      maxParticipants: this.maxParticipantsValue,
-      location: this.locations.value,
-      startDate: start,
-      endDate: end,
-    };
-    */
-
+  
     this.eventsService.getAllEvents(
-      { page: this.currentPage, pageSize: this.pageSize, sort: 'date' }, // Pagination and sort params
+      { page: this.currentPage, pageSize: this.pageSize, sort: this.sortValue }, // Pagination and sort params
       params
     ).subscribe({
       next: (response: PagedResponse<EventCard>) => {
@@ -89,12 +87,15 @@ export class AllEventsComponent {
     this.updatePaginatedEvents();
   }
 
+  onSortChange(event: any): void {
+    this.sortValue = event.value;    
+    this.updatePaginatedEvents();
+  }
+
   handleCardClick(eventCard: EventCard) {
     if (this.isCardClickable) {
       this.selectedEventCard = eventCard; 
       this.clickedEventCardEventEmitter.emit(eventCard);
-      
-      this._snackBar.open("Clicked: " + this.selectedEventCard.name, "OK!");
     }
   }
 }
