@@ -3,9 +3,9 @@
    margin-left: 33%;
    padding-top: 30px;
    padding-bottom: 15px;
+   min-height: 100vh;
    display: flex;
    flex-direction: column;
-   justify-content: center;
    align-items: center;
    background-color: #F1F1F1;
    width: 67%;
@@ -85,4 +85,13 @@
       transition: border 0.05s ease;
    }
  
+.paginator_container {
+   display: flex;
+   width: 100%;
+   justify-content: center;
+   margin-left: 33%;
+   background-color: #ffffff;
+   width: 67%;
+   padding: 10px;;
+}
       

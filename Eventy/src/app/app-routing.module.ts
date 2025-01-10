@@ -41,6 +41,7 @@ const routes: Routes = [
   {path: 'create-reservation', component: CreateReservationComponent},
   {path: 'upgrade-profile', component: UpgradeProfileComponent},
   {path: 'fast-registration', component: FastRegistrationComponent},
+  {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],

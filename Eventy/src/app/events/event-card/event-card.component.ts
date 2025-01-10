@@ -12,19 +12,17 @@ export class EventCardComponent {
   @Input() eventCard: EventCard;
   @Input() isClickable: Boolean;
 
-  constructor() {
-
-  }
+  constructor() {}
 
   handleFavoriteItem() {
     if (!this.isClickable) {
-      this._snackBar.open("FAVORITE: " + this.eventCard.event.name, "OK!");
+      this._snackBar.open("FAVORITE: " + this.eventCard.name, "OK!");
     }
   }
 
   handleSeeMore() {
     if (!this.isClickable) {
-      this._snackBar.open("SEE MORE: " + this.eventCard.event.name, "OK!");
+      this._snackBar.open("SEE MORE: " + this.eventCard.name, "OK!");
     }
   }
 }
