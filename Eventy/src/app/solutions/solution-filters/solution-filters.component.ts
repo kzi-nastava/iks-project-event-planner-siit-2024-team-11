@@ -74,10 +74,10 @@ export class SolutionFiltersComponent {
 
     const filters = {
       type: this.type,
-      categories: this.solutionCategories,
+      categories: this.solutionCategories.value,
       eventTypes: this.eventTypes.value,
       eventTypesSize: this.eventTypes.value.length,
-      company: this.company,
+      company: this.company.value,
       minPrice: this.minPrice,
       maxPrice: this.maxPrice,
       startDate: start,
@@ -89,7 +89,7 @@ export class SolutionFiltersComponent {
 
     const message: string = "FILTER:\n" +
                    "Type: " + this.type + ";   " + 
-                   "Solutions: " + this.solutionCategories.value + ";   " +
+                   "Categories: " + this.solutionCategories.value + ";   " +
                    "Event types: " + this.eventTypes.value + ";   " +
                    "Company: " + this.company.value + ";   " +
                    "Min price: " + this.minPrice + ";   " +

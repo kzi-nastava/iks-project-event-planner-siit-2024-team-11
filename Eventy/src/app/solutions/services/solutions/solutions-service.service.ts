@@ -15,7 +15,7 @@ export class SolutionsService {
 
   getAllSolutions( 
     pageProperties?: { page?: number; pageSize?: number; sort?: string }, 
-    filters?: { search?: string; categories?: string[]; eventTypes?: string[]; company?: string; minPrice?: number; maxPrice?: number; startDate?: Date; endDate?: Date; isAvailable?: boolean; 
+    filters?: { search?: string; type?: string, categories?: string[]; eventTypes?: string[]; company?: string; minPrice?: number; maxPrice?: number; startDate?: Date; endDate?: Date; isAvailable?: boolean; 
     }
   ): Observable<PagedResponse<SolutionCard>> {
 
@@ -37,6 +37,9 @@ export class SolutionsService {
     if (filters) {
       if (filters.search) {
         params = params.set('search', filters.search);
+      }
+      if (filters.type) {
+        params = params.set('type', filters.type);
       }
       if (filters.categories && filters.categories.length > 0) {
         params = params.set('categories', filters.categories.join(','));
@@ -60,8 +63,8 @@ export class SolutionsService {
       if (filters.endDate) {
         params = params.set('endDate', filters.endDate.toISOString());
       }
-      if (filters.isAvailable) {
-        params = params.set('isAvailable', filters.isAvailable.toString());
+      if (filters.isAvailable !== undefined) {
+        params = params.set('isAvailable', filters.isAvailable);
       }
     }
     return this.httpClient.get<PagedResponse<SolutionCard>>(environment.apiHost + this.urlPrefix, {params: params});
