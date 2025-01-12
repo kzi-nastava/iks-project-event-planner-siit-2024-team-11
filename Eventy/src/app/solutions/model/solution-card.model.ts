@@ -3,7 +3,7 @@ export interface SolutionCard {
    type: "SERVICE" | "PRODUCT"; // "SERVICE" or "PRODUCT"
    name: string;
    categoryName: string;
-   description?: string; // only for products
+   description: string;
    specifics?: string; // only for services
    minReservationTime?: number; // only for services
    maxReservationTime?: number; // only for services
