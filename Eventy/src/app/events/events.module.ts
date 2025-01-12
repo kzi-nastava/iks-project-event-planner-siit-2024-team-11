@@ -15,7 +15,7 @@ import {AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { EventsServiceService } from './services/events/events-service.service';
+import { EventsService } from './services/events/events-service.service';
 import { AllEventTypesComponent } from './all-event-types/all-event-types.component';
 import { CreateEventTypeComponent } from './create-event-type/create-event-type.component';
 import { EditEventTypeComponent } from './edit-event-type/edit-event-type.component';
@@ -59,7 +59,7 @@ import { ReservationSelectEventComponent } from './reservation-select-event/rese
     ReservationSelectEventComponent
   ],
   providers: [
-    EventsServiceService,
+    EventsService,
     RouterLink,
     FormsModule,
     SharedModule

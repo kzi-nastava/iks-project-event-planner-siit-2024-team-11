@@ -12,7 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { SolutionsServiceService } from './services/solutions/solutions-service.service';
+import { SolutionsService } from './services/solutions/solutions-service.service';
 import { ServicesModule } from '../services/services.module';
 import { ProductsModule } from '../products/products.module';
 import { FeaturedSolutionsComponent } from './featured-solutions/featured-solutions.component';
@@ -63,7 +63,7 @@ import { DeleteRequestDialogComponent } from './delete-request-dialog/delete-req
     FeaturedSolutionsComponent,
   ], 
   providers: [
-    SolutionsServiceService,
+    SolutionsService,
   ]
 })
 export class SolutionsModule { }

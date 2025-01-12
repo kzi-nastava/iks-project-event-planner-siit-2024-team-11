@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { EventCard } from '../model/event-card.model';
-import { EventsServiceService } from '../services/events/events-service.service';
+import { EventsService } from '../services/events/events-service.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { EventsServiceService } from '../services/events/events-service.service'
 export class FeaturedEventsComponent {
   featuredEvents: EventCard[] = [];
 
-  constructor(private eventsService: EventsServiceService) {}
+  constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
     this.eventsService.getFeaturedEvents().subscribe({

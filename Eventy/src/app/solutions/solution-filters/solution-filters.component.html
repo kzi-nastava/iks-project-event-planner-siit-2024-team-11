@@ -21,8 +21,8 @@
             <mat-form-field>
                <mat-select [(value)]="type">
                  <mat-option value="Any">Any</mat-option>
-                 <mat-option value="Services"> <mat-icon style = "margin: 0; margin-top: 10px; font-size: 12px; color: #FAD609;">circle</mat-icon> Services </mat-option>
-                 <mat-option value="Products"> <mat-icon style = "margin: 0; margin-top: 10px; font-size: 12px; color: #DD79AE;">circle</mat-icon> Products </mat-option>
+                 <mat-option value="Service"> <mat-icon style = "margin: 0; margin-top: 10px; font-size: 12px; color: #FAD609;">circle</mat-icon> Services </mat-option>
+                 <mat-option value="Product"> <mat-icon style = "margin: 0; margin-top: 10px; font-size: 12px; color: #DD79AE;">circle</mat-icon> Products </mat-option>
                </mat-select>
             </mat-form-field>    
          </div>
@@ -75,7 +75,7 @@
                          [formControl]="company"
                          [matAutocomplete]="auto">
                   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                     @for (companyOptions of filteredLCompanyOptions | async; track companyOptions) {
+                     @for (companyOptions of filteredCompanyOptions | async; track companyOptions) {
                      <mat-option [value]="companyOptions">{{companyOptions}}</mat-option>
                      }
                   </mat-autocomplete>

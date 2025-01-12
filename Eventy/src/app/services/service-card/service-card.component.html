@@ -1,30 +1,30 @@
 <div class = "card_container">
    <div class = "left_side_container">
       <div class = "title_container">
-         <p class = "title">{{serviceCard.service.name}}</p>
+         <p class = "title">{{serviceCard.name}}</p>
       </div>
 
       <div class = "category_container">
          <p style = "margin-right: 5px;" class = "category">Category:</p>
-         <p class = "category">{{serviceCard.service.category.name}}</p>
+         <p class = "category">{{serviceCard.categoryName}}</p>
       </div>
 
       <div class = "duration_container">
          <p style = "margin-right: 5px;" class = "duration">Service duration:</p>
-         <p class = "duration">{{serviceCard.service.minReservationTime === serviceCard.service.maxReservationTime ? serviceCard.service.minReservationTime + "min" : serviceCard.service.minReservationTime + "min - " + serviceCard.service.maxReservationTime + "min"}}</p>
+         <p class = "duration">{{serviceCard.minReservationTime === serviceCard.maxReservationTime ? serviceCard.minReservationTime + "min" : serviceCard.minReservationTime + "min - " + serviceCard.maxReservationTime + "min"}}</p>
       </div>
 
       <div class = "reservation_container">
          <p style = "margin-right: 5px;" class = "reservation">Reservation:</p>
-         <p class = "reservation">{{serviceCard.service.reservationType === 0 ? "manual" : "automatic"}}</p>
+         <p class = "reservation">{{serviceCard.reservationType.toLowerCase()}}</p>
       </div>
 
       <div class = "event_types_all_container">
          <p style = "margin-right: 5px; padding-bottom: 5px;" class = "category">Event types:</p>
 
          <div class = "event_types_container">
-            <div class = "event_type_container" *ngFor="let eventType of serviceCard.eventTypes">
-               <p style = "color: #4e4e4e; margin: 0; font-size: 13.5px; font-family: Albert Sans; font-weight: 600;">{{eventType.name}}</p>
+            <div class = "event_type_container" *ngFor="let name of serviceCard.eventTypeNames">
+               <p style = "color: #4e4e4e; margin: 0; font-size: 13.5px; font-family: Albert Sans; font-weight: 600;">{{name}}</p>
             </div>
             <div class = "event_type_container">
                <p style = "color: #4e4e4e; margin: 0; font-size: 13.5px; font-family: Albert Sans; font-weight: 600;">...</p>
@@ -33,11 +33,11 @@
       </div>
 
       <div class = "organiser_container">
-         <img src = "event_assets/{{serviceCard.providerImage}}" class = "organiser_img" [routerLink]="['/users', serviceCard.provider]">
+         <img src = "http://localhost:8080/{{serviceCard.providerImageUrl}}" class = "organiser_img" [routerLink]="['/users', serviceCard.providerId]">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
             <p style = "margin-right: 5px; margin-top: 1px" class = "category">Provider:</p>
-            <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', serviceCard.provider]">
-              {{serviceCard.provider}}
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', serviceCard.providerId]">
+              {{serviceCard.providerName}}
             </p>
          </div>
       </div>
@@ -46,25 +46,25 @@
    <div class = "right_side_container">
       <div class = "buttons_container">
          <div class = "price_container">
-            <div style = "display: inline-block" [ngStyle]="{'visibility' : serviceCard.service.discount === 0 ? 'hidden' : 'visible'}">
-               <p class = "old_price">{{(serviceCard.service.price).toFixed(2)}}$</p>
+            <div style = "display: inline-block" [ngStyle]="{'visibility' : serviceCard.discount === 0 ? 'hidden' : 'visible'}">
+               <p class = "old_price">{{(serviceCard.price).toFixed(2)}}$</p>
             </div>
-            <p [ngStyle]="{'margin-top' : serviceCard.service.discount === 0 ? '-11px' : '0px',
-                           'padding-bottom': serviceCard.service.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(serviceCard.service.price - serviceCard.service.price * serviceCard.service.discount / 100).toFixed(2)}}$</p>
+            <p [ngStyle]="{'margin-top' : serviceCard.discount === 0 ? '-11px' : '0px',
+                           'padding-bottom': serviceCard.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(serviceCard.price - serviceCard.price * serviceCard.discount / 100).toFixed(2)}}$</p>
          </div>
          <div style = "justify-content:right; align-items: center; display: flex; flex: 1.3;">
             <div class = "favorite_button_container" (click)="handleFavoriteItem()">
                <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
             </div>
 
-            <div class = "see_more_button_container" (click)="handleSeeMore()" [routerLink]="['/users', serviceCard.provider]">
+            <div class = "see_more_button_container" (click)="handleSeeMore()" [routerLink]="['/users', serviceCard.providerId]">
                <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
             </div>
          </div>
       </div>
 
       <div class = "image_container">
-         <img class = "service_image" src = "solution_assets/{{serviceCard.service.imageUrls[0]}}"/>
+         <img class = "service_image" src = "http://localhost:8080/{{serviceCard.firstImageUrl}}"/>
       </div>
    </div>
 </div>

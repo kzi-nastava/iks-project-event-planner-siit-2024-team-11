@@ -12,10 +12,10 @@ export class ServiceCardComponent {
   @Input() serviceCard: SolutionCard;
 
   handleFavoriteItem() {
-    this._snackBar.open("FAVORITE: " + this.serviceCard.service.name, "OK!");
+    this._snackBar.open("FAVORITE: " + this.serviceCard.name, "OK!");
   }
 
   handleSeeMore() {
-    this._snackBar.open("SEE MORE: " + this.serviceCard.service.name, "OK!");
+    this._snackBar.open("SEE MORE: " + this.serviceCard.name, "OK!");
   }
 }

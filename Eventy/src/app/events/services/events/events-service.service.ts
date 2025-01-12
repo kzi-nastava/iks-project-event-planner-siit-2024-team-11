@@ -1,29 +1,19 @@
 import { Injectable } from '@angular/core';
 import { EventCard } from '../../model/event-card.model';
-import {Event, OrganizeEvent} from '../../model/events.model';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../env/constants';
+import { Event, OrganizeEvent } from '../../model/events.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../env/constants';
 import { PagedResponse } from '../../../shared/model/paged-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventsServiceService {
+export class EventsService {
   private readonly urlPrefix: string = "/api/events";
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  /*
-  AN EXAMPLE:
-  this.eventService.getAllEvents(
-    { page: 0, pageSize: 5, sort: 'date,asc' },
-    { search: 'Jane & Mark Wedding', eventTypes: ['Wedding', 'Party'], location: 'BeachResort', startDate: new Date('2024-05-01T00:00:00'), endDate: new Date('2024-05-01T00:00:00') }
-  ).subscribe(response => {
-    console.log('Paged Events:', response);
-  });
-  */
   getAllEvents(
     pageProperties?: { page?: number; pageSize?: number; sort?: string }, 
     filters?: { search?: string; eventTypes?: string[]; location?: string; maxParticipants?: number; startDate?: Date; endDate?: Date }
@@ -70,7 +60,6 @@ export class EventsServiceService {
 
   getFeaturedEvents(): Observable<EventCard[]> {
     return this.httpClient.get<EventCard[]>(environment.apiHost + this.urlPrefix + "/featured");
-
   }
 
   organizeEvent(event: OrganizeEvent): Observable<Event> {

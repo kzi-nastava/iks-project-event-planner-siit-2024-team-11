@@ -52,7 +52,7 @@
 
    <div class = "details_container">
       <app-service-card [serviceCard]="selectedService" style = "border-radius: 10px; box-shadow: 0px 0px 5px rgb(233, 233, 233)"/>
-      <div class = "event_details" [routerLink]="['/users', selectedService.provider]">
+      <div class = "event_details" [routerLink]="['/users', selectedService.providerId]">
          <div class = "left_side_container">
             <div class = "title_container">
                <p id = "title" class = "title">{{selectedEvent.name}}</p>
@@ -93,11 +93,11 @@
    <div class = "deadlines_container">
       <div style = "display: flex; flex-direction: row;">
          <mat-icon style = "color: rgb(139, 139, 139); size: 19px; margin-right: 0px;">arrow_right</mat-icon>
-         <p>Reservation deadline: <b>{{selectedService.service.reservationDeadline}} days</b></p>
+         <p>Reservation deadline: <b>{{selectedService.reservationDeadline}} days</b></p>
       </div>
       <div style = "display: flex; flex-direction: row; margin-left: 45px;">
          <mat-icon style = "color: rgb(139, 139, 139); size: 19px; margin-right: 0%;">arrow_right</mat-icon>
-         <p>Cancellation deadline: <b>{{selectedService.service.cancellationDeadline}} days</b></p>
+         <p>Cancellation deadline: <b>{{selectedService.cancellationDeadline}} days</b></p>
       </div>  
    </div>
 
@@ -207,7 +207,7 @@
                   </mat-form-field>
 
                   <div *ngIf="isFixedDuration" style="margin-top: 16px;">
-                  <p>Fixed Duration: {{selectedService.service.minReservationTime}} minutes</p>
+                  <p>Fixed Duration: {{selectedService.minReservationTime}} minutes</p>
                   </div>
                </div>
             </div> 

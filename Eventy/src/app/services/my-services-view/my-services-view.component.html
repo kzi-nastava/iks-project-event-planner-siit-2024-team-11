@@ -1,5 +1,5 @@
 <div class="services-wrapper">
-    <div class="services-container" *ngFor="let service of services">
+    <div class="services-container" *ngFor="let service of paginatedServices">
         <app-my-services-view-card [service]="service"></app-my-services-view-card>
     </div>
 </div>
