@@ -58,7 +58,7 @@ export class ReservationSelectDatetimeComponent {
     element.scrollTo({top: 0, behavior: 'smooth'}); // smooth scrolling
 
     // Fetch the selected service and initialize related properties
-    this.solutionsService.getSolution(1).subscribe((service) => {
+    this.solutionsService.getSolution(5).subscribe((service) => {
       this.selectedService = service;
 
       // Update dependent properties
@@ -74,6 +74,10 @@ export class ReservationSelectDatetimeComponent {
 
   dateValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+      if (!this.selectedService) {
+        return null;
+      }
+
       const selectedDate = new Date(control.value);
       const today = new Date();
       const tooEarlyDate = new Date(today);

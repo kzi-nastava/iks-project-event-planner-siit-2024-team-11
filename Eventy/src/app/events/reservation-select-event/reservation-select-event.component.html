@@ -42,9 +42,15 @@
 
 <div style = "background-color: #F1F1F1; width: 100%; position: relative;">
    <!-- EVENTS FILTER -->
-   <app-event-filters/>
+   <app-event-filters
+      (filtersChanged)="handleFiltersChanged($event)" 
+      (filtersReset)="handleFiltersReset()"/>
    <!-- SELECT EVENT FROM ALL EVENTS -->
-   <app-all-events (clickedEventCardEventEmitter)="onEventSelected($event)" [isCardClickable]="true"/>
+   <app-all-events 
+      [filters]="filters" 
+      [searchQuery]="searchQuery"
+      (clickedEventCardEventEmitter)="onEventSelected($event)" 
+      [isCardClickable]="true"/>
    <div style = "box-shadow: 10px 0px 5px rgb(206, 206, 206); padding: 18px; margin-left: 33%; bottom: 0; position: sticky; background-color: white; border-left: solid 3px #F1F1F1;">
       <div style = "display: flex; justify-content: center;">
          <div class = "confirm_selection_container" (click)="onContinueButtonClicked()">

@@ -8,8 +8,14 @@ import { EventCard } from '../model/event-card.model';
 })
 export class ReservationSelectEventComponent {
   @Output() continueButtonClicked = new EventEmitter<Boolean>;
+  
   selectedEventCard: EventCard = null;
   @Output() selectedEventCardEventEmitter = new EventEmitter<EventCard>
+
+  filters: any = {}; // To store filters
+  searchQuery: string = ''; // To store search input
+
+  ///////////////////////////////////////////////////////
 
   ngOnInit() {
     this.continueButtonClicked.emit(false);
@@ -28,5 +34,20 @@ export class ReservationSelectEventComponent {
   onContinueButtonClicked() {
     this.selectedEventCardEventEmitter.emit(this.selectedEventCard);
     this.continueButtonClicked.emit(true) 
+  }
+
+  // Handle when filters are applied
+  handleFiltersChanged(filters: any): void {
+    this.filters = filters;
+  }
+
+  // Handle when filters are reset
+  handleFiltersReset(): void {
+    this.filters = {}; // Reset filters
+  }
+
+  // Handle search input
+  handleSearch(searchValue: string): void {
+    this.searchQuery = searchValue;
   }
 }
