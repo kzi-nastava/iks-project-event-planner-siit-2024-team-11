@@ -75,6 +75,6 @@ export class SolutionsService {
   }
 
   getSolution(id: number): Observable<SolutionCard> {
-    return this.httpClient.get<SolutionCard>(environment.apiHost + this.urlPrefix + "/" + id);
+    return this.httpClient.get<SolutionCard>(environment.apiHost + this.urlPrefix + "/cards/" + id);
   }
 }
