@@ -212,9 +212,7 @@ export class ReservationSelectDatetimeComponent {
       });
     
       dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.confirmReservationClickedStage = 2;
-          
+        if (result) { 
           const parsedDate = new Date(this.dateControl.value);
           const formattedDate = formatDate(parsedDate,'yyyy-MM-dd','en-US'); 
 
@@ -232,7 +230,9 @@ export class ReservationSelectDatetimeComponent {
           };
 
           this.reservationsService.createReservation(reservation).subscribe({
-            next: (response) => {
+            next: () => {
+              this.confirmReservationClickedStage = 2;
+              
               const dialogRef = this.dialog.open(SuccessfulDialogComponent, {
                 width: '400px',
                 disableClose: true, // Prevent closing by clicking outside
@@ -243,22 +243,31 @@ export class ReservationSelectDatetimeComponent {
                 },
               });
 
-              dialogRef.afterClosed().subscribe(() => {
-               
-                  this.router.navigate(['']);
-                
+              dialogRef.afterClosed().subscribe(() => {           
+                this.router.navigate(['']);     
               });          
             },
             error: (err) => {
+              let errorMessage = 'Failed to create a reservation.'; // default message
+              if (err?.error !== null) {
+                let msg = err.error[0]
+                const parts = msg.split(":"); 
+                if (parts[1] !== null) {
+                  errorMessage = parts[1]?.trim();
+                }    
+              }
+
               this.dialog.open(ErrorDialogComponent, {
                 width: '400px',
                 disableClose: true, // Prevent closing by clicking outside
                 backdropClass: 'blurred_backdrop_dialog',
                 data: {
                   title: 'Creation Failed',
-                  message: 'Failed to create a reservation.', 
+                  message: errorMessage, 
                 },
               });
+
+              this.confirmReservationClickedStage = 0;
             },
           });
 
@@ -276,7 +285,6 @@ export class ReservationSelectDatetimeComponent {
           message: 'Please make sure that all inputs are valid before confirming the reservation.', // Pass the message
         },
       });
-      this.router.navigate(['']);
     }
   }
 }
