@@ -47,11 +47,11 @@
 
     <mat-form-field id = "upgrade_provider" class="field">
       <mat-label>Name</mat-label>
-      <input type="text" matInput placeholder="Company Name" formControlName="name" />
-      @if (registerForm.controls['name'].hasError('required')) {
+      <input type="text" matInput placeholder="Company Name" formControlName="companyName" />
+      @if (registerForm.controls['companyName'].hasError('required')) {
         <mat-error>Name is <strong>required</strong></mat-error>
       }
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('name')">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('companyName')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>

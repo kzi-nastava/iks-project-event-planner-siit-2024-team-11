@@ -4,7 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from '../../../user-management/model/users.model';
 import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
-import { UpgradeProfile } from '../model/upgrade_profile.model';
+import { UpgradeProfileData } from '../model/upgrade_profile.model';
+import { AuthService } from '../auth.service';
+import { InvalidInputDataDialogComponent } from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 
 @Component({
   selector: 'app-upgrade-organizer',
@@ -15,28 +17,19 @@ export class UpgradeOrganizerComponent {
   @Input() user: User;
   registerForm: FormGroup;
 
-  constructor(private dialog: MatDialog, private router: Router) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
     this.registerForm = new FormGroup({
       profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
-      email: new FormControl(
-        { value: '', disabled: true },
-        [Validators.required, Validators.email]
-      ),
+      email: new FormControl({ value: '', disabled: true },[Validators.required, Validators.email]),
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      address: new FormControl(
-        { value: '', disabled: true },
-        [Validators.required]
-      ),
-      phoneNumber: new FormControl(
-        { value: '', disabled: true },
-        [
-          Validators.required,
-          Validators.pattern(
-            '^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$'
-          ),
-        ]
-      ),
+      address: new FormControl({ value: '', disabled: true },[Validators.required]),
+      phoneNumber: new FormControl({ value: '', disabled: true },[
+        Validators.required,
+        Validators.pattern(
+          '^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$'
+        ),
+      ]),
     });
   }
 
@@ -63,19 +56,19 @@ export class UpgradeOrganizerComponent {
 
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
+
     } else {
-      const upgradeProfile: UpgradeProfile = {
+      const upgradeProfileData: UpgradeProfileData = {
         email: this.user.email,
         accountType: "EVENT ORGANIZER",
         firstName: this.registerForm.controls['firstName'].value, 
         lastName: this.registerForm.controls['lastName'].value,
-        name: null, 
+        companyName: null, 
         description: null,
         profilePictures: [this.registerForm.controls['profilePicture'].value]
       }
 
-      /*
-      this.authService.register(user).subscribe({
+      this.authService.upgradeProfile(upgradeProfileData).subscribe({
         next: (response: string) => {
           this.dialog.open(InvalidInputDataDialogComponent, {
           data : {
@@ -84,19 +77,27 @@ export class UpgradeOrganizerComponent {
           }
         }).afterClosed().subscribe(() => this.router.navigate(['']));
         },
-        error: () => {
-          this.dialog.open(InvalidInputDataDialogComponent, {
-            data : {
-              title: "Invalid input!",
-              message: "Invalid registration data"
-            }
+        error: (err) => {
+          let errorMessage =  "Invalid registration data."; // default message
+          if (err?.error !== null) {
+            let msg = err.error[0]
+            const parts = msg.split(":"); 
+            if (parts[1] !== null) {
+              errorMessage = parts[1]?.trim();
+            }    
+          }
+
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            disableClose: true, // Prevent closing by clicking outside
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: 'Upgrade Failed',
+              message: errorMessage, 
+            },
           });
         }
-      });
-   */
-      // we can add normal register function here, or something specific, we will see
-      //this.userService.register(this.registerForm.value);
-      this.router.navigate(['']);
+      }); 
     }
   }
 

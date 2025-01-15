@@ -4,6 +4,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import { User } from '../../../user-management/model/users.model';
 import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
+import { InvalidInputDataDialogComponent } from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import { AuthService } from '../auth.service';
+import { UpgradeProfileData } from '../model/upgrade_profile.model';
 
 @Component({
   selector: 'app-upgrade-provider',
@@ -15,11 +18,11 @@ export class UpgradeProviderComponent {
   registerForm: FormGroup;
   public pictureIndex: number = 0;
 
-  constructor(private dialog: MatDialog, private router: Router) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
     this.registerForm = new FormGroup({
       profilePictures: new FormControl(['upgrade_profile/solution_provider_profile_picture.png']),
       email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
-      name: new FormControl('', [Validators.required]),
+      companyName: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       address: new FormControl({ value: '', disabled: true }, [Validators.required]),
       phoneNumber: new FormControl({ value: '', disabled: true }, [
@@ -54,10 +57,50 @@ export class UpgradeProviderComponent {
 
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
+
     } else {
-      // we can add normal register function here, or something specific, we will see
-      // this.userService.register(this.registerForm.value);
-      this.router.navigate(['']);
+      const upgradeProfileData: UpgradeProfileData = {
+        email: this.user.email,
+        accountType: "SOLUTIONS PROVIDER",
+        firstName: null,
+        lastName: null,
+        companyName: this.registerForm.controls['companyName'].value, 
+        description: this.registerForm.controls['description'].value, 
+        profilePictures: this.registerForm.controls['profilePictures'].value
+      }
+
+      this.authService.upgradeProfile(upgradeProfileData).subscribe({
+        next: (response: string) => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+          data : {
+            title: "Confirmation needed!",
+            message: response
+          }
+        }).afterClosed().subscribe(() => this.router.navigate(['']));
+        },
+        error: (err) => {
+        console.log(err)
+
+          let errorMessage =  "Invalid registration data."; // default message
+          if (err?.error !== null) {
+            let msg = err.error[0]
+            const parts = msg.split(":"); 
+            if (parts[1] !== null) {
+              errorMessage = parts[1]?.trim();
+            }    
+          }
+
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            disableClose: true, // Prevent closing by clicking outside
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: 'Upgrade Failed',
+              message: errorMessage, 
+            },
+          });
+        }
+      }); 
     }
   }
 
