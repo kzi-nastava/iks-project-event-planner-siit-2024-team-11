@@ -2,8 +2,8 @@ import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { User } from '../model/users.model';
-import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
+import { User } from '../../../user-management/model/users.model';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
 import { UpgradeProfile } from '../model/upgrade_profile.model';
 
 @Component({

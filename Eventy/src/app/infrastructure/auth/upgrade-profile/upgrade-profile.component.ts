@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from '../user.service';
-import { AuthService } from '../../infrastructure/auth/auth.service';
-import { User } from '../model/users.model';
+import { UserService } from '../../../user-management/user.service';
+import { AuthService } from '../auth.service';
+import { User } from '../../../user-management/model/users.model';
 
 interface ButtonClasses {
   "role-button" : boolean,

@@ -2,8 +2,8 @@ import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import { User } from '../model/users.model';
-import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
+import { User } from '../../../user-management/model/users.model';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-upgrade-provider',

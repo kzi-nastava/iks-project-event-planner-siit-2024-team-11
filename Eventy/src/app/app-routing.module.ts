@@ -20,7 +20,7 @@ import { CreateReservationComponent } from './services/create-reservation/create
 import { FastRegistrationComponent } from './infrastructure/auth/fast-registration/fast-registration.component';
 import {AuthGuard} from './infrastructure/auth/auth.guard';
 import {ConfirmRegistrationComponent} from './infrastructure/auth/confirm-registration/confirm-registration.component';
-import {UpgradeProfileComponent} from './user-management/upgrade-profile/upgrade-profile.component';
+import {UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/upgrade-profile.component';
 
 
 const routes: Routes = [

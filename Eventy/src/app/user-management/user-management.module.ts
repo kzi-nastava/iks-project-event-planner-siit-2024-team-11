@@ -14,9 +14,9 @@ import { EditProviderFormComponent } from './edit-provider-form/edit-provider-fo
 import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
-import { UpgradeProfileComponent } from './upgrade-profile/upgrade-profile.component';
-import { UpgradeOrganizerComponent } from './upgrade-organizer/upgrade-organizer.component';
-import { UpgradeProviderComponent } from './upgrade-provider/upgrade-provider.component';
+import { UpgradeProfileComponent } from '../infrastructure/auth/upgrade-profile/upgrade-profile.component';
+import { UpgradeOrganizerComponent } from '../infrastructure/auth/upgrade-organizer/upgrade-organizer.component';
+import { UpgradeProviderComponent } from '../infrastructure/auth/upgrade-provider/upgrade-provider.component';
 import {AuthModule} from '../infrastructure/auth/auth.module';
 
 @NgModule({
