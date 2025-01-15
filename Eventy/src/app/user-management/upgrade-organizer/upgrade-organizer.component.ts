@@ -1,12 +1,10 @@
 import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from '../model/users.model';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
-import { AuthService} from '../../infrastructure/auth/auth.service';
-import { FormBuilder } from '@angular/forms';
+import { UpgradeProfile } from '../model/upgrade_profile.model';
 
 @Component({
   selector: 'app-upgrade-organizer',
@@ -66,6 +64,36 @@ export class UpgradeOrganizerComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
+      const upgradeProfile: UpgradeProfile = {
+        email: this.user.email,
+        accountType: "EVENT ORGANIZER",
+        firstName: this.registerForm.controls['firstName'].value, 
+        lastName: this.registerForm.controls['lastName'].value,
+        name: null, 
+        description: null,
+        profilePictures: [this.registerForm.controls['profilePicture'].value]
+      }
+
+      /*
+      this.authService.register(user).subscribe({
+        next: (response: string) => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+          data : {
+            title: "Confirmation needed!",
+            message: response
+          }
+        }).afterClosed().subscribe(() => this.router.navigate(['']));
+        },
+        error: () => {
+          this.dialog.open(InvalidInputDataDialogComponent, {
+            data : {
+              title: "Invalid input!",
+              message: "Invalid registration data"
+            }
+          });
+        }
+      });
+   */
       // we can add normal register function here, or something specific, we will see
       //this.userService.register(this.registerForm.value);
       this.router.navigate(['']);
