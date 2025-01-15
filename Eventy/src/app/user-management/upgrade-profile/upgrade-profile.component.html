@@ -39,6 +39,6 @@
       </div>
    </div>
 
-   <app-upgrade-organizer *ngIf="isOrganizer" class="right-side"/>
-   <app-upgrade-provider *ngIf="!isOrganizer" class="right-side"/>
+   <app-upgrade-organizer [user] = "currentUser" *ngIf="currentUser && isOrganizer" class="right-side"/>
+   <app-upgrade-provider [user] = "currentUser" *ngIf="currentUser && !isOrganizer" class="right-side"/>
 </div>

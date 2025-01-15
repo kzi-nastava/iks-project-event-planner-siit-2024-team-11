@@ -1,12 +1,12 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {UserService} from '../user.service';
-import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
-import {Router} from '@angular/router';
+import { Component, ElementRef, ViewChild, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { User } from '../model/users.model';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
-import {AuthService} from '../../infrastructure/auth/auth.service';
+import { AuthService} from '../../infrastructure/auth/auth.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-upgrade-organizer',
@@ -14,29 +14,41 @@ import {AuthService} from '../../infrastructure/auth/auth.service';
   styleUrl: './upgrade-organizer.component.css'
 })
 export class UpgradeOrganizerComponent {
-  user: User;
+  @Input() user: User;
   registerForm: FormGroup;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private router: Router, private authService: AuthService) {
-
+  constructor(private dialog: MatDialog, private router: Router) {
+    this.registerForm = new FormGroup({
+      profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
+      email: new FormControl(
+        { value: '', disabled: true },
+        [Validators.required, Validators.email]
+      ),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      address: new FormControl(
+        { value: '', disabled: true },
+        [Validators.required]
+      ),
+      phoneNumber: new FormControl(
+        { value: '', disabled: true },
+        [
+          Validators.required,
+          Validators.pattern(
+            '^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$'
+          ),
+        ]
+      ),
+    });
   }
 
   ngOnInit(): void {
-    // Fetch the user data (assuming it's asynchronous)
-      this.userService.get(this.authService.getId()).subscribe({
-        next: (response: User) => {
-          this.user = response;
-
-          this.registerForm = new FormGroup({
-            profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
-            email : new FormControl({value: this.user.email, disabled: true}, [Validators.required, Validators.email]),
-            firstName : new FormControl('', [Validators.required]),
-            lastName : new FormControl('', [Validators.required]),
-            address : new FormControl({value: this.user.address, disabled: true}, [Validators.required]),
-            phoneNumber : new FormControl({value: this.user.phoneNumber, disabled: true}, [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
-          });
-        }
-      });
+    this.registerForm.patchValue({
+      profilePicture: 'upgrade_profile/event_organiser_profile_picture.png',
+      email: this.user.email,
+      address: this.user.address,
+      phoneNumber: this.user.phoneNumber,
+    });
   }
 
   register(): void {
