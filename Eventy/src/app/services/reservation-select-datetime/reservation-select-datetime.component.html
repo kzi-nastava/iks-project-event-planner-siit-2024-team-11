@@ -50,7 +50,7 @@
       <p>1. See the details of your service reservation: </p>
    </div>
 
-   <div class = "details_container">
+   <div *ngIf="selectedService" class = "details_container">
       <app-service-card [serviceCard]="selectedService" style = "border-radius: 10px; box-shadow: 0px 0px 5px rgb(233, 233, 233)"/>
       <div class = "event_details" [routerLink]="['/users', selectedService.providerId]">
          <div class = "left_side_container">
@@ -71,7 +71,7 @@
             <div class = "date_location_container">
                <div style = "display: flex; flex-direction: row;">
                   <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
-                  <p id = "date" class = "date">{{selectedEvent.startDate.toLocaleDateString()}}</p>
+                  <p id = "date" class = "date">{{selectedEvent.startDate | date: 'MMMM d, y'}}</p>
                </div>
       
                <div style = "display: flex; flex-direction: row;">
@@ -90,7 +90,7 @@
       </div>
    </div>
 
-   <div class = "deadlines_container">
+   <div *ngIf="selectedService" class = "deadlines_container">
       <div style = "display: flex; flex-direction: row;">
          <mat-icon style = "color: rgb(139, 139, 139); size: 19px; margin-right: 0px;">arrow_right</mat-icon>
          <p>Reservation deadline: <b>{{selectedService.reservationDeadline}} days</b></p>

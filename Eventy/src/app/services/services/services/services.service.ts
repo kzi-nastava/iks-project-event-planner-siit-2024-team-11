@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Service } from '../solutions/model/services.model';
-import { SolutionsService } from '../solutions/services/solutions/solutions-service.service';
-import { Solution } from '../solutions/model/solutions.model';
+import { Service } from '../../../solutions/model/services.model';
+import { SolutionsService } from '../../../solutions/services/solutions/solutions-service.service';
+import { Solution } from '../../../solutions/model/solutions.model';
 
 @Injectable({
   providedIn: 'root'

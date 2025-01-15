@@ -2,11 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { EventCard } from '../../events/model/event-card.model';
 import { SolutionCard } from '../../solutions/model/solution-card.model';
 import { FormControl, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YesNoFancierDialogComponent } from '../../shared/yes-no-fancier-dialog/yes-no-fancier-dialog.component';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { SolutionsService } from '../../solutions/services/solutions/solutions-service.service';
+import { ReservationsService } from '../services/reservations/reservations-service.service';
+import { Reservation } from '../model/reservations.model';
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import { SuccessfulDialogComponent } from '../../shared/successful-dialog/successful-dialog.component';
 
 @Component({
   selector: 'app-reservation-select-datetime',
@@ -21,21 +26,21 @@ export class ReservationSelectDatetimeComponent {
 
   // date
   dateControl: FormControl;
-  reservedDates = ['2024-12-15', '2024-12-20']; // Mock reserved dates
+  reservedDates = ['2025-01-15', '2025-01-20']; // Mock reserved dates
   selectedDate: Date;
   // time
   startTimeControl: FormControl;
   endTimeControl: FormControl;
   reservedSlots = [   // mock data
-    { start: '2024-12-15T10:00', end: '2024-12-15T12:00' },
-    { start: '2024-12-20T15:00', end: '2024-12-20T16:30' },
+    { start: '2025-01-15T10:00', end: '2025-01-15T12:00' },
+    { start: '2025-01-20T15:00', end: '2025-01-20T16:30' },
   ];
   isFixedDuration = false;
   selectedStartTime: Date | null = null;
   selectedEndTime: Date | null = null;
   confirmReservationClickedStage: Number = 0;
 
-  constructor(private solutionsService: SolutionsService, private dialog: MatDialog) {
+  constructor(private solutionsService: SolutionsService, private reservationsService: ReservationsService, private dialog: MatDialog, private router: Router) {
     this.dateControl = new FormControl('', [
       Validators.required,
       this.dateValidator(),
@@ -47,7 +52,6 @@ export class ReservationSelectDatetimeComponent {
     ]);
     this.endTimeControl = new FormControl('');
   
-    // Add a subscription for endTimeControl changes
     this.endTimeControl.valueChanges.subscribe(() => {
       this.startTimeControl.updateValueAndValidity();
     });
@@ -57,14 +61,11 @@ export class ReservationSelectDatetimeComponent {
     const element = document.querySelector('mat-sidenav-content') || window;
     element.scrollTo({top: 0, behavior: 'smooth'}); // smooth scrolling
 
-    // Fetch the selected service and initialize related properties
-    this.solutionsService.getSolution(1).subscribe((service) => {
+    this.solutionsService.getSolution(6).subscribe((service) => {
       this.selectedService = service;
 
-      // Update dependent properties
       this.isFixedDuration = this.selectedService.minReservationTime === this.selectedService.maxReservationTime;
-
-      // Update validation for endTimeControl based on fetched service
+      
       this.endTimeControl.setValidators(
         this.isFixedDuration ? [] : [Validators.required, this.endTimeValidator()]
       );
@@ -74,6 +75,10 @@ export class ReservationSelectDatetimeComponent {
 
   dateValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+      if (!this.selectedService) {
+        return null;
+      }
+  
       const selectedDate = new Date(control.value);
       const today = new Date();
       const tooEarlyDate = new Date(today);
@@ -88,7 +93,7 @@ export class ReservationSelectDatetimeComponent {
       /*if (this.reservedDates.includes(selectedDate.toISOString().split('T')[0])) {
         return { alreadyReserved: true };
       }*/
-
+ 
       this.selectedDate = selectedDate;
       return null; // Valid date
     };
@@ -207,8 +212,65 @@ export class ReservationSelectDatetimeComponent {
       });
     
       dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.confirmReservationClickedStage = 2;
+        if (result) { 
+          const parsedDate = new Date(this.dateControl.value);
+          const formattedDate = formatDate(parsedDate,'yyyy-MM-dd','en-US'); 
+
+          const formattedStartTime = parseTimeTo24HourFormat(this.startTimeControl.value); 
+          const formattedEndTime = parseTimeTo24HourFormat(this.endTimeControl.value); 
+
+          const reservationStartDateTime = `${formattedDate}T${formattedStartTime}:00`;
+          const reservationEndDateTime = `${formattedDate}T${formattedEndTime}:00`;
+
+          const reservation: Reservation  = {
+            selectedEventId: this.selectedEvent.eventId,
+            selectedServiceId: this.selectedService.solutionId,
+            reservationStartDateTime: reservationStartDateTime,
+            reservationEndDateTime: reservationEndDateTime, 
+          };
+
+          this.reservationsService.createReservation(reservation).subscribe({
+            next: () => {
+              this.confirmReservationClickedStage = 2;
+              
+              const dialogRef = this.dialog.open(SuccessfulDialogComponent, {
+                width: '400px',
+                disableClose: true, // Prevent closing by clicking outside
+                backdropClass: 'blurred_backdrop_dialog',
+                data: {
+                  title: 'Creation Successful',
+                  message: 'Your service reservation was successful!', 
+                },
+              });
+
+              dialogRef.afterClosed().subscribe(() => {           
+                this.router.navigate(['']);     
+              });          
+            },
+            error: (err) => {
+              let errorMessage = 'Failed to create a reservation.'; // default message
+              if (err?.error !== null) {
+                let msg = err.error[0]
+                const parts = msg.split(":"); 
+                if (parts[1] !== null) {
+                  errorMessage = parts[1]?.trim();
+                }    
+              }
+
+              this.dialog.open(ErrorDialogComponent, {
+                width: '400px',
+                disableClose: true, // Prevent closing by clicking outside
+                backdropClass: 'blurred_backdrop_dialog',
+                data: {
+                  title: 'Creation Failed',
+                  message: errorMessage, 
+                },
+              });
+
+              this.confirmReservationClickedStage = 0;
+            },
+          });
+
         } else {
           this.confirmReservationClickedStage = 0;
         }
@@ -225,4 +287,18 @@ export class ReservationSelectDatetimeComponent {
       });
     }
   }
+}
+
+function parseTimeTo24HourFormat(timeString: string): string {
+  const [time, modifier] = timeString.split(" "); // Split into time and AM/PM
+  let [hours, minutes] = time.split(":").map(Number); // Split time into hours and minutes
+
+  if (modifier === "PM" && hours !== 12) {
+    hours += 12; // Convert PM hours to 24-hour format
+  }
+  if (modifier === "AM" && hours === 12) {
+    hours = 0; // Handle midnight case
+  }
+
+  return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
 }
