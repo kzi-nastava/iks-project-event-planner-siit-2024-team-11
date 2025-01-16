@@ -6,7 +6,8 @@ import { User } from '../../../user-management/model/users.model';
 import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
 import { InvalidInputDataDialogComponent } from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import { AuthService } from '../auth.service';
-import { UpgradeProfileData } from '../model/upgrade_profile.model';
+import { UpgradeProfileData } from '../model/upgrade-profile.model';
+import { SuccessfulDialogComponent } from '../../../shared/successful-dialog/successful-dialog.component';
 
 @Component({
   selector: 'app-upgrade-provider',
@@ -71,17 +72,18 @@ export class UpgradeProviderComponent {
 
       this.authService.upgradeProfile(upgradeProfileData).subscribe({
         next: (response: string) => {
-          this.dialog.open(InvalidInputDataDialogComponent, {
-          data : {
-            title: "Confirmation needed!",
-            message: response
-          }
-        }).afterClosed().subscribe(() => this.router.navigate(['']));
+          this.dialog.open(SuccessfulDialogComponent, {
+            width: '400px',
+            disableClose: true, // Prevent closing by clicking outside
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: "Confirmation Needed",
+              message: response, 
+            },     
+          }).afterClosed().subscribe(() => this.router.navigate(['']));
         },
         error: (err) => {
-        console.log(err)
-
-          let errorMessage =  "Invalid registration data."; // default message
+          let errorMessage = "Invalid registration data."; // default message
           if (err?.error !== null) {
             let msg = err.error[0]
             const parts = msg.split(":"); 
