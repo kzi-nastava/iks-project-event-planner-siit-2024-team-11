@@ -1,15 +1,12 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {UserService} from '../../../user-management/user.service';
-import {MatDialog} from '@angular/material/dialog';
-import {InvalidInputDataDialogComponent} from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
-import {Router} from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
-
-interface ButtonClasses {
-  "role-button" : boolean,
-  "not-selected-button" : boolean
-}
+import { FastRegistrationData } from '../model/fast-registration.model';
+import { AuthService } from '../auth.service';
+import { InvalidInputDataDialogComponent } from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
+import { SuccessfulDialogComponent } from '../../../shared/successful-dialog/successful-dialog.component';
 
 @Component({
   selector: 'app-fast-registration',
@@ -17,9 +14,9 @@ interface ButtonClasses {
   styleUrl: './fast-registration.component.css'
 })
 export class FastRegistrationComponent {
-  email: string = "tactac123@gmail.com"
+  encryptedEmail: string = "";
+  email: string = "";
   registerForm : FormGroup = new FormGroup({
-    profilePicture: new FormControl('ProfilePicture.png'),
     email : new FormControl({value: this.email, disabled: true}, [Validators.required, Validators.email]),
     password : new FormControl('', [Validators.required]),
     confirmedPassword : new FormControl('', [Validators.required, this.passwordMatching()]),
@@ -28,9 +25,23 @@ export class FastRegistrationComponent {
   });
   @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.encryptedEmail = params['value'] || ''; // Assign the 'value' query param to email
+    });
+  }
 
-  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
-
+  ngOnInit() {
+    this.authService.decryptEmail(this.encryptedEmail).subscribe({
+      next: (response: string) => {
+        this.email = response;
+        this.registerForm.controls['email'].setValue(response); // 
+      },
+      error: () => {
+        this.email = "example@gmail.com";
+        this.registerForm.controls['email'].setValue("example@gmail.com"); // 
+      }
+    });
   }
 
   private passwordMatching(): ValidatorFn {
@@ -57,10 +68,50 @@ export class FastRegistrationComponent {
 
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
-    } else {
-      // we can add normal register function here, or something specific, we will see
-      //this.userService.register(this.registerForm.value);
-      this.router.navigate(['']);
+
+    } else {  
+      const fastRegisterData: FastRegistrationData = {
+        encryptedEmail: this.encryptedEmail,
+        password: this.registerForm.controls["password"].value,
+        confirmedPassword: this.registerForm.controls["confirmedPassword"].value,
+        address: this.registerForm.controls["address"].value,
+        phoneNumber: this.registerForm.controls["phoneNumber"].value,
+      }
+
+      this.authService.fastRegister(fastRegisterData).subscribe({
+        next: (response: string) => {
+          this.dialog.open(SuccessfulDialogComponent, {
+            width: '400px',
+            disableClose: true, // Prevent closing by clicking outside
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: "Confirmation Needed",
+              message: response, 
+            },     
+          }).afterClosed().subscribe(() => this.router.navigate(['']));
+        },
+        error: (err) => {
+        console.log(err)
+          let errorMessage = "Invalid registration data."; // default message
+          if (err?.error !== null) {
+            let msg = err.error[0]
+            const parts = msg.split(":"); 
+            if (parts[1] !== null) {
+              errorMessage = parts[1]?.trim();
+            }    
+          }
+
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            disableClose: true, // Prevent closing by clicking outside
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: 'Registration Failed',
+              message: errorMessage, 
+            },
+          });
+        }
+      });
     }
   }
 
