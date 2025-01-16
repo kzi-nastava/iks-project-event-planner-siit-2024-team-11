@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../../user-management/user.service';
+import { AuthService } from '../auth.service';
+import { User } from '../../../user-management/model/users.model';
 
 interface ButtonClasses {
   "role-button" : boolean,
@@ -11,8 +14,24 @@ interface ButtonClasses {
   styleUrl: './upgrade-profile.component.css'
 })
 export class UpgradeProfileComponent {
+  currentUser: User = null;
+
   isOrganizer: boolean = true;
   registerType: boolean = false;
+
+  ///////////////////////////////////////////
+
+  constructor(private userService: UserService, private authService: AuthService) {
+
+  }
+
+  ngOnInit(): void {
+    this.userService.get(this.authService.getId()).subscribe({
+      next: (response: User) => {
+        this.currentUser = response;
+      }
+    });
+  }
 
   setRegisterType(isOrganiser: boolean) : void {
     this.isOrganizer = isOrganiser;

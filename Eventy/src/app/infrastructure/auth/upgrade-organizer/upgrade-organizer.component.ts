@@ -1,57 +1,46 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, ElementRef, ViewChild, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { User } from '../../../user-management/model/users.model';
 import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
-import { FastRegistrationData } from '../model/fast-registration.model';
+import { UpgradeProfileData } from '../model/upgrade-profile.model';
 import { AuthService } from '../auth.service';
 import { InvalidInputDataDialogComponent } from '../../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import { SuccessfulDialogComponent } from '../../../shared/successful-dialog/successful-dialog.component';
 
 @Component({
-  selector: 'app-fast-registration',
-  templateUrl: './fast-registration.component.html',
-  styleUrl: './fast-registration.component.css'
+  selector: 'app-upgrade-organizer',
+  templateUrl: './upgrade-organizer.component.html',
+  styleUrl: './upgrade-organizer.component.css'
 })
-export class FastRegistrationComponent {
-  encryptedEmail: string = "";
-  email: string = "";
-  registerForm : FormGroup = new FormGroup({
-    email : new FormControl({value: this.email, disabled: true}, [Validators.required, Validators.email]),
-    password : new FormControl('', [Validators.required]),
-    confirmedPassword : new FormControl('', [Validators.required, this.passwordMatching()]),
-    address : new FormControl('', [Validators.required]),
-    phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
-  });
-  @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
+export class UpgradeOrganizerComponent {
+  @Input() user: User;
+  registerForm: FormGroup;
 
-  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.encryptedEmail = params['value'] || ''; // Assign the 'value' query param to email
+  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
+    this.registerForm = new FormGroup({
+      profilePicture: new FormControl('upgrade_profile/event_organiser_profile_picture.png'),
+      email: new FormControl({ value: '', disabled: true },[Validators.required, Validators.email]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      address: new FormControl({ value: '', disabled: true },[Validators.required]),
+      phoneNumber: new FormControl({ value: '', disabled: true },[
+        Validators.required,
+        Validators.pattern(
+          '^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$'
+        ),
+      ]),
     });
   }
 
-  ngOnInit() {
-    this.authService.decryptEmail(this.encryptedEmail).subscribe({
-      next: (response: string) => {
-        this.email = response;
-        this.registerForm.controls['email'].setValue(response); // 
-      },
-      error: () => {
-        this.email = "example@gmail.com";
-        this.registerForm.controls['email'].setValue("example@gmail.com"); // 
-      }
+  ngOnInit(): void {
+    this.registerForm.patchValue({
+      profilePicture: 'upgrade_profile/event_organiser_profile_picture.png',
+      email: this.user.email,
+      address: this.user.address,
+      phoneNumber: this.user.phoneNumber,
     });
-  }
-
-  private passwordMatching(): ValidatorFn {
-    return (): ValidationErrors | null => {
-      if(this.registerForm) {
-        return this.registerForm.controls['password'].value === this.registerForm.controls['confirmedPassword'].value ? null : { match: true };
-      }
-
-      return null;
-    };
   }
 
   register(): void {
@@ -62,23 +51,25 @@ export class FastRegistrationComponent {
         backdropClass: 'blurred_backdrop_dialog',
         data: {
           title: 'Input Error',
-          message: 'Please make sure that all inputs are valid before registration.',
+          message: 'Please make sure that all inputs are valid before upgrading profile.',
         },
       });
 
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
 
-    } else {  
-      const fastRegisterData: FastRegistrationData = {
-        encryptedEmail: this.encryptedEmail,
-        password: this.registerForm.controls["password"].value,
-        confirmedPassword: this.registerForm.controls["confirmedPassword"].value,
-        address: this.registerForm.controls["address"].value,
-        phoneNumber: this.registerForm.controls["phoneNumber"].value,
+    } else {
+      const upgradeProfileData: UpgradeProfileData = {
+        email: this.user.email,
+        accountType: "EVENT ORGANIZER",
+        firstName: this.registerForm.controls['firstName'].value, 
+        lastName: this.registerForm.controls['lastName'].value,
+        companyName: null, 
+        description: null,
+        profilePictures: [this.registerForm.controls['profilePicture'].value]
       }
 
-      this.authService.fastRegister(fastRegisterData).subscribe({
+      this.authService.upgradeProfile(upgradeProfileData).subscribe({
         next: (response: string) => {
           this.dialog.open(SuccessfulDialogComponent, {
             width: '400px',
@@ -91,7 +82,6 @@ export class FastRegistrationComponent {
           }).afterClosed().subscribe(() => this.router.navigate(['']));
         },
         error: (err) => {
-        console.log(err)
           let errorMessage = "Invalid registration data."; // default message
           if (err?.error !== null) {
             let msg = err.error[0]
@@ -106,12 +96,12 @@ export class FastRegistrationComponent {
             disableClose: true, // Prevent closing by clicking outside
             backdropClass: 'blurred_backdrop_dialog',
             data: {
-              title: 'Registration Failed',
+              title: 'Upgrade Failed',
               message: errorMessage, 
             },
           });
         }
-      });
+      }); 
     }
   }
 
@@ -125,6 +115,8 @@ export class FastRegistrationComponent {
       reader.readAsDataURL(file);
     }
   }
+
+  @ViewChild('profilePictureInput') fileInput!: ElementRef<HTMLInputElement>;
 
   pickProfilePicture() : void {
     this.fileInput.nativeElement.click();

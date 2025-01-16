@@ -1,4 +1,4 @@
-<div class="all-container">
+<div *ngIf="user" class="all-container">
   <div class="basic-info-wrapper">
     <div style="flex: 1;"></div>
 
@@ -28,7 +28,7 @@
         <button mat-flat-button class="button negative-button" (click)="deactivate()"><mat-icon>delete</mat-icon> Deactivate account</button>
       </div>
 
-      <button *ngIf="isOtherUser()" mat-flat-button class="button" [routerLink]="['/register']"><mat-icon>arrow_drop_up</mat-icon> Upgrade to Organizer/Provider</button>
+      <button *ngIf="isOtherUser()" mat-flat-button class="button" [routerLink]="['/upgrade-profile']"><mat-icon>arrow_drop_up</mat-icon> Upgrade to Organizer/Provider</button>
     </div>
   </div>
 

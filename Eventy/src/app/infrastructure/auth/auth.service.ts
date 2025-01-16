@@ -6,6 +6,8 @@ import {AuthResponse} from './model/auth-response.model';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Login} from './model/login.model';
 import {RegisterData} from './model/register.model';
+import { UpgradeProfileData } from './model/upgrade-profile.model';
+import { FastRegistrationData } from './model/fast-registration.model';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +71,26 @@ export class AuthService {
 
   setUser(): void {
     this.user$.next(this.getRole());
+  }
+
+  upgradeProfile(upgradeProfileData: UpgradeProfileData): Observable<string> {
+    return this.http.post<string>(
+      environment.apiHost + this.urlPrefix + 'upgrade-profile', upgradeProfileData, {
+        responseType: 'text' as 'json', 
+      });
+  }
+
+  fastRegister(fastRegistrationData: FastRegistrationData): Observable<string> {
+    return this.http.post<string>(
+      environment.apiHost + this.urlPrefix + 'fast-registration', fastRegistrationData, {
+        responseType: 'text' as 'json', 
+      });
+  }
+
+  decryptEmail(encryptedEmail: string): Observable<string> {
+    let email = this.http.get<string>(environment.apiHost + this.urlPrefix + 'fast-registration/' + encryptedEmail, {
+      responseType: 'text' as 'json', 
+    });
+    return email;
   }
 }

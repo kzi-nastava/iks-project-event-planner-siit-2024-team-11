@@ -10,7 +10,7 @@
 
   <div class="fields">
     <div class="profile-picture-picker profile-picture-container" (click)="pickProfilePicture()">
-      <img [src]="registerForm.controls['profilePicture'].value" class="profile-picture" alt="Profile picture" />
+      <img [src]="registerForm?.controls['profilePicture'].value" class="profile-picture" alt="Profile picture" />
       <div class="change-picture-note">Select Profile Picture</div>
       <input type="file" #profilePictureInput id="profilePictureInputId" (change)="onFileSelected($event)" accept="image/*">
     </div>
@@ -22,10 +22,10 @@
 
     <mat-form-field class="field" style = "margin-top: 23px"> 
       <input type="email" matInput placeholder="Ex. something@gmail.com" formControlName="email" />
-      @if (registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')) {
+      @if (registerForm?.controls['email'].hasError('email') && !registerForm?.controls['email'].hasError('required')) {
         <mat-error>Please enter a valid email address</mat-error>
       }
-      @if (registerForm.controls['email'].hasError('required')) {
+      @if (registerForm?.controls['email'].hasError('required')) {
         <mat-error>Email is <strong>required</strong></mat-error>
       }
     </mat-form-field>
@@ -34,7 +34,7 @@
       <mat-form-field class="name-field">
         <mat-label>First Name</mat-label>
         <input type="text" matInput placeholder="Your Name" formControlName="firstName" />
-        @if (registerForm.controls['firstName'].hasError('required')) {
+        @if (registerForm?.controls['firstName'].hasError('required')) {
           <mat-error>First name is <strong>required</strong></mat-error>
         }
         <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('firstName')">
@@ -45,7 +45,7 @@
       <mat-form-field class="name-field">
         <mat-label>Last Name</mat-label>
         <input type="text" matInput placeholder="Your Last Name" formControlName="lastName" />
-        @if (registerForm.controls['lastName'].hasError('required')) {
+        @if (registerForm?.controls['lastName'].hasError('required')) {
           <mat-error>Last name is <strong>required</strong></mat-error>
         }
         <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('lastName')">
@@ -56,17 +56,17 @@
 
     <mat-form-field class="field">
       <input type="text" matInput placeholder="Some Street 32" formControlName="address" />
-      @if (registerForm.controls['address'].hasError('required')) {
+      @if (registerForm?.controls['address'].hasError('required')) {
         <mat-error>Address is <strong>required</strong></mat-error>
       }
     </mat-form-field>
 
     <mat-form-field class="field">
       <input type="text" matInput placeholder="Ex. +381 65 57 30 724" formControlName="phoneNumber" />
-      @if (registerForm.controls['phoneNumber'].hasError('required') && !registerForm.controls['phoneNumber'].hasError("pattern")) {
+      @if (registerForm?.controls['phoneNumber'].hasError('required') && !registerForm?.controls['phoneNumber'].hasError("pattern")) {
         <mat-error>Phone number is <strong>required</strong></mat-error>
       }
-      @if (registerForm.controls['phoneNumber'].hasError('pattern')) {
+      @if (registerForm?.controls['phoneNumber'].hasError('pattern')) {
         <mat-error>Invalid phone number</mat-error>
       }
     </mat-form-field>
