@@ -17,7 +17,8 @@ export class AppComponent {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showFooter = !(event.url === '/login' || event.url === '/register' || event.url === '/fast-registration' || event.url === '/upgrade-profile');
+        const excludedRoutes = ['/login', '/register', '/fast-registration', '/upgrade-profile'];
+        this.showFooter = !excludedRoutes.some(route => event.url.startsWith(route)); 
       }
     });
   }
