@@ -33,7 +33,7 @@
       </div>
 
       <div class = "organiser_container">
-         <img src = "http://localhost:8080/{{serviceCard.providerImageUrl}}" class = "organiser_img" [routerLink]="['/users', serviceCard.providerId]">
+         <img src = "{{serviceCard.providerImageUrl}}" class = "organiser_img" [routerLink]="['/users', serviceCard.providerId]">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
             <p style = "margin-right: 5px; margin-top: 1px" class = "category">Provider:</p>
             <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', serviceCard.providerId]">
@@ -64,7 +64,7 @@
       </div>
 
       <div class = "image_container">
-         <img class = "service_image" src = "http://localhost:8080/{{serviceCard.firstImageUrl}}"/>
+         <img class = "service_image" src = "{{serviceCard.firstImageUrl}}"/>
       </div>
    </div>
 </div>

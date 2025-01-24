@@ -27,7 +27,7 @@
       </div>
 
       <div class = "organiser_container">
-         <img src = "http://localhost:8080/{{eventCard.organiserImage}}" class = "organiser_img" [routerLink]="['/users', eventCard.organiserId]">
+         <img src = "{{eventCard.organiserImage}}" class = "organiser_img" [routerLink]="['/users', eventCard.organiserId]">
          <div style = "display: flex; flex-direction: column; margin-left: 9px;">
             <p style = "margin-right: 5px; margin-top: 1px" class = "type">Organiser:</p>
             <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', eventCard.organiserId]">
@@ -58,6 +58,6 @@
             <p style = "margin: 0; font-size: 15px; color: #AEAAAA;  margin-bottom: 2px"> Description: </p>
             <p id = "description" class = "description"> {{eventCard.description}} </p>
          </div>
-      </div>  
+      </div>
    </div>
 </div>
