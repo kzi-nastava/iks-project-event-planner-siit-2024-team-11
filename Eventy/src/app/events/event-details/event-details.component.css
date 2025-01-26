@@ -4,50 +4,89 @@
   padding: 16px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #5a5d94;
-  color: white;
-  padding: 8px 16px;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.header-icons button {
-  color: white;
-}
-
 .main-content {
   margin: 16px 0;
+  display: flex;
+  flex-direction: row;
 }
 
 .event-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 40px;
+  margin-top: 15px;
 }
 
 .event-title {
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: "Albert Sans";
+  color: #7A7575;
   margin: 0;
 }
 
+.favorite_button_container {
+  position: relative;
+  display: flex;
+  padding: 3px;
+  padding-left: 3px;
+  padding-right: 5.5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  border: solid 2px #929AB7;
+  margin-right: 13px;
+  cursor: pointer;
+}
+
+.favorite_button_container_true {
+  position: relative;
+  display: flex;
+  padding: 3px;
+  padding-left: 3px;
+  padding-right: 5.5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  border: solid 2px #929AB7;
+  margin-right: 13px;
+  cursor: pointer;
+  background-color: #929AB7;
+}
+
+.favorite_button_container:hover {
+  background-color: #929AB7;
+}
+
+.favorite_button_container_true:hover {
+  background-color: white;
+}
+
+.favorite_button_container:hover mat-icon {
+  color: white !important;
+}
+
+.favorite_button_container_true:hover mat-icon {
+  color: #929AB7 !important;
+}
+
 .event-details {
-  background-color: #f9f9f9;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.organizer-name {
+  margin: 20px;
+  font-size: 22px;
+  font-family: Figtree;
+  text-align: center;
 }
 
 .event-description {
-  margin: 8px 0;
+  margin: 20px;
+  font-size: 20px;
+  font-family: Figtree;
+  text-align: center;
 }
 
 .map-container {
@@ -58,8 +97,17 @@
   border-radius: 8px;
 }
 
-.event-dates {
+.event-location {
   margin: 8px 0;
+  font-size: 18px;
+  font-family: Figtree;
+  text-align: center;
+}
+
+.event-dates {
+  margin: 35px 10px 20px 10px;
+  font-size: 18px;
+  font-family: Figtree;
 }
 
 .download-buttons {
@@ -68,13 +116,25 @@
 }
 
 .agenda-container {
-  margin-top: 24px;
+  margin: 50px;
+  text-align: center;
+}
+
+.agenda-title {
+  font-size: 32px;
+  font-weight: 400;
+  font-family: "Albert Sans";
+  color: #7A7575;
+  margin: 0;
 }
 
 .agenda-content {
   background-color: #fff;
-  padding: 16px;
+  padding: 50px;
   border: 1px solid #ddd;
   border-radius: 8px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

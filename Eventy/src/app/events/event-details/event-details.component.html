@@ -1,45 +1,38 @@
 <div class="event-page-container">
-  <header class="header">
-    <div class="logo">EVENTY</div>
-    <div class="header-icons">
-      <button mat-icon-button>
-        <mat-icon>account_circle</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>chat</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>notifications</mat-icon>
-      </button>
+    <div class="event-header">
+      <a mat-flat-button class="button">Chat With Organizer</a>
+      <h1 class="event-title">{{event.name}}</h1>
+      <div class = "{{event.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
+           (click)="handleFavoriteItem()">
+        <mat-icon style = "{{event.isFavorite ? 'font-size: 25.5px; color: white; font-weight: 500; transform: scale(0.8);' :
+                 'font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);'}}">favorite_border</mat-icon>
+      </div>
     </div>
-  </header>
 
   <div class="main-content">
-    <div class="event-header">
-      <h1 class="event-title">Very Special Wedding</h1>
-      <button mat-raised-button color="primary">Chat with Organizer</button>
-    </div>
-
     <div class="event-details">
-      <p><strong>Event Organizer:</strong> Veselin Roganovic</p>
+      <p class="organizer-name"><strong>Event Organizer:</strong> {{event.organizerName}}</p>
       <p class="event-description">
-        This is a very special wedding! We are very excited! Hope to have you here and to have a great time!
+        {{ event.description }}
       </p>
 
       <div id="map" class="map-container">
         <!-- Leaflet map will be rendered here -->
       </div>
+      <p class="event-location">
+        {{ event.location.address }}
+      </p>
 
       <p class="event-dates">
-        <strong>Starting:</strong> 02.11.2024. <strong>Ending:</strong> 03.11.2024.
+        <strong>Date:</strong> {{ event.date | date: 'dd.MM.yyyy.' }}
       </p>
 
       <div class="download-buttons">
-        <button mat-raised-button color="primary">
+        <button mat-flat-button class="button">
           <mat-icon>file_download</mat-icon>
           Event Details
         </button>
-        <button mat-raised-button color="primary">
+        <button mat-flat-button class="button">
           <mat-icon>file_download</mat-icon>
           Guest List
         </button>
@@ -47,8 +40,11 @@
     </div>
 
     <div class="agenda-container">
-      <h2>Agenda</h2>
-      <div class="agenda-content">agenda ovde</div>
+      <h2 class="agenda-title">Agenda</h2>
+      <ul class="agenda-content">
+        <li *ngFor="let activity of event.agenda">Activity: {{ activity.name }}, Description: {{ activity.description }}, Location: {{ activity.location }},
+        Time Range: {{activity.startTime | date:'dd.MM.yyyy. HH:mm'}} - {{activity.endTime | date:'dd.MM.yyyy. HH:mm'}}</li>
+      </ul>
     </div>
   </div>
 </div>

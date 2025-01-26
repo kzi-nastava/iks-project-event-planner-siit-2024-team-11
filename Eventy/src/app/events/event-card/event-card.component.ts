@@ -36,7 +36,5 @@ export class EventCardComponent {
       }
     })
   }
-
-  protected readonly event = event;
 }
 
