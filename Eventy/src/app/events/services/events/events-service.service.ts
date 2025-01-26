@@ -75,10 +75,14 @@ export class EventsService {
   }
 
   triggerEventDetailsPDFDownload(eventId: number): Observable<Blob> {
-    return this.httpClient.get<Blob>(environment.apiHost + this.urlPrefix + "/pdfs/details/" + eventId);
+    return this.httpClient.get(environment.apiHost + this.urlPrefix + "/pdfs/details/" + eventId, {
+      responseType: 'blob'
+    });
   }
 
   triggerEventGuestListPDFDownload(eventId: number): Observable<Blob> {
-    return this.httpClient.get<Blob>(environment.apiHost + this.urlPrefix + "/pdfs/guest-list/" + eventId);
+    return this.httpClient.get(environment.apiHost + this.urlPrefix + "/pdfs/guest-list/" + eventId, {
+      responseType: 'blob'
+    });
   }
 }

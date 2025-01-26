@@ -21,13 +21,6 @@ export class EventDetailsComponent {
     this.eventService.getEvent(id).subscribe({
       next: (event: EventDetails) => {
         this.event = event;
-        this.event.agenda = [{
-          name: "Activity",
-          description: "ASMDNJFHBAJDKM asa csd cdsjc jda",
-          location: "Here",
-          startTime: new Date(),
-          endTime: new Date()
-        }];
 
         this.initMap();
       },
@@ -76,7 +69,17 @@ export class EventDetailsComponent {
 
   downloadEventDetails(): void {
     this.eventService.triggerEventDetailsPDFDownload(this.event.id).subscribe({
-      error: () => {
+      next: (response: Blob) => {
+        const blob: Blob = new Blob([response], { type: 'application/pdf' });
+        const url: string = window.URL.createObjectURL(blob);
+        const anchor: HTMLAnchorElement = document.createElement('a');
+        anchor.href = url;
+        anchor.download = this.event.name + '-event-details.pdf';
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error) => {
+        console.log(error);
         this.dialog.open(ErrorDialogComponent, {
           width: '400px',
           disableClose: true, // prevents closing by clicking outside
@@ -92,6 +95,15 @@ export class EventDetailsComponent {
 
   downloadGuestList(): void {
     this.eventService.triggerEventGuestListPDFDownload(this.event.id).subscribe({
+      next: (response: Blob) => {
+        const blob: Blob = new Blob([response], { type: 'application/pdf' });
+        const url: string = window.URL.createObjectURL(blob);
+        const anchor: HTMLAnchorElement = document.createElement('a');
+        anchor.href = url;
+        anchor.download = this.event.name + '-guest-list.pdf';
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+      },
       error: () => {
         this.dialog.open(ErrorDialogComponent, {
           width: '400px',
