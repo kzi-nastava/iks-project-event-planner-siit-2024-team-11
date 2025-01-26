@@ -1,0 +1,80 @@
+.event-page-container {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5a5d94;
+  color: white;
+  padding: 8px 16px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header-icons button {
+  color: white;
+}
+
+.main-content {
+  margin: 16px 0;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.event-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.event-details {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event-description {
+  margin: 8px 0;
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.event-dates {
+  margin: 8px 0;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.agenda-container {
+  margin-top: 24px;
+}
+
+.agenda-content {
+  background-color: #fff;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
