@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-event-details',
@@ -27,6 +28,8 @@ export class EventDetailsComponent {
           startTime: new Date(),
           endTime: new Date()
         }];
+
+        this.initMap();
       },
       error: (event: EventDetails) => {
         this.dialog.open(ErrorDialogComponent, {
@@ -60,5 +63,46 @@ export class EventDetailsComponent {
         });
       }
     })
+  }
+
+  initMap(): void {
+    let map: L.Map | undefined = L.map('map').setView([this.event.location.latitude, this.event.location.longitude], 15);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+        '&copy; <a href="https://carto.com/">Carto</a>'
+    }).addTo(map);
+  }
+
+  downloadEventDetails(): void {
+    this.eventService.triggerEventDetailsPDFDownload(this.event.id).subscribe({
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true, // prevents closing by clicking outside
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: "Error while downloading",
+            message: 'Error while downloading event details. Please try again later.',
+          },
+        });
+      }
+    });
+  }
+
+  downloadGuestList(): void {
+    this.eventService.triggerEventGuestListPDFDownload(this.event.id).subscribe({
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true, // prevents closing by clicking outside
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: "Error while downloading",
+            message: 'Error while downloading guest list. Please try again later.',
+          },
+        });
+      }
+    });
   }
 }
