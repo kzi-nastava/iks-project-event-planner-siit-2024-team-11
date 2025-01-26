@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventCard } from '../../model/event-card.model';
-import { Event, OrganizeEvent } from '../../model/events.model';
+import {Event, EventDetails, OrganizeEvent} from '../../model/events.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../env/constants';
@@ -15,7 +15,7 @@ export class EventsService {
   constructor(private httpClient: HttpClient) {}
 
   getAllEvents(
-    pageProperties?: { page?: number; pageSize?: number; sort?: string }, 
+    pageProperties?: { page?: number; pageSize?: number; sort?: string },
     filters?: { search?: string; eventTypes?: string[]; location?: string; maxParticipants?: number; startDate?: Date; endDate?: Date }
   ): Observable<PagedResponse<EventCard>> {
 
@@ -64,5 +64,21 @@ export class EventsService {
 
   organizeEvent(event: OrganizeEvent): Observable<Event> {
     return this.httpClient.post<Event>(environment.apiHost + this.urlPrefix, event);
+  }
+
+  toggleFavoriteEvent(eventId: number): Observable<any> {
+    return this.httpClient.put<any>(environment.apiHost + this.urlPrefix + "/favorite/" + eventId, {});
+  }
+
+  getEvent(eventId: number): Observable<EventDetails> {
+    return this.httpClient.get<EventDetails>(environment.apiHost + this.urlPrefix + "/" + eventId);
+  }
+
+  triggerEventDetailsPDFDownload(eventId: number): Observable<Blob> {
+    return this.httpClient.get<Blob>(environment.apiHost + this.urlPrefix + "/pdfs/details/" + eventId);
+  }
+
+  triggerEventGuestListPDFDownload(eventId: number): Observable<Blob> {
+    return this.httpClient.get<Blob>(environment.apiHost + this.urlPrefix + "/pdfs/guest-list/" + eventId);
   }
 }

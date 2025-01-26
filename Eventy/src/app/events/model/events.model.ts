@@ -80,3 +80,16 @@ export interface EventBasicInformation {
   createLocationDTO: Location;
   date: Date;
 }
+
+export interface EventDetails {
+  id: number;
+  name: string;
+  description: string;
+  eventType: EventType;
+  location: Location;
+  date: Date;
+  agenda: Activity[];
+  organizerId: number;
+  organizerName: string;
+  isFavorite: boolean;
+}
