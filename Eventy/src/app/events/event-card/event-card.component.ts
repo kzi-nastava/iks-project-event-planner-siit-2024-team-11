@@ -20,10 +20,6 @@ export class EventCardComponent {
     }
   }
 
-  handleSeeMore() {
-    if (!this.isClickable) {
-      this._snackBar.open("SEE MORE: " + this.eventCard.name, "OK!");
-    }
-  }
+  protected readonly event = event;
 }
 

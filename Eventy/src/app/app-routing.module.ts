@@ -21,6 +21,7 @@ import { FastRegistrationComponent } from './infrastructure/auth/fast-registrati
 import {AuthGuard} from './infrastructure/auth/auth.guard';
 import {ConfirmRegistrationComponent} from './infrastructure/auth/confirm-registration/confirm-registration.component';
 import {UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/upgrade-profile.component';
+import {EventDetailsComponent} from './events/event-details/event-details.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'upgrade-profile', component: UpgradeProfileComponent},
   {path: 'fast-registration', component: FastRegistrationComponent},
   {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent},
+  {path: 'events/:eventId', component: EventDetailsComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
@@ -77,6 +79,7 @@ const routes: Routes = [
   //   data: {role: ['ROLE_AuthenticatedUser']}},
   // {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent, canActivate: [AuthGuard],
   //   data: {role: []}},
+  // {path: 'events/:eventId', component: EventDetailsComponent},
   // {path: '**', redirectTo: ''},
 ];
 
