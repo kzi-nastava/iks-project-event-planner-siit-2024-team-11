@@ -91,6 +91,11 @@
             font-weight: 450;
             color: #717171;
             letter-spacing: 0;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
             font-family: Figtree;
          }
 

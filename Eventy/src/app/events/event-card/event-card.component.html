@@ -16,12 +16,16 @@
 
       <div class = "date_location_container">
          <div style = "display: flex; flex-direction: row;">
-            <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
+            <div>
+               <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.5px;">calendar_month</mat-icon>
+            </div>
             <p id = "date" class = "date">{{eventCard.startDate | date: 'MMMM d, y'}}</p>
          </div>
 
          <div style = "display: flex; flex-direction: row;">
-            <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.8px;">location_pin</mat-icon>
+            <div>
+               <mat-icon style = "font-size: 19px; color: #5B5B5B; margin-top: 2.5px; margin-left: -1.8px;">location_pin</mat-icon>
+            </div>
             <p id = "location" class = "location">{{eventCard.locationName}}</p>
          </div>
       </div>
