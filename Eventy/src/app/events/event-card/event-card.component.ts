@@ -21,7 +21,7 @@ export class EventCardComponent {
     this.eventService.toggleFavoriteEvent(this.eventCard.eventId).subscribe({
       next: any => {
         this.eventCard.isFavorite = !this.eventCard.isFavorite;
-        this._snackBar.open("FAVORITE: " + this.eventCard.name, "OK!");
+        this._snackBar.open((this.eventCard.isFavorite ? "FAVORITE: " : "REMOVE FAVORITE: ") + this.eventCard.name, "OK!");
       },
       error: any => {
         this.dialog.open(ErrorDialogComponent, {
