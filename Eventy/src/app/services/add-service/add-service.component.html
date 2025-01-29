@@ -3,13 +3,6 @@
   <form [formGroup]="serviceForm" (ngSubmit)="submit()">
     <div class="form-row">
       <div class="column">
-        <mat-form-field appearance="fill">
-          <mat-label>Service category</mat-label>
-          <input matInput placeholder="Enter value" formControlName="serviceCategory" required>
-          <mat-error *ngIf="serviceForm.controls['serviceCategory'].hasError('required')">
-            Service category is required
-          </mat-error>
-        </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
@@ -82,16 +75,45 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-checkbox [checked]="checked" formControlName="autoAccept">Automatically accept reservations</mat-checkbox>
+        <mat-checkbox formControlName="autoAccept">Automatically accept reservations</mat-checkbox>
 
       </div>
 
       <div class="column">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Service category</mat-label>
+          <mat-select placeholder="Choose a category" formControlName="serviceCategory" required>
+            <mat-option  *ngFor="let category of allSolutionCategories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="serviceForm.controls['serviceCategory'].hasError('required')">
+            Service category is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="this.serviceForm.controls['serviceCategory'].value === -1337">
+          <mat-label>New category name</mat-label>
+          <input matInput placeholder="Enter new category name" formControlName="newCategoryName">
+          <mat-error *ngIf="serviceForm.controls['newCategoryName'].hasError('required')">
+            New category name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="this.serviceForm.controls['serviceCategory'].value === -1337">
+          <mat-label>New category description</mat-label>
+          <input matInput placeholder="Enter new category description" formControlName="newCategoryDescription">
+          <mat-error *ngIf="serviceForm.controls['newCategoryDescription'].hasError('required')">
+            Specifics are required
+          </mat-error>
+        </mat-form-field>
+
         <mat-form-field appearance="fill">
           <mat-label>Related event types</mat-label>
           <mat-select formControlName="relevantEventTypes" multiple>
-            <mat-option *ngFor="let category of categoryList" [value]="category">
-              {{ category }}
+            <mat-option *ngFor="let eventType of allEventTypes" [value]="eventType.id">
+              {{ eventType.name }}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="serviceForm.controls['relevantEventTypes'].hasError('required')">
