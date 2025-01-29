@@ -13,6 +13,7 @@ import { ProductsModule } from './products/products.module';
 import { ServicesModule } from './services/services.module';
 import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
 import {Interceptor} from './infrastructure/auth/interceptor';
+import { InteractionsModule } from './interactions/interactions.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {Interceptor} from './infrastructure/auth/interceptor';
     SolutionsModule,
     ProductsModule,
     ServicesModule,
+    InteractionsModule
   ],
   providers: [
     provideAnimationsAsync(),
