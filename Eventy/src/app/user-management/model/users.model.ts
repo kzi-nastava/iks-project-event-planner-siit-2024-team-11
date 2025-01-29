@@ -34,3 +34,8 @@ export interface CalendarOccupancy {
   occupationStartDate: Date;
   occupationEndDate: Date;
 }
+
+export interface UserNotificationsInfo {
+  id: number;
+  areNotificationsMuted: Boolean;
+}

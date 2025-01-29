@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterLink, RouterModule } from '@angular/router';
 import { AllNotificationsComponent } from './all-notifications/all-notifications.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntlService } from './services/paginator/custom-mat-paginator-intl.service';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import { AllNotificationsComponent } from './all-notifications/all-notifications
   providers: [
     RouterLink,
     FormsModule,
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlService }
   ]
 })
 export class InteractionsModule { }

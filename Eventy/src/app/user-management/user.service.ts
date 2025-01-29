@@ -110,4 +110,8 @@ export class UserService {
 
     return this.httpClient.get<PagedResponse<SolutionCard>>(environment.apiHost + this.solutionsUrlPrefix + "/catalog/" + userId, { params: params });
   }
+
+  getUserNotificationsInfo(userId: number): Observable<Boolean> {
+    return this.httpClient.get<Boolean>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/notifications-info");
+  }
 }

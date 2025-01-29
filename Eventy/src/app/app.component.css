@@ -12,4 +12,5 @@ mat-sidenav {
   .notification_drawer {
     overflow: auto !important; /* Enable scrolling */
     max-height: 100vh; /* Ensure it doesn't exceed the viewport height */
+    padding: 10px;
   }

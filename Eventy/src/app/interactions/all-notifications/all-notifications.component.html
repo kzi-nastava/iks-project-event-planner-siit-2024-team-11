@@ -1,18 +1,60 @@
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
-<p>all-notifications works!</p>
+<div *ngIf="loaded === 1">
+   <div class = "header_container">
+      <p class = "header_title">Notifications</p>
+
+      <div *ngIf="!areNotificationsMuted" (click)="handleMuteNotifications()" class = "mute_all_container" style = "background-color: #E75959;">
+         <mat-icon>notifications</mat-icon>
+         <p>Mute All</p>
+      </div>
+
+      <div *ngIf="areNotificationsMuted" (click)="handleMuteNotifications()" class = "mute_all_container" style = "background-color: #7F86A4;">
+         <mat-icon>notifications_off</mat-icon>
+         <p>Unmute All</p>
+      </div>   
+   </div>
+
+
+   <div class = "notifications_container">
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+      <p>Tac</p>
+
+      <div class = "pagination_container">
+         <mat-paginator 
+            [length]="totalCount"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[1, 2, 5, 10]"
+            aria-label="Select page"
+            (page)="onPageChange($event)"
+            style=" background: white !important"
+         />
+      </div>
+   </div>
+</div>
+
+
