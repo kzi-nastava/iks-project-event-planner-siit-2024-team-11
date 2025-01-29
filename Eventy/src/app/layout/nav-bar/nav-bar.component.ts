@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
   @Input() drawer!: MatSidenav;
+  @Input() notificationsDrawer!: MatSidenav;
 
   role: string = '';
   constructor(private authService: AuthService, private router: Router) {

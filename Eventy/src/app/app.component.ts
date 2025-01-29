@@ -9,6 +9,7 @@ import {NavigationEnd, Router} from '@angular/router';
 export class AppComponent {
   title: string = 'Eventy';
   showFooter: boolean = true;
+  drawerWidth = '28vw';
 
   constructor(private router: Router) {
 

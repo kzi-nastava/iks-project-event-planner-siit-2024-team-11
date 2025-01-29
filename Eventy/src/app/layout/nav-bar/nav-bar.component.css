@@ -24,7 +24,7 @@ mat-icon {
 }
 
 .tool-bar-icon {
-  margin-left: 25px;
+  margin-left: 20px;
 }
 
 .drawer-opener {
@@ -38,4 +38,10 @@ img {
 
 .clickable:hover {
   cursor: pointer;
+}
+
+#notificationsDrawer {
+  width: 300px; /* Adjust to your needs */
+  background-color: #fff; /* Make it stand out */
+  z-index: 1000;
 }

@@ -5,6 +5,11 @@ mat-sidenav-container {
 mat-sidenav {
   width: auto;
   background-color: #FEFEFE;
-  border-radius: 0;
+  border-radius: 0 !important;
   box-shadow: 25px 25px 25px rgba(30, 30, 30, 0.4);
 }
+
+  .notification_drawer {
+    overflow: auto !important; /* Enable scrolling */
+    max-height: 100vh; /* Ensure it doesn't exceed the viewport height */
+  }
