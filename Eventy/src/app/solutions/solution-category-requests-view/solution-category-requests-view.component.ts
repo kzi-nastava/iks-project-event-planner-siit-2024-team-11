@@ -4,6 +4,7 @@ import { SolutionCategoryService } from '../services/solutions/solution-category
 import { CategoryWithId } from '../model/category-with-id.model';
 import { PageEvent } from '@angular/material/paginator';
 import { Status } from '../model/category.model';
+import { PagedResponse } from '../../shared/model/paged-response.model';
 
 interface DeletedRequestAndReplacementId {
   deniedRequest: CategoryWithId,
@@ -16,30 +17,19 @@ interface DeletedRequestAndReplacementId {
   styleUrl: './solution-category-requests-view.component.css'
 })
 export class SolutionCategoryRequestsViewComponent {
-  requests: CategoryWithId[] = [];
   paginatedRequests: CategoryWithId[];
   requestsPairs: CategoryWithId[][] = [];
 
-  private pageSize: number;
-  private currentPage: number;
+  totalElements: number = 0;
+  pageSize: number = 10;
+  currentPage: number = 0;
   
-  constructor(private creationDialog: MatDialog, private categoryService: SolutionCategoryService) {
+  constructor(private categoryService: SolutionCategoryService) {
     this.updatePaginatedCategories();
   }
 
   ngOnInit(): void {
-    this.pageSize = 10;
-    this.currentPage = 0;
-    this.getAll();
     this.updatePaginatedCategories();
-  }
-
-  getAll(): void {
-    this.categoryService.getAllRequests().subscribe({
-      next: (request: CategoryWithId[]) => {
-        this.requests = request;
-      }
-    })
   }
 
   onPageChange(event: PageEvent): void {
@@ -49,40 +39,44 @@ export class SolutionCategoryRequestsViewComponent {
   }
 
   private updatePaginatedCategories(): void {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedRequests = this.requests.slice(startIndex, endIndex);
-    this.requestsPairs = []
-    for (let i = 0; i < this.paginatedRequests.length / 2; i++) {
-      this.requestsPairs.push([this.paginatedRequests[i*2], this.paginatedRequests[i*2 + 1]])
-    }
+    this.categoryService.getAllRequests().subscribe({
+      next: (request: PagedResponse<CategoryWithId>) => {
+        this.paginatedRequests = request.content;
+        this.totalElements = request.totalElements;
+        this.requestsPairs = []
+        for (let i = 0; i < this.paginatedRequests.length / 2; i++) {
+          this.requestsPairs.push([this.paginatedRequests[i*2], this.paginatedRequests[i*2 + 1]])
+        }
+      }
+    })
+    
   }
 
   requestChanged(request: CategoryWithId) {
     // CONSIDER: how to notify PUPs that it has been changed
     request.status = Status.ACCEPTED;
-    this.categoryService.update(request);
-    this.removeFromRequestListAndUpdatePage(request)
+    this.categoryService.changeRequest(request).subscribe({
+      next: (response: CategoryWithId) => {
+        this.updatePaginatedCategories();
+      }
+    })
   }
 
   requestApproved(request: CategoryWithId) {
     request.status = Status.ACCEPTED;
-    this.categoryService.update(request);
-    this.removeFromRequestListAndUpdatePage(request)
+    this.categoryService.acceptRequest(request.id).subscribe({
+      next: (response: CategoryWithId) => {
+        this.updatePaginatedCategories();
+      }
+    });
+
   }
 
   requestDeniedAndChanged(params: DeletedRequestAndReplacementId) {
-    // TODO: change every solution with oldRequest.id as a category with newRequestId (REST call)
-    this.categoryService.delete(params.deniedRequest.id);
-    this.removeFromRequestListAndUpdatePage(params.deniedRequest)
-  }
-
-
-  removeFromRequestListAndUpdatePage(request: CategoryWithId): void {
-    let index: number = this.requests.findIndex(r => request.id === r.id)
-    if (index > -1) {
-      this.requests.splice(index, 1);
-    }
-    this.updatePaginatedCategories();
+    this.categoryService.replaceRequest(params.deniedRequest.id, params.newRequestId).subscribe({
+      next: (response: CategoryWithId) => {
+        this.updatePaginatedCategories();
+      }
+    });
   }
 }

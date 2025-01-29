@@ -1,5 +1,5 @@
 <div *ngFor="let requestPair of requestsPairs">
     <app-solution-category-request-view-dual-card [categoryDouble]="requestPair" (requestDeniedAndChanged)="requestDeniedAndChanged($event)" (requestChanged)="requestChanged($event)" (requestApproved)="requestApproved($event)"></app-solution-category-request-view-dual-card>
 </div>
-<mat-paginator [length]="requests.length" [pageSize]="10" (page)="onPageChange($event)" [pageSizeOptions]="[6, 10, 20]" aria-label="Select page">
+<mat-paginator [length]="totalElements" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[6, 10, 20]" aria-label="Select page">
 </mat-paginator>
