@@ -1,6 +1,6 @@
 export enum Status {
-   PENDING,
    ACCEPTED,
+   PENDING,
    DENIED
 }
 
