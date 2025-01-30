@@ -1,4 +1,4 @@
-<div *ngIf="notificationsLoaded">
+<div *ngIf="notificationsLoaded && paginatedNotifications">
    <div class = "header_container">
       <p class = "header_title">Notifications</p>
 
@@ -20,40 +20,21 @@
    </div>
 
    <div class = "notifications_container">
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
-      <p>Tac</p>
+      <div *ngFor="let notification of paginatedNotifications;">
+         <div 
+            (click)="handleNotificationClick(notification)"       
+            style = "margin: 17px; margin-left: 16px; margin-right: 16px;"
+         > 
+            <app-notification-card [notification]="notification"
+                                   [userNotificationsInfo]="userNotificationsInfo"/>  
+         </div>
+      </div>
 
       <div class = "pagination_container">
          <mat-paginator 
             [length]="totalCount"
             [pageSize]="pageSize"
-            [pageSizeOptions]="[1, 2, 5, 10]"
+            [pageSizeOptions]="[5, 10]"
             aria-label="Select page"
             (page)="onPageChange($event)"
             style=" background: white !important"

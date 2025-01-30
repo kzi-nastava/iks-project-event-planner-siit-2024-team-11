@@ -13,8 +13,9 @@ export class AppComponent implements AfterViewInit {
   title: string = 'Eventy';
   showFooter: boolean = true;
   drawerWidth = '28vw';
-  loggedInUserId: number; // for notifications
-  userNotificationsInfo: UserNotificationsInfo;
+  // for notifications
+  loggedInUserId: number; 
+  userNotificationsInfo: UserNotificationsInfo; // updated from all-notifications with EventEmitter
 
   constructor(private router: Router,  
               private authService: AuthService,
@@ -45,4 +46,7 @@ export class AppComponent implements AfterViewInit {
     }
   }
   
+  onNotificationsInfoUpdated(updatedInfo: UserNotificationsInfo) {
+    this.userNotificationsInfo = updatedInfo;
+  }
 }

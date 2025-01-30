@@ -45,3 +45,17 @@ img {
   background-color: #fff; /* Make it stand out */
   z-index: 1000;
 }
+
+.notification_container {
+  display: flex;
+}
+
+  .notification-dot {
+    width: 7px;
+    height: 7px;
+    background-color: red;
+    border-radius: 50px;
+    margin-top: -19px;
+    margin-left: -6px;
+  }
+

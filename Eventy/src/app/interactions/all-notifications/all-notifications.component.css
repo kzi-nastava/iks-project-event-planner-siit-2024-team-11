@@ -43,12 +43,12 @@ p {
       }
 
 .notifications_container {
-   margin-bottom: 56px;
+   margin-bottom: 70px;
 }  
 
    .pagination_container {
       width: 28wv;
-      min-width: 400px;
+      min-width: 410px;
       align-self: center;
       position: fixed;
       bottom: 0;

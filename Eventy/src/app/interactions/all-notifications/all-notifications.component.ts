@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, Input } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Notification } from '../model/notification.model';
 import { PageEvent } from '@angular/material/paginator';
 import { UserService } from '../../user-management/user.service';
@@ -9,7 +9,7 @@ import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.com
 import { MatDialog } from '@angular/material/dialog';
 import { UserNotificationsInfo } from '../../user-management/model/users.model';
 import { MatSidenav } from '@angular/material/sidenav';
-import { interval, Subscription, switchMap } from 'rxjs';
+import { interval, Observable, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-all-notifications',
@@ -25,13 +25,14 @@ export class AllNotificationsComponent implements AfterViewInit {
   currentPage: number = 0;
   totalCount: number = 100;
   // user info
-  @Input() userId: number;
-  @Input() userNotificationsInfo: UserNotificationsInfo;
+  @Input() userId: number; // from app
+  @Input() userNotificationsInfo: UserNotificationsInfo; // from app
+  @Output() notificationsInfoUpdated = new EventEmitter<UserNotificationsInfo>(); // to app (for red dot on notifications icon)
   // loaded
   notificationsLoaded: Boolean = false;
   @Input() notificationsDrawer!: MatSidenav;
   // subscription to check if user has any new notifications
-  private notificationInfoPollingSubscription: Subscription | null = null;
+  private notificationInfoPollingSubscription: Subscription | null = null; // for polling
 
   constructor(private notificationService: NotificationService,  
               private userService: UserService, 
@@ -50,9 +51,15 @@ export class AllNotificationsComponent implements AfterViewInit {
 
     // get notifications when the user opens notifications' icon
     this.notificationsDrawer.openedChange.subscribe((isOpen) => {
-      if (isOpen && this.userId) {
-        this.updatePaginatedNotifications();
-      }
+      if (this.userId) {
+        if (isOpen) {
+          this.updatePaginatedNotifications();
+        } else {
+          if (!this.userNotificationsInfo.areNotificationsMuted) {
+            this.updateLastReadNotifications();
+          }  
+        }  
+      }      
     });
   }
 
@@ -63,6 +70,7 @@ export class AllNotificationsComponent implements AfterViewInit {
       ).subscribe({
         next: (result: UserNotificationsInfo) => {
           this.userNotificationsInfo = result;
+          this.notificationsInfoUpdated.emit(this.userNotificationsInfo); // to app
         },
         error: (err) => {
           console.error('Failed to fetch notificatio info:', err);
@@ -80,6 +88,9 @@ export class AllNotificationsComponent implements AfterViewInit {
 
   ngOnDestroy() {
     this.stopPollingNotificationInfo();
+    if (!this.userNotificationsInfo.areNotificationsMuted) {
+      this.updateLastReadNotifications();
+    } 
   }
 
   public onPageChange(event?: PageEvent){
@@ -95,18 +106,42 @@ export class AllNotificationsComponent implements AfterViewInit {
     ).subscribe({
       next: (response: PagedResponse<Notification>) => {
         this.paginatedNotifications = response.content;
+        console.log(this.paginatedNotifications);
         this.totalCount = response.totalElements;
-        this.notificationsLoaded = true;
+        this.notificationsLoaded = true;        
       },
       error: (err) => {
+        this.notificationsLoaded = false;
         this.dialog.open(ErrorDialogComponent, {
           data : {
             title: "Loading Error",
             message: "Error while loading the notifications!"
           }
         });
-        console.error('Failed to fetch notifications:', err);
       },
+    });
+  }
+
+  public updateLastReadNotifications() {
+    this.userService.updateLastReadNotifications(this.userId).subscribe({
+      next: (response: Date) => {
+        this.userNotificationsInfo.lastReadNotifications = response;
+        this.userNotificationsInfo.hasNewNotifications = false;
+        this.notificationsInfoUpdated.emit(this.userNotificationsInfo);
+        if (!this.userNotificationsInfo.areNotificationsMuted) {
+          if (!this.notificationInfoPollingSubscription) {
+            this.startPollingNotificationInfo();
+          }
+        }
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error",
+            message: "An unexpected error occurred while updating last read!"
+          }
+        });
+      }
     });
   }
   
@@ -114,9 +149,14 @@ export class AllNotificationsComponent implements AfterViewInit {
     this.userService.toggleUserNotifications(this.userId, !this.userNotificationsInfo.areNotificationsMuted).subscribe({
       next: () => {
         this.userNotificationsInfo.areNotificationsMuted = !this.userNotificationsInfo.areNotificationsMuted;
+        this.notificationsInfoUpdated.emit(this.userNotificationsInfo);
         if (!this.userNotificationsInfo.areNotificationsMuted) {
           if (!this.notificationInfoPollingSubscription) {
             this.startPollingNotificationInfo();
+          }
+        } else {
+          if (this.notificationInfoPollingSubscription) {
+            this.stopPollingNotificationInfo();
           }
         }
       },
@@ -130,5 +170,13 @@ export class AllNotificationsComponent implements AfterViewInit {
       }
     });
   } 
+
+  public handleNotificationClick(notification: Notification) {
+    if (!this.userNotificationsInfo.areNotificationsMuted) {
+      this.updateLastReadNotifications();
+    }
+
+    console.log(notification);
+  }
 }
 

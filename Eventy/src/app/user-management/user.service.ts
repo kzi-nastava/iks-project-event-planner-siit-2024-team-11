@@ -118,4 +118,8 @@ export class UserService {
   toggleUserNotifications(userId: number, toggleValue: Boolean): Observable<Boolean> {
     return this.httpClient.put<Boolean>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/notifications-info", toggleValue);
   }
+
+  updateLastReadNotifications(userId: number): Observable<Date> {
+    return this.httpClient.put<Date>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/last-read-notifications", {});
+  }
 }

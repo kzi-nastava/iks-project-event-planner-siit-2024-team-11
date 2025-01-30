@@ -13,17 +13,20 @@
                position="end" 
                class="notification-drawer"
                [style.width]='drawerWidth'
-               [style.minWidth.px]='400'>
+               [style.minWidth.px]='410'>
     <app-all-notifications *ngIf="userNotificationsInfo && loggedInUserId"
                            [userNotificationsInfo]="userNotificationsInfo"
                            [userId]="loggedInUserId"
-                           [notificationsDrawer]="notificationsDrawer"/>
+                           [notificationsDrawer]="notificationsDrawer"
+                           (notificationsInfoUpdated)="onNotificationsInfoUpdated($event)"/>
   </mat-sidenav>
 
   <!-- Main Content -->
   <mat-sidenav-content>
-    <app-nav-bar [drawer]="drawer" [notificationsDrawer]="notificationsDrawer"></app-nav-bar>
-    <router-outlet></router-outlet>
-    <app-footer *ngIf="showFooter"></app-footer>
+    <app-nav-bar [drawer]="drawer" 
+                 [notificationsDrawer]="notificationsDrawer"
+                 [userNotificationsInfo]="userNotificationsInfo"/>
+    <router-outlet/>
+    <app-footer *ngIf="showFooter"/>
   </mat-sidenav-content>
 </mat-sidenav-container>

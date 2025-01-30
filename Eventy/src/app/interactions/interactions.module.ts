@@ -11,11 +11,13 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { AllNotificationsComponent } from './all-notifications/all-notifications.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntlService } from './services/paginator/custom-mat-paginator-intl.service';
+import { NotificationCardComponent } from './notification-card/notification-card.component';
 
 
 @NgModule({
   declarations: [
-    AllNotificationsComponent
+    AllNotificationsComponent,
+    NotificationCardComponent
   ],
   imports: [
     CommonModule,
