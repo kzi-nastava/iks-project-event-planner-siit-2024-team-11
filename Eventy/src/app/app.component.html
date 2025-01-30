@@ -14,7 +14,10 @@
                class="notification-drawer"
                [style.width]='drawerWidth'
                [style.minWidth.px]='400'>
-    <app-all-notifications/>
+    <app-all-notifications *ngIf="userNotificationsInfo && loggedInUserId"
+                           [userNotificationsInfo]="userNotificationsInfo"
+                           [userId]="loggedInUserId"
+                           [notificationsDrawer]="notificationsDrawer"/>
   </mat-sidenav>
 
   <!-- Main Content -->

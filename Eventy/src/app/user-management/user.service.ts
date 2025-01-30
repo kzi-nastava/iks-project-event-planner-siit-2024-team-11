@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CalendarOccupancy, UpdateUser, User} from './model/users.model';
+import {CalendarOccupancy, UpdateUser, User, UserNotificationsInfo} from './model/users.model';
 import {EventCard} from '../events/model/event-card.model';
 import {SolutionCard} from '../solutions/model/solution-card.model';
 import {environment} from '../../env/constants';
@@ -111,7 +111,11 @@ export class UserService {
     return this.httpClient.get<PagedResponse<SolutionCard>>(environment.apiHost + this.solutionsUrlPrefix + "/catalog/" + userId, { params: params });
   }
 
-  getUserNotificationsInfo(userId: number): Observable<Boolean> {
-    return this.httpClient.get<Boolean>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/notifications-info");
+  getUserNotificationsInfo(userId: number): Observable<UserNotificationsInfo> {
+    return this.httpClient.get<UserNotificationsInfo>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/notifications-info");
+  }
+
+  toggleUserNotifications(userId: number, toggleValue: Boolean): Observable<Boolean> {
+    return this.httpClient.put<Boolean>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/notifications-info", toggleValue);
   }
 }

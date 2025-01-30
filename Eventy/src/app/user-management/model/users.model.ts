@@ -36,6 +36,8 @@ export interface CalendarOccupancy {
 }
 
 export interface UserNotificationsInfo {
-  id: number;
+  userId: number;
   areNotificationsMuted: Boolean;
+  lastReadNotifications: Date;
+  hasNewNotifications: Boolean;
 }

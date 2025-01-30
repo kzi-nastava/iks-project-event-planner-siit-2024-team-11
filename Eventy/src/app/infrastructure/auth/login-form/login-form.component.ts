@@ -33,7 +33,9 @@ export class LoginFormComponent {
         next: (response: AuthResponse) => {
           localStorage.setItem('user', response.accessToken);
           this.authService.setUser();
-          this.router.navigate(['']);
+          this.router.navigate(['']).then(() => {
+            window.location.reload();
+          });
         },
         error: () => {
           this.dialog.open(InvalidInputDataDialogComponent, {

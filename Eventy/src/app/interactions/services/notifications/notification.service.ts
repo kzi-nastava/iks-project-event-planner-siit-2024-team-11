@@ -15,17 +15,17 @@ export class NotificationService {
   constructor(private httpClient: HttpClient) {}
 
   getNotifications(userId?: number, pageProperties?: PageProperties): Observable<PagedResponse<Notification>> {
-      let params = new HttpParams();
-      if (userId) {
-        params = params.set('userId', userId);
-      }
-  
-      if(pageProperties) {
-        params = params
-          .set('page', pageProperties.page)
-          .set('size', pageProperties.size);
-      }
-  
-      return this.httpClient.get<PagedResponse<Notification>>(environment.apiHost + this.urlPrefix, { params: params });
+    let params = new HttpParams();
+    if (userId) {
+      params = params.set('userId', userId);
     }
+
+    if(pageProperties) {
+      params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
+    }
+
+    return this.httpClient.get<PagedResponse<Notification>>(environment.apiHost + this.urlPrefix + "/" + userId, { params: params });
+  }
 }
