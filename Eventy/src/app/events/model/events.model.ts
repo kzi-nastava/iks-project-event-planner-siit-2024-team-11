@@ -1,6 +1,7 @@
 import { EventTypeForCards } from "./event-type.model";
 import { Location } from "./location.model";
 import {CategoryWithId} from '../../solutions/model/category-with-id.model';
+import {EventCard} from './event-card.model';
 
 export interface Activity {
   name: string;
@@ -92,4 +93,11 @@ export interface EventDetails {
   organizerId: number;
   organizerName: string;
   isFavorite: boolean;
+}
+
+export interface EventStats {
+  eventCard: EventCard;
+  visitors: number;
+  averageGrade: number;
+  gradeDistribution: number[];
 }
