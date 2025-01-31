@@ -7,6 +7,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {EventStats} from '../model/events.model';
+import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-event-stats',
@@ -38,7 +40,7 @@ export class EventStatsComponent {
 
   //////////////////////////////////////
 
-  constructor(private eventsService: EventsService, private fb: FormBuilder) {
+  constructor(private eventsService: EventsService, private fb: FormBuilder, private dialog: MatDialog) {
     this.dateRangeForm = this.fb.group({
       dateRange: this.fb.group({
         start: [''],
@@ -132,7 +134,28 @@ export class EventStatsComponent {
     this.dateRangeForm.get('dateRange')?.reset();
   }
 
-  downloadPDF(eventId: number): void {
-
+  downloadPDF(eventId: number, name: string): void {
+    this.eventsService.triggerEventStatsPDFDownload(eventId).subscribe({
+      next: (response: Blob) => {
+        const blob: Blob = new Blob([response], { type: 'application/pdf' });
+        const url: string = window.URL.createObjectURL(blob);
+        const anchor: HTMLAnchorElement = document.createElement('a');
+        anchor.href = url;
+        anchor.download = name + '-stats.pdf';
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true, // prevents closing by clicking outside
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: "Error while downloading",
+            message: 'Error while downloading guest list. Please try again later.',
+          },
+        });
+      }
+    });
   }
 }

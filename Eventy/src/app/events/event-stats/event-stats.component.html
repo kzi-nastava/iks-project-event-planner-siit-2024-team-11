@@ -130,6 +130,7 @@
         />
         <div class="stats">
           <ngx-charts-gauge
+            [view]="[250, 250]"
             [results]="[{ name: 'Number of Guests', value: event.visitors }]"
             [scheme]="'cool'"
             [min]="0"
@@ -139,7 +140,7 @@
             [startAngle]="-120">
           </ngx-charts-gauge>
           <ngx-charts-bar-vertical
-            [view]="[700, 400]"
+            [view]="[250, 250]"
             [scheme]="'cool'"
             [results]="[
       { 'name': '1 Star', 'value': event.gradeDistribution[0] },
@@ -157,6 +158,7 @@
             [barPadding]="8">
           </ngx-charts-bar-vertical>
           <ngx-charts-gauge
+            [view]="[250, 250]"
             [results]="[{ name: 'Average Grade', value: event.averageGrade }]"
             [scheme]="'cool'"
             [min]="0"
@@ -164,7 +166,8 @@
             [units]="'stars'"
             [angleSpan]="240"
             [startAngle]="-120">
-          <button mat-flat-button class="button" (click)="downloadPDF(event.eventCard.eventId)" type="submit"><mat-icon>download</mat-icon>Download</button>
+          </ngx-charts-gauge>
+          <button mat-flat-button class="button" (click)="downloadPDF(event.eventCard.eventId, event.eventCard.name.toString + '')" type="submit"><mat-icon>download</mat-icon>Download</button>
         </div>
       </div>
     </div>
