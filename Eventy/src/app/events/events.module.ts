@@ -24,6 +24,7 @@ import {SharedModule} from '../shared/shared.module';
 import { ReservationSelectEventComponent } from './reservation-select-event/reservation-select-event.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventStatsComponent } from './event-stats/event-stats.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { EventStatsComponent } from './event-stats/event-stats.component';
     ReactiveFormsModule,
     AsyncPipe,
     RouterModule,
+    NgxChartsModule,
   ],
   exports: [
     EventCardComponent,
