@@ -23,10 +23,13 @@
       <div *ngFor="let notification of paginatedNotifications;">
          <div 
             (click)="handleNotificationClick(notification)"       
-            style = "margin: 17px; margin-left: 16px; margin-right: 16px;"
+            style = "margin: 17px; margin-left: 16px; margin-right: 16px; display: flex; flex-direction: column;"
          > 
             <app-notification-card [notification]="notification"
-                                   [userNotificationsInfo]="userNotificationsInfo"/>  
+                                   [userNotificationsInfo]="userNotificationsInfo"/>
+            <p class = "timestamp" [ngStyle]="{
+               'color': (notification.timestamp > userNotificationsInfo.lastReadNotifications && !userNotificationsInfo.areNotificationsMuted)  ? '#6D79A2' : '#B3B3B3'
+              }">{{notification.timestamp | date: 'dd.MM.yyyy. HH:mm\'h\'' }}</p>  
          </div>
       </div>
 

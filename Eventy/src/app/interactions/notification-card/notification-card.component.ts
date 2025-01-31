@@ -14,7 +14,7 @@ export class NotificationCardComponent {
   borderColor: string;
 
   ngOnInit() {
-   console.log(this.notification);
+    console.log(this.notification);
   }
 
   public getBorderColor(): string {

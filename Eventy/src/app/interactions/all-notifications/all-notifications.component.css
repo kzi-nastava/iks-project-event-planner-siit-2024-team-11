@@ -46,6 +46,14 @@ p {
    margin-bottom: 70px;
 }  
 
+   .timestamp {
+      margin-top: 2px;
+      font-family: Albert Sans;
+      font-size: 14px;
+      align-self: flex-end;
+      margin-bottom: -6px;
+   }
+
    .pagination_container {
       width: 28wv;
       min-width: 410px;

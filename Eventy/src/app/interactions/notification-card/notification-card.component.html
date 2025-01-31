@@ -1,12 +1,12 @@
 <div class = "card_container"
      [ngStyle]="{
-      'box-shadow': notification.timestamp > userNotificationsInfo.lastReadNotifications ? '0px 0px 5px #878787' : '0px 0px 4px #b4b4b4',
+      'box-shadow': (notification.timestamp > userNotificationsInfo.lastReadNotifications && !userNotificationsInfo.areNotificationsMuted)  ? '0px 0px 5px #878787' : '0px 0px 4px #b4b4b4',
       'border-left': getBorderColor()
      }">
      
-   <div *ngIf="notification.timestamp > userNotificationsInfo.lastReadNotifications" class = "red_dot"> </div>
+   <div *ngIf="(notification.timestamp > userNotificationsInfo.lastReadNotifications && !userNotificationsInfo.areNotificationsMuted)" class = "red_dot"> </div>
 
-   <p class = "title">"{{notification.title}}"</p>
+   <p class = "title">{{notification.title}}</p>
    <p class = "message">{{notification.message}}</p>
 
    <div *ngIf="notification.grade !== null" class = "grade_container">

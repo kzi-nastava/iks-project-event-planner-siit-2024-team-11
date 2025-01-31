@@ -80,3 +80,8 @@ export interface EventBasicInformation {
   createLocationDTO: Location;
   date: Date;
 }
+
+export interface UnreviewedEvent {
+  id: number;
+  name: string;
+}

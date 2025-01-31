@@ -18,12 +18,11 @@ export class LoginFormComponent {
     password: new FormControl(),
   });
 
-  constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
-
-  }
+  constructor(private authService: AuthService, 
+              private dialog: MatDialog, 
+              private router: Router) {}
 
   login(): void {
-
     if(this.loginForm.valid) {
       const login: Login = {
         email: this.loginForm.value.email || "",
@@ -33,9 +32,9 @@ export class LoginFormComponent {
         next: (response: AuthResponse) => {
           localStorage.setItem('user', response.accessToken);
           this.authService.setUser();
-          this.router.navigate(['']).then(() => {
-            window.location.reload();
-          });
+
+          localStorage.setItem('runHandleReviewEvents', 'true'); // for reviewing unreviewed & passed events after login
+          this.router.navigate(['']);
         },
         error: () => {
           this.dialog.open(InvalidInputDataDialogComponent, {

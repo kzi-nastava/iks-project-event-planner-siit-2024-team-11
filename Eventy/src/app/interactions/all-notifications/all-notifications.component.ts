@@ -70,6 +70,7 @@ export class AllNotificationsComponent implements AfterViewInit {
       ).subscribe({
         next: (result: UserNotificationsInfo) => {
           this.userNotificationsInfo = result;
+          console.log(this.userNotificationsInfo);
           this.notificationsInfoUpdated.emit(this.userNotificationsInfo); // to app
         },
         error: (err) => {

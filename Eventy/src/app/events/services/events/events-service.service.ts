@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventCard } from '../../model/event-card.model';
-import { Event, OrganizeEvent } from '../../model/events.model';
+import { Event, OrganizeEvent, UnreviewedEvent } from '../../model/events.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../env/constants';
@@ -64,5 +64,9 @@ export class EventsService {
 
   organizeEvent(event: OrganizeEvent): Observable<Event> {
     return this.httpClient.post<Event>(environment.apiHost + this.urlPrefix, event);
+  }
+
+  getUnreviewedAcceptedEventsByUserId(userId: number): Observable<UnreviewedEvent[]> {
+    return this.httpClient.get<UnreviewedEvent[]>(environment.apiHost + this.urlPrefix + "/unreviewed/" + userId);
   }
 }
