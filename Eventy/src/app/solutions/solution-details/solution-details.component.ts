@@ -25,7 +25,8 @@ export class SolutionDetailsComponent {
     isAvailable: false,
     providerId: 0,
     providerName: '',
-    providerImageUrl: ''
+    providerImageUrl: '',
+    isFavorite: false
   }
 
   constructor(private route: ActivatedRoute, private solutionService: SolutionsService, private dialog: MatDialog, private router: Router) {
@@ -53,7 +54,22 @@ export class SolutionDetailsComponent {
   }
 
   handleFavoriteItem() {
-    // TO-DO
+    this.solutionService.toggleFavorite(this.solution.solutionId).subscribe({
+      next: Boolean => {
+        this.solution.isFavorite = !this.solution.isFavorite;
+      },
+      error: any => {
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true,
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: "Can't like if you aren't logged in",
+          message: 'Please log in to make this your favorite event.',
+        },
+      });
+    }
+    })
   }
 
   purchaseProduct() {

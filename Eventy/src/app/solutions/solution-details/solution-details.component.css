@@ -34,13 +34,35 @@
     flex-direction: column;
 }
 
-.favorite_button_container {
+
+
+ .favorite_button_container {
+    position: relative;
     display: flex;
-    scale: 1.5;
-    width: fit-content;
+    padding: 3px;
+    padding-left: 3px;
+    padding-right: 5.5px;
+    justify-content: center;
+    align-items: center;
     border-radius: 7px;
     border: solid 2px #929AB7;
+    margin-right: 13px;
     cursor: pointer;
+ }
+
+ .favorite_button_container_true {
+   position: relative;
+   display: flex;
+   padding: 3px;
+   padding-left: 3px;
+   padding-right: 5.5px;
+   justify-content: center;
+   align-items: center;
+   border-radius: 7px;
+   border: solid 2px #929AB7;
+   margin-right: 13px;
+   cursor: pointer;
+   background-color: #929AB7;
  }
 
 img {

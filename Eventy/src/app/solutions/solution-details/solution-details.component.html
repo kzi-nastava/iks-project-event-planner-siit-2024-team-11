@@ -1,9 +1,11 @@
 <div class="container" id="container">
     <div class="first-row">
         <h1 class="title">{{solution.name}} - {{solution.categoryName}}</h1>
-        <div class = "favorite_button_container" (click)="handleFavoriteItem()">
-            <mat-icon style = "color: #929AB7; font-weight: 500;">favorite_border</mat-icon>
-        </div>
+        <div class = "{{solution.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
+                 (click)="handleFavoriteItem()">
+               <mat-icon style = "{{solution.isFavorite ? 'font-size: 25.5px; color: white; font-weight: 500; transform: scale(0.8);' :
+                 'font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);'}}">favorite_border</mat-icon>
+            </div>
     </div>
     <div class="row">
         <div class="column">
