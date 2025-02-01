@@ -15,8 +15,4 @@ export class ProductCardComponent {
   handleFavoriteItem() {
     this._snackBar.open("FAVORITE: " + this.productCard.name, "OK!");
   }
-
-  handleSeeMore() {
-    this._snackBar.open("SEE MORE: " + this.productCard.name, "OK!");
-  }
 }
