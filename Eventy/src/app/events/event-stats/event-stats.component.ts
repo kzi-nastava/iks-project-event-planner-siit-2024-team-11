@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, SimpleChanges} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {EventsService} from '../services/events/events-service.service';
 import {PagedResponse} from '../../shared/model/paged-response.model';
@@ -40,15 +40,13 @@ export class EventStatsComponent {
 
   //////////////////////////////////////
 
-  constructor(private eventsService: EventsService, private fb: FormBuilder, private dialog: MatDialog) {
+  constructor(private eventsService: EventsService, private fb: FormBuilder, private dialog: MatDialog, private cdr: ChangeDetectorRef) {
     this.dateRangeForm = this.fb.group({
       dateRange: this.fb.group({
         start: [''],
         end: [''],
       }),
     });
-
-    this.updatePaginatedEvents();
   }
 
   ngOnInit(): void {
@@ -56,6 +54,8 @@ export class EventStatsComponent {
       startWith(''),
       map(value => this._filter(value || '')),
     );
+
+    this.updatePaginatedEvents();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -80,6 +80,8 @@ export class EventStatsComponent {
       next: (response: PagedResponse<EventStats>) => {
         this.paginatedEvents = response.content;
         this.totalCount = response.totalElements;
+
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Failed to fetch events:', err);
