@@ -1,0 +1,69 @@
+<div class="container" id="container">
+    <div class="first-row">
+        <h1 class="title">{{solution.name}} - {{solution.categoryName}}</h1>
+        <div class = "favorite_button_container" (click)="handleFavoriteItem()">
+            <mat-icon style = "color: #929AB7; font-weight: 500;">favorite_border</mat-icon>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="image-container">
+                <img src="{{solution.firstImageUrl}}" alt="{{solution.name}}-picture.png">
+            </div>
+            <div class="description-container">
+                <p style="display: inline;">{{solution.description}}</p>
+            </div>
+            <div class="specifics-container" *ngIf="solution.type === 'SERVICE'">
+                <b>{{solution.specifics}}</b>
+            </div>
+            <div class="event-types-container">
+                Suitable for: {{solution.eventTypeNames}}
+            </div>
+            <div *ngIf="solution.type === 'SERVICE'" class="reservation-time-container">
+                <div *ngIf="!solution.maxReservationTime">
+                    Service length: {{solution.minReservationTime}} minutes
+                </div>
+                <div *ngIf="solution.maxReservationTime">
+                    Service length: {{solution.minReservationTime}} minutes - {{solution.maxReservationTime}} minutes
+                </div>
+            </div>
+            <div *ngIf="solution.type === 'SERVICE'" class="deadlines-container">
+                Contact the provider at least <b>{{solution.reservationDeadline}} days</b> before the day you want this service to be held to reserve it, and at least <b>{{solution.cancellationDeadline}} days</b> before the service is held to cancel it.
+            </div>
+            <div *ngIf="solution.type === 'SERVICE'" class="acceptance-container">
+                {{solution.reservationType === 'AUTOMATIC' ? 'Your reservation will be immediately accepted.' : 'Your reservation will be reviewed by the provider before being accepted or rejected.'}}
+            </div>
+        </div>
+        <div class="column">
+            <div class = "price_container">
+                <div style = "display: inline-block" [ngStyle]="{'visibility' : solution.discount === 0 ? 'hidden' : 'visible'}">
+                   <p class = "old_price">{{(solution.price).toFixed(2)}}$</p>
+                </div>
+                <p [ngStyle]="{'margin-top' : solution.discount === 0 ? '-20px' : '10px',
+                               'padding-bottom': solution.discount === 0 ? '20px' : '0px'}"  class = "current_price">{{(solution.price - solution.price * solution.discount / 100).toFixed(2)}}$</p>
+             </div>
+             <div class = "organiser_container">
+                <p class = "brought-by">Brought to you by:</p>
+                <img src = "{{solution.providerImageUrl}}" class = "organiser_img" [routerLink]="['/users', solution.providerId]">
+                <div>
+                   <p id = "organiser" class = "organiser_name" [routerLink]="['/users', solution.providerId]">
+                     {{solution.providerName}}
+                   </p>
+                </div>
+             </div>
+             <div class="reviews-container">
+                <h1>Reviews</h1>
+                <div class="reviews-inner-container"></div>
+             </div>
+        </div>
+    </div>
+    <div class="row buttons-container">
+        <button class="chat-button" (click)="openChat()" mat-button>
+            <mat-icon>chat</mat-icon> Chat with provider
+        </button>
+        <button *ngIf="solution.type === 'PRODUCT'" [ngStyle]="{ 'background-color': !solution.isAvailable ? 'gray' : '#07FC03', 'cursor': !solution.isAvailable ? 'not-allowed' : 'pointer' }" [disabled]="!solution.isAvailable" class="purchase-button" (click)="purchaseProduct()" mat-button><mat-icon>shopping_bag</mat-icon> {{solution.isAvailable ? "Buy product" : "Product unavailable"}}</button>
+        <button *ngIf="solution.type !== 'PRODUCT'" [ngStyle]="{ 'background-color': !solution.isAvailable ? 'gray' : '#07FC03', 'cursor': !solution.isAvailable ? 'not-allowed' : 'pointer' }" [disabled]="!solution.isAvailable" class="purchase-button" (click)="reserveService()" mat-button><mat-icon>shopping_bag</mat-icon> {{solution.isAvailable ? "Reserve service" : "Service unavailable"}}</button>
+    </div>
+    <div class="patch">
+    </div>
+</div>
