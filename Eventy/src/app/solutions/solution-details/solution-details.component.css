@@ -1,0 +1,207 @@
+* {
+    font-family: Albert Sans;
+}
+
+.container {
+    background-color: #F1F1F1;
+    overflow-y: auto;
+}
+
+.title {
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.first-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.first-row > h1 {
+    margin-right: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.column {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+ .favorite_button_container {
+    position: relative;
+    display: flex;
+    padding: 3px;
+    padding-left: 3px;
+    padding-right: 5.5px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    border: solid 2px #929AB7;
+    margin-right: 13px;
+    cursor: pointer;
+ }
+
+ .favorite_button_container_true {
+   position: relative;
+   display: flex;
+   padding: 3px;
+   padding-left: 3px;
+   padding-right: 5.5px;
+   justify-content: center;
+   align-items: center;
+   border-radius: 7px;
+   border: solid 2px #929AB7;
+   margin-right: 13px;
+   cursor: pointer;
+   background-color: #929AB7;
+ }
+
+img {
+    width: 720px;
+    height: 405px;
+    
+    object-fit: contain;
+}
+
+.description-container, .specifics-container, .event-types-container, .reservation-time-container, .deadlines-container, .acceptance-container {
+    font-size: 30px;
+    margin-top: 15px;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+    line-height: 1.15;
+}
+
+.reviews-container {
+    flex-grow: 1;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+    background-color: #b4bde0;
+    min-height: 750px;
+    width: 90%;
+    border-radius: 10%;
+    text-align: center;
+}
+
+.reviews-container h1 {
+    margin-top: 17px;
+}
+
+.reviews-inner-container {
+    background-color: #f0c9c9;
+    margin: 5% 5% 5% 5%;
+    width: 90%;
+    height: 80%;
+    border-radius: 10%;
+}
+
+.price_container {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    justify-content: center;
+    display: inline-block;
+    flex-direction: column;
+}
+.old_price {
+    margin: 0;
+    color: #F40F0F;
+    font-weight: 500;
+    font-size: 44px;
+    margin-top: 0px;
+    padding: 0;
+    background: linear-gradient(to top left,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) calc(50% - 1px),
+        rgb(238, 30, 30) 50%,
+        rgba(0, 0, 0, 0) calc(50% + 1px),
+        rgba(0, 0, 0, 0) 100%);
+    display:flex;
+    margin-left: 5px;
+    font-family: Albert Sans;
+}
+
+.current_price {
+    margin: 0;
+    color: #454444;
+    font-weight: 700;
+    font-size: 72px;
+    margin-top: 0px;
+    margin-left: 5px;
+    font-family: Albert Sans;
+}
+
+.organiser_container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.organiser_img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.brought-by {
+    margin: 0;
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+.organiser_img:hover {
+    box-shadow: 0px 0px 5px #242630;
+}
+
+.organiser_name {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #798098;
+    letter-spacing: 0;
+    font-family: Figtree;
+    cursor: pointer;
+}
+#organiser:hover {
+    text-decoration: underline 1px #7882a2;
+    text-underline-offset: 3px;
+}
+
+mat-icon {
+    font-family: 'Material Icons', sans-serif !important;
+}
+
+.buttons-container {
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+.purchase-button {
+    scale: 1.5;
+    background-color: #07FC03; 
+    color: white !important;
+}
+
+.chat-button {
+    scale: 1.5;
+    background-color: #3f51b5; 
+    color: white !important;
+}
+
+.patch {
+    height: 0.1px;
+    background-color: #F1F1F1;
+}
