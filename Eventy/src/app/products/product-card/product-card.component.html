@@ -50,11 +50,13 @@
                            'padding-bottom': productCard.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(productCard.price - productCard.price * productCard.discount / 100).toFixed(2)}}$</p>
          </div>
          <div style = "justify-content:right; align-items: center; display: flex; flex: 1.3;">
-            <div class = "favorite_button_container" (click)="handleFavoriteItem()">
-               <mat-icon style = "font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);">favorite_border</mat-icon>
+            <div class = "{{productCard.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
+                 (click)="handleFavoriteItem()">
+               <mat-icon style = "{{productCard.isFavorite ? 'font-size: 25.5px; color: white; font-weight: 500; transform: scale(0.8);' :
+                 'font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);'}}">favorite_border</mat-icon>
             </div>
 
-            <div class = "see_more_button_container"(click)="handleSeeMore()" [routerLink]="['/users', productCard.providerId]">
+            <div class = "see_more_button_container" [routerLink]="['/solution', productCard.solutionId]">
                <p style = "margin: 0; color: #929AB7; font-size: 14px; font-family: Albert Sans; font-weight: 650;">SEE MORE</p>
             </div>
          </div>
