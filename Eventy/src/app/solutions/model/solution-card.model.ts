@@ -18,5 +18,4 @@ export interface SolutionCard {
    providerId: number;
    providerName: string;
    providerImageUrl: string;
-   isFavorite: boolean;
 }
