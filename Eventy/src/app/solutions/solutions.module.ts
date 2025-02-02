@@ -25,9 +25,6 @@ import { SharedModule } from '../shared/shared.module';
 import { SolutionCategoryRequestsViewComponent } from './solution-category-requests-view/solution-category-requests-view.component';
 import { SolutionCategoryRequestViewDualCardComponent } from './solution-category-request-view-dual-card/solution-category-request-view-dual-card.component';
 import { DeleteRequestDialogComponent } from './delete-request-dialog/delete-request-dialog.component';
-import { SolutionDetailsComponent } from './solution-details/solution-details.component';
-import { RouterModule } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -41,7 +38,6 @@ import { MatIconModule } from '@angular/material/icon';
     SolutionCategoryRequestsViewComponent,
     SolutionCategoryRequestViewDualCardComponent,
     DeleteRequestDialogComponent,
-    SolutionDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -60,8 +56,6 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     MatCardModule,
     SharedModule,
-    RouterModule,
-    MatIconModule,
 ],
   exports: [
     SolutionFiltersComponent,
