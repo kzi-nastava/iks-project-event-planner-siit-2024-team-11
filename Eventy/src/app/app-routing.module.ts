@@ -23,6 +23,7 @@ import {ConfirmRegistrationComponent} from './infrastructure/auth/confirm-regist
 import {UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/upgrade-profile.component';
 import {EventDetailsComponent} from './events/event-details/event-details.component';
 import {EventStatsComponent} from './events/event-stats/event-stats.component';
+import { SolutionDetailsComponent } from './solutions/solution-details/solution-details.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent},
   {path: 'events/stats', component: EventStatsComponent},
   {path: 'events/:eventId', component: EventDetailsComponent},
+  {path: 'solution/:solutionId', component: SolutionDetailsComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
