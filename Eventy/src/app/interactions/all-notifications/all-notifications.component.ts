@@ -3,13 +3,12 @@ import { Notification } from '../model/notification.model';
 import { PageEvent } from '@angular/material/paginator';
 import { UserService } from '../../user-management/user.service';
 import { NotificationService } from '../services/notifications/notification.service';
-import { AuthService } from '../../infrastructure/auth/auth.service';
 import { PagedResponse } from '../../shared/model/paged-response.model';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserNotificationsInfo } from '../../user-management/model/users.model';
 import { MatSidenav } from '@angular/material/sidenav';
-import { interval, Observable, Subscription, switchMap } from 'rxjs';
+import { Client } from '@stomp/stompjs';
 
 @Component({
   selector: 'app-all-notifications',
@@ -31,25 +30,24 @@ export class AllNotificationsComponent implements AfterViewInit {
   // loaded
   notificationsLoaded: Boolean = false;
   @Input() notificationsDrawer!: MatSidenav;
-  // subscription to check if user has any new notifications
-  private notificationInfoPollingSubscription: Subscription | null = null; // for polling
+  // for web sockets
+  private stompClient: Client | null = null;
+  private websocketConnected: boolean = false;
 
   constructor(private notificationService: NotificationService,  
-              private userService: UserService, 
-              private authService: AuthService,     
+              private userService: UserService,    
               private dialog: MatDialog) {}
 
   ngAfterViewInit() {
-    // - start polling notification info every 30 sec while the user is logged in
-    // - checks if there are ANY (not important which or how much) new notifications
-    //   so I can show the red dot on notifications' icon
     if (this.userId && !this.userNotificationsInfo.areNotificationsMuted) {
-      this.startPollingNotificationInfo();
+      this.connectWebSocket();    
     } else {
-      this.stopPollingNotificationInfo();
+      if (this.stompClient || this.websocketConnected) {
+        this.stompClient.deactivate();
+        console.log('WebSocket connection closed');
+      }
     }
 
-    // get notifications when the user opens notifications' icon
     this.notificationsDrawer.openedChange.subscribe((isOpen) => {
       if (this.userId) {
         if (isOpen) {
@@ -63,35 +61,51 @@ export class AllNotificationsComponent implements AfterViewInit {
     });
   }
 
-  private startPollingNotificationInfo() {
-    if (!this.notificationInfoPollingSubscription) {
-      this.notificationInfoPollingSubscription = interval(30000).pipe(
-        switchMap(() => this.userService.getUserNotificationsInfo(this.userId))
-      ).subscribe({
-        next: (result: UserNotificationsInfo) => {
-          this.userNotificationsInfo = result;
-          console.log(this.userNotificationsInfo);
-          this.notificationsInfoUpdated.emit(this.userNotificationsInfo); // to app
-        },
-        error: (err) => {
-          console.error('Failed to fetch notificatio info:', err);
-        }
-      });
-    }
-  }
+  private connectWebSocket() {
+    const socket = new WebSocket('http://localhost:8080/web-notifications'); 
+
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+      connectHeaders: {},
+      debug: (msg) => console.log(msg),
+      reconnectDelay: 5000, // Reconnect after 5 seconds if disconnected
+      onConnect: () => {
+        this.websocketConnected = true;
+        console.log('Connected to WebSocket');
   
-  private stopPollingNotificationInfo() {
-    if (this.notificationInfoPollingSubscription) {
-      this.notificationInfoPollingSubscription.unsubscribe();
-      this.notificationInfoPollingSubscription = null;
-    }
+        // subscribe
+        this.stompClient?.subscribe(`/topic/web/${this.userId}`, (message) => {
+          const notification: Notification = JSON.parse(message.body);
+          this.handleIncomingNotification(notification);
+        });
+      },
+      onDisconnect: () => {
+        this.websocketConnected = false;
+        console.log('Disconnected from WebSocket');
+      }
+    });
+
+    this.stompClient = stompClient;
+    this.stompClient.activate();
+  }
+
+  private handleIncomingNotification(notification: Notification) {
+    this.paginatedNotifications.unshift(notification); // unshift adds to the top of list
+    this.totalCount++;
+    this.userNotificationsInfo.hasNewNotifications = true; 
+    this.notificationsInfoUpdated.emit(this.userNotificationsInfo); 
+    console.log('New notification received:', notification);
   }
 
   ngOnDestroy() {
-    this.stopPollingNotificationInfo();
     if (!this.userNotificationsInfo.areNotificationsMuted) {
       this.updateLastReadNotifications();
     } 
+
+    if (this.stompClient) {
+      this.stompClient.deactivate();
+      console.log('WebSocket connection closed');
+    }
   }
 
   public onPageChange(event?: PageEvent){
@@ -129,11 +143,6 @@ export class AllNotificationsComponent implements AfterViewInit {
         this.userNotificationsInfo.lastReadNotifications = response;
         this.userNotificationsInfo.hasNewNotifications = false;
         this.notificationsInfoUpdated.emit(this.userNotificationsInfo);
-        if (!this.userNotificationsInfo.areNotificationsMuted) {
-          if (!this.notificationInfoPollingSubscription) {
-            this.startPollingNotificationInfo();
-          }
-        }
       },
       error: () => {
         this.dialog.open(ErrorDialogComponent, {
@@ -151,15 +160,6 @@ export class AllNotificationsComponent implements AfterViewInit {
       next: () => {
         this.userNotificationsInfo.areNotificationsMuted = !this.userNotificationsInfo.areNotificationsMuted;
         this.notificationsInfoUpdated.emit(this.userNotificationsInfo);
-        if (!this.userNotificationsInfo.areNotificationsMuted) {
-          if (!this.notificationInfoPollingSubscription) {
-            this.startPollingNotificationInfo();
-          }
-        } else {
-          if (this.notificationInfoPollingSubscription) {
-            this.stopPollingNotificationInfo();
-          }
-        }
       },
       error: () => {
         this.dialog.open(ErrorDialogComponent, {
