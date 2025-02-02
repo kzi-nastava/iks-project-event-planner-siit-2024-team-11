@@ -4,6 +4,7 @@ import { ViewEncapsulation } from '@angular/core';
 import { EventsService } from '../services/events/events-service.service';
 import { PagedResponse } from '../../shared/model/paged-response.model';
 import { PageEvent } from '@angular/material/paginator';
+import { AuthService } from '../../infrastructure/auth/auth.service';
 
 //{ search: 'Jane & Mark Wedding', eventTypes: ['Wedding', 'Party'], location: 'BeachResort', startDate: new Date('2024-05-01T00:00:00'), endDate: new Date('2024-05-01T00:00:00') }
   
@@ -45,7 +46,7 @@ export class AllEventsComponent {
 
   //////////////////////////////////////
 
-  constructor(private eventsService: EventsService) {}
+  constructor(private eventsService: EventsService, private authService: AuthService) {}
 
   ngOnInit(): void {
      this.updatePaginatedEvents();
@@ -66,18 +67,36 @@ export class AllEventsComponent {
   private updatePaginatedEvents(): void {
     const params = { search: this.searchQuery, ...this.filters,};
   
-    this.eventsService.getAllEvents(
-      { page: this.currentPage, pageSize: this.pageSize, sort: this.sortValue }, // Pagination and sort params
-      params
-    ).subscribe({
-      next: (response: PagedResponse<EventCard>) => {
-        this.paginatedEvents = response.content;
-        this.totalCount = response.totalElements;
-      },
-      error: (err) => {
-        console.error('Failed to fetch events:', err);
-      },
-    });
+    if (!this.isCardClickable) {
+      this.eventsService.getAllEvents(
+        { page: this.currentPage, pageSize: this.pageSize, sort: this.sortValue }, // Pagination and sort params
+        params
+      ).subscribe({
+        next: (response: PagedResponse<EventCard>) => {
+          this.paginatedEvents = response.content;
+          this.totalCount = response.totalElements;
+        },
+        error: (err) => {
+          console.error('Failed to fetch events:', err);
+        },
+      });
+    } else {
+      let loggedInUserId = this.authService.getId();
+
+      this.eventsService.getAllEventsByUserId(
+        loggedInUserId,
+        { page: this.currentPage, pageSize: this.pageSize, sort: this.sortValue }, // Pagination and sort params
+        params
+      ).subscribe({
+        next: (response: PagedResponse<EventCard>) => {
+          this.paginatedEvents = response.content;
+          this.totalCount = response.totalElements;
+        },
+        error: (err) => {
+          console.error('Failed to fetch events:', err);
+        },
+      });
+    }
   }
 
   onSearchInput(): void {

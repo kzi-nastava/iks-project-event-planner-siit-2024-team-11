@@ -32,17 +32,12 @@ export class HomeComponent {
 
   private handleReviewEvents() {
     let loggedInUserId = this.authService.getId();
-
-    console.log("ovde sam!");
     
     this.eventService.getUnreviewedAcceptedEventsByUserId(loggedInUserId).subscribe({
       next: (unreviewedEvents) => {
         let index = 0;
 
         const showNextDialog = () => {
-          console.log(unreviewedEvents)
-          console.log(index);
-
           if (index >= unreviewedEvents.length) {
             window.location.reload();
             return;

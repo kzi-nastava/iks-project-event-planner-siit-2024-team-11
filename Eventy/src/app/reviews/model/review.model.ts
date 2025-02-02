@@ -9,3 +9,8 @@ export interface CreateReview {
    grade: number;
    comment: String;
 }
+
+export interface CheckExistingSolutionReview {
+   userId: number;
+   solutionId: number;
+}

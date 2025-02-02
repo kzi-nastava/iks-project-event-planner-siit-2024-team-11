@@ -15,4 +15,8 @@ export class ReviewService {
   createReview(review: CreateReview): Observable<CreateReview> {
     return this.httpClient.post<CreateReview>(environment.apiHost + this.urlPrefix, review);
   }
+
+  isSolutionReviewedByUser(userId: number, solutionId: number): Observable<Boolean> {
+    return this.httpClient.get<Boolean>(environment.apiHost + this.urlPrefix + "/user/" + userId + "/solution/" + solutionId);
+  }
 }
