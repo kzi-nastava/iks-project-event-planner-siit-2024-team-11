@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Service } from '../../../solutions/model/services.model';
-import { SolutionsService } from '../../../solutions/services/solutions/solutions-service.service';
-import { Solution } from '../../../solutions/model/solutions.model';
+import { PagedResponse } from '../../../shared/model/paged-response.model';
+import { SolutionCard } from '../../../solutions/model/solution-card.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../../../env/constants';
+import { AuthService } from '../../../infrastructure/auth/auth.service';
+import { CreateService, Service } from '../../model/services.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
-  serviceList: Solution[] = [];
-
-  constructor(private solutionsService: SolutionsService) {
-    //solutionsService.getAllSolutions().forEach(solution => solution.service !== undefined ? this.serviceList.push(solution.service) : console.log)
+  private readonly prefix: string = "/api/services";
+  // TO-DO: Finish calls
+  constructor(private httpClient: HttpClient, private authService: AuthService) {
+  
   }
 
-  getAllServices(): Solution[] {
-    return this.serviceList;
+  getAllOwnServices(): Observable<PagedResponse<SolutionCard>> {
+    let params: HttpParams = new HttpParams();
+    params.set('organizerId', this.authService.getId());
+
+    return this.httpClient.get<PagedResponse<SolutionCard>>(environment.apiHost + this.prefix + "/cards", {params: params});
   }
 
-  add(service: Service) {
-    this.serviceList.push(service)
+  add(newService: CreateService): Observable<Service> {
+    return this.httpClient.post<Service>(environment.apiHost + this.prefix, newService);
   }
 }
