@@ -139,27 +139,29 @@ export class AddServiceComponent {
       }
 
       if (this.serviceForm.get('serviceCategory').value === -1337) {
-        let categoryService: SolutionCategoryService;
-        let newCategory: Category;
-        newCategory.name = this.serviceForm.get('newCategoryName').value
-        newCategory.description = this.serviceForm.get('newCategoryDescription').value
-        newCategory.status = Status.PENDING;
-        categoryService.create(newCategory).subscribe({
+        let newCategory: Category = {name: this.serviceForm.get('newCategoryName').value, description: this.serviceForm.get('newCategoryDescription').value, status: Status.PENDING};
+        this.solutionCategoryService.create(newCategory).subscribe({
           next: (category: CategoryWithId) => {
             newService.categoryId = category.id;
             response = this.servicesService.add(newService);
+            response.subscribe({
+              next: (createdService: Service) => {
+                this.router.navigate(["my-services"]);
+              }
+            })
           }
         })
       } else {
         response = this.servicesService.add(newService);
+        response.subscribe({
+          next: (createdService: Service) => {
+            this.router.navigate(["my-services"]);
+          }
+        })
       }
       // The reason I have two separate calls towards the add method depends on whether a category must be created first. If yes,
       // we must ensure that we grab the ID of the new (currently pending) category and use it in our new service
-      response.subscribe({
-        next: (createdService: Service) => {
-          this.router.navigate(["my-services"]);
-        }
-      })
+      
     }
     else {
       this.dialog.open(ErrorDialogComponent, {
