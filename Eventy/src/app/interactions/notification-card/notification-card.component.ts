@@ -34,11 +34,8 @@ export class NotificationCardComponent {
       case "CATEGORY_UPDATED":
         return "solid 5px #FF9B30"; // orange
 
-      case "NEW_CATEGORY_SUGGESTION_SERVICE":
-        return "solid 5px #FAD609"; // Service yellow
-
-      case "NEW_CATEGORY_SUGGESTION_PRODUCT":
-        return "solid 5px #DD79AE"; // Product pink
+      case "NEW_CATEGORY_SUGGESTION":
+        return "solid 5px rgb(250, 194, 9)"; // dark yellow
 
       case "CATEGORY_SUGGESTION_ACCEPTED":
         return "solid 5px #39B839"; // green
