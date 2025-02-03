@@ -6,6 +6,8 @@ import { CategoryWithId } from '../model/category-with-id.model';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { SolutionCategoryInputDialogComponent } from '../../shared/solution-category-input-dialog/solution-category-input-dialog.component';
+import { PageProperties } from '../../shared/model/page-properties.model';
+import { PagedResponse } from '../../shared/model/paged-response.model';
 
 @Component({
   selector: 'app-solution-categories-view',
@@ -13,29 +15,20 @@ import { SolutionCategoryInputDialogComponent } from '../../shared/solution-cate
   styleUrl: './solution-categories-view.component.css'
 })
 export class SolutionCategoriesViewComponent {
-  categories: CategoryWithId[] = [];
-
- paginatedCategories: CategoryWithId[];
- categoryPairs: CategoryWithId[][] = []
- private pageSize: number;
- private currentPage: number;
+  totalElements: number = 0;
+  pageSize: number = 10;
+  currentPage: number = 0;
+  
+  paginatedCategories: CategoryWithId[] = [];
+  categoryPairs: CategoryWithId[][] = []
+  
   constructor(private creationDialog: MatDialog, private categoryService: SolutionCategoryService) {
-    this.updatePaginatedCategories();
+    
   }
 
   ngOnInit(): void {
-    this.pageSize = 10;
     this.currentPage = 0;
-    this.getAll();
     this.updatePaginatedCategories();
-  }
-
-  getAll(): void {
-    this.categoryService.getAll().subscribe({
-      next: (category: CategoryWithId[]) => {
-        this.categories = category;
-      }
-    })
   }
 
   onPageChange(event: PageEvent): void {
@@ -44,14 +37,19 @@ export class SolutionCategoriesViewComponent {
     this.updatePaginatedCategories();
   }
 
-  private updatePaginatedCategories(): void {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedCategories = this.categories.slice(startIndex, endIndex);
-    this.categoryPairs = []
-    for (let i = 0; i < this.paginatedCategories.length / 2; i++) {
-      this.categoryPairs.push([this.paginatedCategories[i*2], this.paginatedCategories[i*2 + 1]])
-    }
+  updatePaginatedCategories(): void {
+    let pageProperties: PageProperties = {page: this.currentPage, size: this.pageSize};
+    this.categoryService.getAllPaginated(pageProperties).subscribe({
+      next: (category: PagedResponse<CategoryWithId>) => {
+        this.paginatedCategories = category.content;
+        this.totalElements = category.totalElements;
+        this.categoryPairs = [];
+        for (let i = 0; i < this.paginatedCategories.length / 2; i++) {
+          this.categoryPairs.push([this.paginatedCategories[i*2], this.paginatedCategories[i*2 + 1]])
+        }
+      }
+    })
+    
   }
 
   addCategory() {
@@ -66,30 +64,25 @@ export class SolutionCategoriesViewComponent {
 
     dialogRef.afterClosed().subscribe(returnValues => {
       if (returnValues[0]) {
-        //let updatedEntity: Observable<CategoryWithId> = this.categoriesService.create(returnValues[1])
-        //TODO: Uncomment later once backend is implemented
-        let createdEntity: Observable<CategoryWithId> = new Observable(observer => {observer.next(returnValues[1]); observer.complete()});
+        let createdEntity: Observable<CategoryWithId> = this.categoryService.create(returnValues[1])
+        
         createdEntity.subscribe((createdEntityValue: CategoryWithId) => {
-            this.categoryService.create(createdEntityValue)
-            this.categories.push(createdEntityValue)
+            this.updatePaginatedCategories();
         })
       }
     })
   }
 
   categoryDeleted(category: CategoryWithId) {
-    let index: number = this.categories.indexOf(category);
-    if (index > -1) {
-      this.categories.splice(index, 1);
-    }
+    this.categoryService.delete(category.id)
     this.updatePaginatedCategories();
   }
 
   categoryEdited(category: CategoryWithId) {
-    let index: number = this.categories.findIndex(v => category.id === v.id)
-    if (index > -1) {
-      this.categories[index] = category;
-    }
-    this.updatePaginatedCategories();
+    this.categoryService.update(category).subscribe({
+      next: (updatedCategory: CategoryWithId) => {
+        this.updatePaginatedCategories();
+      }
+    })
   }
 }

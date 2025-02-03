@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Status } from '../../solutions/model/category.model';
 import { CategoryWithId } from '../../solutions/model/category-with-id.model';
-import { SolutionCategoryService } from '../../solutions/services/solutions/solution-category.service';
 
 interface SolutionCategoryInputDialogData {
   message: string;
@@ -22,9 +21,9 @@ export class SolutionCategoryInputDialogComponent {
   categoryId: number = null;
   categoryName: string = '';
   categoryDescription: string = '';
-  categoryStatus: Status = Status.PENDING;
+  categoryStatus: Status = Status.ACCEPTED;
 
-  constructor(public dialogRef: MatDialogRef<SolutionCategoryInputDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: SolutionCategoryInputDialogData, private categoriesService: SolutionCategoryService) {
+  constructor(public dialogRef: MatDialogRef<SolutionCategoryInputDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: SolutionCategoryInputDialogData) {
     this.categoryId = data.categoryId;
     this.categoryName = data.categoryName;
     this.categoryDescription = data.categoryDescription;

@@ -77,4 +77,8 @@ export class SolutionsService {
   getSolution(id: number): Observable<SolutionCard> {
     return this.httpClient.get<SolutionCard>(environment.apiHost + this.urlPrefix + "/cards/" + id);
   }
+
+  toggleFavorite(id: number): Observable<Boolean> {
+    return this.httpClient.put<Boolean>(environment.apiHost + this.urlPrefix + "/favorite/" + id, {})
+  }
 }
