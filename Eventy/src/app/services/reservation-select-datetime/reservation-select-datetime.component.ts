@@ -90,8 +90,8 @@ export class ReservationSelectDatetimeComponent {
       const selectedDate = new Date(control.value);
       const today = new Date();
       const tooEarlyDate = new Date(today);
-      tooEarlyDate.setDate(today.getDate() + this.selectedService.reservationDeadline);
-
+      tooEarlyDate.setDate(today.getDate() + this.selectedService.reservationDeadline - 1);
+      
       // Check if the selected date is too early
       if (selectedDate < tooEarlyDate) {
         return { tooEarly: true };
@@ -324,7 +324,11 @@ export class ReservationSelectDatetimeComponent {
               window.location.reload();
             });
           });  
-        }  
+        } else {
+          this.router.navigate(['']).then(() => {
+            window.location.reload();
+          });
+        }
       },
       error: () => {
         return true;
