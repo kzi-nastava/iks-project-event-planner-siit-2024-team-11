@@ -82,6 +82,11 @@ export interface EventBasicInformation {
   date: Date;
 }
 
+export interface UnreviewedEvent {
+  id: number;
+  name: string;
+}
+
 export interface EventDetails {
   id: number;
   name: string;

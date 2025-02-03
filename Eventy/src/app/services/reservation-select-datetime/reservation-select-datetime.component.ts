@@ -12,6 +12,11 @@ import { Reservation } from '../model/reservations.model';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { SuccessfulDialogComponent } from '../../shared/successful-dialog/successful-dialog.component';
+import { AuthService } from '../../infrastructure/auth/auth.service';
+import { CreateReview } from '../../reviews/model/review.model';
+import { CreateReviewComponent } from '../../reviews/create-review/create-review.component';
+import { ReviewService } from '../../reviews/service/review.service';
+import { isReactive } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-reservation-select-datetime',
@@ -21,9 +26,7 @@ import { SuccessfulDialogComponent } from '../../shared/successful-dialog/succes
 })
 export class ReservationSelectDatetimeComponent {
   @Input() selectedEvent: EventCard;
-
   selectedService: SolutionCard;
-
   // date
   dateControl: FormControl;
   reservedDates = ['2025-01-15', '2025-01-20']; // Mock reserved dates
@@ -40,7 +43,12 @@ export class ReservationSelectDatetimeComponent {
   selectedEndTime: Date | null = null;
   confirmReservationClickedStage: Number = 0;
 
-  constructor(private solutionsService: SolutionsService, private reservationsService: ReservationsService, private dialog: MatDialog, private router: Router) {
+  constructor(private solutionsService: SolutionsService, 
+              private reservationsService: ReservationsService, 
+              private authService: AuthService,
+              private reviewService: ReviewService,
+              private dialog: MatDialog, 
+              private router: Router) {
     this.dateControl = new FormControl('', [
       Validators.required,
       this.dateValidator(),
@@ -82,8 +90,8 @@ export class ReservationSelectDatetimeComponent {
       const selectedDate = new Date(control.value);
       const today = new Date();
       const tooEarlyDate = new Date(today);
-      tooEarlyDate.setDate(today.getDate() + this.selectedService.reservationDeadline);
-
+      tooEarlyDate.setDate(today.getDate() + this.selectedService.reservationDeadline - 1);
+      
       // Check if the selected date is too early
       if (selectedDate < tooEarlyDate) {
         return { tooEarly: true };
@@ -243,8 +251,8 @@ export class ReservationSelectDatetimeComponent {
                 },
               });
 
-              dialogRef.afterClosed().subscribe(() => {           
-                this.router.navigate(['']);     
+              dialogRef.afterClosed().subscribe(() => {  
+                this.handleReviewService();              
               });          
             },
             error: (err) => {
@@ -286,6 +294,46 @@ export class ReservationSelectDatetimeComponent {
         },
       });
     }
+  }
+
+  private handleReviewService() {
+    let loggedInUserId = this.authService.getId();
+
+    this.reviewService.isSolutionReviewedByUser(loggedInUserId, this.selectedService.solutionId).subscribe({
+      next: (isReviewed) => {
+        if (!isReviewed) {
+          let createReview: CreateReview = {
+            graderId: loggedInUserId,
+            solutionId: this.selectedService.solutionId,
+            eventId: null,
+            grade: null,
+            comment: null
+          }
+      
+          const dialogRef = this.dialog.open(CreateReviewComponent, {
+            disableClose: true, // Prevent closing by clicking outside
+            data: {
+              title: `"${this.selectedService.name}"`,
+              message: `Please rate the service you reserved!`,
+              createReview: createReview
+            }
+          });
+      
+          dialogRef.afterClosed().subscribe(() => {
+            this.router.navigate(['']).then(() => {
+              window.location.reload();
+            });
+          });  
+        } else {
+          this.router.navigate(['']).then(() => {
+            window.location.reload();
+          });
+        }
+      },
+      error: () => {
+        return true;
+      },
+    });
   }
 }
 

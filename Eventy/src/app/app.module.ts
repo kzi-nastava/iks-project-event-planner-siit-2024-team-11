@@ -1,18 +1,19 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LayoutModule } from './layout/layout.module';
-import {MaterialModule} from './infrastructure/material/material.module';
-import {UserManagementModule} from './user-management/user-management.module';
-import {EventsModule} from './events/events.module';
+import { MaterialModule } from './infrastructure/material/material.module';
+import { UserManagementModule } from './user-management/user-management.module';
+import { EventsModule } from './events/events.module';
 import { SolutionsModule } from './solutions/solutions.module';
 import { ProductsModule } from './products/products.module';
 import { ServicesModule } from './services/services.module';
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
-import {Interceptor} from './infrastructure/auth/interceptor';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
+import { Interceptor } from './infrastructure/auth/interceptor';
+import { InteractionsModule } from './interactions/interactions.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 
 @NgModule({
@@ -29,6 +30,9 @@ import {Interceptor} from './infrastructure/auth/interceptor';
     SolutionsModule,
     ProductsModule,
     ServicesModule,
+    InteractionsModule,
+    ReviewsModule,
+    InteractionsModule
   ],
   providers: [
     provideAnimationsAsync(),
