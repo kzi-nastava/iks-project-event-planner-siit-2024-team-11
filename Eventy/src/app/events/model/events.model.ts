@@ -1,6 +1,7 @@
 import { EventTypeForCards } from "./event-type.model";
 import { Location } from "./location.model";
 import {CategoryWithId} from '../../solutions/model/category-with-id.model';
+import {EventCard} from './event-card.model';
 
 export interface Activity {
   name: string;
@@ -79,4 +80,29 @@ export interface EventBasicInformation {
   eventTypeId: number;
   createLocationDTO: Location;
   date: Date;
+}
+
+export interface UnreviewedEvent {
+  id: number;
+  name: string;
+}
+
+export interface EventDetails {
+  id: number;
+  name: string;
+  description: string;
+  eventType: EventType;
+  location: Location;
+  date: Date;
+  agenda: Activity[];
+  organizerId: number;
+  organizerName: string;
+  isFavorite: boolean;
+}
+
+export interface EventStats {
+  eventCard: EventCard;
+  visitors: number;
+  averageGrade: number;
+  gradeDistribution: number[];
 }

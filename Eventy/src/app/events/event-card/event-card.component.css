@@ -91,6 +91,11 @@
             font-weight: 450;
             color: #717171;
             letter-spacing: 0;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
             font-family: Figtree;
          }
 
@@ -157,6 +162,21 @@
             cursor: pointer;
          }
 
+         .favorite_button_container_true {
+           position: relative;
+           display: flex;
+           padding: 3px;
+           padding-left: 3px;
+           padding-right: 5.5px;
+           justify-content: center;
+           align-items: center;
+           border-radius: 7px;
+           border: solid 2px #929AB7;
+           margin-right: 13px;
+           cursor: pointer;
+           background-color: #929AB7;
+         }
+
          .see_more_button_container {
             display: flex;
             padding: 3px;
@@ -175,9 +195,19 @@
          .favorite_button_container:hover {
             background-color: #929AB7;
          }
+
+         .favorite_button_container_true:hover {
+           background-color: white;
+         }
+
          .favorite_button_container:hover mat-icon {
             color: white !important;
          }
+
+        .favorite_button_container_true:hover mat-icon {
+          color: #929AB7 !important;
+        }
+
          .see_more_button_container:hover {
             background-color: #929AB7;
          }
@@ -187,7 +217,7 @@
 
          .no-hover .favorite_button_container:hover {
             background-color: transparent;
-          }   
+          }
          .no-hover .favorite_button_container:hover mat-icon {
             color: #929AB7 !important;
          }

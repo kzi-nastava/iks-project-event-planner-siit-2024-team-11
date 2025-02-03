@@ -12,4 +12,5 @@ export interface EventCard {
   organiserId: Number; // when we click on picture/name it shows organiser profile
   organiserName: String;
   organiserImage: String;
+  isFavorite: boolean;
  }

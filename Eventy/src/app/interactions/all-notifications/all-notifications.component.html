@@ -1,0 +1,49 @@
+<div *ngIf="notificationsLoaded && paginatedNotifications">
+   <div class = "header_container">
+      <p class = "header_title">Notifications</p>
+
+      <div *ngIf="!userNotificationsInfo.areNotificationsMuted" 
+           (click)="handleMuteNotifications()" 
+           class = "mute_all_container" 
+           style = "background-color: #E75959;">
+         <mat-icon>notifications</mat-icon>
+         <p>Mute All</p>
+      </div>
+
+      <div *ngIf="userNotificationsInfo.areNotificationsMuted" 
+           (click)="handleMuteNotifications()" 
+           class = "mute_all_container" 
+           style = "background-color: #7F86A4;">
+         <mat-icon>notifications_off</mat-icon>
+         <p>Unmute All</p>
+      </div>   
+   </div>
+
+   <div class = "notifications_container">
+      <div *ngFor="let notification of paginatedNotifications;">
+         <div 
+            (click)="handleNotificationClick(notification)"       
+            style = "margin: 17px; margin-left: 16px; margin-right: 16px; display: flex; flex-direction: column;"
+         > 
+            <app-notification-card [notification]="notification"
+                                   [userNotificationsInfo]="userNotificationsInfo"/>
+            <p class = "timestamp" [ngStyle]="{
+               'color': (notification.timestamp > userNotificationsInfo.lastReadNotifications && !userNotificationsInfo.areNotificationsMuted)  ? '#6D79A2' : '#B3B3B3'
+              }">{{notification.timestamp | date: 'dd.MM.yyyy. HH:mm\'h\'' }}</p>  
+         </div>
+      </div>
+
+      <div class = "pagination_container">
+         <mat-paginator 
+            [length]="totalCount"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10]"
+            aria-label="Select page"
+            (page)="onPageChange($event)"
+            style=" background: white !important"
+         />
+      </div>
+   </div>
+</div>
+
+

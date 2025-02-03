@@ -1,0 +1,35 @@
+<div class = "card_container"
+     [ngStyle]="{
+      'box-shadow': (notification.timestamp > userNotificationsInfo.lastReadNotifications && !userNotificationsInfo.areNotificationsMuted)  ? '0px 0px 5px #878787' : '0px 0px 4px #b4b4b4',
+      'border-left': getBorderColor()
+     }">
+     
+   <div *ngIf="(notification.timestamp > userNotificationsInfo.lastReadNotifications && !userNotificationsInfo.areNotificationsMuted)" class = "red_dot"> </div>
+
+   <p class = "title">{{notification.title}}</p>
+   <p class = "message">{{notification.message}}</p>
+
+   <div *ngIf="notification.grade !== null" class = "grade_container">
+      <div class = "photo_container">
+         <img src = "{{notification.graderImage}}" class = "organiser_img">
+      </div>
+      <div class = "content_container">
+         <p class = "grader_title">By: &commat;{{notification.graderEmail}}</p>
+         <div class = "grades_container">
+            <mat-icon style = "color: #FBD917">star</mat-icon>
+
+            <mat-icon *ngIf="notification.grade <= 1" style = "color: #D9D9D9">star</mat-icon>
+            <mat-icon *ngIf="notification.grade > 1" style = "color: #FBD917">star</mat-icon>
+            
+            <mat-icon *ngIf="notification.grade <= 2" style = "color: #D9D9D9">star</mat-icon>
+            <mat-icon *ngIf="notification.grade > 2" style = "color: #FBD917">star</mat-icon>
+            
+            <mat-icon *ngIf="notification.grade <= 3" style = "color: #D9D9D9">star</mat-icon>
+            <mat-icon *ngIf="notification.grade > 3" style = "color: #FBD917">star</mat-icon>
+            
+            <mat-icon *ngIf="notification.grade <= 4" style = "color: #D9D9D9">star</mat-icon>
+            <mat-icon *ngIf="notification.grade > 4" style = "color: #FBD917">star</mat-icon>
+         </div>
+      </div>
+   </div>
+</div>
