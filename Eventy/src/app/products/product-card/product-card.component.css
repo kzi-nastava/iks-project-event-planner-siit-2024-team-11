@@ -218,6 +218,13 @@
                margin-right: 13px;
                cursor: pointer;
             }
+
+               .favorite_button_mat_icon {
+                  font-size: 25.5px; 
+                  color: white; 
+                  font-weight: 500; 
+                  transform: scale(0.8);
+               }
    
             .favorite_button_container_true {
               position: relative;
@@ -233,6 +240,13 @@
               cursor: pointer;
               background-color: #929AB7;
             }
+
+               .favorite_button_true_mat_icon {
+                  font-size: 25.5px; 
+                  color: #929AB7; 
+                  font-weight: 500; 
+                  transform: scale(0.8);
+               }
 
          .see_more_button_container {
             display: flex;
@@ -255,6 +269,13 @@
          .favorite_button_container:hover mat-icon {
             color: white !important;
          }
+         .favorite_button_container_true:hover {
+            background-color: white;
+          }
+         .favorite_button_container_true:hover mat-icon {
+            color: #929AB7 !important;
+         }
+         
          .see_more_button_container:hover {
             background-color: #929AB7;
          }

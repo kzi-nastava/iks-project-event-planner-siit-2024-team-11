@@ -49,8 +49,7 @@
          <div style = "justify-content:right; align-items: center; display: flex; flex: 1.3;">
             <div *ngIf="!isClickable" class = "{{eventCard.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
                  (click)="handleFavoriteItem()">
-               <mat-icon style = "{{eventCard.isFavorite ? 'font-size: 25.5px; color: white; font-weight: 500; transform: scale(0.8);' :
-                 'font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);'}}">favorite_border</mat-icon>
+               <mat-icon class = "{{eventCard.isFavorite ? 'favorite_button_mat_icon' : 'favorite_button_true_mat_icon'}}">favorite_border</mat-icon>
             </div>
 
             <div class = "see_more_button_container" [routerLink]="['/events', eventCard.eventId]">

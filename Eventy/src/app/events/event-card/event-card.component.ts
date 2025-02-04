@@ -11,7 +11,6 @@ import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.compo
   styleUrl: './event-card.component.css'
 })
 export class EventCardComponent {
-  private _snackBar = inject(MatSnackBar);
   @Input() eventCard: EventCard;
   @Input() isClickable: Boolean;
 
@@ -21,7 +20,6 @@ export class EventCardComponent {
     this.eventService.toggleFavoriteEvent(this.eventCard.eventId).subscribe({
       next: any => {
         this.eventCard.isFavorite = !this.eventCard.isFavorite;
-        this._snackBar.open((this.eventCard.isFavorite ? "FAVORITE: " : "REMOVE FAVORITE: ") + this.eventCard.name, "OK!");
       },
       error: any => {
         this.dialog.open(ErrorDialogComponent, {

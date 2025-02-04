@@ -13,9 +13,7 @@ export class NotificationCardComponent {
   // color
   borderColor: string;
 
-  ngOnInit() {
-    console.log(this.notification);
-  }
+  ngOnInit() {}
 
   public getBorderColor(): string {
     switch (this.notification.type.toString()) {
@@ -32,7 +30,7 @@ export class NotificationCardComponent {
         return "solid 5px #DD79AE"; // Product pink
 
       case "CATEGORY_UPDATED":
-        return "solid 5px #FF9B30"; // orange
+        return "solid 5px rgb(174, 143, 100)"; // brown
 
       case "NEW_CATEGORY_SUGGESTION":
         return "solid 5px rgb(250, 194, 9)"; // dark yellow
@@ -41,7 +39,7 @@ export class NotificationCardComponent {
         return "solid 5px #39B839"; // green
 
       case "CATEGORY_SUGGESTION_CHANGED":
-        return "solid 5pxrgb(240, 118, 74)"; // dark orange-red
+        return "solid 5px rgb(254, 172, 57)"; // dark orange-red
 
       case "CATEGORY_SUGGESTION_REPLACED":
         return "solid 5px #F25454"; // red
@@ -52,6 +50,5 @@ export class NotificationCardComponent {
       default:
         return "solid 5px #808AAC";
     }
-
   }
 }
