@@ -193,13 +193,13 @@ export class AllNotificationsComponent implements AfterViewInit {
         break;
 
       case "RATING_SERVICE":
-        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+        this.router.navigate(['solutions/' + notification.redirectionId]).then(() => {
           window.location.reload();
         });
         break;
 
       case "RATING_PRODUCT":
-        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+        this.router.navigate(['solutions/' + notification.redirectionId]).then(() => {
           window.location.reload();
         });
         break;
@@ -217,20 +217,20 @@ export class AllNotificationsComponent implements AfterViewInit {
         break;
 
       case "CATEGORY_SUGGESTION_ACCEPTED":
-        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+        this.router.navigate(['solutions/' + notification.redirectionId]).then(() => {
           window.location.reload();
         });
         break;
 
       case "CATEGORY_SUGGESTION_CHANGED":
         console.log(notification.redirectionId)
-        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+        this.router.navigate(['solutions/' + notification.redirectionId]).then(() => {
           window.location.reload();
         });  
         break;
 
       case "CATEGORY_SUGGESTION_REPLACED":
-        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+        this.router.navigate(['solutions/' + notification.redirectionId]).then(() => {
           window.location.reload();
         });
         break;
