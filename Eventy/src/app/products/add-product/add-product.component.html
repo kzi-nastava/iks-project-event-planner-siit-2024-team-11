@@ -1,1 +1,108 @@
-<p>add-product works!</p>
+<div class="container">
+  <h1>Add Product</h1>
+  <form [formGroup]="serviceForm" (ngSubmit)="submit()">
+    <div class="form-row">
+      <div class="column">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Enter value" formControlName="name" required>
+          <mat-error *ngIf="serviceForm.controls['name'].hasError('required')">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Enter value" formControlName="description" required>
+          <mat-error *ngIf="serviceForm.controls['description'].hasError('required')">
+            Description is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Related event types</mat-label>
+          <mat-select formControlName="relevantEventTypes" multiple>
+            <mat-option *ngFor="let eventType of allEventTypes" [value]="eventType.id">
+              {{ eventType.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="serviceForm.controls['relevantEventTypes'].hasError('required')">
+            At least one relevant event type is required
+          </mat-error>
+        </mat-form-field>
+
+        <div class = "row">
+          <mat-checkbox formControlName="autoAccept">Is Available?</mat-checkbox>
+          <mat-checkbox formControlName="autoAccept">Is Visible?</mat-checkbox>
+        </div>
+      </div>
+
+      <div class="column">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Product category</mat-label>
+          <mat-select placeholder="Choose a category" formControlName="serviceCategory" required>
+            <mat-option  *ngFor="let category of allSolutionCategories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="serviceForm.controls['serviceCategory'].hasError('required')">
+            Product category is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="this.serviceForm.controls['serviceCategory'].value === -1337">
+          <mat-label>New category name</mat-label>
+          <input matInput placeholder="Enter new category name" formControlName="newCategoryName">
+          <mat-error *ngIf="serviceForm.controls['newCategoryName'].hasError('required')">
+            New category name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="this.serviceForm.controls['serviceCategory'].value === -1337">
+          <mat-label>New category description</mat-label>
+          <input matInput placeholder="Enter new category description" formControlName="newCategoryDescription">
+          <mat-error *ngIf="serviceForm.controls['newCategoryDescription'].hasError('required')">
+            Specifics are required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput placeholder="Enter value" formControlName="price" required type="number">
+          <mat-error *ngIf="serviceForm.controls['price'].hasError('required')">
+            Price is required
+          </mat-error>
+          <mat-error *ngIf="serviceForm.controls['price'].hasError('min')">
+            Price must be a positive number
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Discount (%)</mat-label>
+          <input matInput placeholder="Enter value" formControlName="discount" required type="number">
+          <mat-error *ngIf="serviceForm.controls['discount'].hasError('required')">
+            Discount is required
+          </mat-error>
+          <mat-error *ngIf="serviceForm.controls['discount'].hasError('min') || serviceForm.controls['discount'].hasError('max')">
+            Discount must be between 0 and 100
+          </mat-error>
+        </mat-form-field>
+
+        <div class="image-picker-container">
+          <input #addPictures id="picker" type="file" (change)="onFilesSelected($event)" accept="image/*" multiple>
+          <div class="picture-button" (click)="triggerFileInput()">Upload Pictures</div>
+        </div>
+
+        <div class="selected-images" *ngIf="selectedFiles.length">
+          <div *ngFor="let file of selectedFiles; let i = index" class="image-preview">
+            <img [src]="file.preview" alt="image preview" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button class="button" type="submit">Create product</button>
+  </form>
+</div>
