@@ -47,7 +47,7 @@ const routes: Routes = [
   {path: 'confirm-registration/:requestId', component: ConfirmRegistrationComponent},
   {path: 'events/stats', component: EventStatsComponent},
   {path: 'events/:eventId', component: EventDetailsComponent},
-  {path: 'solution/:solutionId', component: SolutionDetailsComponent},
+  {path: 'solutions/:solutionId', component: SolutionDetailsComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
