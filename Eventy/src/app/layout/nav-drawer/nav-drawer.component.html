@@ -14,6 +14,7 @@
   <a class="sidenav-link" [routerLink]="['upgrade-profile']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Upgrade Profile</a>
   <a class="sidenav-link" [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>
   <a class="sidenav-link" [routerLink]="['events', 'stats']" (click)="drawer.toggle()"><mat-icon>bar_chart</mat-icon> Event Stats</a>
+  <a class="sidenav-link" [routerLink]="['add-product']" (click)="drawer.toggle()"><mat-icon>shopping_cart</mat-icon> Add Product</a>
   <!-- TO-DO: TAKE A GOOD LOOK HERE EVERYONE, MAYBE I ADDED SOME WRONG ROLE CHECK, CHECK YOUR PAGES -->
 <!--  <a class="sidenav-link" [routerLink]="['']" (click)="drawer.toggle()"><mat-icon>home</mat-icon> Home</a>-->
 <!--  <a class="sidenav-link" *ngIf="role === null" [routerLink]="['login']" (click)="drawer.toggle()"><mat-icon>badge</mat-icon> Login</a>-->
@@ -26,6 +27,7 @@
 <!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Organizer'" [routerLink]="['create-reservation']" (click)="drawer.toggle()"><mat-icon>event_available</mat-icon> Create Reservation</a>-->
 <!--  <a class="sidenav-link" *ngIf="role === null"  [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>-->
 <!--  <a class="sidenav-link" *ngIf="role === 'ROLE_AuthenticatedUser'" [routerLink]="['upgrade-profile']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Upgrade Profile</a>-->
-  <!-- <a class="sidenav-link" *ngIf="role === 'ROLE_Admin' or role === 'ROLE_Organizer'" [routerLink]="['events', 'stats']" (click)="drawer.toggle()"><mat-icon>bar_chart</mat-icon> Event Stats</a> -->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin' or role === 'ROLE_Organizer'" [routerLink]="['events', 'stats']" (click)="drawer.toggle()"><mat-icon>bar_chart</mat-icon> Event Stats</a> -->
+<!--  <a class="sidenav-link" *ngIf="role === 'ROLE_Provider'" [routerLink]="['add-product']" (click)="drawer.toggle()"><mat-icon>shopping_cart</mat-icon> Add Product</a>-->
 </mat-nav-list>
 

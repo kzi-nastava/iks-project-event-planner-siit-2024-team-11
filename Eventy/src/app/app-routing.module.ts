@@ -24,6 +24,7 @@ import {UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/upg
 import {EventDetailsComponent} from './events/event-details/event-details.component';
 import {EventStatsComponent} from './events/event-stats/event-stats.component';
 import { SolutionDetailsComponent } from './solutions/solution-details/solution-details.component';
+import {AddProductComponent} from './products/add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'events/stats', component: EventStatsComponent},
   {path: 'events/:eventId', component: EventDetailsComponent},
   {path: 'solutions/:solutionId', component: SolutionDetailsComponent},
+  {path: 'add-product', component: AddProductComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
@@ -86,6 +88,8 @@ const routes: Routes = [
   // {path: 'events/stats', component: EventStatsComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_Organizer', 'ROLE_Admin']}},
   // {path: 'events/:eventId', component: EventDetailsComponent},
+  // {path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Provider']}},
   // {path: '**', redirectTo: ''},
 ];
 
