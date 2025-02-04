@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserNotificationsInfo } from '../../user-management/model/users.model';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Client } from '@stomp/stompjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-notifications',
@@ -36,7 +37,8 @@ export class AllNotificationsComponent implements AfterViewInit {
 
   constructor(private notificationService: NotificationService,  
               private userService: UserService,    
-              private dialog: MatDialog) {}
+              private dialog: MatDialog,
+              private router: Router) {}
 
   ngAfterViewInit() {
     if (this.userId && !this.userNotificationsInfo.areNotificationsMuted) {
@@ -177,7 +179,71 @@ export class AllNotificationsComponent implements AfterViewInit {
       this.updateLastReadNotifications();
     }
 
-    console.log(notification);
+    switch (notification.type.toString()) {
+      case "EVENT_CHANGE":
+        this.router.navigate(['events/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "RATING_EVENT":
+        this.router.navigate(['events/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "RATING_SERVICE":
+        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "RATING_PRODUCT":
+        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "CATEGORY_UPDATED":
+        this.router.navigate(['profile']).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "NEW_CATEGORY_SUGGESTION":
+        this.router.navigate(['solution-categories']).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "CATEGORY_SUGGESTION_ACCEPTED":
+        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "CATEGORY_SUGGESTION_CHANGED":
+        console.log(notification.redirectionId)
+        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });  
+        break;
+
+      case "CATEGORY_SUGGESTION_REPLACED":
+        this.router.navigate(['solution/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      case "REMINDER_SERVICE":
+        this.router.navigate(['events/' + notification.redirectionId]).then(() => {
+          window.location.reload();
+        });
+        break;
+
+      default:
+        return;
+    }
   }
 }
 
