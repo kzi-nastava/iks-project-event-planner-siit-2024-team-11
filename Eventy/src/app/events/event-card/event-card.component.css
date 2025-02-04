@@ -195,18 +195,15 @@
          .favorite_button_container:hover {
             background-color: #929AB7;
          }
-
-         .favorite_button_container_true:hover {
-           background-color: white;
-         }
-
          .favorite_button_container:hover mat-icon {
             color: white !important;
          }
-
-        .favorite_button_container_true:hover mat-icon {
-          color: #929AB7 !important;
-        }
+         .favorite_button_container_true:hover {
+            background-color: white;
+          }
+         .favorite_button_container_true:hover mat-icon {
+            color: #929AB7 !important;
+         }
 
          .see_more_button_container:hover {
             background-color: #929AB7;
