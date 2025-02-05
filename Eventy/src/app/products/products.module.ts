@@ -7,13 +7,15 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import {RouterModule} from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import {MatCheckbox} from '@angular/material/checkbox';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 
 
 @NgModule({
   declarations: [
     ProductCardComponent,
-    AddProductComponent
+    AddProductComponent,
+    UpdateProductComponent
   ],
   imports: [
     CommonModule,

@@ -25,6 +25,7 @@ import {EventDetailsComponent} from './events/event-details/event-details.compon
 import {EventStatsComponent} from './events/event-stats/event-stats.component';
 import { SolutionDetailsComponent } from './solutions/solution-details/solution-details.component';
 import {AddProductComponent} from './products/add-product/add-product.component';
+import {UpdateProductComponent} from './products/update-product/update-product.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
   {path: 'events/:eventId', component: EventDetailsComponent},
   {path: 'solutions/:solutionId', component: SolutionDetailsComponent},
   {path: 'add-product', component: AddProductComponent},
+  {path: 'edit-product/:id', component: UpdateProductComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
@@ -89,6 +91,8 @@ const routes: Routes = [
   //   data: {role: ['ROLE_Organizer', 'ROLE_Admin']}},
   // {path: 'events/:eventId', component: EventDetailsComponent},
   // {path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Provider']}},
+  // {path: 'edit-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_Provider']}},
   // {path: '**', redirectTo: ''},
 ];
