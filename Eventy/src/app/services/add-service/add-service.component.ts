@@ -41,7 +41,7 @@ export class AddServiceComponent {
     relevantEventTypes: new FormControl ([], [Validators.required]),
     price: new FormControl (null, [Validators.required, Validators.min(0)]),
     discount: new FormControl (null, [Validators.required, Validators.min(0), Validators.max(100)]),
-    images: new FormControl (null),
+    images: new FormControl ([], [Validators.required]),
     newCategoryName: new FormControl (null),
     newCategoryDescription: new FormControl (null),
   });
@@ -81,6 +81,7 @@ export class AddServiceComponent {
   }
   
   ngOnInit() {
+    
     this.eventTypeService.getActiveEventTypes().subscribe({
       next: (response: EventTypeCard[]) => {
         this.allEventTypes = response;
@@ -102,14 +103,21 @@ export class AddServiceComponent {
   onFilesSelected(event: any): void {
     const files = event.target.files;
     this.selectedFiles = [];
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.selectedFiles.push({ file, preview: reader.result });
-      };
-      reader.readAsDataURL(file);
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.selectedFiles.push({ file, preview: reader.result });
+        };
+        reader.readAsDataURL(file);
+        this.serviceForm.get('images')?.clearValidators();
+      }
+    } else {
+      this.serviceForm.get('images')?.setValidators([Validators.required]);
     }
+    this.serviceForm.controls['images'].setValue(this.selectedFiles);
+    this.serviceForm.controls['images'].updateValueAndValidity();
   }
   
   removeFile(index: number): void {
@@ -138,6 +146,11 @@ export class AddServiceComponent {
         automaticReservationAcceptance: this.serviceForm.get('autoAccept').value,
       }
 
+      if (this.serviceForm.get('serviceType')?.value === 'fixed') {
+        newService.minReservationTime = this.serviceForm.get('duration').value;
+        newService.maxReservationTime = null;
+      }
+
       if (this.serviceForm.get('serviceCategory').value === -1337) {
         let newCategory: Category = {name: this.serviceForm.get('newCategoryName').value, description: this.serviceForm.get('newCategoryDescription').value, status: Status.PENDING};
         this.solutionCategoryService.create(newCategory).subscribe({
@@ -159,9 +172,6 @@ export class AddServiceComponent {
           }
         })
       }
-      // The reason I have two separate calls towards the add method depends on whether a category must be created first. If yes,
-      // we must ensure that we grab the ID of the new (currently pending) category and use it in our new service
-      
     }
     else {
       this.dialog.open(ErrorDialogComponent, {
