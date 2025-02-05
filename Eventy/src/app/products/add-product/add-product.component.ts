@@ -115,7 +115,7 @@ export class AddProductComponent {
         price: this.productFrom.get('price').value,
         discount: this.productFrom.get('discount').value,
         imageUrls: this.selectedFiles.map(file => file.preview),
-        category: this.productFrom.get('productCategory').value === -1337 ? this.allSolutionCategories[0] : this.allSolutionCategories.find(category => category.id === this.productFrom.get('serviceCategory').value),
+        category: this.productFrom.get('productCategory').value === -1337 ? this.allSolutionCategories[0] : this.allSolutionCategories.find(category => category.id === this.productFrom.get('productCategory').value),
         relatedEventTypes: this.productFrom.get('relevantEventTypes').value,
         isAvailable: this.productFrom.get('isAvailable').value,
         isVisible: this.productFrom.get('isVisible').value
