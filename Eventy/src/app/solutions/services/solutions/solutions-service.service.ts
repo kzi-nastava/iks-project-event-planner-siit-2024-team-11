@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../env/constants';
 import { PagedResponse } from '../../../shared/model/paged-response.model';
+import {SolutionDTO} from '../../model/solutions.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class SolutionsService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllSolutions( 
-    pageProperties?: { page?: number; pageSize?: number; sort?: string }, 
-    filters?: { search?: string; type?: string, categories?: string[]; eventTypes?: string[]; company?: string; minPrice?: number; maxPrice?: number; startDate?: Date; endDate?: Date; isAvailable?: boolean; 
+  getAllSolutions(
+    pageProperties?: { page?: number; pageSize?: number; sort?: string },
+    filters?: { search?: string; type?: string, categories?: string[]; eventTypes?: string[]; company?: string; minPrice?: number; maxPrice?: number; startDate?: Date; endDate?: Date; isAvailable?: boolean;
     }
   ): Observable<PagedResponse<SolutionCard>> {
 
@@ -80,5 +81,9 @@ export class SolutionsService {
 
   toggleFavorite(id: number): Observable<Boolean> {
     return this.httpClient.put<Boolean>(environment.apiHost + this.urlPrefix + "/favorite/" + id, {})
+  }
+
+  get(id: number): Observable<SolutionDTO> {
+    return this.httpClient.get<SolutionDTO>(environment.apiHost + this.urlPrefix + "/" + id)
   }
 }

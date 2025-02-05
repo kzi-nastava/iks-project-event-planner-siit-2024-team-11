@@ -1,1 +1,103 @@
-<p>update-product works!</p>
+<div class="container">
+  <h1>Add Product</h1>
+  <form [formGroup]="productFrom" (ngSubmit)="submit()">
+    <div class="form-row">
+      <div class="column">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Enter value" formControlName="name" required>
+          <mat-error *ngIf="productFrom.controls['name'].hasError('required')">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Enter value" formControlName="description" required>
+          <mat-error *ngIf="productFrom.controls['description'].hasError('required')">
+            Description is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Related event types</mat-label>
+          <mat-select formControlName="relevantEventTypes" multiple>
+            <mat-option *ngFor="let eventType of allEventTypes" [value]="eventType">
+              {{ eventType.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="productFrom.controls['relevantEventTypes'].hasError('required')">
+            At least one relevant event type is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="column">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Product category</mat-label>
+          <mat-select placeholder="Choose a category" formControlName="productCategory" required>
+            <mat-option  *ngFor="let category of allSolutionCategories" [value]="category.name">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="productFrom.controls['productCategory'].hasError('required')">
+            Product category is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="this.productFrom.controls['productCategory'].value === -1337">
+          <mat-label>New category name</mat-label>
+          <input matInput placeholder="Enter new category name" formControlName="newCategoryName">
+          <mat-error *ngIf="productFrom.controls['newCategoryName'].hasError('required')">
+            New category name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="this.productFrom.controls['productCategory'].value === -1337">
+          <mat-label>New category description</mat-label>
+          <input matInput placeholder="Enter new category description" formControlName="newCategoryDescription">
+          <mat-error *ngIf="productFrom.controls['newCategoryDescription'].hasError('required')">
+            Specifics are required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput placeholder="Enter value" formControlName="price" required type="number">
+          <mat-error *ngIf="productFrom.controls['price'].hasError('required')">
+            Price is required
+          </mat-error>
+          <mat-error *ngIf="productFrom.controls['price'].hasError('min')">
+            Price must be a positive number
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Discount (%)</mat-label>
+          <input matInput placeholder="Enter value" formControlName="discount" required type="number">
+          <mat-error *ngIf="productFrom.controls['discount'].hasError('required')">
+            Discount is required
+          </mat-error>
+          <mat-error *ngIf="productFrom.controls['discount'].hasError('min') || productFrom.controls['discount'].hasError('max')">
+            Discount must be between 0 and 100
+          </mat-error>
+        </mat-form-field>
+
+        <div class="image-picker-container">
+          <input #addPictures id="picker" type="file" (change)="onFilesSelected($event)" accept="image/*" multiple>
+          <div class="picture-button" (click)="triggerFileInput()">Upload Pictures</div>
+        </div>
+
+        <div class="selected-images" *ngIf="selectedFiles.length">
+          <div *ngFor="let file of selectedFiles; let i = index" class="image-preview">
+            <img [src]="file.preview" alt="image preview" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button class="button" type="submit">Create product</button>
+  </form>
+</div>
