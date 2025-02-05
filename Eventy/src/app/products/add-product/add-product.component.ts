@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {ProductService} from '../product.service';
 import {CreateProduct, Product} from '../model/products.model';
+import {SuccessfulDialogComponent} from '../../shared/successful-dialog/successful-dialog.component';
 
 @Component({
   selector: 'app-add-product',
@@ -129,7 +130,15 @@ export class AddProductComponent {
             response = this.productService.add(newProduct);
             response.subscribe({
               next: (product: Product) => {
-                this.router.navigate(["my-profile"]);
+                this.dialog.open(SuccessfulDialogComponent, {
+                  width: '400px',
+                  disableClose: true, // Prevent closing by clicking outside
+                  backdropClass: 'blurred_backdrop_dialog',
+                  data: {
+                    title: "Product added",
+                    message: "Product added successfully",
+                  },
+                }).afterClosed().subscribe(() => this.router.navigate(['my-profile']));
               },
               error: () => {
                 this.dialog.open(ErrorDialogComponent, {
@@ -160,7 +169,15 @@ export class AddProductComponent {
         response = this.productService.add(newProduct);
         response.subscribe({
           next: (product: Product) => {
-            this.router.navigate(["profile"]);
+            this.dialog.open(SuccessfulDialogComponent, {
+              width: '400px',
+              disableClose: true, // Prevent closing by clicking outside
+              backdropClass: 'blurred_backdrop_dialog',
+              data: {
+                title: "Product added",
+                message: "Product added successfully",
+              },
+            }).afterClosed().subscribe(() => this.router.navigate(['my-profile']));
           },
           error: () => {
             this.dialog.open(ErrorDialogComponent, {

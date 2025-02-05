@@ -22,8 +22,4 @@ export class ProductService {
   update(newProduct: Product): Observable<Product> {
     return this.httpClient.put<Product>(environment.apiHost + this.prefix + '/' + newProduct.id, newProduct);
   }
-
-  delete(id: number): Observable<any> {
-    return this.httpClient.delete<any>(environment.apiHost + this.prefix + '/' + id);
-  }
 }
