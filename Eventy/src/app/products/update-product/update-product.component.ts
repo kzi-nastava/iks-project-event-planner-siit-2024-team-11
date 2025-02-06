@@ -24,7 +24,17 @@ export class UpdateProductComponent {
   allSolutionCategories: CategoryWithId[] = [{id: -1337, name: "New Category", description:"filler text", status: Status.PENDING}];
   selectedFiles: Array<any> = [];
 
-  productFrom: FormGroup;
+  productFrom: FormGroup = new FormGroup({
+    productCategory: new FormControl('', [Validators.required]),
+    name: new FormControl ('', [Validators.required]),
+    description: new FormControl ('', [Validators.required]),
+    isAvailable: new FormControl (false),
+    isVisible: new FormControl (false),
+    relevantEventTypes: new FormControl ([], [Validators.required]),
+    price: new FormControl (null, [Validators.required, Validators.min(0)]),
+    discount: new FormControl (null, [Validators.required, Validators.min(0), Validators.max(100)]),
+    images: new FormControl (null, [Validators.required])
+  });
 
   constructor(private eventTypeService: EventTypeService, private solutionCategoryService: SolutionCategoryService,
               private productService: ProductService, private dialog: MatDialog, private router: Router,
@@ -33,7 +43,7 @@ export class UpdateProductComponent {
       next: (response: EventTypeCard[]) => {
         this.allEventTypes = response;
 
-        let id: number = route.snapshot.params['eventId'];
+        let id: number = route.snapshot.params['id'];
         this.solutionService.get(id).subscribe({
           next: (solution: SolutionDTO) => {
             this.productFrom = new FormGroup({
