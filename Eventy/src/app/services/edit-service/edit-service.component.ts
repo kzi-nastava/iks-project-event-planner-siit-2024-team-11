@@ -72,7 +72,6 @@ export class EditServiceComponent {
 
     this.servicesService.get(this.id).subscribe({
       next: (response: Service) => {
-        console.log(response);
         this.serviceForm.patchValue({
           serviceCategory: response.category.name,
           name: response.name,
@@ -162,7 +161,7 @@ export class EditServiceComponent {
   
         this.servicesService.update(updatedService).subscribe({
           next: (response: Service) => {
-            this.router.navigate(["my-services"]);
+            this.router.navigate(["solutions", this.id]);
           }
         })
       }
