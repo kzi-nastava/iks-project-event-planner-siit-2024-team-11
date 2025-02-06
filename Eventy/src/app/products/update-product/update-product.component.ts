@@ -152,7 +152,7 @@ export class UpdateProductComponent {
               title: "Product added",
               message: "Product added successfully",
             },
-          }).afterClosed().subscribe(() => this.router.navigate(['my-profile']));
+          }).afterClosed().subscribe(() => this.router.navigate(['solutions', product.id]));
         },
         error: () => {
           this.dialog.open(ErrorDialogComponent, {
