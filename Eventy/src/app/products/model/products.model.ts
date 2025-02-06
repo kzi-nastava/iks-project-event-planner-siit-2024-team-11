@@ -19,7 +19,7 @@ export interface Product {
   description: string;
   price: number;
   discount: number;
-  imageUrls: string[];
+  images: string[];
   relatedEventTypes: EventTypeCard[];
   isVisible: boolean;
   isAvailable: boolean;

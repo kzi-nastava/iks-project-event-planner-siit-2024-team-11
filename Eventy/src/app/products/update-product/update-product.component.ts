@@ -56,7 +56,7 @@ export class UpdateProductComponent {
               relevantEventTypes: new FormControl (solution.eventTypeNames.map(name => this.allEventTypes.find(type => type.name === name)), [Validators.required]),
               price: new FormControl (solution.price, [Validators.required, Validators.min(0)]),
               discount: new FormControl (solution.discount, [Validators.required, Validators.min(0), Validators.max(100)]),
-              images: new FormControl (solution.images),
+              images: new FormControl (solution.images, [Validators.required]),
             });
 
             for(let image of solution.images) {
@@ -138,7 +138,7 @@ export class UpdateProductComponent {
         description: this.productFrom.get('description').value,
         price: this.productFrom.get('price').value,
         discount: this.productFrom.get('discount').value,
-        imageUrls: this.selectedFiles.map(file => file.preview),
+        images: this.selectedFiles.map(file => file.preview),
         relatedEventTypes: this.productFrom.get('relevantEventTypes').value,
         isAvailable: this.productFrom.get('isAvailable').value,
         isVisible: this.productFrom.get('isVisible').value
