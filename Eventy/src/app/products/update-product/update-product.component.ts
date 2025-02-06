@@ -23,6 +23,7 @@ export class UpdateProductComponent {
   allEventTypes: EventTypeCard[] = [];
   allSolutionCategories: CategoryWithId[] = [{id: -1337, name: "New Category", description:"filler text", status: Status.PENDING}];
   selectedFiles: Array<any> = [];
+  id: number = -1;
 
   productFrom: FormGroup = new FormGroup({
     productCategory: new FormControl('', [Validators.required]),
@@ -61,6 +62,8 @@ export class UpdateProductComponent {
             for(let image of solution.images) {
               this.selectedFiles.push({ image, preview: image });
             }
+
+            this.id = solution.solutionId;
           },
           error: (event: EventDetails) => {
             this.dialog.open(ErrorDialogComponent, {
@@ -126,11 +129,11 @@ export class UpdateProductComponent {
   }
 
   submit() {
-    if (this.productFrom.valid) {
+    if (this.productFrom.valid && this.id !== -1) {
       let response;
 
       let product: Product = {
-        id: 5, // dont hardcode it
+        id: this.id,
         name: this.productFrom.get('name').value,
         description: this.productFrom.get('description').value,
         price: this.productFrom.get('price').value,
