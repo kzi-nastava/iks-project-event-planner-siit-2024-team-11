@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';  
-import { EventType, EventTypeCard } from '../../events/model/events.model';
+import { EventTypeCard } from '../../events/model/events.model';
 import { CategoryWithId } from '../../solutions/model/category-with-id.model';
 import { EventTypeService } from '../../events/event-type.service';
 import { SolutionCategoryService } from '../../solutions/services/solutions/solution-category.service';
@@ -8,9 +8,7 @@ import { Category, Status } from '../../solutions/model/category.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { CreateService, Service } from '../model/services.model';
-import { Solution } from '../../solutions/model/solutions.model';
 import { ServicesService } from '../services/services/services.service';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../infrastructure/auth/auth.service';
 

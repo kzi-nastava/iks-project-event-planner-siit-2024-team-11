@@ -18,6 +18,24 @@ export interface CreateService {
     automaticReservationAcceptance: boolean;
 }
 
+export interface UpdateService {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    discount: number;
+    imageUrls: string[];
+    isVisible: boolean;
+    isAvailable: boolean;
+    relatedEventTypeIds: number[];
+    specifics: string;
+    minReservationTime: number;
+    maxReservationTime: number;
+    reservationDeadline: number;
+    cancellationDeadline: number;
+    automaticReservationAcceptance: boolean;
+}
+
 export interface Service {
     id: number;
     name: string;
@@ -28,7 +46,7 @@ export interface Service {
     isVisible: boolean;
     isAvailable: boolean;
     category: Category;
-    relatedEventTypeIds: EventTypeCard[];
+    relatedEventTypes: EventTypeCard[];
     specifics: string;
     minReservationTime: number;
     maxReservationTime: number;
@@ -36,5 +54,3 @@ export interface Service {
     cancellationDeadline: number;
     automaticReservationAcceptance: boolean;
 }
-
-// TO-DO: update imageURLs to comply with newly implemented image system

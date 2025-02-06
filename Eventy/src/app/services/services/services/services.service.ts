@@ -5,17 +5,14 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../env/constants';
 import { AuthService } from '../../../infrastructure/auth/auth.service';
-import { CreateService, Service } from '../../model/services.model';
+import { CreateService, Service, UpdateService } from '../../model/services.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
   private readonly prefix: string = "/api/services";
-  // TO-DO: Finish calls
-  constructor(private httpClient: HttpClient, private authService: AuthService) {
-  
-  }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   getAllOwnServices(): Observable<PagedResponse<SolutionCard>> {
     let params: HttpParams = new HttpParams();
@@ -26,5 +23,13 @@ export class ServicesService {
 
   add(newService: CreateService): Observable<Service> {
     return this.httpClient.post<Service>(environment.apiHost + this.prefix, newService);
+  }
+
+  update(updateService: UpdateService): Observable<Service> {
+    return this.httpClient.put<Service>(environment.apiHost + this.prefix, updateService);
+  }
+
+  get(id: number): Observable<Service> {
+    return this.httpClient.get<Service>(environment.apiHost + this.prefix + "/" + id)
   }
 }

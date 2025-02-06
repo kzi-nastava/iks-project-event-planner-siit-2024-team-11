@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../env/constants';
 import { PagedResponse } from '../../../shared/model/paged-response.model';
+import { SolutionDTO } from '../../model/solutions.model';
 
 @Injectable({
   providedIn: 'root'
@@ -80,5 +81,21 @@ export class SolutionsService {
 
   toggleFavorite(id: number): Observable<Boolean> {
     return this.httpClient.put<Boolean>(environment.apiHost + this.urlPrefix + "/favorite/" + id, {})
+  }
+
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete<any>(environment.apiHost + this.urlPrefix + "/" + id)
+  }
+
+  toggleAvailablity(id: number): Observable<any> {
+    return this.httpClient.put<any>(environment.apiHost + this.urlPrefix + "/" + id + "/availability", {});
+  }
+
+  toggleVisibility(id: number): Observable<any> {
+    return this.httpClient.put<any>(environment.apiHost + this.urlPrefix + "/" + id + "/visibility", {});
+  }
+
+  get(id: number): Observable<SolutionDTO> {
+    return this.httpClient.get<SolutionDTO>(environment.apiHost + this.urlPrefix + "/" + id)
   }
 }
