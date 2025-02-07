@@ -34,10 +34,10 @@
                 Suitable for: {{solution.eventTypeNames}}
             </div>
             <div *ngIf="solution.type === 'SERVICE'" class="reservation-time-container">
-                <div *ngIf="!solution.maxReservationTime">
+                <div *ngIf="solution.maxReservationTime === solution.minReservationTime">
                     Service length: {{solution.minReservationTime}} minutes
                 </div>
-                <div *ngIf="solution.maxReservationTime">
+                <div *ngIf="solution.maxReservationTime !== solution.minReservationTime">
                     Service length: {{solution.minReservationTime}} minutes - {{solution.maxReservationTime}} minutes
                 </div>
             </div>
