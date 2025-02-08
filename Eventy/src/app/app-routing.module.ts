@@ -24,6 +24,7 @@ import {UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/upg
 import {EventDetailsComponent} from './events/event-details/event-details.component';
 import {EventStatsComponent} from './events/event-stats/event-stats.component';
 import { SolutionDetailsComponent } from './solutions/solution-details/solution-details.component';
+import { PendingReviewsComponent } from './reviews/pending-reviews/pending-reviews.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'events/stats', component: EventStatsComponent},
   {path: 'events/:eventId', component: EventDetailsComponent},
   {path: 'solutions/:solutionId', component: SolutionDetailsComponent},
+  {path: 'pending-reviews', component: PendingReviewsComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],

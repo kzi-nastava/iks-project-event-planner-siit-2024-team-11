@@ -11,11 +11,13 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { CreateReviewComponent } from './create-review/create-review.component';
 import { ReviewService } from './service/review.service';
 import { SharedModule } from '../shared/shared.module';
+import { PendingReviewsComponent } from './pending-reviews/pending-reviews.component';
 
 
 @NgModule({
   declarations: [
-    CreateReviewComponent
+    CreateReviewComponent,
+    PendingReviewsComponent
   ],
   imports: [
     CommonModule,
