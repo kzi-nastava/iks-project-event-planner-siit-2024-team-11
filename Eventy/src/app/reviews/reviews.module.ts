@@ -12,12 +12,14 @@ import { CreateReviewComponent } from './create-review/create-review.component';
 import { ReviewService } from './service/review.service';
 import { SharedModule } from '../shared/shared.module';
 import { PendingReviewsComponent } from './pending-reviews/pending-reviews.component';
+import { ReviewDetailsDialogComponent } from './review-details-dialog/review-details-dialog.component';
 
 
 @NgModule({
   declarations: [
     CreateReviewComponent,
-    PendingReviewsComponent
+    PendingReviewsComponent,
+    ReviewDetailsDialogComponent
   ],
   imports: [
     CommonModule,
