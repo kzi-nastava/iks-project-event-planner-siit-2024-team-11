@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';  
-import { EventType, EventTypeCard } from '../../events/model/events.model';
+import { EventTypeCard } from '../../events/model/events.model';
 import { CategoryWithId } from '../../solutions/model/category-with-id.model';
 import { EventTypeService } from '../../events/event-type.service';
 import { SolutionCategoryService } from '../../solutions/services/solutions/solution-category.service';
@@ -8,9 +8,7 @@ import { Category, Status } from '../../solutions/model/category.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { CreateService, Service } from '../model/services.model';
-import { Solution } from '../../solutions/model/solutions.model';
 import { ServicesService } from '../services/services/services.service';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../infrastructure/auth/auth.service';
 
@@ -41,7 +39,7 @@ export class AddServiceComponent {
     relevantEventTypes: new FormControl ([], [Validators.required]),
     price: new FormControl (null, [Validators.required, Validators.min(0)]),
     discount: new FormControl (null, [Validators.required, Validators.min(0), Validators.max(100)]),
-    images: new FormControl (null),
+    images: new FormControl ([], [Validators.required]),
     newCategoryName: new FormControl (null),
     newCategoryDescription: new FormControl (null),
   });
@@ -81,6 +79,7 @@ export class AddServiceComponent {
   }
   
   ngOnInit() {
+    
     this.eventTypeService.getActiveEventTypes().subscribe({
       next: (response: EventTypeCard[]) => {
         this.allEventTypes = response;
@@ -102,14 +101,21 @@ export class AddServiceComponent {
   onFilesSelected(event: any): void {
     const files = event.target.files;
     this.selectedFiles = [];
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.selectedFiles.push({ file, preview: reader.result });
-      };
-      reader.readAsDataURL(file);
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.selectedFiles.push({ file, preview: reader.result });
+        };
+        reader.readAsDataURL(file);
+        this.serviceForm.get('images')?.clearValidators();
+      }
+    } else {
+      this.serviceForm.get('images')?.setValidators([Validators.required]);
     }
+    this.serviceForm.controls['images'].setValue(this.selectedFiles);
+    this.serviceForm.controls['images'].updateValueAndValidity();
   }
   
   removeFile(index: number): void {
@@ -138,6 +144,11 @@ export class AddServiceComponent {
         automaticReservationAcceptance: this.serviceForm.get('autoAccept').value,
       }
 
+      if (this.serviceForm.get('serviceType')?.value === 'fixed') {
+        newService.minReservationTime = this.serviceForm.get('duration').value;
+        newService.maxReservationTime = this.serviceForm.get('duration').value;
+      }
+
       if (this.serviceForm.get('serviceCategory').value === -1337) {
         let newCategory: Category = {name: this.serviceForm.get('newCategoryName').value, description: this.serviceForm.get('newCategoryDescription').value, status: Status.PENDING};
         this.solutionCategoryService.create(newCategory).subscribe({
@@ -159,9 +170,6 @@ export class AddServiceComponent {
           }
         })
       }
-      // The reason I have two separate calls towards the add method depends on whether a category must be created first. If yes,
-      // we must ensure that we grab the ID of the new (currently pending) category and use it in our new service
-      
     }
     else {
       this.dialog.open(ErrorDialogComponent, {

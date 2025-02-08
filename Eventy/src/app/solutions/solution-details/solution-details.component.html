@@ -6,11 +6,23 @@
                <mat-icon style = "{{solution.isFavorite ? 'font-size: 25.5px; color: white; font-weight: 500; transform: scale(0.8);' :
                  'font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);'}}">favorite_border</mat-icon>
             </div>
+            
+    </div>
+    <div class="row" style="margin-bottom: 30px;">
+
+
+        <button *ngIf="solution.providerId === currentUser" class="edit-button" (click)="editSolution()" mat-button><mat-icon>edit</mat-icon> Edit</button>
+        <button *ngIf="solution.providerId === currentUser && solution.isVisible" class="bad-button" (click)="toggleVisibility()" mat-button><mat-icon>visibility_off</mat-icon> Make invisible</button>
+        <button *ngIf="solution.providerId === currentUser && !solution.isVisible" class="good-button" (click)="toggleVisibility()" mat-button><mat-icon>visibility</mat-icon> Make visible</button>
+        <button *ngIf="solution.providerId === currentUser && solution.isAvailable" class="bad-button" (click)="toggleAvailability()" mat-button><mat-icon>dangerous</mat-icon> Make unavailable</button>
+        <button *ngIf="solution.providerId === currentUser && !solution.isAvailable" class="good-button" (click)="toggleAvailability()" mat-button><mat-icon>check_circle</mat-icon> Make available</button>
+        <button *ngIf="solution.providerId === currentUser" class="delete-button" (click)="deleteSolution()" mat-button><mat-icon>delete</mat-icon> Delete</button>
+            
     </div>
     <div class="row">
         <div class="column">
             <div class="image-container">
-                <img src="{{solution.firstImageUrl}}" alt="{{solution.name}}-picture.png">
+                <img src="{{solution.images}}" alt="{{solution.name}}-picture.png">
             </div>
             <div class="description-container">
                 <p style="display: inline;">{{solution.description}}</p>
@@ -22,10 +34,10 @@
                 Suitable for: {{solution.eventTypeNames}}
             </div>
             <div *ngIf="solution.type === 'SERVICE'" class="reservation-time-container">
-                <div *ngIf="!solution.maxReservationTime">
+                <div *ngIf="solution.maxReservationTime === solution.minReservationTime">
                     Service length: {{solution.minReservationTime}} minutes
                 </div>
-                <div *ngIf="solution.maxReservationTime">
+                <div *ngIf="solution.maxReservationTime !== solution.minReservationTime">
                     Service length: {{solution.minReservationTime}} minutes - {{solution.maxReservationTime}} minutes
                 </div>
             </div>
