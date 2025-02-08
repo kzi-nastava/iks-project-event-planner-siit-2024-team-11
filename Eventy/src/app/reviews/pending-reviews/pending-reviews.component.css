@@ -65,13 +65,14 @@
          justify-content: center;
          align-items: center;
          width: 100%; 
+         cursor: pointer;
       }
 
          .see_details_button_container p {
             display: inline-block;
             margin: 0;
             padding: 4px 10px; /* Optional: Adds some padding */
-            border: solid 2px #7C81B0;
+            border: solid 2px #858abb;
             border-radius: 10px;
             color: #7C81B0;
             font-family: Albert Sans;
@@ -79,20 +80,46 @@
          }
 
       .comment_container {
-         
+         border: solid 2.5px #cdcdcd;
+         border-radius: 10px;
       }
+
+         .comment_container p {
+            margin: 0;
+            padding: 4px 10px; /* Optional: Adds some padding */
+            color: #605D5D;
+            font-family: Albert Sans;
+            font-weight: 500;
+         }
 
       .decision_buttons_container {
          display: flex;
          flex-direction: row;
+         align-items: center;
+         justify-content: center;
       }  
 
          .accept_button_container {
-            
+            padding: 7px;
+            padding-right: 11px;
+            padding-bottom: 11px;
+            background-color: #3AB745;
+            border-radius: 10px;
+            height: 20px;
+            width: 20px;
+            margin-right: 20px;
+            cursor: pointer;
          }
 
          .decline_button_container {
-            
+            padding: 7px;
+            padding-right: 11px;
+            padding-bottom: 11px;
+            background-color: #E75959;
+            border-radius: 10px;
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
          }
 
    .paginator_container {

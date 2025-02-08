@@ -20,37 +20,41 @@
       </div>
       
       <div *ngFor="let review of paginatedPendingReviews;"
-           style = "display: flex; flex-direction: row; margin-top: 15px">
-         <div class = "first_column">
-            <div class = "see_details_button_container">
-               <p>See details</p>
-            </div>
-         </div>
-
-         <div class = "second_column">
-            <div class = "comment_container">
-               <p>{{review.comment}}</p>
-            </div>
-         </div>
-
-         <div class = "third_column">
-            <div class = "decision_buttons_container">
-               <div class = "accept_button_container">
-                  <mat-icon>check</mat-icon>
-               </div>
-
-               <div class = "decline_button_container">
-                  <mat-icon>delete</mat-icon>
+           style = "display: flex; flex-direction: column">
+         <div style = "display: flex; flex-direction: row; margin-top: 15px; justify-content: center; align-items: center;">
+            <div class = "first_column">
+               <div class = "see_details_button_container">
+                  <p>See details</p>
                </div>
             </div>
-         </div>     
+   
+            <div class = "second_column">
+               <div class = "comment_container">
+                  <p>{{review.comment}}</p>
+               </div>
+            </div>
+   
+            <div class = "third_column">
+               <div class = "decision_buttons_container">
+                  <div class = "accept_button_container">
+                     <mat-icon style = "color: white; font-weight: 600;">check</mat-icon>
+                  </div>
+   
+                  <div class = "decline_button_container">
+                     <mat-icon style = "color: white; font-weight: 400;">delete_outline</mat-icon>
+                  </div>
+               </div>
+            </div>  
+         </div>
+            
+         <div style = "height: 1.5px; background-color: #ededed; margin-top: 15px"></div>
       </div>
 
       <div class = "paginator_container">
          <mat-paginator 
             [length]="totalCount"
             [pageSize]="pageSize"
-            [pageSizeOptions]="[1, 2, 5, 10]"
+            [pageSizeOptions]="[5, 10]"
             aria-label="Select page"
             (page)="onPageChange($event)"
             style="background: white;"
