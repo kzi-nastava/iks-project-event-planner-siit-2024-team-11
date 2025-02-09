@@ -3,6 +3,8 @@ import {EventType, EventTypeCard, EventTypeWithActivity} from '../model/events.m
 import {EventTypeService} from '../event-type.service';
 import {PageEvent} from '@angular/material/paginator';
 import {PagedResponse} from '../../shared/model/paged-response.model';
+import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 interface ICardClasses {
   "event-type-card": boolean,
@@ -21,7 +23,7 @@ export class AllEventTypesComponent implements OnInit {
   paginatedEventTypes: EventTypeCard[] = [];
   totalCount: number = 0;
 
-  constructor(private eventTypeService: EventTypeService) {
+  constructor(private eventTypeService: EventTypeService, private dialog: MatDialog) {
 
   }
 
@@ -117,6 +119,17 @@ export class AllEventTypesComponent implements OnInit {
             console.log(response);
             this.selectedEventType = response;
           }
+        });
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true,
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: "Deactivation unsuccessful",
+            message: 'You can\'t deactivate an event type that is in use!',
+          },
         });
       }
     });
