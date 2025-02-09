@@ -6,6 +6,7 @@ import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.compo
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import * as L from 'leaflet';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-event-details',
@@ -16,7 +17,8 @@ export class EventDetailsComponent {
   private _snackBar = inject(MatSnackBar);
   event: EventDetails;
 
-  constructor(private eventService: EventsService, private route: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private eventService: EventsService, private route: ActivatedRoute, private dialog: MatDialog,
+              private authService: AuthService) {
     let id: number = route.snapshot.params['eventId'];
     this.eventService.getEvent(id).subscribe({
       next: (event: EventDetails) => {
@@ -116,5 +118,9 @@ export class EventDetailsComponent {
         });
       }
     });
+  }
+
+  isOrganizerCheckingDetails(): boolean {
+    return this.event.organizerId === this.authService.getId();
   }
 }
