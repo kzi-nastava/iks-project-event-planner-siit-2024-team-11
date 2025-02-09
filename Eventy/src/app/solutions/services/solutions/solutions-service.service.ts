@@ -14,9 +14,9 @@ export class SolutionsService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllSolutions( 
-    pageProperties?: { page?: number; pageSize?: number; sort?: string }, 
-    filters?: { search?: string; type?: string, categories?: string[]; eventTypes?: string[]; company?: string; minPrice?: number; maxPrice?: number; startDate?: Date; endDate?: Date; isAvailable?: boolean; 
+  getAllSolutions(
+    pageProperties?: { page?: number; pageSize?: number; sort?: string },
+    filters?: { search?: string; type?: string, categories?: string[]; eventTypes?: string[]; company?: string; minPrice?: number; maxPrice?: number; startDate?: Date; endDate?: Date; isAvailable?: boolean;
     }
   ): Observable<PagedResponse<SolutionCard>> {
 
