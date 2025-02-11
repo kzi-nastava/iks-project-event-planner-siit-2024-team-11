@@ -2,7 +2,6 @@
    background-color: #F1F1F1;
    display: flex;
    flex-direction: column;
-
    align-items: center;
    padding: 25px;
    height: 100%;
@@ -103,28 +102,33 @@
             padding: 7px;
             padding-right: 11px;
             padding-bottom: 11px;
-            background-color: #3AB745;
+            background: linear-gradient(to left, #3AB745, #46d152);
             border-radius: 10px;
             height: 20px;
             width: 20px;
             margin-right: 20px;
             cursor: pointer;
          }
+         .accept_button_container:hover {
+            background: linear-gradient(to left, #33a73d, #3ec049);
+         }
 
          .decline_button_container {
             padding: 7px;
             padding-right: 11px;
             padding-bottom: 11px;
-            background-color: #E75959;
+            background: linear-gradient(to left, #d44b4b, #E75959);
             border-radius: 10px;
             height: 20px;
             width: 20px;
             cursor: pointer;
          }
+         .decline_button_container:hover {
+            background: linear-gradient(to left, #bf4141, #d95151);
+         }
 
    .paginator_container {
       display: flex;
-      width: 100%;
       justify-content: center;
       background-color: #ffffff;
       padding-top: 15px;

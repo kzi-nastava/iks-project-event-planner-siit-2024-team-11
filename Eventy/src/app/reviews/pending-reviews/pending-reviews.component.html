@@ -23,7 +23,7 @@
            style = "display: flex; flex-direction: column">
          <div style = "display: flex; flex-direction: row; margin-top: 15px; justify-content: center; align-items: center;">
             <div class = "first_column">
-               <div class = "see_details_button_container">
+               <div class = "see_details_button_container" (click)="openReviewDetails(review)">
                   <p>See details</p>
                </div>
             </div>
@@ -36,11 +36,11 @@
    
             <div class = "third_column">
                <div class = "decision_buttons_container">
-                  <div class = "accept_button_container">
+                  <div class = "accept_button_container" (click)="acceptReview(review)">
                      <mat-icon style = "color: white; font-weight: 600;">check</mat-icon>
                   </div>
    
-                  <div class = "decline_button_container">
+                  <div class = "decline_button_container" (click)="declineReview(review)">
                      <mat-icon style = "color: white; font-weight: 400;">delete_outline</mat-icon>
                   </div>
                </div>

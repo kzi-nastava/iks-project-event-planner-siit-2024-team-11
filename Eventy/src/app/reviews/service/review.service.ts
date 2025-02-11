@@ -23,14 +23,22 @@ export class ReviewService {
   }
 
   getAllPendingReviews(pageProperties?: PageProperties): Observable<PagedResponse<Review>> {
-      let params = new HttpParams();
-  
-      if(pageProperties) {
-        params = params
-          .set('page', pageProperties.page)
-          .set('size', pageProperties.size);
-      }
-  
-      return this.httpClient.get<PagedResponse<Review>>(environment.apiHost + this.urlPrefix + "/pending", { params: params });
+    let params = new HttpParams();
+
+    if(pageProperties) {
+      params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
     }
+
+    return this.httpClient.get<PagedResponse<Review>>(environment.apiHost + this.urlPrefix + "/pending", { params: params });
+  }
+
+  acceptReview(reviewId: number): Observable<Review> {
+    return this.httpClient.put<Review>(environment.apiHost + this.urlPrefix + "/" + reviewId + "/accept", {});
+  }
+
+  declineReview(reviewId: number): Observable<Review> {
+    return this.httpClient.put<Review>(environment.apiHost + this.urlPrefix + "/" + reviewId + "/decline", {});
+  }
 }
