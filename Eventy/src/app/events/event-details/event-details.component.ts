@@ -123,4 +123,11 @@ export class EventDetailsComponent {
   isOrganizerCheckingDetails(): boolean {
     return this.event.organizerId === this.authService.getId();
   }
+
+  isInFuture(): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to midnight
+
+    return this.event.date > today;
+  }
 }

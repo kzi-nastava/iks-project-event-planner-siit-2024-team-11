@@ -187,4 +187,8 @@ export class EventsService {
   edit(updatedEvent: UpdateEvent): Observable<Event> {
     return this.httpClient.put<Event>(environment.apiHost + this.urlPrefix, updatedEvent);
   }
+
+  getEventForUpdate(id: number): Observable<UpdateEvent> {
+    return this.httpClient.get<UpdateEvent>(environment.apiHost + this.urlPrefix + "/" + id + "/update");
+  }
 }

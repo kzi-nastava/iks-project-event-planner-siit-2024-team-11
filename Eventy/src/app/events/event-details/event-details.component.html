@@ -3,7 +3,7 @@
       <a mat-flat-button class="button"><mat-icon>chat</mat-icon>Chat With Organizer</a>
       <h1 class="event-title">{{event.name}}</h1>
       <div class="buttons">
-        <a *ngIf="isOrganizerCheckingDetails()" mat-flat-button class="button" [routerLink]="['/edit-event', this.event.id]">
+        <a *ngIf="isOrganizerCheckingDetails() && isInFuture()" mat-flat-button class="button" [routerLink]="['/edit-event', this.event.id]">
           <mat-icon>edit</mat-icon> Edit
         </a>
         <div class = "{{event.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
