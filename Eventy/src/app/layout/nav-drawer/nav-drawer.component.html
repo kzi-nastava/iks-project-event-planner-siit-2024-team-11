@@ -14,7 +14,7 @@
   <a class="sidenav-link" [routerLink]="['upgrade-profile']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Upgrade Profile</a>
   <a class="sidenav-link" [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>
   <a class="sidenav-link" [routerLink]="['events', 'stats']" (click)="drawer.toggle()"><mat-icon>bar_chart</mat-icon> Event Stats</a>
-  <a class="sidenav-link"  [routerLink]="['pending-reviews']" (click)="drawer.toggle()"><mat-icon>rate_review</mat-icon> Pending Reviews</a>
+  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin'" [routerLink]="['pending-reviews']" (click)="drawer.toggle()"><mat-icon>rate_review</mat-icon> Pending Reviews</a>
 
   <!-- TO-DO: TAKE A GOOD LOOK HERE EVERYONE, MAYBE I ADDED SOME WRONG ROLE CHECK, CHECK YOUR PAGES -->
 <!--  <a class="sidenav-link" [routerLink]="['']" (click)="drawer.toggle()"><mat-icon>home</mat-icon> Home</a>-->

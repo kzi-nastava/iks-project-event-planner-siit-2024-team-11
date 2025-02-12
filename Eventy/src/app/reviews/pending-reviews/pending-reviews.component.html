@@ -49,18 +49,16 @@
             
          <div style = "height: 1.5px; background-color: #ededed; margin-top: 15px"></div>
       </div>
-
-      <div class = "paginator_container">
-         <mat-paginator 
-            [length]="totalCount"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="[5, 10]"
-            aria-label="Select page"
-            (page)="onPageChange($event)"
-            style="background: white;"
-         />
-      </div>
    </div>
-
-   
+ 
+   <div class = "paginator_container">
+      <mat-paginator 
+         [length]="totalCount"
+         [pageSize]="pageSize"
+         [pageSizeOptions]="[5, 10]"
+         aria-label="Select page"
+         (page)="onPageChange($event)"
+         style="background: white;"
+      />
+   </div> 
 </div>
