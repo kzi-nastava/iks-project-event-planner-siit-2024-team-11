@@ -146,7 +146,7 @@ export class AddServiceComponent {
 
       if (this.serviceForm.get('serviceType')?.value === 'fixed') {
         newService.minReservationTime = this.serviceForm.get('duration').value;
-        newService.maxReservationTime = null;
+        newService.maxReservationTime = this.serviceForm.get('duration').value;
       }
 
       if (this.serviceForm.get('serviceCategory').value === -1337) {

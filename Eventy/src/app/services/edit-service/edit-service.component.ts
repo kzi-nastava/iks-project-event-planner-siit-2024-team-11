@@ -77,10 +77,10 @@ export class EditServiceComponent {
           name: response.name,
           description: response.description,
           specifics: response.specifics,
-          serviceType: response.maxReservationTime === null ? 'fixed' : 'variable',
-          duration: response.maxReservationTime === null ? response.minReservationTime : null,
-          minDuration: response.maxReservationTime === null ? null : response.minReservationTime,
-          maxDuration: response.maxReservationTime === null ? null : response.maxReservationTime,
+          serviceType: response.maxReservationTime === response.minReservationTime ? 'fixed' : 'variable',
+          duration: response.maxReservationTime === response.minReservationTime ? response.minReservationTime : null,
+          minDuration: response.maxReservationTime === response.minReservationTime ? null : response.minReservationTime,
+          maxDuration: response.maxReservationTime === response.minReservationTime ? null : response.maxReservationTime,
           daysNoticeForReservation: response.reservationDeadline,
           daysNoticeForCancellation: response.cancellationDeadline,
           autoAccept: response.automaticReservationAcceptance,
@@ -156,7 +156,7 @@ export class EditServiceComponent {
   
         if (this.serviceForm.get('serviceType')?.value === 'fixed') {
           updatedService.minReservationTime = this.serviceForm.get('duration').value;
-          updatedService.maxReservationTime = null;
+          updatedService.maxReservationTime = this.serviceForm.get('duration').value;
         }
   
         this.servicesService.update(updatedService).subscribe({

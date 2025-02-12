@@ -5,19 +5,25 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DatepickerModule} from '../infrastructure/datepicker/datepicker.module';
 import { ProductCardComponent } from './product-card/product-card.component';
 import {RouterModule} from '@angular/router';
+import { AddProductComponent } from './add-product/add-product.component';
+import {MatCheckbox} from '@angular/material/checkbox';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 
 
 @NgModule({
   declarations: [
-    ProductCardComponent
+    ProductCardComponent,
+    AddProductComponent,
+    UpdateProductComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     DatepickerModule,
-    RouterModule
+    RouterModule,
+    MatCheckbox
   ],
   exports: [
     ProductCardComponent,

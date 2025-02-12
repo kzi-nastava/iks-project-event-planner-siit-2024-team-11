@@ -34,10 +34,10 @@
                 Suitable for: {{solution.eventTypeNames}}
             </div>
             <div *ngIf="solution.type === 'SERVICE'" class="reservation-time-container">
-                <div *ngIf="!solution.maxReservationTime">
+                <div *ngIf="solution.maxReservationTime === solution.minReservationTime">
                     Service length: {{solution.minReservationTime}} minutes
                 </div>
-                <div *ngIf="solution.maxReservationTime">
+                <div *ngIf="solution.maxReservationTime !== solution.minReservationTime">
                     Service length: {{solution.minReservationTime}} minutes - {{solution.maxReservationTime}} minutes
                 </div>
             </div>
@@ -71,7 +71,7 @@
              </div>
         </div>
     </div>
-    <div class="row buttons-container">
+    <div *ngIf="currentRole === 'ROLE_Organizer'" class="row buttons-container">
         <button class="chat-button" (click)="openChat()" mat-button>
             <mat-icon>chat</mat-icon> Chat with provider
         </button>

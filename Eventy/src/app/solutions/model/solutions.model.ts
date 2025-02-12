@@ -36,4 +36,3 @@ export interface SolutionDTO {
    providerImageUrl: string;
    isFavorite: boolean;
 }
-
