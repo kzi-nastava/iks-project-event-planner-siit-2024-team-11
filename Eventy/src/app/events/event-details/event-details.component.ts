@@ -128,6 +128,6 @@ export class EventDetailsComponent {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Reset time to midnight
 
-    return this.event.date > today;
+    return new Date(this.event.date) > today;
   }
 }
