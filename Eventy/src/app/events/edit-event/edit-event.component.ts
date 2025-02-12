@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EventTypeCard, UpdateEvent} from '../model/events.model';
 import * as L from 'leaflet';
-import {LatLng} from 'leaflet';
+import {latLng, LatLng} from 'leaflet';
 import {EventTypeService} from '../event-type.service';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {EventsService} from '../services/events/events-service.service';
@@ -33,7 +33,6 @@ export class EditEventComponent {
   selectedLatLng: LatLng;
   currentMarker: L.Marker | undefined;
   selectedAddress: string;
-  readonly ftnCoordinates: [number, number] = [45.2445, 19.8484];
 
   constructor(private eventTypeService: EventTypeService, private eventService: EventsService,
               private route: ActivatedRoute, private dialog: MatDialog) {
@@ -48,9 +47,12 @@ export class EditEventComponent {
               name : new FormControl(response.name, Validators.required),
               description: new FormControl(response.description, Validators.required),
               maxNumberParticipants: new FormControl(response.maxNumberParticipants, [Validators.required, Validators.pattern("^[1-9]\\d*$")]),
-              eventType: new FormControl(this.eventTypes.find(type => response.eventTypeId === type.id), Validators.required),
+              eventType: new FormControl(this.eventTypes.find(type => response.eventTypeId === type.id).id, Validators.required),
               date: new FormControl(response.date, Validators.required),
             });
+
+            this.initMap([response.location.latitude, response.location.longitude]);
+            this.showNewMapClick(new LatLng(response.location.latitude, response.location.longitude));
           },
           error: () => {
             this.dialog.open(ErrorDialogComponent, {
@@ -68,12 +70,8 @@ export class EditEventComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.initMap();
-  }
-
-  initMap(): void {
-    this.map = L.map('map').setView(this.ftnCoordinates, 15);
+  initMap(latLng: [number, number]): void {
+    this.map = L.map('map').setView(latLng, 15);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -86,6 +84,22 @@ export class EditEventComponent {
 
   onMapClick(e: L.LeafletMouseEvent): void {
     const latLng: L.LatLng = e.latlng;
+
+    this.showNewMapClick(latLng)
+  }
+
+  mapPinToAddress(): void {
+    const url: string = `https://nominatim.openstreetmap.org/reverse?lat=${this.selectedLatLng.lat}&lon=${this.selectedLatLng.lng}&format=json`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        this.selectedAddress = data.display_name;
+      })
+      .catch(error => console.error('Error fetching address:', error));
+  }
+
+  showNewMapClick(latLng: L.LatLng): void {
     this.selectedLatLng = latLng;
 
     if (this.currentMarker) {
@@ -102,16 +116,5 @@ export class EditEventComponent {
     this.currentMarker = L.marker(latLng, { icon }).addTo(this.map);
 
     this.mapPinToAddress();
-  }
-
-  mapPinToAddress(): void {
-    const url: string = `https://nominatim.openstreetmap.org/reverse?lat=${this.selectedLatLng.lat}&lon=${this.selectedLatLng.lng}&format=json`;
-
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        this.selectedAddress = data.display_name;
-      })
-      .catch(error => console.error('Error fetching address:', error));
   }
 }
