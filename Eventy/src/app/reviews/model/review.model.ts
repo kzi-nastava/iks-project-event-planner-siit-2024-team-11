@@ -1,5 +1,18 @@
-export interface Review {
+export enum Status {
+   ACCEPTED,
+   PENDING,
+   DENIED
+}
 
+export interface Review {
+   id: number;
+   comment: String;
+   grade: number;
+   senderEmail: String;
+   recipientEmail: String;
+   title: String; // event/product/service name
+   status: Status;
+   isDeleted: boolean;
 }
 
 export interface CreateReview {
