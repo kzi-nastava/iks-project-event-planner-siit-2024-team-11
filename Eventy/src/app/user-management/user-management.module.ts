@@ -18,6 +18,7 @@ import { UpgradeProfileComponent } from '../infrastructure/auth/upgrade-profile/
 import { UpgradeOrganizerComponent } from '../infrastructure/auth/upgrade-organizer/upgrade-organizer.component';
 import { UpgradeProviderComponent } from '../infrastructure/auth/upgrade-provider/upgrade-provider.component';
 import {AuthModule} from '../infrastructure/auth/auth.module';
+import { ReportUserDialogComponent } from './report-user-dialog/report-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {AuthModule} from '../infrastructure/auth/auth.module';
     UpgradeProfileComponent,
     UpgradeOrganizerComponent,
     UpgradeProviderComponent,
+    ReportUserDialogComponent,
   ],
   imports: [
     CommonModule,
