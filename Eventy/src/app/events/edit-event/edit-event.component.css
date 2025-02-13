@@ -52,3 +52,50 @@ mat-radio-group {
   font-family: Montserrat;
   color: #333;
 }
+
+.all-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10vh;
+  margin-top: 8vh;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 45vw;
+  margin-right: 5vw;
+}
+
+.field {
+  width: 30vw;
+  margin-bottom: 2vh;
+}
+
+table {
+  height: 60vh;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
