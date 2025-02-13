@@ -6,13 +6,9 @@ export enum Status {
 
 export interface Report {
    id: number;
-   comment: String;
-   grade: number;
+   reason: String;
    senderEmail: String;
-   recipientEmail: String;
-   title: String; // event/product/service name
-   status: Status;
-   isDeleted: boolean;
+   reportedUserEmail: String;
 }
 
 export interface CreateReport {

@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateReport } from '../model/reports.model';
+import { CreateReport, Report } from '../model/reports.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../env/constants';
+import { PageProperties } from '../../shared/model/page-properties.model';
+import { PagedResponse } from '../../shared/model/paged-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +18,7 @@ export class ReportService {
     return this.httpClient.post<CreateReport>(environment.apiHost + this.urlPrefix, review);
   }
 
-  /*
-  isSolutionReviewedByUser(userId: number, solutionId: number): Observable<Boolean> {
-    return this.httpClient.get<Boolean>(environment.apiHost + this.urlPrefix + "/user/" + userId + "/solution/" + solutionId);
-  }
-
-  getAllPendingReviews(pageProperties?: PageProperties): Observable<PagedResponse<Review>> {
+  getAllPendingReports(pageProperties?: PageProperties): Observable<PagedResponse<Report>> {
     let params = new HttpParams();
 
     if(pageProperties) {
@@ -30,14 +27,14 @@ export class ReportService {
         .set('size', pageProperties.size);
     }
 
-    return this.httpClient.get<PagedResponse<Review>>(environment.apiHost + this.urlPrefix + "/pending", { params: params });
+    return this.httpClient.get<PagedResponse<Report>>(environment.apiHost + this.urlPrefix + "/pending", { params: params });
   }
 
-  acceptReview(reviewId: number): Observable<Review> {
-    return this.httpClient.put<Review>(environment.apiHost + this.urlPrefix + "/" + reviewId + "/accept", {});
+  acceptReport(reportId: number): Observable<Report> {
+    return this.httpClient.put<Report>(environment.apiHost + this.urlPrefix + "/" + reportId + "/accept", {});
   }
 
-  declineReview(reviewId: number): Observable<Review> {
-    return this.httpClient.put<Review>(environment.apiHost + this.urlPrefix + "/" + reviewId + "/decline", {});
-  }*/
+  declineReport(reportId: number): Observable<Report> {
+    return this.httpClient.put<Report>(environment.apiHost + this.urlPrefix + "/" + reportId + "/decline", {});
+  }
 }

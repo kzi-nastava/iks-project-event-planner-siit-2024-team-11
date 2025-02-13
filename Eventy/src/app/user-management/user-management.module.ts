@@ -19,6 +19,8 @@ import { UpgradeOrganizerComponent } from '../infrastructure/auth/upgrade-organi
 import { UpgradeProviderComponent } from '../infrastructure/auth/upgrade-provider/upgrade-provider.component';
 import {AuthModule} from '../infrastructure/auth/auth.module';
 import { ReportUserDialogComponent } from './report-user-dialog/report-user-dialog.component';
+import { PendingReportsComponent } from './pending-reports/pending-reports.component';
+import { ReportDetailsDialogComponent } from './report-details-dialog/report-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ReportUserDialogComponent } from './report-user-dialog/report-user-dial
     UpgradeOrganizerComponent,
     UpgradeProviderComponent,
     ReportUserDialogComponent,
+    PendingReportsComponent,
+    ReportDetailsDialogComponent,
   ],
   imports: [
     CommonModule,

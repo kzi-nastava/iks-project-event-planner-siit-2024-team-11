@@ -6,10 +6,10 @@ import { ReportService } from '../service/report.service';
 import { CreateReport } from '../model/reports.model';
 import { SuccessfulDialogComponent } from '../../shared/successful-dialog/successful-dialog.component';
 
-export interface ReviewDialogData {
+export interface ReportDialogData {
   title: string;
   message: string;
-  createReport: CreateReport
+  createReport: CreateReport;
 }
 
 @Component({
@@ -22,7 +22,7 @@ export class ReportUserDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<ReportUserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ReviewDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: ReportDialogData,
     private dialog: MatDialog,
     private reportService: ReportService,
   ) {
@@ -38,20 +38,20 @@ export class ReportUserDialogComponent {
   }
 
   confirmReport() {
-    if(this.reportForm.invalid) {
+    if (this.reportForm.invalid) {
       this.reportForm.updateValueAndValidity();
       this.reportForm.markAllAsTouched();
 
     } else {
       let message = this.reportForm.controls['message'].value;
       this.data.createReport.reason = message;
-      
+
       this.reportService.createReport(this.data.createReport).subscribe({
         next: () => {
           this.dialogRef.close();
           this.dialog.open(SuccessfulDialogComponent, {
             data : {
-              title: "Success!",
+              title: "Report Successful!",
               message: "Report created successfully!"
             }
           });

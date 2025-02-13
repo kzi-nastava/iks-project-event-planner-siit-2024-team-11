@@ -161,7 +161,7 @@ export class OtherUserProfilePageComponent {
       data: {
         title: `Report "${this.user.email}"?`,
         message: `Please provide a reason for the report!`,
-        createReview: createReport,
+        createReport: createReport,
       }
     });
   }
