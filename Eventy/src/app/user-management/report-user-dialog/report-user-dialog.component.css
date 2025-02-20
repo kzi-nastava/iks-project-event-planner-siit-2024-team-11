@@ -3,6 +3,7 @@ p {
  }
  
  .create_report_dialog {
+   max-width: 350px !important;
    text-align: center;
    padding: 15px;
    padding-top: 22px;
