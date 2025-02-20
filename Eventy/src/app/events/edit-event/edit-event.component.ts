@@ -196,4 +196,8 @@ export class EditEventComponent {
     this.agenda = this.agenda.filter(agendaActivity => agendaActivity.name != activity.name || agendaActivity.description != activity.description
     || agendaActivity.location != activity.location || agendaActivity.startTime != activity.startTime || agendaActivity.endTime != activity.endTime);
   }
+
+  submit(): void {
+
+  }
 }
