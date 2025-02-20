@@ -129,7 +129,7 @@ export class EditEventComponent {
     timeRange: new FormControl([], [Validators.required, this.validateTimeRange()])
   });
 
-  displayedColumns: string[] = ['name', 'description', 'location', 'startTime', 'endTime'];
+  displayedColumns: string[] = ['name', 'description', 'location', 'startTime', 'endTime', 'delete'];
   agenda: Activity[] = [];
 
   minStartTime: Date;
@@ -190,5 +190,10 @@ export class EditEventComponent {
 
       return null;
     };
+  }
+
+  deleteRow(activity: Activity): void {
+    this.agenda = this.agenda.filter(agendaActivity => agendaActivity.name != activity.name || agendaActivity.description != activity.description
+    || agendaActivity.location != activity.location || agendaActivity.startTime != activity.startTime || agendaActivity.endTime != activity.endTime);
   }
 }
