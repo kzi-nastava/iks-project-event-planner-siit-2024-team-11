@@ -116,5 +116,4 @@ export interface UpdateEvent {
   location: Location;
   date: Date;
   agenda: Activity[];
-  organizerId: number;
 }

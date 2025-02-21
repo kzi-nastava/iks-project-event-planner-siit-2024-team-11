@@ -6,7 +6,7 @@ import {LatLng} from 'leaflet';
 import {EventTypeService} from '../event-type.service';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {EventsService} from '../services/events/events-service.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {
@@ -36,15 +36,16 @@ export class EditEventComponent {
   selectedLatLng: LatLng;
   currentMarker: L.Marker | undefined;
   selectedAddress: string;
+  id: number;
 
   constructor(private eventTypeService: EventTypeService, private eventService: EventsService,
-              private route: ActivatedRoute, private dialog: MatDialog) {
+              private route: ActivatedRoute, private dialog: MatDialog, private router: Router) {
     this.eventTypeService.getActiveEventTypes().subscribe({
       next: (response: EventTypeCard[]) => {
         this.eventTypes = response;
 
-        let id: number = route.snapshot.params['id'];
-        this.eventService.getEventForUpdate(id).subscribe({
+        this.id = route.snapshot.params['id'];
+        this.eventService.getEventForUpdate(this.id).subscribe({
           next: (response: UpdateEvent) => {
             this.basicInformationForm = new FormGroup({
               name : new FormControl(response.name, Validators.required),
@@ -198,6 +199,51 @@ export class EditEventComponent {
   }
 
   submit(): void {
+    if(this.basicInformationForm.invalid) {
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true, // prevents closing by clicking outside
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: 'Edit error',
+          message: 'Error while editing! Please check all your fields and try again.',
+        },
+      });
 
+      return;
+    }
+
+    let updateEvent: UpdateEvent = {
+      id: this.id,
+      name: this.basicInformationForm.controls['name'].value,
+      description: this.basicInformationForm.controls['description'].value,
+      maxNumberParticipants: this.basicInformationForm.controls['maxNumberParticipants'].value,
+      eventTypeId: this.basicInformationForm.controls['eventType'].value,
+      location: {
+        name: this.selectedAddress,
+        address: this.selectedAddress,
+        latitude: this.selectedLatLng.lat,
+        longitude: this.selectedLatLng.lng
+      },
+      date: this.basicInformationForm.controls['date'].value,
+      agenda: this.agenda
+    }
+
+    this.eventService.edit(updateEvent).subscribe({
+      next: () => {
+        this.router.navigate(['']);
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true, // prevents closing by clicking outside
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: 'Edit error',
+            message: 'Error while editing! Please check all your fields and try again.',
+          },
+        });
+      }
+    });
   }
 }
