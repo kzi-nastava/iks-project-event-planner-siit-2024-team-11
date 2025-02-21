@@ -1,0 +1,28 @@
+<div class="create_report_dialog">
+   <div class = "title_container">
+
+      <p class = "title">{{data.title}}</p>
+   </div>
+   <p class = "message">{{data.message}}</p>
+
+   <form [formGroup]="reportForm">
+      <mat-form-field id = "create_review_message" class="field">
+         <mat-label>Reason</mat-label>
+         <textarea type="text" matInput placeholder="Your Reason" formControlName="message"
+                  cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" rows="2"></textarea>
+         @if (reportForm.controls['message'].hasError('required')) {
+         <mat-error>Reason is <strong>required</strong></mat-error>
+         }
+         <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('message')">
+         <mat-icon>close</mat-icon>
+         </button>
+      </mat-form-field>
+   </form>
+   
+   <div style = "display: flex; justify-content: center; margin-top: 13px;">
+      <div class = "confirm_filter_container" (click) = "confirmReport()">
+         <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">CONFIRM</p>
+      </div>
+   </div>  
+</div>

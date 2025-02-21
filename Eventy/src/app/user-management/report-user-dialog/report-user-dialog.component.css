@@ -2,7 +2,7 @@ p {
    margin: 0;
  }
  
- .create_review_dialog {
+ .create_report_dialog {
    max-width: 350px !important;
    text-align: center;
    padding: 15px;
@@ -40,24 +40,8 @@ p {
     .message {
       font-size: 17px;
       font-family: Albert Sans;
-    }
-
-    .grades_container {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      margin-top: 15px;
       margin-bottom: 14px;
     }
-
-      .grades_container mat-icon {
-        font-size: 45px;
-        margin-right: 10px;
-        cursor: pointer;
-        padding-bottom: 21px;
-        padding-right: 25px;
-      }
 
    .confirm_filter_container {
      width: 26vw;

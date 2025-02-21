@@ -1,0 +1,24 @@
+<div class="details_dialog">
+   <div class = "title_container">
+     <p class = "title">REPORT DETAILS</p>
+     <div class = "decline_button_container" (click) = "cancel()">
+       <mat-icon style = "color: white; font-weight: 400;">close</mat-icon>
+     </div>
+   </div>
+ 
+   <div class="line_container">
+     <div class="line"></div>
+   </div>
+ 
+   <div class = "details_container">
+     <div class = "text_container">
+       <p class = "info">From:</p>
+       <p class = "message">{{data.report.senderEmail}}</p>
+     </div>
+ 
+     <div class = "text_container" style = "margin-top: 9px;">
+       <p class = "info">For:</p>
+       <p class = "message">{{data.report.reportedUserEmail}}</p>
+     </div>
+
+ </div>

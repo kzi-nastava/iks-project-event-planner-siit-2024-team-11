@@ -27,6 +27,7 @@ import { SolutionDetailsComponent } from './solutions/solution-details/solution-
 import { PendingReviewsComponent } from './reviews/pending-reviews/pending-reviews.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { UpdateProductComponent } from './products/update-product/update-product.component';
+import { PendingReportsComponent } from './user-management/pending-reports/pending-reports.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,7 @@ const routes: Routes = [
   {path: 'pending-reviews', component: PendingReviewsComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:id', component: UpdateProductComponent},
+  {path: 'pending-reports', component: PendingReportsComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
