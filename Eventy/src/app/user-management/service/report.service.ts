@@ -14,8 +14,8 @@ export class ReportService {
 
   constructor(private httpClient: HttpClient) {}
 
-  createReport(review: CreateReport): Observable<CreateReport> {
-    return this.httpClient.post<CreateReport>(environment.apiHost + this.urlPrefix, review);
+  createReport(report: CreateReport): Observable<CreateReport> {
+    return this.httpClient.post<CreateReport>(environment.apiHost + this.urlPrefix, report);
   }
 
   getAllPendingReports(pageProperties?: PageProperties): Observable<PagedResponse<Report>> {

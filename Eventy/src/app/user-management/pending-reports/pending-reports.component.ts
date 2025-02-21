@@ -41,7 +41,7 @@ export class PendingReportsComponent {
         this.totalCount = response.totalElements;
       },
       error: (err) => {
-        console.error('Failed to fetch events:', err);
+        console.error('Failed to fetch reports:', err);
       },
     });
   }
@@ -67,7 +67,7 @@ export class PendingReportsComponent {
           backdropClass: 'blurred_backdrop_dialog',
           data: {
             title: 'Error',
-            message: 'An unexpected error occured while accepting the review.',
+            message: 'An unexpected error occured while accepting the report.',
           },
         });
       },
@@ -85,7 +85,7 @@ export class PendingReportsComponent {
           backdropClass: 'blurred_backdrop_dialog',
           data: {
             title: 'Error',
-            message: 'An unexpected error occured while declining the review.',
+            message: 'An unexpected error occured while declining the report.',
           },
         });
       },
