@@ -3,13 +3,15 @@ import {EventCard} from '../../events/model/event-card.model';
 import {UserService} from '../user.service';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
 import {PageEvent} from '@angular/material/paginator';
-import {User} from '../model/users.model';
+import {BlockUser, User} from '../model/users.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PagedResponse} from '../../shared/model/paged-response.model';
 import { CreateReport } from '../model/reports.model';
 import { AuthService } from '../../infrastructure/auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReportUserDialogComponent } from '../report-user-dialog/report-user-dialog.component';
+import { BlockUserDialogComponent } from '../block-user-dialog/block-user-dialog.component';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-other-user-profile-page',
@@ -36,6 +38,32 @@ export class OtherUserProfilePageComponent {
       next: (user: User) => {
         this.user = user;
         this.fetchMyEventsSolutions();
+      },
+      error: (error) => {
+        if (error.status === 403) {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data: {
+              title: "Account Blocked!",
+              message: `You cannot access this profile page.`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+
+        } else {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data : {
+              title: "Loading Error!",
+              message: "There has been a problem while loading this page."
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+        }
       }
     });
 
@@ -44,7 +72,18 @@ export class OtherUserProfilePageComponent {
 
 
   isOrganizer(): boolean {
-    return "firstName" in this.user;
+    let firstName = null
+    try {
+      firstName = this.user.firstName
+    } catch {
+
+    }
+
+    if (firstName == null) {
+      return false
+    } else {
+      return true
+    }
   }
 
   getName(): string {
@@ -162,6 +201,21 @@ export class OtherUserProfilePageComponent {
         title: `Report "${this.user.email}"?`,
         message: `Please provide a reason for the report!`,
         createReport: createReport,
+      }
+    });
+  }
+
+  handleBlockUser() {
+    let blockUser: BlockUser = {
+      blockerId: this.loggedInUserId,
+      blockedId: this.user.id,
+    }
+
+    this.dialog.open(BlockUserDialogComponent, {
+      data: {
+        title: `Block user?`,
+        message: `Are you sure you want to block "${this.user.email}"?`,
+        blockUser: blockUser,
       }
     });
   }
