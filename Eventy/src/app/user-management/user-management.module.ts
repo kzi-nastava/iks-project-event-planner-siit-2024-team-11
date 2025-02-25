@@ -21,6 +21,7 @@ import {AuthModule} from '../infrastructure/auth/auth.module';
 import { ReportUserDialogComponent } from './report-user-dialog/report-user-dialog.component';
 import { PendingReportsComponent } from './pending-reports/pending-reports.component';
 import { ReportDetailsDialogComponent } from './report-details-dialog/report-details-dialog.component';
+import { BlockUserDialogComponent } from './block-user-dialog/block-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ReportDetailsDialogComponent } from './report-details-dialog/report-det
     ReportUserDialogComponent,
     PendingReportsComponent,
     ReportDetailsDialogComponent,
+    BlockUserDialogComponent,
   ],
   imports: [
     CommonModule,

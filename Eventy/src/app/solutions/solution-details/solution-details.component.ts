@@ -46,16 +46,31 @@ export class SolutionDetailsComponent {
       next: (card: SolutionDTO) => {
         this.solution = card;
       },
-      error: (card: SolutionCard) => {
-        this.dialog.open(ErrorDialogComponent, {
-          width: '400px',
-          disableClose: false,
-          backdropClass: 'blurred_backdrop_dialog',
-          data: {
-            title: "Error loading the solution",
-            message: 'Error loading the solution.',
-          },
-        });
+      error: (error) => {
+        if (error.status === 403) {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data: {
+              title: "Content Blocked!",
+              message: `You cannot access the content of a blocked account!`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+
+        } else {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data : {
+              title: "Loading Error!",
+              message: "There has been a problem while loading this page."
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+        }   
       }
     })
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CalendarOccupancy, UpdateUser, User, UserNotificationsInfo} from './model/users.model';
+import {BlockUser, CalendarOccupancy, UpdateUser, User, UserNotificationsInfo} from './model/users.model';
 import {EventCard} from '../events/model/event-card.model';
 import {SolutionCard} from '../solutions/model/solution-card.model';
 import {environment} from '../../env/constants';
@@ -121,5 +121,9 @@ export class UserService {
 
   updateLastReadNotifications(userId: number): Observable<Date> {
     return this.httpClient.put<Date>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/last-read-notifications", {});
+  }
+
+  blockUser(blockUser: BlockUser): Observable<BlockUser> {
+    return this.httpClient.post<BlockUser>(environment.apiHost + this.userProfileUrlPrefix + "/block", blockUser);
   }
 }
