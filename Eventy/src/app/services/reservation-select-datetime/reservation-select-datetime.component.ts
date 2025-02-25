@@ -16,7 +16,6 @@ import { AuthService } from '../../infrastructure/auth/auth.service';
 import { CreateReview } from '../../reviews/model/review.model';
 import { CreateReviewComponent } from '../../reviews/create-review/create-review.component';
 import { ReviewService } from '../../reviews/service/review.service';
-import { isReactive } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-reservation-select-datetime',
@@ -102,6 +101,20 @@ export class ReservationSelectDatetimeComponent {
   isDateValid() {
     return this.dateControl.valid;
   }
+
+  dateFilter = (date: Date | null): boolean => {
+    if (!date || !this.selectedService) {
+      return false;
+    }
+  
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+  
+    const tooEarlyDate = new Date(today);
+    tooEarlyDate.setDate(today.getDate() + this.selectedService.reservationDeadline);
+  
+    return date >= tooEarlyDate; 
+  };
 
   startTimeValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
