@@ -211,7 +211,17 @@ export class SolutionDetailsComponent {
   }
 
   reserveService() {
-    // TO-DO
+    if (this.currentRole === "ROLE_Organizer") {
+      if (this.solution.solutionId != 0) {
+        this.router.navigate(['/create-reservation'], { state: { selectedService: this.solution } });
+     
+      } else {
+        this.errorDialog("Error", "A service is required to proceed with the reservation!")
+      }
+     
+    } else {
+      this.errorDialog("Forbidden action", "You can only do this as an organizer!")
+    }
   }
 
   openChat() {
