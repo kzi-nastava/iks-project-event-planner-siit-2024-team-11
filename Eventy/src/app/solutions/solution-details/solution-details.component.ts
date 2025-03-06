@@ -7,6 +7,7 @@ import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.com
 import { AuthService } from '../../infrastructure/auth/auth.service';
 import { SuccessfulDialogComponent } from '../../shared/successful-dialog/successful-dialog.component';
 import { SolutionDTO } from '../model/solutions.model';
+import { ChatService } from '../../chat/chat.service';
 
 @Component({
   selector: 'app-solution-details',
@@ -34,7 +35,7 @@ export class SolutionDetailsComponent {
   }
 
   constructor(private route: ActivatedRoute, private solutionService: SolutionsService, private dialog: MatDialog, private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService, private chatService: ChatService) {
     this.currentUser = authService.getId()
     let id: number = route.snapshot.params['solutionId'];
     solutionService.get(id).subscribe({
@@ -170,6 +171,36 @@ export class SolutionDetailsComponent {
   }
 
   openChat() {
-    // TO-DO
+    this.chatService.createChat(this.solution.providerId).subscribe({
+      next: (value: any) => {
+        if(this.authService.getRole()) {
+          this.router.navigate(['chat'], {
+            state: { newChatOpen: true }
+          })
+        } else {
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            disableClose: true, // prevents closing by clicking outside
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: "Can't open chat if you are not logged in",
+              message: 'Please log in to access the chat.',
+            },
+          });
+        }
+      },
+      error: (err) => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true, // prevents closing by clicking outside
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: "Error",
+            message: 'Unexpected error while opening chat!',
+          },
+        });
+        console.log(err)
+      }
+    })
   }
 }

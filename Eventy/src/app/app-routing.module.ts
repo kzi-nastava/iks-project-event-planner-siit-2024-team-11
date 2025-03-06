@@ -26,6 +26,7 @@ import {EventStatsComponent} from './events/event-stats/event-stats.component';
 import { SolutionDetailsComponent } from './solutions/solution-details/solution-details.component';
 import {AddProductComponent} from './products/add-product/add-product.component';
 import {UpdateProductComponent} from './products/update-product/update-product.component';
+import { AllChatsViewComponent } from './chat/all-chats-view/all-chats-view.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
   {path: 'solutions/:solutionId', component: SolutionDetailsComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:id', component: UpdateProductComponent},
+  {path: 'chat', component: AllChatsViewComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],

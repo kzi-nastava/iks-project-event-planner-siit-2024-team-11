@@ -1,6 +1,6 @@
 <div class="event-page-container">
     <div class="event-header">
-      <a mat-flat-button class="button"><mat-icon>chat</mat-icon>Chat With Organizer</a>
+      <a mat-flat-button class="button" (click)="openChat()" ><mat-icon>chat</mat-icon>Chat With Organizer</a>
       <h1 class="event-title">{{event.name}}</h1>
       <div class = "{{event.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
            (click)="handleFavoriteItem()">

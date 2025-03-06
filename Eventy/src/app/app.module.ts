@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi
 import { Interceptor } from './infrastructure/auth/interceptor';
 import { InteractionsModule } from './interactions/interactions.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { ChatModule } from './chat/chat.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ReviewsModule } from './reviews/reviews.module';
     ServicesModule,
     InteractionsModule,
     ReviewsModule,
-    InteractionsModule
+    InteractionsModule,
+    ChatModule
   ],
   providers: [
     provideAnimationsAsync(),
