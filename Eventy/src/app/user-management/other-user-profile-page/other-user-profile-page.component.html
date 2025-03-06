@@ -1,4 +1,4 @@
-<div class="all-container">
+<div *ngIf="user != null" class="all-container">
   <div class="basic-info-wrapper">
     <div style="flex: 1;"></div>
 
@@ -26,7 +26,12 @@
 
     <div class="basic-info-buttons">
       <button mat-flat-button class="button" type="submit"><mat-icon>chat_bubble</mat-icon> Chat</button>
-      <button mat-flat-button class="button negative-button" type="submit"><mat-icon>error</mat-icon> Report User</button>
+      <button mat-flat-button class="button negative-button" type="submit" (click)="handleReportUser()">
+        <mat-icon>error</mat-icon> Report User
+      </button>
+      <button mat-flat-button class="button negative-button" type="submit" (click)="handleBlockUser()">
+        <mat-icon>error</mat-icon> Block User
+      </button> 
     </div>
   </div>
 

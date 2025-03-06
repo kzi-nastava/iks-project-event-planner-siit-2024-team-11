@@ -27,16 +27,31 @@ export class EventDetailsComponent {
 
         this.initMap();
       },
-      error: (event: EventDetails) => {
-        this.dialog.open(ErrorDialogComponent, {
-          width: '400px',
-          disableClose: true, // prevents closing by clicking outside
-          backdropClass: 'blurred_backdrop_dialog',
-          data: {
-            title: "Error while loading the event",
-            message: 'Error while loading the event.',
-          },
-        });
+      error: (error) => {
+        if (error.status === 403) {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data: {
+              title: "Content Blocked!",
+              message: `You cannot access the content of a blocked account!`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+
+        } else {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data : {
+              title: "Loading Error!",
+              message: "There has been a problem while loading this page."
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+        }   
       }
     });
   }

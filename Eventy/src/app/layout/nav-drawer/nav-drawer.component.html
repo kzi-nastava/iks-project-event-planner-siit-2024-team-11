@@ -10,10 +10,11 @@
   <a class="sidenav-link" [routerLink]="['event-types']" (click)="drawer.toggle()"><mat-icon>theater_comedy</mat-icon> Event Types</a>
   <a class="sidenav-link" [routerLink]="['my-services']" (click)="drawer.toggle()"><mat-icon>sentiment_very_satisfied</mat-icon> My services</a>
   <a class="sidenav-link" [routerLink]="['solution-categories']" (click)="drawer.toggle()"><mat-icon>hardware</mat-icon> Solution categories</a>
-  <a class="sidenav-link" [routerLink]="['create-reservation']" (click)="drawer.toggle()"><mat-icon>event_available</mat-icon> Create Reservation</a>
   <a class="sidenav-link" [routerLink]="['upgrade-profile']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Upgrade Profile</a>
   <a class="sidenav-link" [routerLink]="['fast-registration']" (click)="drawer.toggle()"><mat-icon>people</mat-icon> Fast Registration</a>
   <a class="sidenav-link" [routerLink]="['events', 'stats']" (click)="drawer.toggle()"><mat-icon>bar_chart</mat-icon> Event Stats</a>
+  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin'" [routerLink]="['pending-reviews']" (click)="drawer.toggle()"><mat-icon>rate_review</mat-icon> Pending Reviews</a>
+  <a class="sidenav-link" *ngIf="role === 'ROLE_Admin'" [routerLink]="['pending-reports']" (click)="drawer.toggle()"><mat-icon>rate_review</mat-icon> Pending Reports</a>
   <a class="sidenav-link" [routerLink]="['add-product']" (click)="drawer.toggle()"><mat-icon>shopping_cart</mat-icon> Add Product</a>
   <!-- TO-DO: TAKE A GOOD LOOK HERE EVERYONE, MAYBE I ADDED SOME WRONG ROLE CHECK, CHECK YOUR PAGES -->
 <!--  <a class="sidenav-link" [routerLink]="['']" (click)="drawer.toggle()"><mat-icon>home</mat-icon> Home</a>-->

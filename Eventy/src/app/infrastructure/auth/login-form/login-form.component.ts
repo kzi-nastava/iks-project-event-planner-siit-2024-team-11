@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 import {AuthResponse} from '../model/auth-response.model';
 import {Login} from '../model/login.model';
+import { ErrorDialogComponent } from '../../../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-login-form',
@@ -36,13 +37,23 @@ export class LoginFormComponent {
           localStorage.setItem('runHandleReviewEvents', 'true'); // for reviewing unreviewed & passed events after login
           this.router.navigate(['']);
         },
-        error: () => {
-          this.dialog.open(InvalidInputDataDialogComponent, {
-            data : {
-              title: "Wrong credentials!",
-              message: "Email and password don't match"
-            }
-          });
+        error: (error) => {
+          if (error.status === 403 && error.error) {
+            this.dialog.open(ErrorDialogComponent, {
+              data: {
+                title: "Account Suspended!",
+                message: `${error.error.message} You will be unsuspended on ${error.error.suspensionEndsAt}. 
+                          Time left: ${error.error.timeLeft}.`
+              }
+            });
+          } else {
+            this.dialog.open(InvalidInputDataDialogComponent, {
+              data : {
+                title: "Wrong credentials!",
+                message: "Email and password don't match"
+              }
+            });
+          }
         }
       });
     }

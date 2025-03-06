@@ -41,3 +41,8 @@ export interface UserNotificationsInfo {
   lastReadNotifications: Date;
   hasNewNotifications: Boolean;
 }
+
+export interface BlockUser {
+  blockerId: number;
+  blockedId: number;
+}
