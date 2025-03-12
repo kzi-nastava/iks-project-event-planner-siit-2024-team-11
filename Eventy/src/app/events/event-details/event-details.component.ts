@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {EventsService} from '../services/events/events-service.service';
 import {EventDetails} from '../model/events.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -17,7 +17,10 @@ export class EventDetailsComponent {
   private _snackBar = inject(MatSnackBar);
   event: EventDetails;
 
-  constructor(private eventService: EventsService, private route: ActivatedRoute, private dialog: MatDialog,
+  constructor(private eventService: EventsService, 
+              private route: ActivatedRoute, 
+              private dialog: MatDialog,
+              private router: Router,
               private authService: AuthService) {
     let id: number = route.snapshot.params['eventId'];
     this.eventService.getEvent(id).subscribe({
@@ -26,16 +29,31 @@ export class EventDetailsComponent {
 
         this.initMap();
       },
-      error: (event: EventDetails) => {
-        this.dialog.open(ErrorDialogComponent, {
-          width: '400px',
-          disableClose: true, // prevents closing by clicking outside
-          backdropClass: 'blurred_backdrop_dialog',
-          data: {
-            title: "Error while loading the event",
-            message: 'Error while loading the event.',
-          },
-        });
+      error: (error) => {
+        if (error.status === 403) {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data: {
+              title: "Content Blocked!",
+              message: `You cannot access the content of a blocked account!`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+
+        } else {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data : {
+              title: "Loading Error!",
+              message: "There has been a problem while loading this page."
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+        }   
       }
     });
   }

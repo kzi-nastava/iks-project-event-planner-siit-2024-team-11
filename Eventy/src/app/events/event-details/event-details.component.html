@@ -1,4 +1,4 @@
-<div class="event-page-container">
+<div *ngIf="event != null" class="event-page-container">
     <div class="event-header">
       <a *ngIf="!isOrganizerCheckingDetails()" mat-flat-button class="button"><mat-icon>chat</mat-icon>Chat With Organizer</a>
       <h1 class="event-title">{{event.name}}</h1>

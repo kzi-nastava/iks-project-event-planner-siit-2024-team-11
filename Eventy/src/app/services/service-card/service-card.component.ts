@@ -1,6 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
 import { SolutionCard } from '../../solutions/model/solution-card.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SolutionsService } from '../../solutions/services/solutions/solutions-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
@@ -11,12 +10,10 @@ import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.com
   styleUrl: './service-card.component.css'
 })
 export class ServiceCardComponent {
-  private _snackBar = inject(MatSnackBar);
   @Input() serviceCard: SolutionCard;
 
-  constructor(private solutionService: SolutionsService, private dialog: MatDialog) {
-    
-  }
+  constructor(private solutionService: SolutionsService,
+              private dialog: MatDialog) {}
 
   handleFavoriteItem() {
     console.log("BEFORE: " + this.serviceCard.isFavorite)

@@ -16,7 +16,6 @@ import { AuthService } from '../../infrastructure/auth/auth.service';
 import { CreateReview } from '../../reviews/model/review.model';
 import { CreateReviewComponent } from '../../reviews/create-review/create-review.component';
 import { ReviewService } from '../../reviews/service/review.service';
-import { isReactive } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-reservation-select-datetime',
@@ -26,7 +25,7 @@ import { isReactive } from '@angular/core/primitives/signals';
 })
 export class ReservationSelectDatetimeComponent {
   @Input() selectedEvent: EventCard;
-  selectedService: SolutionCard;
+  @Input() selectedService: SolutionCard;
   // date
   dateControl: FormControl;
   reservedDates = ['2025-01-15', '2025-01-20']; // Mock reserved dates
@@ -34,10 +33,6 @@ export class ReservationSelectDatetimeComponent {
   // time
   startTimeControl: FormControl;
   endTimeControl: FormControl;
-  reservedSlots = [   // mock data
-    { start: '2025-01-15T10:00', end: '2025-01-15T12:00' },
-    { start: '2025-01-20T15:00', end: '2025-01-20T16:30' },
-  ];
   isFixedDuration = false;
   selectedStartTime: Date | null = null;
   selectedEndTime: Date | null = null;
@@ -69,16 +64,12 @@ export class ReservationSelectDatetimeComponent {
     const element = document.querySelector('mat-sidenav-content') || window;
     element.scrollTo({top: 0, behavior: 'smooth'}); // smooth scrolling
 
-    this.solutionsService.getSolution(6).subscribe((service) => {
-      this.selectedService = service;
-
-      this.isFixedDuration = this.selectedService.minReservationTime === this.selectedService.maxReservationTime;
-      
-      this.endTimeControl.setValidators(
-        this.isFixedDuration ? [] : [Validators.required, this.endTimeValidator()]
-      );
-      this.endTimeControl.updateValueAndValidity();
-    });
+    this.isFixedDuration = this.selectedService.minReservationTime === this.selectedService.maxReservationTime;
+    
+    this.endTimeControl.setValidators(
+      this.isFixedDuration ? [] : [Validators.required, this.endTimeValidator()]
+    );
+    this.endTimeControl.updateValueAndValidity();
   } 
 
   dateValidator(): ValidatorFn {
@@ -110,6 +101,20 @@ export class ReservationSelectDatetimeComponent {
   isDateValid() {
     return this.dateControl.valid;
   }
+
+  dateFilter = (date: Date | null): boolean => {
+    if (!date || !this.selectedService) {
+      return false;
+    }
+  
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+  
+    const tooEarlyDate = new Date(today);
+    tooEarlyDate.setDate(today.getDate() + this.selectedService.reservationDeadline);
+  
+    return date >= tooEarlyDate; 
+  };
 
   startTimeValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -184,14 +189,6 @@ export class ReservationSelectDatetimeComponent {
     date.setHours(hours, minutes, 0, 0);
 
     return date;
-  }
-
-  
-  isOverlapping(startTime: Date, endTime: Date | null): boolean {
-    return this.reservedSlots.some(
-      (slot) =>
-        new Date(slot.start) < endTime && new Date(slot.end) > startTime
-    );
   }
 
   isTimeValid() {
