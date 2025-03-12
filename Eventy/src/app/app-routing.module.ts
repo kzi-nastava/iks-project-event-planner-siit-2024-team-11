@@ -28,6 +28,7 @@ import { PendingReviewsComponent } from './reviews/pending-reviews/pending-revie
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { UpdateProductComponent } from './products/update-product/update-product.component';
 import { PendingReportsComponent } from './user-management/pending-reports/pending-reports.component';
+import {EditEventComponent} from './events/edit-event/edit-event.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
   {path: 'pending-reviews', component: PendingReviewsComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:id', component: UpdateProductComponent},
+  {path: 'edit-event/:id', component: EditEventComponent},
   {path: 'pending-reports', component: PendingReportsComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
@@ -98,6 +100,8 @@ const routes: Routes = [
   //   data: {role: ['ROLE_Provider']}},
   // {path: 'edit-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_Provider']}},
+  // {path: 'edit-event/:id', component: EditEventComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Organizer']}},
   // {path: '**', redirectTo: ''},
 ];
 

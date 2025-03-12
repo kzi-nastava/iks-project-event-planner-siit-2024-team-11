@@ -6,6 +6,7 @@ import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.compo
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import * as L from 'leaflet';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-event-details',
@@ -19,7 +20,8 @@ export class EventDetailsComponent {
   constructor(private eventService: EventsService, 
               private route: ActivatedRoute, 
               private dialog: MatDialog,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
     let id: number = route.snapshot.params['eventId'];
     this.eventService.getEvent(id).subscribe({
       next: (event: EventDetails) => {
@@ -134,5 +136,16 @@ export class EventDetailsComponent {
         });
       }
     });
+  }
+
+  isOrganizerCheckingDetails(): boolean {
+    return this.event.organizerId === this.authService.getId();
+  }
+
+  isInFuture(): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to midnight
+
+    return new Date(this.event.date) > today;
   }
 }
