@@ -191,4 +191,12 @@ export class EventsService {
   getEventForUpdate(id: number): Observable<UpdateEvent> {
     return this.httpClient.get<UpdateEvent>(environment.apiHost + this.urlPrefix + "/" + id + "/update");
   }
+
+  getAllUniqueEventTypesForEvents(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiHost + this.urlPrefix + "/event-types");
+  }
+
+  getAllUniqueLocationsForEvents(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiHost + this.urlPrefix + "/locations");
+  }
 }
