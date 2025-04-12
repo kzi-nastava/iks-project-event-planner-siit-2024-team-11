@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <div class="left-column scrollable">
+        <div *ngFor="let chat of allChats" (click)="onCardClick(chat)">
+            <div class="card" [ngClass]="{ 'active-card': chat === activeChat }">
+                <img class="user-image" src="{{chat.otherPicture}}" alt="picture">
+                <span>{{chat.otherName}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="right-column">
+        <app-chat-view *ngIf="activeChat" [newMessageReceived]="newMessageReceived" [activeChat]="activeChat"></app-chat-view>
+    </div>
+</div>

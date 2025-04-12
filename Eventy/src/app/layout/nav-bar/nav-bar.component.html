@@ -8,7 +8,7 @@
   <div>
     <!-- Router Links will be added here -->
     <mat-icon class="tool-bar-icon clickable" [routerLink]="['profile']">account_circle</mat-icon>
-    <mat-icon class="tool-bar-icon clickable">chat_bubble</mat-icon>
+    <mat-icon class="tool-bar-icon clickable" (click)="openChat()">chat_bubble</mat-icon>
     <div *ngIf="role !== null" class = "notification_container"> <!-- notifications -->
       <mat-icon class="tool-bar-icon clickable" (click)="notificationsDrawer.toggle()">notifications</mat-icon>
       <div *ngIf="userNotificationsInfo?.hasNewNotifications && !userNotificationsInfo?.areNotificationsMuted" class="notification-dot"></div>

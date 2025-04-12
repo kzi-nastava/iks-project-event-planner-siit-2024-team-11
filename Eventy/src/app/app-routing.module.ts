@@ -24,6 +24,7 @@ import { UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/up
 import { EventDetailsComponent} from './events/event-details/event-details.component';
 import { EventStatsComponent} from './events/event-stats/event-stats.component';
 import { SolutionDetailsComponent } from './solutions/solution-details/solution-details.component';
+import { AllChatsViewComponent } from './chat/all-chats-view/all-chats-view.component';
 import { PendingReviewsComponent } from './reviews/pending-reviews/pending-reviews.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { UpdateProductComponent } from './products/update-product/update-product.component';
@@ -56,6 +57,7 @@ const routes: Routes = [
   {path: 'pending-reviews', component: PendingReviewsComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:id', component: UpdateProductComponent},
+  {path: 'chat', component: AllChatsViewComponent},
   {path: 'edit-event/:id', component: EditEventComponent},
   {path: 'pending-reports', component: PendingReportsComponent},
   {path: '**', redirectTo: ''},
