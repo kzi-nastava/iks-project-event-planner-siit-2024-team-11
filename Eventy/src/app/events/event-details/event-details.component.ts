@@ -18,8 +18,12 @@ export class EventDetailsComponent {
   private _snackBar = inject(MatSnackBar);
   event: EventDetails;
 
-  constructor(private eventService: EventsService, private route: ActivatedRoute, private dialog: MatDialog, private chatService: ChatService,
-              private router: Router, private authService: AuthService) {
+  constructor(private eventService: EventsService, 
+              private route: ActivatedRoute, 
+              private dialog: MatDialog,
+              private chatService: ChatService,
+              private router: Router,
+              private authService: AuthService) {
     let id: number = route.snapshot.params['eventId'];
     this.eventService.getEvent(id).subscribe({
       next: (event: EventDetails) => {
@@ -168,5 +172,15 @@ export class EventDetailsComponent {
         console.log(err)
       }
     })
+
+  isOrganizerCheckingDetails(): boolean {
+    return this.event.organizerId === this.authService.getId();
+  }
+
+  isInFuture(): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to midnight
+
+    return new Date(this.event.date) > today;
   }
 }

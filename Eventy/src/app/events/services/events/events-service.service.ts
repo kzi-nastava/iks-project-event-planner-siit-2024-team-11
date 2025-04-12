@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventCard } from '../../model/event-card.model';
-import { Event, OrganizeEvent, UnreviewedEvent, EventDetails, EventStats } from '../../model/events.model';
+import {Event, OrganizeEvent, UnreviewedEvent, EventDetails, EventStats, UpdateEvent} from '../../model/events.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../env/constants';
@@ -60,7 +60,7 @@ export class EventsService {
 
   getAllEventsByUserId(
     userId: number,
-    pageProperties?: { page?: number; pageSize?: number; sort?: string }, 
+    pageProperties?: { page?: number; pageSize?: number; sort?: string },
     filters?: { search?: string; eventTypes?: string[]; location?: string; maxParticipants?: number; startDate?: Date; endDate?: Date }
   ) {
     // pageable
@@ -179,8 +179,24 @@ export class EventsService {
       responseType: 'blob'
     });
   }
-  
+
   getUnreviewedAcceptedEventsByUserId(userId: number): Observable<UnreviewedEvent[]> {
     return this.httpClient.get<UnreviewedEvent[]>(environment.apiHost + this.urlPrefix + "/unreviewed/" + userId);
+  }
+
+  edit(updatedEvent: UpdateEvent): Observable<Event> {
+    return this.httpClient.put<Event>(environment.apiHost + this.urlPrefix, updatedEvent);
+  }
+
+  getEventForUpdate(id: number): Observable<UpdateEvent> {
+    return this.httpClient.get<UpdateEvent>(environment.apiHost + this.urlPrefix + "/" + id + "/update");
+  }
+
+  getAllUniqueEventTypesForEvents(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiHost + this.urlPrefix + "/event-types");
+  }
+
+  getAllUniqueLocationsForEvents(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiHost + this.urlPrefix + "/locations");
   }
 }

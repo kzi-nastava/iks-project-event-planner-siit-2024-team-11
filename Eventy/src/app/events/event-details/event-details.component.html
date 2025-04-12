@@ -1,11 +1,16 @@
 <div *ngIf="event != null" class="event-page-container">
     <div class="event-header">
-      <a mat-flat-button class="button" (click)="openChat()" ><mat-icon>chat</mat-icon>Chat With Organizer</a>
+      <a *ngIf="!isOrganizerCheckingDetails()" mat-flat-button class="button" (click)="openChat()"><mat-icon>chat</mat-icon>Chat With Organizer</a>
       <h1 class="event-title">{{event.name}}</h1>
-      <div class = "{{event.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
-           (click)="handleFavoriteItem()">
-        <mat-icon style = "{{event.isFavorite ? 'font-size: 25.5px; color: white; font-weight: 500; transform: scale(0.8);' :
+      <div class="buttons">
+        <a *ngIf="isOrganizerCheckingDetails() && isInFuture()" mat-flat-button class="button" [routerLink]="['/edit-event', this.event.id]">
+          <mat-icon>edit</mat-icon> Edit
+        </a>
+        <div class = "{{event.isFavorite ? 'favorite_button_container_true' : 'favorite_button_container'}}"
+             (click)="handleFavoriteItem()">
+          <mat-icon style = "{{event.isFavorite ? 'font-size: 25.5px; color: white; font-weight: 500; transform: scale(0.8);' :
                  'font-size: 25.5px; color: #929AB7; font-weight: 500; transform: scale(0.8);'}}">favorite_border</mat-icon>
+        </div>
       </div>
     </div>
 
