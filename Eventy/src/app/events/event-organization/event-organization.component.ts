@@ -68,9 +68,25 @@ export class EventOrganizationComponent {
 
     goForward(): void {
       if(this.eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION) {
-        this.eventOrganizationStage = EventOrganizationStage.AGENDA_CREATION;
+        this.basicInformationForm.markAllAsTouched();
+        if (this.basicInformationForm.valid && this.selectedAddress) {
+          this.eventOrganizationStage = EventOrganizationStage.AGENDA_CREATION;
+        }
       } else if(this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION) {
-        this.eventOrganizationStage = EventOrganizationStage.INVITATIONS_SENDING;
+        if (this.agenda.length > 0) {
+          this.eventOrganizationStage = EventOrganizationStage.INVITATIONS_SENDING;
+        }
+        else {
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            disableClose: true,
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: 'Agenda empty',
+              message: 'Please make sure to have at least one activity in the agenda.',
+            },
+          });
+        }
       }
     }
 
