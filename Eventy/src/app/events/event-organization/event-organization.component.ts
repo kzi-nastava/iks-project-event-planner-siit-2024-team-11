@@ -35,10 +35,7 @@ export class EventOrganizationComponent {
     maxNumberParticipants: new FormControl(0, [Validators.required, Validators.pattern("^[1-9]\\d*$")]),
     isPublic: new FormControl(true),
     eventType: new FormControl('', Validators.required),
-    dateRange: new FormGroup({
-      startDate: new FormControl('', [Validators.required]),
-      endDate: new FormControl('', [Validators.required])
-    })
+    date: new FormControl('', [Validators.required])
   });
   selectedAddress: string | undefined;
   selectedLatLng: L.LatLng | undefined;
@@ -104,7 +101,7 @@ export class EventOrganizationComponent {
     }
 
     getStartMinDateForAgenda(): Date {
-       return (this.basicInformationForm.controls['dateRange'] as FormGroup).controls['startDate'].value;
+       return this.basicInformationForm.controls['date'].value;
     }
 
     submit(): void {
@@ -120,7 +117,7 @@ export class EventOrganizationComponent {
          latitude: this.selectedLatLng.lat,
          longitude: this.selectedLatLng.lng
        },
-       date: (this.basicInformationForm.controls['dateRange'] as FormGroup).controls['startDate'].value,
+       date: this.basicInformationForm.controls['date'].value,
        agenda: this.agenda,
        emails: this.invitedEmails,
        organizerId: this.authService.getId()
