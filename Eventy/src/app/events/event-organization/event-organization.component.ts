@@ -60,7 +60,7 @@ export class EventOrganizationComponent {
 
     isForward(): boolean {
      return this.eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION ||
-       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && this.isEventPublic);
+       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && !this.isEventPublic);
     }
 
     goForward(): void {
