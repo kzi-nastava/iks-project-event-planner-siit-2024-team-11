@@ -40,7 +40,7 @@
       }
       @if (activityForm.controls['timeRange'].hasError('bothTimesEntered') &&
         !activityForm.controls['timeRange'].hasError('required')) {
-        <mat-error id = "activity-timeRange-input-endTime-required-error">End Time is <strong>required</strong></mat-error>
+        <mat-error id = "activity-timeRange-input-endTime-required-error">End Time is <strong>required</strong> and has to be at least a minute after start time</mat-error>
       }
     </mat-form-field>
 
