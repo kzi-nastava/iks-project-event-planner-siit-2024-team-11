@@ -24,7 +24,6 @@ export class EventOrganizationComponent {
   protected readonly EventOrganizationStage = EventOrganizationStage;
 
    eventOrganizationStage: EventOrganizationStage;
-   isEventPublic: boolean;
    titleMap: Map<EventOrganizationStage, string>;
    invitedEmails: string[] = [];
    agenda: Activity[] = [];
@@ -47,7 +46,6 @@ export class EventOrganizationComponent {
      this.titleMap.set(EventOrganizationStage.AGENDA_CREATION, "Add Agenda to the Event");
      this.titleMap.set(EventOrganizationStage.INVITATIONS_SENDING, "Send Invitations");
      this.eventOrganizationStage = EventOrganizationStage.BASIC_INFORMATION;
-     this.isEventPublic = true;
    }
 
     goBack(): void {
@@ -60,7 +58,7 @@ export class EventOrganizationComponent {
 
     isForward(): boolean {
      return this.eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION ||
-       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && !this.isEventPublic);
+       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && !this.basicInformationForm.controls['isPublic'].value);
     }
 
     goForward(): void {
@@ -105,7 +103,13 @@ export class EventOrganizationComponent {
     }
 
     submit(): void {
-     let event: OrganizeEvent = {
+      const date: Date = this.basicInformationForm.controls['date'].value;
+
+      const dateTimeString = date.getFullYear() + '-' +
+        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+        String(date.getDate()).padStart(2, '0') + 'T00:00:00';
+
+      let event: OrganizeEvent = {
        name: this.basicInformationForm.controls['name'].value,
        description: this.basicInformationForm.controls['description'].value,
        maxNumberParticipants: this.basicInformationForm.controls['maxNumberParticipants'].value,
@@ -117,7 +121,7 @@ export class EventOrganizationComponent {
          latitude: this.selectedLatLng.lat,
          longitude: this.selectedLatLng.lng
        },
-       date: this.basicInformationForm.controls['date'].value,
+       date: dateTimeString,
        agenda: this.agenda,
        emails: this.invitedEmails,
        organizerId: this.authService.getId()

@@ -10,7 +10,7 @@
    <div class = "form_container">
       <div #left_container class = "left_container">
          <p class = "form_label">Added people:</p>
-   
+
          <div class = "emails_container">
             <div *ngFor="let email of invitedEmails; let i = index" class = "invited_email_container">
                <div class = "email_text_container">
@@ -22,7 +22,7 @@
                   <p style = "margin: 0; color: white; font-family: Albert Sans; font-weight: 500">Remove</p>
                </div>
             </div>
-         </div> 
+         </div>
       </div>
 
       <div #right_container class = "right_container" (window:resize)="onScreenResize($event)">
@@ -33,6 +33,7 @@
                <form>
                   <mat-form-field class="add_email_form">
                     <input
+                      id = "add_email_input"
                       matInput
                       placeholder="example@gmail.com"
                       [formControl]="emailControl"
@@ -45,7 +46,8 @@
                    </mat-error>
                   </mat-form-field>
                 </form>
-               <mat-icon 
+               <mat-icon
+                 id = "add_email_button"
                 class = "add_icon"
                 (click)="addEmail()"
                 [ngClass]="{ disabled: emailControl.invalid }"
