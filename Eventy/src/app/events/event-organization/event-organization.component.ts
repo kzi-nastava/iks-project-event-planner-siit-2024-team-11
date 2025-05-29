@@ -103,6 +103,20 @@ export class EventOrganizationComponent {
     }
 
     submit(): void {
+      if (this.agenda.length == 0) {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true,
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: 'Agenda empty',
+            message: 'Please make sure to have at least one activity in the agenda.',
+          },
+        });
+
+        return;
+      }
+
       const date: Date = this.basicInformationForm.controls['date'].value;
 
       const dateTimeString = date.getFullYear() + '-' +
