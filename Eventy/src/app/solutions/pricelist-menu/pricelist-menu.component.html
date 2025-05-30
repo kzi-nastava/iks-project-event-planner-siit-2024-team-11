@@ -1,0 +1,5 @@
+<div *ngFor="let item of items">
+    <app-pricelist-item [item]="item"></app-pricelist-item>
+</div>
+<mat-paginator [length]="totalElements" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[6, 10, 20]" aria-label="Select page">
+</mat-paginator>

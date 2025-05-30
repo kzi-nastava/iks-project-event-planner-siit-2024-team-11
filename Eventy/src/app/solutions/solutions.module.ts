@@ -28,6 +28,8 @@ import { DeleteRequestDialogComponent } from './delete-request-dialog/delete-req
 import { SolutionDetailsComponent } from './solution-details/solution-details.component';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { PricelistMenuComponent } from './pricelist-menu/pricelist-menu.component';
+import { PricelistItemComponent } from './pricelist-item/pricelist-item.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { MatIconModule } from '@angular/material/icon';
     SolutionCategoryRequestViewDualCardComponent,
     DeleteRequestDialogComponent,
     SolutionDetailsComponent,
+    PricelistMenuComponent,
+    PricelistItemComponent,
   ],
   imports: [
     CommonModule,

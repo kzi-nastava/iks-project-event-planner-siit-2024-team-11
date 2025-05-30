@@ -1,0 +1,42 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="confirmChanges()">
+        <mat-card>
+            <mat-card-content>
+                <div class="name-container">
+                    <b>{{item.name}}</b>
+                </div>
+                <div class="price-container">
+                    <p *ngIf="!editMode">Price</p>
+                    <p class="number" *ngIf="!editMode">{{item.price}}</p>
+                    <mat-form-field appearance="fill" *ngIf="editMode">
+                        <mat-label>Price</mat-label>
+                        <input matInput placeholder="Enter value" formControlName="price" required type="number">
+                    </mat-form-field>
+                </div>
+                <div class="discount-container">
+                    <p *ngIf="!editMode">Discount (%)</p>
+                    <p class="number" *ngIf="!editMode">{{item.discount}}</p>
+                    <mat-form-field appearance="fill" *ngIf="editMode">
+                        <mat-label>Discount (%)</mat-label>
+                        <input matInput placeholder="Enter value" formControlName="discount" required type="number">
+                    </mat-form-field>
+                </div>
+                <div class="final-container">
+                    <p *ngIf="!editMode">Final price</p>
+                    <p class="number" *ngIf="!editMode">{{item.price * (100 - item.discount) / 100 | number:'1.2-2'}}</p>
+                </div>
+                <div class="buttons-container">
+                    <a mat-button class="edit" *ngIf="!editMode" (click)="beginEditMode()">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                    <a mat-button class="confirm" *ngIf="editMode" (click)="confirmChanges()">
+                        <mat-icon>check</mat-icon>
+                    </a>
+                    <a mat-button class="deny" *ngIf="editMode" (click)="revertChanges()">
+                        <mat-icon>close</mat-icon>
+                    </a>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>
