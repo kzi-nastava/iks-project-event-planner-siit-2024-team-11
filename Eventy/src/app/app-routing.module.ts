@@ -30,6 +30,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { UpdateProductComponent } from './products/update-product/update-product.component';
 import { PendingReportsComponent } from './user-management/pending-reports/pending-reports.component';
 import {EditEventComponent} from './events/edit-event/edit-event.component';
+import { PricelistMenuComponent } from './solutions/pricelist-menu/pricelist-menu.component';
 
 
 const routes: Routes = [
@@ -60,6 +61,7 @@ const routes: Routes = [
   {path: 'chat', component: AllChatsViewComponent},
   {path: 'edit-event/:id', component: EditEventComponent},
   {path: 'pending-reports', component: PendingReportsComponent},
+  {path: 'pricelist', component: PricelistMenuComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
