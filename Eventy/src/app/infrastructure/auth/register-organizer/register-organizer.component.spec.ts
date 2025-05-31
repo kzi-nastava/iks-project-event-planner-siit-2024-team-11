@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterOrganizerComponent } from './register-organizer.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from '../auth.service';
+import {AuthServiceMock} from '../auth.service.mock';
 
 describe('RegisterOrganizerComponent', () => {
   let component: RegisterOrganizerComponent;
@@ -8,7 +11,9 @@ describe('RegisterOrganizerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RegisterOrganizerComponent]
+      imports: [FormsModule, ReactiveFormsModule],
+      declarations: [RegisterOrganizerComponent],
+      providers: [{provide: AuthService, useClass: AuthServiceMock}],
     })
     .compileComponents();
 
@@ -20,4 +25,8 @@ describe('RegisterOrganizerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // create a mock -- DONE
+  // create tests with the last slide
+  // check dialogs that pop up and check validity of control form
 });
