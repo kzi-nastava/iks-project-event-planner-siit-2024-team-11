@@ -501,6 +501,82 @@ describe('RegisterOrganizerComponent', () => {
     });
   });
 
+  it('should open invalid input dialog and display error around the field if phone number starts with - sign', () => {
+    spyOn(dialog, 'open');
+
+    component.registerForm.controls['email'].setValue('test@example.com');
+    component.registerForm.controls['password'].setValue('Password123');
+    component.registerForm.controls['confirmedPassword'].setValue('Password123');
+    component.registerForm.controls['firstName'].setValue('John');
+    component.registerForm.controls['lastName'].setValue('Doe');
+    component.registerForm.controls['address'].setValue('123 Fake St');
+    component.registerForm.controls['phoneNumber'].setValue('-394289384');
+    component.register();
+
+    expect(component.registerForm.controls['phoneNumber'].hasError('pattern')).toBeTruthy();
+    expect(component.registerForm.valid).toBeFalsy();
+    expect(dialog.open).toHaveBeenCalledWith(InvalidInputDataDialogComponent, {
+      data: {title: 'Invalid input', message: 'Invalid registration data'}
+    });
+  });
+
+  it('should open invalid input dialog and display error around the field if phone number ends with - sign', () => {
+    spyOn(dialog, 'open');
+
+    component.registerForm.controls['email'].setValue('test@example.com');
+    component.registerForm.controls['password'].setValue('Password123');
+    component.registerForm.controls['confirmedPassword'].setValue('Password123');
+    component.registerForm.controls['firstName'].setValue('John');
+    component.registerForm.controls['lastName'].setValue('Doe');
+    component.registerForm.controls['address'].setValue('123 Fake St');
+    component.registerForm.controls['phoneNumber'].setValue('394289384-');
+    component.register();
+
+    expect(component.registerForm.controls['phoneNumber'].hasError('pattern')).toBeTruthy();
+    expect(component.registerForm.valid).toBeFalsy();
+    expect(dialog.open).toHaveBeenCalledWith(InvalidInputDataDialogComponent, {
+      data: {title: 'Invalid input', message: 'Invalid registration data'}
+    });
+  });
+
+  it('should open invalid input dialog and display error around the field if phone number ends with + sign', () => {
+    spyOn(dialog, 'open');
+
+    component.registerForm.controls['email'].setValue('test@example.com');
+    component.registerForm.controls['password'].setValue('Password123');
+    component.registerForm.controls['confirmedPassword'].setValue('Password123');
+    component.registerForm.controls['firstName'].setValue('John');
+    component.registerForm.controls['lastName'].setValue('Doe');
+    component.registerForm.controls['address'].setValue('123 Fake St');
+    component.registerForm.controls['phoneNumber'].setValue('094289384+');
+    component.register();
+
+    expect(component.registerForm.controls['phoneNumber'].hasError('pattern')).toBeTruthy();
+    expect(component.registerForm.valid).toBeFalsy();
+    expect(dialog.open).toHaveBeenCalledWith(InvalidInputDataDialogComponent, {
+      data: {title: 'Invalid input', message: 'Invalid registration data'}
+    });
+  });
+
+  it('should open invalid input dialog and display error around the field if phone number has + sign between digits', () => {
+    spyOn(dialog, 'open');
+
+    component.registerForm.controls['email'].setValue('test@example.com');
+    component.registerForm.controls['password'].setValue('Password123');
+    component.registerForm.controls['confirmedPassword'].setValue('Password123');
+    component.registerForm.controls['firstName'].setValue('John');
+    component.registerForm.controls['lastName'].setValue('Doe');
+    component.registerForm.controls['address'].setValue('123 Fake St');
+    component.registerForm.controls['phoneNumber'].setValue('0942+89384');
+    component.register();
+
+    expect(component.registerForm.controls['phoneNumber'].hasError('pattern')).toBeTruthy();
+    expect(component.registerForm.valid).toBeFalsy();
+    expect(dialog.open).toHaveBeenCalledWith(InvalidInputDataDialogComponent, {
+      data: {title: 'Invalid input', message: 'Invalid registration data'}
+    });
+  });
+
   it('should open confirmation dialog and navigate to home if registration without pictures with phone number without + sign succeeds', () => {
     const dialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['afterClosed']);
     dialogRefSpy.afterClosed.and.returnValue(of(undefined));

@@ -23,7 +23,7 @@ export class RegisterOrganizerComponent {
     firstName : new FormControl('', [Validators.required]),
     lastName : new FormControl('', [Validators.required]),
     address : new FormControl('', [Validators.required]),
-    phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
+    phoneNumber : new FormControl('', [Validators.required, Validators.pattern("^\\+?[0-9]{1,4}?[-.\\s]?(\\(?\\d{1,5}\\)?[-.\\s]?)*\\d{1,6}$")])
   });
 
   constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {
