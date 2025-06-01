@@ -52,8 +52,12 @@ export class RegisterOrganizerComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      let user: RegisterData = this.registerForm.value as RegisterData;
-      user.profilePictures = [this.registerForm.controls['profilePicture'].value];
+      const {profilePicture, confirmedPassword, ...userData} = this.registerForm.value;
+      let user: RegisterData = {
+        ...userData,
+        profilePictures: [this.registerForm.controls['profilePicture'].value]
+      };
+
       this.authService.register(user).subscribe({
         next: (response: string) => {
           this.dialog.open(InvalidInputDataDialogComponent, {
