@@ -21,7 +21,7 @@ export class RegisterProviderComponent {
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^\\+?[0-9]{1,4}?[-.\\s]?(\\(?\\d{1,5}\\)?[-.\\s]?)*\\d{1,6}$")])
   });
 
   public pictureIndex: number = 0;
@@ -45,14 +45,15 @@ export class RegisterProviderComponent {
       this.dialog.open(InvalidInputDataDialogComponent, {
         data : {
           title: "Invalid input",
-          message: "Invalid input data"
+          message: "Invalid registration data"
         }
       });
 
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      this.authService.register(this.registerForm.value as RegisterData).subscribe({
+      const {confirmedPassword, ...user} = this.registerForm.value;
+      this.authService.register(user).subscribe({
         next: (response: string) => {
           this.dialog.open(InvalidInputDataDialogComponent, {
           data : {
