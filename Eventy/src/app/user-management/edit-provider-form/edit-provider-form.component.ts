@@ -7,6 +7,7 @@ import {
   InvalidInputDataDialogComponent
 } from '../../shared/invalid-input-data-dialog/invalid-input-data-dialog.component';
 import {UpdateUser, User} from '../model/users.model';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-edit-provider-form',
@@ -21,7 +22,8 @@ export class EditProviderFormComponent implements OnInit{
 
   public pictureIndex: number = 0;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) {
+  constructor(private userService: UserService, private dialog: MatDialog, private router: Router,
+              private authService: AuthService) {
 
   }
 
@@ -30,8 +32,8 @@ export class EditProviderFormComponent implements OnInit{
       profilePictures: new FormControl(this.user.profilePictures || ['ProfilePicture.png']),
       email: new FormControl({value: this.user.email, disabled: true }),
       oldPassword: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      confirmedPassword: new FormControl('', [Validators.required, this.passwordMatching()]),
+      password: new FormControl('', []),
+      confirmedPassword: new FormControl('', [this.passwordMatching()]),
       name: new FormControl({value: this.user.name, disabled: true }),
       description: new FormControl(this.user.description, [Validators.required]),
       address: new FormControl(this.user.address, [Validators.required]),
@@ -66,13 +68,22 @@ export class EditProviderFormComponent implements OnInit{
       user.id = this.user.id;
       this.userService.edit(user).subscribe({
         next: () => {
-          this.router.navigate(['/profile']);
+          if (user.password !== "") {
+            localStorage.removeItem('user');
+            this.authService.setUser();
+            this.router.navigate(['login']).then(() => {
+              window.location.reload();
+            });
+          }
+          else {
+            this.router.navigate(['profile']);
+          }
         },
         error: () => {
           this.dialog.open(InvalidInputDataDialogComponent, {
             data : {
               title: "Invalid input",
-              message: "Invalid edit data"
+              message: "Invalid edit data! Be careful when entering the old password!"
             }
           });
         }
