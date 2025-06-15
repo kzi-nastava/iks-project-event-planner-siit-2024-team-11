@@ -112,4 +112,10 @@ export class SolutionsService {
   updatePrice(newData: PricelistItem): Observable<PricelistItem> {
     return this.httpClient.put<PricelistItem>(environment.apiHost + this.urlPrefix + "/pricelist", newData);
   }
+
+  downloadPricelistPdf(): Observable<Blob> {
+    return this.httpClient.get(environment.apiHost + this.urlPrefix + "/pricelist/pdf", {
+      responseType: 'blob'
+    });
+  }
 }
