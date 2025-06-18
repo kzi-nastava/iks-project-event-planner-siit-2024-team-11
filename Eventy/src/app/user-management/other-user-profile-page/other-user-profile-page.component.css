@@ -145,3 +145,8 @@ mat-paginator {
   margin-top: 5vh;
   font-size: 15px;
 }
+
+.small-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
