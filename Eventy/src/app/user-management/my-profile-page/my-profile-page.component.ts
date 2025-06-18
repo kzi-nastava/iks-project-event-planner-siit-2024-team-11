@@ -8,7 +8,6 @@ import {CalendarOccupancy, User} from '../model/users.model';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 import {Router} from '@angular/router';
 import {PagedResponse} from '../../shared/model/paged-response.model';
-import {EventTypeCard} from '../../events/model/events.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 
