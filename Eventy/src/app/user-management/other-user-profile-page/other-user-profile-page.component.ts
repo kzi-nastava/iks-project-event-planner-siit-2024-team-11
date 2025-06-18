@@ -39,7 +39,7 @@ export class OtherUserProfilePageComponent {
   }
 
   isOrganizer(): boolean {
-    return "firstName" in this.user;
+    return "firstName" in this.user && this.user.firstName != null;
   }
 
   getName(): string {
