@@ -4,8 +4,9 @@ import {UserService} from '../user.service';
 import {SolutionCard} from '../../solutions/model/solution-card.model';
 import {PageEvent} from '@angular/material/paginator';
 import {User} from '../model/users.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PagedResponse} from '../../shared/model/paged-response.model';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-other-user-profile-page',
@@ -20,8 +21,14 @@ export class OtherUserProfilePageComponent {
 
   searchQuery: string;
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {
+  constructor(private userService: UserService, private route: ActivatedRoute, private authService: AuthService,
+              private router: Router) {
     let id: number = route.snapshot.params['id'];
+
+    if(id == this.authService.getId()) {
+      this.router.navigate(['profile']);
+      return;
+    }
 
     this.userService.get(id).subscribe({
       next: (user: User) => {
@@ -30,7 +37,6 @@ export class OtherUserProfilePageComponent {
       }
     });
   }
-
 
   isOrganizer(): boolean {
     return "firstName" in this.user;
