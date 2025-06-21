@@ -28,7 +28,7 @@
         <button mat-flat-button class="button negative-button" (click)="deactivate()"><mat-icon>delete</mat-icon> Deactivate account</button>
       </div>
 
-      <button *ngIf="isOtherUser()" mat-flat-button class="button" [routerLink]="['/upgrade-profile']"><mat-icon>arrow_drop_up</mat-icon> Upgrade to Organizer/Provider</button>
+      <button *ngIf="isAuthUser()" mat-flat-button class="button" [routerLink]="['/upgrade-profile']"><mat-icon>arrow_drop_up</mat-icon> Upgrade to Organizer/Provider</button>
     </div>
   </div>
 

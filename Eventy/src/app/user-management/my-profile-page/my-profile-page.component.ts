@@ -75,6 +75,10 @@ export class MyProfilePageComponent {
     return this.user.firstName != null && this.user.userType !== "ORGANIZER";
   }
 
+  isAuthUser(): boolean {
+    return this.user.userType === "AUTHENTICATED";
+  }
+
   isOrganizer(): boolean {
     return this.user.userType === "ORGANIZER";
   }

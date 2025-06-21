@@ -45,7 +45,7 @@
       </button>
     </mat-form-field>
 
-    <div class="name-fields">
+    <div class="name-fields" *ngIf="isOrganizer()">
       <mat-form-field class="name-field">
         <mat-label>First Name</mat-label>
         <input type="text" matInput placeholder="Your Name" formControlName="firstName" />

@@ -31,11 +31,15 @@ export class EditUserFormComponent implements OnInit {
       oldPassword: new FormControl('', [Validators.required]),
       password : new FormControl('', []),
       confirmedPassword : new FormControl('', [this.passwordMatching()]),
-      firstName : new FormControl(this.user.firstName, [Validators.required]),
-      lastName : new FormControl(this.user.lastName, [Validators.required]),
+      firstName : new FormControl(this.user.firstName, this.isOrganizer() ? [Validators.required] : []),
+      lastName : new FormControl(this.user.lastName, this.isOrganizer() ? [Validators.required] : []),
       address : new FormControl(this.user.address, [Validators.required]),
       phoneNumber : new FormControl(this.user.phoneNumber, [Validators.required, Validators.pattern("^(\\+?\\d{1,4}[-.\\s]?)?(\\(?\\d{1,4}\\)?[-.\\s]?)?(\\d{1,4}[-.\\s]?){1,4}\\d{1,4}$")])
     });
+  }
+
+  isOrganizer(): boolean {
+    return this.user.userType === "ORGANIZER";
   }
 
   private passwordMatching(): ValidatorFn {
