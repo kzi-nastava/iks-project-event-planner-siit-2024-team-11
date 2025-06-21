@@ -65,6 +65,7 @@ export class EditProviderFormComponent implements OnInit{
     } else {
       let user: UpdateUser = this.editForm.value as UpdateUser;
       user.email = this.user.email;
+      user.name = this.user.name;
       user.id = this.user.id;
       this.userService.edit(user).subscribe({
         next: () => {

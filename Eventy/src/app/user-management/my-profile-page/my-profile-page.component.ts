@@ -28,12 +28,12 @@ const calendarColors: CalendarColors = {
     secondary: "#bfc4d5"
   },
   "PRODUCT": {
-    primary: "#FAD609",
-    secondary: "#fdee9c"
-  },
-  "SERVICE": {
     primary: "#DD79AE",
     secondary: "#f4d6e6"
+  },
+  "SERVICE": {
+    primary: "#FAD609",
+    secondary: "#fdee9c"
   }
 }
 
