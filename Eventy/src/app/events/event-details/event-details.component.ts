@@ -22,7 +22,10 @@ export class EventDetailsComponent {
       next: (event: EventDetails) => {
         this.event = event;
 
-        this.initMap();
+        setTimeout(() => {
+          this.initMap();
+        });
+
       },
       error: (event: EventDetails) => {
         this.dialog.open(ErrorDialogComponent, {
