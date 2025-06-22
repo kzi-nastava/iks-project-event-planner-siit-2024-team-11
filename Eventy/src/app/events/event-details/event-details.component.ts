@@ -172,7 +172,7 @@ export class EventDetailsComponent {
         console.log(err)
       }
     })
-
+  }
   isOrganizerCheckingDetails(): boolean {
     return this.event.organizerId === this.authService.getId();
   }
