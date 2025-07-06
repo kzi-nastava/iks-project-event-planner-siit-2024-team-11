@@ -1,9 +1,10 @@
 <app-reservation-select-event 
-   *ngIf="stage === 1" 
+   *ngIf="stage === 1 && selectedService != null" 
    (selectedEventCardEventEmitter)="onSelectedEventCard($event)"
    (continueButtonClicked)="onContinueButtonClicked($event)"
 />
 <app-reservation-select-datetime 
-   *ngIf="stage === 2"
+   *ngIf="stage === 2 && selectedService != null"
    [selectedEvent]="selectedEvent" 
+   [selectedService]="selectedService"
 />

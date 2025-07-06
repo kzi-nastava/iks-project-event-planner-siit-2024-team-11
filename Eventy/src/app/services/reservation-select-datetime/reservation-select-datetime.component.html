@@ -52,7 +52,7 @@
 
    <div *ngIf="selectedService" class = "details_container">
       <app-service-card [serviceCard]="selectedService" style = "border-radius: 10px; box-shadow: 0px 0px 5px rgb(233, 233, 233)"/>
-      <div class = "event_details" [routerLink]="['/users', selectedService.providerId]">
+      <div class = "event_details" [routerLink]="['/events', selectedEvent.eventId]">
          <div class = "left_side_container">
             <div class = "title_container">
                <p id = "title" class = "title">{{selectedEvent.name}}</p>
@@ -117,7 +117,7 @@
                <!-- Event Date picker -->
                <mat-form-field appearance="fill" style = "width: 26vw;">
                   <mat-label>Event Date</mat-label>
-                  <input matInput [matDatepicker]="picker" [formControl]="dateControl" />
+                  <input matInput [matDatepicker]="picker" [formControl]="dateControl" [matDatepickerFilter]="dateFilter" />
                   <mat-datepicker #picker></mat-datepicker>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-error *ngIf="dateControl.hasError('required')">

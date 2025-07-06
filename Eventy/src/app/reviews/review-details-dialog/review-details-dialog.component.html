@@ -1,0 +1,46 @@
+<div class="details_dialog">
+  <div class = "title_container">
+    <p class = "title">REVIEW DETAILS</p>
+    <div class = "decline_button_container" (click) = "cancel()">
+      <mat-icon style = "color: white; font-weight: 400;">close</mat-icon>
+    </div>
+  </div>
+
+  <div class="line_container">
+    <div class="line"></div>
+  </div>
+
+  <div class = "details_container">
+    <div class = "text_container">
+      <p class = "info">From:</p>
+      <p class = "message">{{data.review.senderEmail}}</p>
+    </div>
+
+    <div class = "text_container" style = "margin-top: 9px;">
+      <p class = "info">For:</p>
+      <p class = "message">"{{data.review.title}}"</p>
+    </div>
+
+    <div class = "text_container" style = "margin-top: 9px;">
+      <p class = "info">Grade:</p>
+      <div class = "content_container">        
+        <div class = "grades_container">
+           <mat-icon style = "color: #FBD917">star</mat-icon>
+
+           <mat-icon *ngIf="data.review.grade <= 1" style = "color: #D9D9D9">star</mat-icon>
+           <mat-icon *ngIf="data.review.grade > 1" style = "color: #FBD917">star</mat-icon>
+           
+           <mat-icon *ngIf="data.review.grade <= 2" style = "color: #D9D9D9">star</mat-icon>
+           <mat-icon *ngIf="data.review.grade > 2" style = "color: #FBD917">star</mat-icon>
+           
+           <mat-icon *ngIf="data.review.grade <= 3" style = "color: #D9D9D9">star</mat-icon>
+           <mat-icon *ngIf="data.review.grade > 3" style = "color: #FBD917">star</mat-icon>
+           
+           <mat-icon *ngIf="data.review.grade <= 4" style = "color: #D9D9D9">star</mat-icon>
+           <mat-icon *ngIf="data.review.grade > 4" style = "color: #FBD917">star</mat-icon>
+        </div>
+     </div>
+    </div>
+  </div>
+  
+</div>

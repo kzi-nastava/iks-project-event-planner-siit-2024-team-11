@@ -18,14 +18,19 @@ import {EditUserComponent} from './user-management/edit-user/edit-user.component
 import {MyProfilePageComponent} from './user-management/my-profile-page/my-profile-page.component';
 import { CreateReservationComponent } from './services/create-reservation/create-reservation.component';
 import { FastRegistrationComponent } from './infrastructure/auth/fast-registration/fast-registration.component';
-import {AuthGuard} from './infrastructure/auth/auth.guard';
-import {ConfirmRegistrationComponent} from './infrastructure/auth/confirm-registration/confirm-registration.component';
-import {UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/upgrade-profile.component';
-import {EventDetailsComponent} from './events/event-details/event-details.component';
-import {EventStatsComponent} from './events/event-stats/event-stats.component';
+import { AuthGuard} from './infrastructure/auth/auth.guard';
+import { ConfirmRegistrationComponent} from './infrastructure/auth/confirm-registration/confirm-registration.component';
+import { UpgradeProfileComponent} from './infrastructure/auth/upgrade-profile/upgrade-profile.component';
+import { EventDetailsComponent} from './events/event-details/event-details.component';
+import { EventStatsComponent} from './events/event-stats/event-stats.component';
 import { SolutionDetailsComponent } from './solutions/solution-details/solution-details.component';
-import {AddProductComponent} from './products/add-product/add-product.component';
-import {UpdateProductComponent} from './products/update-product/update-product.component';
+import { AllChatsViewComponent } from './chat/all-chats-view/all-chats-view.component';
+import { PendingReviewsComponent } from './reviews/pending-reviews/pending-reviews.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
+import { UpdateProductComponent } from './products/update-product/update-product.component';
+import { PendingReportsComponent } from './user-management/pending-reports/pending-reports.component';
+import {EditEventComponent} from './events/edit-event/edit-event.component';
+import { PricelistMenuComponent } from './solutions/pricelist-menu/pricelist-menu.component';
 
 
 const routes: Routes = [
@@ -51,8 +56,13 @@ const routes: Routes = [
   {path: 'events/stats', component: EventStatsComponent},
   {path: 'events/:eventId', component: EventDetailsComponent},
   {path: 'solutions/:solutionId', component: SolutionDetailsComponent},
+  {path: 'pending-reviews', component: PendingReviewsComponent},
   {path: 'add-product', component: AddProductComponent},
   {path: 'edit-product/:id', component: UpdateProductComponent},
+  {path: 'chat', component: AllChatsViewComponent},
+  {path: 'edit-event/:id', component: EditEventComponent},
+  {path: 'pending-reports', component: PendingReportsComponent},
+  {path: 'pricelist', component: PricelistMenuComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
@@ -95,6 +105,8 @@ const routes: Routes = [
   //   data: {role: ['ROLE_Provider']}},
   // {path: 'edit-product/:id', component: UpdateProductComponent, canActivate: [AuthGuard],
   //   data: {role: ['ROLE_Provider']}},
+  // {path: 'edit-event/:id', component: EditEventComponent, canActivate: [AuthGuard],
+  //   data: {role: ['ROLE_Organizer']}},
   // {path: '**', redirectTo: ''},
 ];
 

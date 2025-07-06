@@ -1,0 +1,45 @@
+.container {
+    width: 99%;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+mat-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 99%;
+    padding: 0;
+}
+
+.price-container, .discount-container, .final-container, .name-container, .buttons-container {
+    width: 20%;
+    text-align: center;
+}
+
+.edit {
+    background-color: skyblue !important;
+    color: white !important;
+}
+
+.confirm {
+    background-color: lightgreen !important;
+    color: white !important;
+    margin-right: 10px;
+}
+
+.deny {
+    background-color: red !important;
+    color: white !important;
+}
+
+p {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+p.number {
+    font-size: 20px;
+}

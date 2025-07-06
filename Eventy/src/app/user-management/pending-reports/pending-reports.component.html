@@ -1,0 +1,64 @@
+<div class = "all_container">
+   <p class = "title">Pending reports</p>
+
+   <div class = "reviews_container">
+      <div style = "display: flex; flex-direction: row;">
+         <div class = "first_column">
+            <p>DETAILS</p>
+            <div class = "line"></div>
+         </div>
+   
+         <div class = "second_column">
+            <p>COMMENT</p>
+            <div class = "line"></div>
+         </div>
+   
+         <div class = "third_column">
+            <p>DECISION</p>
+            <div class = "line"></div>
+         </div>
+      </div>
+      
+      <div *ngFor="let report of paginatedPendingReports"
+           style = "display: flex; flex-direction: column">
+         <div style = "display: flex; flex-direction: row; margin-top: 15px; justify-content: center; align-items: center;">
+            <div class = "first_column">
+               <div class = "see_details_button_container" (click)="openReportDetails(report)">
+                  <p>See details</p>
+               </div>
+            </div>
+   
+            <div class = "second_column">
+               <div class = "comment_container">
+                  <p>{{report.reason}}</p>
+               </div>
+            </div>
+   
+            <div class = "third_column">
+               <div class = "decision_buttons_container">
+                  <div class = "accept_button_container" (click)="acceptReport(report)">
+                     <mat-icon style = "color: white; font-weight: 600;">check</mat-icon>
+                  </div>
+   
+                  <div class = "decline_button_container" (click)="declineReport(report)">
+                     <mat-icon style = "color: white; font-weight: 400;">delete_outline</mat-icon>
+                  </div>
+               </div>
+            </div>  
+         </div>
+            
+         <div style = "height: 1.5px; background-color: #ededed; margin-top: 15px"></div>
+      </div>
+   </div>
+ 
+   <div class = "paginator_container">
+      <mat-paginator 
+         [length]="totalCount"
+         [pageSize]="pageSize"
+         [pageSizeOptions]="[5, 10]"
+         aria-label="Select page"
+         (page)="onPageChange($event)"
+         style="background: white;"
+      />
+   </div> 
+</div>

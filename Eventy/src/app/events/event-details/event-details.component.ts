@@ -1,11 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {EventsService} from '../services/events/events-service.service';
 import {EventDetails} from '../model/events.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import * as L from 'leaflet';
+import { ChatService } from '../../chat/chat.service';
+import { AuthService } from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-event-details',
@@ -16,7 +18,12 @@ export class EventDetailsComponent {
   private _snackBar = inject(MatSnackBar);
   event: EventDetails;
 
-  constructor(private eventService: EventsService, private route: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private eventService: EventsService, 
+              private route: ActivatedRoute, 
+              private dialog: MatDialog,
+              private chatService: ChatService,
+              private router: Router,
+              private authService: AuthService) {
     let id: number = route.snapshot.params['eventId'];
     this.eventService.getEvent(id).subscribe({
       next: (event: EventDetails) => {
@@ -27,16 +34,31 @@ export class EventDetailsComponent {
         });
 
       },
-      error: (event: EventDetails) => {
-        this.dialog.open(ErrorDialogComponent, {
-          width: '400px',
-          disableClose: true, // prevents closing by clicking outside
-          backdropClass: 'blurred_backdrop_dialog',
-          data: {
-            title: "Error while loading the event",
-            message: 'Error while loading the event.',
-          },
-        });
+      error: (error) => {
+        if (error.status === 403) {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data: {
+              title: "Content Blocked!",
+              message: `You cannot access the content of a blocked account!`
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+
+        } else {
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data : {
+              title: "Loading Error!",
+              message: "There has been a problem while loading this page."
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+           this.router.navigate(['']);
+          });
+        }   
       }
     });
   }
@@ -119,5 +141,49 @@ export class EventDetailsComponent {
         });
       }
     });
+  }
+
+  openChat() {
+    this.chatService.createChat(this.event.organizerId).subscribe({
+      next: (value: any) => {
+        if(this.authService.getRole()) {
+          this.router.navigate(['chat'], {
+            state: { newChatOpen: true }
+          })
+        } else {
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            disableClose: true, // prevents closing by clicking outside
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: "Can't open chat if you are not logged in",
+              message: 'Please log in to access the chat.',
+            },
+          });
+        }
+      },
+      error: (err) => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true, // prevents closing by clicking outside
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: "Error",
+            message: 'Unexpected error while opening chat!',
+          },
+        });
+        console.log(err)
+      }
+    })
+  }
+  isOrganizerCheckingDetails(): boolean {
+    return this.event.organizerId === this.authService.getId();
+  }
+
+  isInFuture(): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to midnight
+
+    return new Date(this.event.date) > today;
   }
 }

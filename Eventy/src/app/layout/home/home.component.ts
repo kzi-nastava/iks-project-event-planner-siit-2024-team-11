@@ -17,6 +17,9 @@ export class HomeComponent {
   filters: any = {}; // To store filters
   searchQuery: string = ''; // To store search input
 
+  eventTypesFilter: string[] = [];
+  locationsFilter: string[] = [];
+
   ///////////////////////////////////////////////////////
 
   constructor(private authService: AuthService,
@@ -28,6 +31,9 @@ export class HomeComponent {
       localStorage.removeItem('runHandleReviewEvents');
       this.handleReviewEvents();
     } 
+
+    this.loadFilterEventTypes();
+    this.loadFilterLocations();
   }
 
   private handleReviewEvents() {
@@ -80,6 +86,38 @@ export class HomeComponent {
           data : {
             title: "Error!",
             message: "Error while loading unreviewed events"
+          }
+        });
+      }
+    });
+  }
+
+  private loadFilterEventTypes() {
+    this.eventService.getAllUniqueEventTypesForEvents().subscribe({
+      next: (eventTypes) => {
+        this.eventTypesFilter = eventTypes;
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error!",
+            message: "Error while loading filter event types"
+          }
+        });
+      }
+    });
+  }
+
+  private loadFilterLocations() {
+    this.eventService.getAllUniqueLocationsForEvents().subscribe({
+      next: (locations) => {
+        this.locationsFilter = locations;
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error!",
+            message: "Error while loading filter locations"
           }
         });
       }

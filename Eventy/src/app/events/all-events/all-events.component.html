@@ -1,4 +1,4 @@
-<div class = "container">
+<div id="all_event_cards_home" class = "container">
 
    <!-- SEARCH & FILTER -->
    <div class = "search_and_filter_container"> 
@@ -8,7 +8,7 @@
             placeholder="Search.." 
             [(ngModel)]="searchQuery"
             (input)="onSearchInput()">  
-         <div class = "search_icon_container" (click)="applySearchAndFilters()">
+         <div id = "search_events_button" class = "search_icon_container" (click)="applySearchAndFilters()">
             <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
          </div>    
       </div>
@@ -61,6 +61,7 @@
       [pageSizeOptions]="[1, 2, 5, 10]"
       aria-label="Select page"
       (page)="onPageChange($event)"
+      style="background: white;"
    />
 </div>
 

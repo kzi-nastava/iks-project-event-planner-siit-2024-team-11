@@ -106,3 +106,14 @@ export interface EventStats {
   averageGrade: number;
   gradeDistribution: number[];
 }
+
+export interface UpdateEvent {
+  id: number;
+  name: string;
+  description: string;
+  maxNumberParticipants: number;
+  eventTypeId: number;
+  location: Location;
+  date: Date;
+  agenda: Activity[];
+}

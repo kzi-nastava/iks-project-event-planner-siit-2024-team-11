@@ -25,6 +25,8 @@ import { ReservationSelectEventComponent } from './reservation-select-event/rese
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventStatsComponent } from './event-stats/event-stats.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { EditEventComponent } from './edit-event/edit-event.component';
+import { OwnEventsDialogComponent } from './own-events-dialog/own-events-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     EditEventTypeComponent,
     ReservationSelectEventComponent,
     EventDetailsComponent,
-    EventStatsComponent
+    EventStatsComponent,
+    EditEventComponent,
+    OwnEventsDialogComponent
   ],
   imports: [
     CommonModule,

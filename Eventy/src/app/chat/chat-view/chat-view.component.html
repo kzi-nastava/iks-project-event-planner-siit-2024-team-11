@@ -1,0 +1,33 @@
+<div class="wrapper">
+    <div class="user-holder">
+        <div></div>
+        <div class="card">
+            <img class="user-image" src="{{activeChat.otherPicture}}" alt="picture">
+            <span>{{activeChat.otherName}}</span>
+        </div>
+        <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="handleReport()">Report user</button>
+                <button mat-menu-item (click)="handleBlock()">Block user</button>
+              </mat-menu>
+        </div>
+    </div>
+    <div class="message-box-wrapper" #messageBoxWrapper>
+        <div class="message-box" *ngFor="let message of messages.allMessages">
+            <div class="other-message" *ngIf="message.senderId !== currentId">
+                <span>{{message.message}}</span>
+            </div>
+            <div class="own-message" *ngIf="message.senderId === currentId">
+                <span>{{message.message}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="new-message-holder">
+        <input type="text" class="new-message-input" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Enter a message" />
+        <button (click)="sendMessage()">SEND</button>
+    </div>
+</div>

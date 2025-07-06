@@ -3,6 +3,7 @@ p {
  }
  
  .successful_dialog {
+   max-width: 380px !important;
    text-align: center;
    padding: 15px;
    padding-top: 22px;

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -17,10 +17,14 @@ import { FormGroup } from '@angular/forms';
 export class EventFiltersComponent {
   // filter values
   maxParticipantsValue: number = null;
+
   eventTypes = new FormControl('');
+  @Input() eventTypeOptions: string[];
+
   locations = new FormControl('');
-  locationOptions: string[] = ['Belgrade', 'Gradiska', 'Novi Sad', 'Paris', 'New York', 'Kuala Lumpur'];
+  @Input() locationOptions: string[];
   filteredLocationOptions: Observable<string[]>;
+
   dateRangeForm: FormGroup;
 
   @Output() filtersChanged = new EventEmitter<any>();

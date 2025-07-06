@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../env/constants';
 import { PagedResponse } from '../../../shared/model/paged-response.model';
 import { SolutionDTO } from '../../model/solutions.model';
+import { PricelistItem } from '../../model/pricelist-item.model';
+import { PageProperties } from '../../../shared/model/page-properties.model';
 
 @Injectable({
   providedIn: 'root'
@@ -97,5 +99,23 @@ export class SolutionsService {
 
   get(id: number): Observable<SolutionDTO> {
     return this.httpClient.get<SolutionDTO>(environment.apiHost + this.urlPrefix + "/" + id)
+  }
+
+  getPricelist(pageProperties: PageProperties): Observable<PagedResponse<PricelistItem>> {
+    let params: HttpParams = new HttpParams();
+    params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
+    return this.httpClient.get<PagedResponse<PricelistItem>>(environment.apiHost + this.urlPrefix + "/pricelist")
+  }
+
+  updatePrice(newData: PricelistItem): Observable<PricelistItem> {
+    return this.httpClient.put<PricelistItem>(environment.apiHost + this.urlPrefix + "/pricelist", newData);
+  }
+
+  downloadPricelistPdf(): Observable<Blob> {
+    return this.httpClient.get(environment.apiHost + this.urlPrefix + "/pricelist/pdf", {
+      responseType: 'blob'
+    });
   }
 }
