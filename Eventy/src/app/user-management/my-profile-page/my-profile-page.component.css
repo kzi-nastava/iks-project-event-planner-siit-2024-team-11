@@ -171,3 +171,8 @@ mwl-calendar-month-view {
   width: 10vw;
   margin-top: 2vh;
 }
+
+.small-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

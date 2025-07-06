@@ -24,7 +24,6 @@ export class EventOrganizationComponent {
   protected readonly EventOrganizationStage = EventOrganizationStage;
 
    eventOrganizationStage: EventOrganizationStage;
-   isEventPublic: boolean;
    titleMap: Map<EventOrganizationStage, string>;
    invitedEmails: string[] = [];
    agenda: Activity[] = [];
@@ -35,10 +34,7 @@ export class EventOrganizationComponent {
     maxNumberParticipants: new FormControl(0, [Validators.required, Validators.pattern("^[1-9]\\d*$")]),
     isPublic: new FormControl(true),
     eventType: new FormControl('', Validators.required),
-    dateRange: new FormGroup({
-      startDate: new FormControl('', [Validators.required]),
-      endDate: new FormControl('', [Validators.required])
-    })
+    date: new FormControl('', [Validators.required])
   });
   selectedAddress: string | undefined;
   selectedLatLng: L.LatLng | undefined;
@@ -50,7 +46,6 @@ export class EventOrganizationComponent {
      this.titleMap.set(EventOrganizationStage.AGENDA_CREATION, "Add Agenda to the Event");
      this.titleMap.set(EventOrganizationStage.INVITATIONS_SENDING, "Send Invitations");
      this.eventOrganizationStage = EventOrganizationStage.BASIC_INFORMATION;
-     this.isEventPublic = true;
    }
 
     goBack(): void {
@@ -63,14 +58,30 @@ export class EventOrganizationComponent {
 
     isForward(): boolean {
      return this.eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION ||
-       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && this.isEventPublic);
+       (this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION && !this.basicInformationForm.controls['isPublic'].value);
     }
 
     goForward(): void {
       if(this.eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION) {
-        this.eventOrganizationStage = EventOrganizationStage.AGENDA_CREATION;
+        this.basicInformationForm.markAllAsTouched();
+        if (this.basicInformationForm.valid && this.selectedAddress) {
+          this.eventOrganizationStage = EventOrganizationStage.AGENDA_CREATION;
+        }
       } else if(this.eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION) {
-        this.eventOrganizationStage = EventOrganizationStage.INVITATIONS_SENDING;
+        if (this.agenda.length > 0) {
+          this.eventOrganizationStage = EventOrganizationStage.INVITATIONS_SENDING;
+        }
+        else {
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            disableClose: true,
+            backdropClass: 'blurred_backdrop_dialog',
+            data: {
+              title: 'Agenda empty',
+              message: 'Please make sure to have at least one activity in the agenda.',
+            },
+          });
+        }
       }
     }
 
@@ -88,11 +99,31 @@ export class EventOrganizationComponent {
     }
 
     getStartMinDateForAgenda(): Date {
-       return (this.basicInformationForm.controls['dateRange'] as FormGroup).controls['startDate'].value;
+       return this.basicInformationForm.controls['date'].value;
     }
 
     submit(): void {
-     let event: OrganizeEvent = {
+      if (this.agenda.length == 0) {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true,
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: 'Agenda empty',
+            message: 'Please make sure to have at least one activity in the agenda.',
+          },
+        });
+
+        return;
+      }
+
+      const date: Date = this.basicInformationForm.controls['date'].value;
+
+      const dateTimeString = date.getFullYear() + '-' +
+        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+        String(date.getDate()).padStart(2, '0') + 'T00:00:00';
+
+      let event: OrganizeEvent = {
        name: this.basicInformationForm.controls['name'].value,
        description: this.basicInformationForm.controls['description'].value,
        maxNumberParticipants: this.basicInformationForm.controls['maxNumberParticipants'].value,
@@ -104,7 +135,7 @@ export class EventOrganizationComponent {
          latitude: this.selectedLatLng.lat,
          longitude: this.selectedLatLng.lng
        },
-       date: (this.basicInformationForm.controls['dateRange'] as FormGroup).controls['startDate'].value,
+       date: dateTimeString,
        agenda: this.agenda,
        emails: this.invitedEmails,
        organizerId: this.authService.getId()

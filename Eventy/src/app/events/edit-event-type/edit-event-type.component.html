@@ -14,9 +14,6 @@
         @if (eventTypeFormGroup.controls['name'].hasError('required')) {
           <mat-error>Name is <strong>required</strong></mat-error>
         }
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="eventTypeFormGroup.controls['name'].setValue('')">
-          <mat-icon>close</mat-icon>
-        </button>
       </mat-form-field>
       <mat-form-field class="field">
         <mat-label>Description</mat-label>

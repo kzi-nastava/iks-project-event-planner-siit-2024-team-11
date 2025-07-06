@@ -15,10 +15,6 @@ import {LatLng} from 'leaflet';
 export class EventCreationBasicInformationComponent {
     @Input() basicInformationForm!: FormGroup;
 
-    get dateRangeGroup() : FormGroup {
-      return this.basicInformationForm.controls['dateRange'] as FormGroup;
-    }
-
     eventTypes: EventTypeCard[] = [];
 
     minDate: Date = new Date();

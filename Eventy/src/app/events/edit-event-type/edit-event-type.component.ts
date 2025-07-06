@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EventTypeService} from '../event-type.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryWithId} from '../../solutions/model/category-with-id.model';
-import {EventType, EventTypeWithActivity} from '../model/events.model';
+import {EventType, EventTypeWithActivity, UpdateEventType} from '../model/events.model';
 import {SolutionCategoryService} from '../../solutions/services/solutions/solution-category.service';
 import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -35,6 +35,7 @@ export class EditEventTypeComponent {
       next: (type: EventTypeWithActivity) => {
         this.eventTypeFormGroup.controls['id'].setValue(type['id']);
         this.eventTypeFormGroup.controls['name'].setValue(type['name']);
+        this.eventTypeFormGroup.controls['name'].disable();
         this.eventTypeFormGroup.controls['description'].setValue(type['description']);
         this.eventTypeFormGroup.controls['recommendedSolutionCategoriesIds'].setValue(type['recommendedSolutionCategories'].map((category: CategoryWithId) => category.id));
       }
@@ -49,7 +50,24 @@ export class EditEventTypeComponent {
 
 
   editEvent(): void {
+    if(this.id === 0 && this.eventTypeFormGroup.controls['name'].value === "All") {
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true,
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: "Deactivation unsuccessful",
+          message: 'You can\'t deactivate event type ALL!',
+        },
+      });
+
+      return;
+    }
+
     if(this.eventTypeFormGroup.valid){
+      let type: UpdateEventType = this.eventTypeFormGroup.value;
+      type.name = this.eventTypeFormGroup.controls['name'].value;
+
       this.eventTypeService.update(this.eventTypeFormGroup.value).subscribe({
         next: (eventType: EventType) => {
           this.router.navigate(['/event-types']);

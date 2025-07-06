@@ -66,7 +66,7 @@ export interface OrganizeEvent {
   isPublic: boolean;
   eventTypeId: number;
   location: Location;
-  date: Date;
+  date: string;
   agenda: Activity[];
   emails: string[];
   organizerId: number;

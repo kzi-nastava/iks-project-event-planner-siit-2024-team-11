@@ -34,6 +34,11 @@ export class OtherUserProfilePageComponent {
               private router: Router) {
     let id: number = route.snapshot.params['id'];
 
+    if(id == this.authService.getId()) {
+      this.router.navigate(['profile']);
+      return;
+    }
+
     this.userService.get(id).subscribe({
       next: (user: User) => {
         this.user = user;
@@ -70,20 +75,8 @@ export class OtherUserProfilePageComponent {
     this.loggedInUserId = this.authService.getId();
   }
 
-
   isOrganizer(): boolean {
-    let firstName = null
-    try {
-      firstName = this.user.firstName
-    } catch {
-
-    }
-
-    if (firstName == null) {
-      return false
-    } else {
-      return true
-    }
+    return this.user != null && "firstName" in this.user && this.user.firstName != null;
   }
 
   getName(): string {

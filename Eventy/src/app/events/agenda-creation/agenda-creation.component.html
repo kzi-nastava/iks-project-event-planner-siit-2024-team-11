@@ -2,9 +2,9 @@
   <form class="left-side" [formGroup]="activityForm">
     <mat-form-field class="field">
       <mat-label>Name</mat-label>
-      <input type="text" matInput placeholder="Ex. My Event" formControlName="name" />
+      <input id = "activity-name-input" type="text" matInput placeholder="Ex. My Event" formControlName="name" />
       @if (activityForm.controls['name'].hasError('required')) {
-        <mat-error>Name is <strong>required</strong></mat-error>
+        <mat-error id = "activity-name-input-error">Name is <strong>required</strong></mat-error>
       }
       <button matSuffix mat-icon-button aria-label="Clear" (click)="activityForm.controls['name'].setValue('')">
         <mat-icon>close</mat-icon>
@@ -12,9 +12,9 @@
     </mat-form-field>
     <mat-form-field class="field">
       <mat-label>Description</mat-label>
-      <textarea type="text" matInput placeholder="Your Description" formControlName="description"></textarea>
+      <textarea id = "activity-description-input" type="text" matInput placeholder="Your Description" formControlName="description"></textarea>
       @if (activityForm.controls['description'].hasError('required')) {
-        <mat-error>Description is <strong>required</strong></mat-error>
+        <mat-error id = "activity-description-input-error">Description is <strong>required</strong></mat-error>
       }
       <button matSuffix mat-icon-button aria-label="Clear" (click)="activityForm.controls['description'].setValue('')">
         <mat-icon>close</mat-icon>
@@ -22,9 +22,9 @@
     </mat-form-field>
     <mat-form-field class="field">
       <mat-label>Location</mat-label>
-      <input type="text" matInput placeholder="Ex. Reception desk" formControlName="location" />
+      <input id = "activity-location-input" type="text" matInput placeholder="Ex. Reception desk" formControlName="location" />
       @if (activityForm.controls['location'].hasError('required')) {
-        <mat-error>Location is <strong>required</strong></mat-error>
+        <mat-error id = "activity-location-input-error">Location is <strong>required</strong></mat-error>
       }
       <button matSuffix mat-icon-button aria-label="Clear" (click)="activityForm.controls['location'].setValue('')">
         <mat-icon>close</mat-icon>
@@ -32,19 +32,19 @@
     </mat-form-field>
     <mat-form-field class="field">
       <mat-label>Activity Time Range:</mat-label>
-      <input matInput [min]="minStartTime" [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'" formControlName="timeRange" readonly />
+      <input id = "activity-timeRange-input" matInput [min]="minStartTime" [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'" formControlName="timeRange" readonly />
       <owl-date-time #dt10></owl-date-time>
 
       @if (activityForm.controls['timeRange'].hasError('required')) {
-        <mat-error>Time Range is <strong>required</strong></mat-error>
+        <mat-error id = "activity-timeRange-input-required-error">Time Range is <strong>required</strong></mat-error>
       }
       @if (activityForm.controls['timeRange'].hasError('bothTimesEntered') &&
         !activityForm.controls['timeRange'].hasError('required')) {
-        <mat-error>End Time is <strong>required</strong></mat-error>
+        <mat-error id = "activity-timeRange-input-endTime-required-error">End Time is <strong>required</strong> and has to be at least a minute after start time</mat-error>
       }
     </mat-form-field>
 
-    <button mat-flat-button class="button" type="submit" (click)="addActivity()"><mat-icon>add</mat-icon>Add Activity</button>
+    <button id = "activity-add-button" mat-flat-button class="button" type="submit" (click)="addActivity()"><mat-icon>add</mat-icon>Add Activity</button>
   </form>
 
   <div class="right-side mat-elevation-z8">

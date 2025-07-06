@@ -8,7 +8,8 @@ import {CalendarOccupancy, User} from '../model/users.model';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 import {Router} from '@angular/router';
 import {PagedResponse} from '../../shared/model/paged-response.model';
-import {EventTypeCard} from '../../events/model/events.model';
+import {MatDialog} from '@angular/material/dialog';
+import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
 
 interface ColorScheme {
   primary: string;
@@ -27,12 +28,12 @@ const calendarColors: CalendarColors = {
     secondary: "#bfc4d5"
   },
   "PRODUCT": {
-    primary: "#FAD609",
-    secondary: "#fdee9c"
-  },
-  "SERVICE": {
     primary: "#DD79AE",
     secondary: "#f4d6e6"
+  },
+  "SERVICE": {
+    primary: "#FAD609",
+    secondary: "#fdee9c"
   }
 }
 
@@ -55,7 +56,8 @@ export class MyProfilePageComponent {
   searchMyFavEvents: string;
   searchMyFavSolutions: string;
 
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) {
+  constructor(private userService: UserService, private authService: AuthService, private router: Router,
+              private dialog: MatDialog) {
     this.userService.get(this.authService.getId()).subscribe({
       next: (result: User) => {
         this.user = result;
@@ -71,6 +73,10 @@ export class MyProfilePageComponent {
 
   isOtherUser(): boolean {
     return this.user.firstName != null && this.user.userType !== "ORGANIZER";
+  }
+
+  isAuthUser(): boolean {
+    return this.user.userType === "AUTHENTICATED";
   }
 
   isOrganizer(): boolean {
@@ -302,6 +308,17 @@ export class MyProfilePageComponent {
         localStorage.removeItem('user');
         this.authService.setUser();
         this.router.navigate(['login']);
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true,
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: 'Deactivation not permitted',
+            message: `You are not permitted do deactivate this account while you still have ${this.user.userType === "ORGANIZER" ? "organized events" : "reserved solutions"}.`,
+          },
+        });
       }
     });
   }

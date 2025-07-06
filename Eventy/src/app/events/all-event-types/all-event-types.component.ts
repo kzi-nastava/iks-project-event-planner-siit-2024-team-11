@@ -110,6 +110,20 @@ export class AllEventTypesComponent implements OnInit {
   }
 
   toggleActivate(): void {
+    if(this.selectedEventType.id === 0 && this.selectedEventType.name === "All") {
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true,
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: "Deactivation unsuccessful",
+          message: 'You can\'t deactivate event type ALL!',
+        },
+      });
+
+      return;
+    }
+
     this.eventTypeService.toggleActivate(this.selectedEventType.id).subscribe({
       next: (response: EventType) => {
         this.updatePaginatedEventTypes();

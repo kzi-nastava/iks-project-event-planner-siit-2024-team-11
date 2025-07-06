@@ -48,13 +48,13 @@
     </div>
 
     <div *ngIf="isOrganizer()">
-      <div *ngFor="let eventCard of myEvents;">
+      <div *ngFor="let eventCard of myEvents;" class = "small-padding">
         <app-event-card [eventCard]="eventCard" />
       </div>
     </div>
 
     <div *ngIf="!isOrganizer()">
-      <div *ngFor="let solutionCard of mySolutions; let i = index">
+      <div *ngFor="let solutionCard of mySolutions; let i = index" class = "small-padding">
         <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
         <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
       </div>

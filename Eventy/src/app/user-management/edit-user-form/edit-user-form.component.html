@@ -29,9 +29,6 @@
     <mat-form-field class="field">
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" />
-      @if (editForm.controls['password'].hasError('required')) {
-        <mat-error>Password is <strong>required</strong></mat-error>
-      }
       <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('password')">
         <mat-icon>close</mat-icon>
       </button>
@@ -40,9 +37,6 @@
     <mat-form-field class="field">
       <mat-label>Confirm password</mat-label>
       <input matInput type="password" formControlName="confirmedPassword" />
-      @if (editForm.controls['confirmedPassword'].hasError('required') && !editForm.controls['confirmedPassword'].hasError('match')) {
-        <mat-error>Password confirmation is <strong>required</strong></mat-error>
-      }
       @if (editForm.controls['confirmedPassword'].hasError('match')) {
         <mat-error>Passwords don't match</mat-error>
       }
@@ -51,7 +45,7 @@
       </button>
     </mat-form-field>
 
-    <div class="name-fields">
+    <div class="name-fields" *ngIf="isOrganizer()">
       <mat-form-field class="name-field">
         <mat-label>First Name</mat-label>
         <input type="text" matInput placeholder="Your Name" formControlName="firstName" />

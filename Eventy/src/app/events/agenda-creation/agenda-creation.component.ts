@@ -59,13 +59,6 @@ export class AgendaCreationComponent {
       });
 
       this.AgendaEventEmitter.emit(this.agenda);
-    } else {
-      this.dialog.open(InvalidInputDataDialogComponent, {
-        data : {
-          title: "Invalid input",
-          message: "Invalid input data"
-        }
-      });
     }
   }
 
@@ -83,7 +76,7 @@ export class AgendaCreationComponent {
   private validateTimeRange(): ValidatorFn {
     return (): ValidationErrors | null => {
       if(this.activityForm) {
-        return this.activityForm.controls['timeRange'].value[0] && this.activityForm.controls['timeRange'].value[1] ? null : { bothTimesEntered: true };
+        return this.activityForm.controls['timeRange'].value[0] && this.activityForm.controls['timeRange'].value[1] && this.activityForm.controls['timeRange'].value[0] < this.activityForm.controls['timeRange'].value[1] ? null : { bothTimesEntered: true };
       }
 
       return null;

@@ -36,7 +36,7 @@
         {{ selectedEventType.name }}
       </span>
 
-      <div>
+      <div *ngIf="selectedEventType.id !== 0 && selectedEventType.name !== 'All'">
         <a mat-flat-button class="button" [routerLink]="['/edit-event-type', this.selectedEventType.id]"><mat-icon>edit</mat-icon>Edit</a>
         <button *ngIf="selectedEventType.isActive" mat-flat-button class="button deactivate-button" (click)="toggleActivate()">
           <mat-icon>delete</mat-icon>Deactivate

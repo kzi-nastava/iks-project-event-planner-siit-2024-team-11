@@ -29,7 +29,10 @@ export class EventDetailsComponent {
       next: (event: EventDetails) => {
         this.event = event;
 
-        this.initMap();
+        setTimeout(() => {
+          this.initMap();
+        });
+
       },
       error: (error) => {
         if (error.status === 403) {
