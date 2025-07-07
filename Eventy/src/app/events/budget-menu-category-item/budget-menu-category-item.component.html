@@ -1,0 +1,77 @@
+<div [ngClass]="{
+  'card_container_service': solutionCard.type === 'SERVICE',
+  'card_container_product': solutionCard.type === 'PRODUCT'
+}">
+   <div class = "left_side_container">
+      <div class = "title_container">
+         <p class = "title">{{solutionCard.name}}</p>
+      </div>
+
+      <div class = "category_container">
+         <p style = "margin-right: 5px;" class = "category">Category:</p>
+         <p class = "category">{{solutionCard.categoryName}}</p>
+      </div>
+
+      <div class = "duration_container" *ngIf="solutionCard.type === 'SERVICE'">
+         <p style = "margin-right: 5px;" class = "duration">Service duration:</p>
+         <p class = "duration">{{solutionCard.minReservationTime === solutionCard.maxReservationTime ? solutionCard.minReservationTime + "min" : solutionCard.minReservationTime + "min - " + solutionCard.maxReservationTime + "min"}}</p>
+      </div>
+
+    <div class = "reservation_container" *ngIf="solutionCard.type === 'SERVICE'">
+         <p style = "margin-right: 5px;" class = "reservation">Reservation:</p>
+         <p class = "reservation">{{solutionCard.reservationType.toLowerCase()}}</p>
+    </div>
+
+      <div class = "description_container">
+         <div style = "display: flex; flex: 1; flex-direction: column; padding: 4px; padding-left: 8px; padding-right: 8px; padding-bottom: 5px;">
+            <p style = "margin: 0; font-size: 14px; color: #AEAAAA;  margin-bottom: -2px; margin-top: -2px"> Description: </p>
+            <p id = "description" class = "description"> {{solutionCard.description}} </p>
+         </div>
+      </div>
+
+      <div class = "event_types_all_container">
+         <p style = "margin-right: 5px; padding-bottom: 5px;" class = "category">Event types:</p>
+
+         <div class = "event_types_container">
+            <div class = "event_type_container" *ngFor="let name of solutionCard.eventTypeNames">
+               <p style = "color: #4e4e4e; margin: 0; font-size: 13.5px; font-family: Albert Sans; font-weight: 600;">{{name}}</p>
+            </div>
+            <div class = "event_type_container">
+               <p style = "color: #4e4e4e; margin: 0; font-size: 13.5px; font-family: Albert Sans; font-weight: 600;">...</p>
+            </div>
+         </div>
+      </div>
+
+      <div class = "organiser_container">
+         <img src = "{{solutionCard.providerImageUrl}}" class = "organiser_img" [routerLink]="['/users', solutionCard.providerId]">
+         <div style = "display: flex; flex-direction: column; margin-left: 9px;">
+            <p style = "margin-right: 5px; margin-top: 1px" class = "category">Provider:</p>
+            <p id = "organiser" class = "organiser" style = "margin-top: -1px" [routerLink]="['/users', solutionCard.providerId]">
+              {{solutionCard.providerName}}
+            </p>
+         </div>
+      </div>
+   </div>
+
+   <div class = "right_side_container">
+      <div class = "buttons_container">
+         <div class = "price_container">
+            <div style = "display: inline-block" [ngStyle]="{'visibility' : solutionCard.discount === 0 ? 'hidden' : 'visible'}">
+               <p class = "old_price">{{(solutionCard.price).toFixed(2)}}$</p>
+            </div>
+            <p [ngStyle]="{'margin-top' : solutionCard.discount === 0 ? '-11px' : '0px',
+                           'padding-bottom': solutionCard.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(solutionCard.price - solutionCard.price * solutionCard.discount / 100).toFixed(2)}}$</p>
+         </div>
+         <div style = "justify-content:right; align-items: center; display: flex; flex: 1.3;">
+            
+            <div class = "see_more_button_container" (click)="handleRemoveItem()" [attr.disabled]="isCancellable() ? null : true">
+               <p style = "margin: 0; color: red; font-size: 14px; font-family: Albert Sans; font-weight: 650;">REMOVE ITEM</p>
+            </div>
+         </div>
+      </div>
+
+      <div class = "image_container">
+         <img class = "service_image" src = "{{solutionCard.images[0]}}"/>
+      </div>
+   </div>
+</div>

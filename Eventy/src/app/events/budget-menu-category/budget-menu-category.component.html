@@ -1,0 +1,24 @@
+<div class="category-card">
+    <h3>{{ budgetItem.category }}</h3>
+    <p>Allocated funds: {{ budgetItem.plannedFunds | number:'1.2-2' }}</p>
+    <p>Actual used funds: {{ totalFunds | number:'1.2-2' }}</p>
+    <p *ngIf="budgetItem.plannedFunds >= totalFunds">Remainder: {{ budgetItem.plannedFunds - totalFunds | number:'1.2-2' }}</p>
+    <p *ngIf="budgetItem.plannedFunds < totalFunds" class="not-good">Remainder: OVERBUDGET</p>
+
+  <div *ngIf="isEditable()" class="category-actions" (click)="handleEditFunds()">
+    <button mat-button class="edit-button">
+      <mat-icon>edit</mat-icon> Edit
+    </button>
+
+    <button mat-button class="delete-button" (click)="handleDeleteSelf()">
+      <mat-icon>delete</mat-icon> Delete
+    </button>
+    </div>
+</div>
+
+<div class="solutions-container" *ngFor="let item of budgetItem.budgetedEntries">
+    <app-budget-menu-category-item [solutionCard]="item" [eventDate]="eventDate" (itemDeleted)="itemDeleted($event)"></app-budget-menu-category-item>
+</div>
+<div class="add-new-solution-container" *ngIf="isEditable()" (click)="handleAddItem()">
+  <span class="plus-sign">+</span>
+</div>

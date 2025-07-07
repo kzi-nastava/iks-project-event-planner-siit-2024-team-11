@@ -31,6 +31,7 @@ import { UpdateProductComponent } from './products/update-product/update-product
 import { PendingReportsComponent } from './user-management/pending-reports/pending-reports.component';
 import {EditEventComponent} from './events/edit-event/edit-event.component';
 import { PricelistMenuComponent } from './solutions/pricelist-menu/pricelist-menu.component';
+import { BudgetMenuComponent } from './events/budget-menu/budget-menu.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,7 @@ const routes: Routes = [
   {path: 'edit-event/:id', component: EditEventComponent},
   {path: 'pending-reports', component: PendingReportsComponent},
   {path: 'pricelist', component: PricelistMenuComponent},
+  {path: 'budget/:eventId', component: BudgetMenuComponent},
   {path: '**', redirectTo: ''},
   // {path: '', component: HomeComponent},
   // {path: 'login', component: LoginComponent, canActivate: [AuthGuard],
