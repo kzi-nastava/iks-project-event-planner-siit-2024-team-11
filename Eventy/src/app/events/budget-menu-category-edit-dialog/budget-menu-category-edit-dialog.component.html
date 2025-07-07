@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Edit allocated funds for the {{data.categoryName}} category:</h2>
+<mat-dialog-content>
+    <form [formGroup]="budgetItemForm" (ngSubmit)="submit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Allocated funds</mat-label>
+                <input matInput placeholder="Enter value" formControlName="allocatedFunds" required type="number">
+                <mat-error *ngIf="budgetItemForm.controls['allocatedFunds'].hasError('required')">
+                    Allocated funds is required
+                </mat-error>
+                <mat-error *ngIf="budgetItemForm.controls['allocatedFunds'].hasError('min')">
+                    Allocated funds must be greater or equal to zero
+                </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button type="submit">OK</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>
