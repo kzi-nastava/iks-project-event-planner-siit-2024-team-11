@@ -29,7 +29,7 @@ export class BudgetMenuCategoryInputDialogComponent {
 
   constructor(private dialog: MatDialog, private dialogRef: MatDialogRef<BudgetMenuCategoryInputDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: BudgetMenuCategoryInputDialogData,
-              private solutionCateogryService: SolutionCategoryService, private budgetService: BudgetService) {
+              private solutionCategoryService: SolutionCategoryService, private budgetService: BudgetService) {
 
   }
 
@@ -38,7 +38,7 @@ export class BudgetMenuCategoryInputDialogComponent {
   }
 
   fetchCategories(): void {
-    this.solutionCateogryService.getAllRemaining(this.data.eventId).subscribe({
+    this.solutionCategoryService.getAllRemaining(this.data.eventId).subscribe({
       next: (response: CategoryWithId[]) => {
         this.remainingSolutionCategories = response;
 
