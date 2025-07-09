@@ -19,6 +19,10 @@ export class SolutionCategoryService {
     return this.httpClient.get<CategoryWithId[]>(this.controllerURL)
   }
 
+  getAllRemaining(eventId: number) : Observable<CategoryWithId[]> {
+    return this.httpClient.get<CategoryWithId[]>(this.controllerURL + "/remaining/" + eventId)
+  }
+
   getAllPaginated(pageProperties: PageProperties): Observable<PagedResponse<CategoryWithId>> {
     let params: HttpParams = new HttpParams();
     params = params

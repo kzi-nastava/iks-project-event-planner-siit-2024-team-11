@@ -1,0 +1,39 @@
+h1 {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.add-category-container {
+  border: 2px dashed #aaa;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: 5px;
+  height: 44px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.plus-sign {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #777;
+  text-align: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.add-category-container:hover {
+  background-color: #e0f7fa;
+  border-color: #26c6da;
+}
+
+.add-category-container:hover .plus-sign {
+  color: #26c6da;
+  transform: scale(1.2);
+  transition: transform 0.2s ease, color 0.2s ease;
+}

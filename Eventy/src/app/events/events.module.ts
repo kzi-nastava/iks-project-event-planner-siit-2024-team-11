@@ -27,6 +27,12 @@ import { EventStatsComponent } from './event-stats/event-stats.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { OwnEventsDialogComponent } from './own-events-dialog/own-events-dialog.component';
+import { BudgetMenuComponent } from './budget-menu/budget-menu.component';
+import { BudgetMenuCategoryComponent } from './budget-menu-category/budget-menu-category.component';
+import { BudgetMenuCategoryItemComponent } from './budget-menu-category-item/budget-menu-category-item.component';
+import { BudgetMenuCategoryInputDialogComponent } from './budget-menu-category-input-dialog/budget-menu-category-input-dialog.component';
+import { BudgetMenuCategoryEditDialogComponent } from './budget-menu-category-edit-dialog/budget-menu-category-edit-dialog.component';
+import { BudgetMenuSolutionSelectionDialogComponent } from './budget-menu-solution-selection-dialog/budget-menu-solution-selection-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,13 @@ import { OwnEventsDialogComponent } from './own-events-dialog/own-events-dialog.
     EventDetailsComponent,
     EventStatsComponent,
     EditEventComponent,
-    OwnEventsDialogComponent
+    OwnEventsDialogComponent,
+    BudgetMenuComponent,
+    BudgetMenuCategoryComponent,
+    BudgetMenuCategoryItemComponent,
+    BudgetMenuCategoryInputDialogComponent,
+    BudgetMenuCategoryEditDialogComponent,
+    BudgetMenuSolutionSelectionDialogComponent
   ],
   imports: [
     CommonModule,
