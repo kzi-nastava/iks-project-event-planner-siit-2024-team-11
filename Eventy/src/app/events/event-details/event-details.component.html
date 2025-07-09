@@ -3,6 +3,9 @@
       <a *ngIf="!isOrganizerCheckingDetails()" mat-flat-button class="button" (click)="openChat()"><mat-icon>chat</mat-icon>Chat With Organizer</a>
       <h1 class="event-title">{{event.name}}</h1>
       <div class="buttons">
+        <a *ngIf="isOrganizerCheckingDetails()" mat-flat-button class="button" [routerLink]="['/budget', this.event.id]">
+          View budget
+        </a>
         <a *ngIf="isOrganizerCheckingDetails() && isInFuture()" mat-flat-button class="button" [routerLink]="['/edit-event', this.event.id]">
           <mat-icon>edit</mat-icon> Edit
         </a>
