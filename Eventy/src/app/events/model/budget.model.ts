@@ -1,4 +1,4 @@
-import { SolutionDTO } from "../../solutions/model/solutions.model";
+import { SolutionDTO, SolutionHistory } from "../../solutions/model/solutions.model";
 
 export interface Budget {
     categoryItems: BudgetItem[]
@@ -9,5 +9,5 @@ export interface BudgetItem {
     id: number,
     category: string,
     plannedFunds: number,
-    budgetedEntries: SolutionDTO[]
+    budgetedEntries: SolutionHistory[]
 }
