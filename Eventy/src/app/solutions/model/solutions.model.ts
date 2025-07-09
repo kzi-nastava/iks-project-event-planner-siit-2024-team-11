@@ -36,3 +36,13 @@ export interface SolutionDTO {
    providerImageUrl: string;
    isFavorite: boolean;
 }
+
+export interface SolutionHistory {
+   id: number,
+   providerName: string,
+   name: string,
+   description: string,
+   price: number,
+   discount: number,
+   cancellationDeadline: number
+}
