@@ -28,7 +28,7 @@ export class BudgetService {
     return this.httpClient.put<BudgetItem>(environment.apiHost + this.urlPrefix + "/item/" + budgetItemId, newAllocatedFunds);
   }
 
-  removeBudgetItemSolution(budgetItemId: number, solutionId: number): Observable<any> {
-    return this.httpClient.delete<any>(environment.apiHost + this.urlPrefix + "/item/" + budgetItemId + "/" + solutionId)
+  removeBudgetItemSolution(budgetItemId: number, solutionHistoryId: number): Observable<any> {
+    return this.httpClient.delete<any>(environment.apiHost + this.urlPrefix + "/item/" + budgetItemId + "/" + solutionHistoryId)
   }
 }
