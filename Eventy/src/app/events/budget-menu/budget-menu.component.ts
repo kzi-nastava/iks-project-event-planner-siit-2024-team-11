@@ -85,7 +85,8 @@ export class BudgetMenuComponent {
 
   isEditable(): boolean {
     let currentDate: Date = new Date();
-    return this.budget.eventDate > currentDate  
+    let actualEventDate: Date = new Date(this.budget.eventDate);
+    return actualEventDate > currentDate  
   }
 
 }

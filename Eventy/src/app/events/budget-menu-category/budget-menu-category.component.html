@@ -16,9 +16,9 @@
     </div>
 </div>
 
-<div class="solutions-container" *ngFor="let item of budgetItem.budgetedEntries">
+<div *ngFor="let item of budgetItem.budgetedEntries">
     <app-budget-menu-category-item [solutionCard]="item" [eventDate]="eventDate" (itemDeleted)="itemDeleted($event)"></app-budget-menu-category-item>
 </div>
-<div class="add-new-solution-container" *ngIf="isEditable()" (click)="handleAddItem()">
+<div class="add-new-solution-container" *ngIf="isEditable() || budgetItem.plannedFunds < totalFunds" (click)="handleAddItem()">
   <span class="plus-sign">+</span>
 </div>

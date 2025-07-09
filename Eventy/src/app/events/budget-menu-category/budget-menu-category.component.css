@@ -8,11 +8,6 @@
   margin: 5px;
 }
 
-.solutions-container {
-    display: flex;
-    justify-content: center;
-}
-
 .not-good {
     color: red
 }
@@ -47,8 +42,8 @@ h3, p {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 54vw;
-  height: 280px; /* approximate height matching cards */
+  width: 75%;
+  height: 69px; /* approximate height matching cards */
   background-color: #f9f9f9;
   border-radius: 10px;
   margin: 5px auto;

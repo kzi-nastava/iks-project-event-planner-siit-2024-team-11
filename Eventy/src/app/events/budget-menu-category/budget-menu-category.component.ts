@@ -121,7 +121,7 @@ export class BudgetMenuCategoryComponent {
   itemDeleted(itemId: number) {
     this.budgetService.removeBudgetItemSolution(this.budgetItem.id, itemId).subscribe({
       next: (response: any) => {
-        this.budgetItem.budgetedEntries = this.budgetItem.budgetedEntries.filter(entry => entry.solutionId !== itemId);
+        this.budgetItem.budgetedEntries = this.budgetItem.budgetedEntries.filter(entry => entry.id !== itemId);
       },
       error: (err: any) => {
         this.dialog.open(ErrorDialogComponent, {
@@ -139,6 +139,7 @@ export class BudgetMenuCategoryComponent {
 
   isEditable(): boolean {
     let currentDate: Date = new Date();
-    return this.eventDate > currentDate  
+    let actualEventDate: Date = new Date(this.eventDate);
+    return actualEventDate > currentDate  
   }
 }

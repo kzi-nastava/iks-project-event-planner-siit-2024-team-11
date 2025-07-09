@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SolutionDTO } from '../../solutions/model/solutions.model';
+import { SolutionDTO, SolutionHistory } from '../../solutions/model/solutions.model';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -9,22 +9,14 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './budget-menu-category-item.component.css'
 })
 export class BudgetMenuCategoryItemComponent {
-  @Input() solutionCard: SolutionDTO = {
-      solutionId: 0,
-      type: 'SERVICE',
-      name: '',
-      categoryName: '',
-      description: '',
-      eventTypeNames: [],
+  @Input() solutionCard: SolutionHistory = {
+      id: 0,
+      providerName: "",
+      name: "",
+      description: "",
       price: 0,
       discount: 0,
-      images: [],
-      isAvailable: false,
-      providerId: 0,
-      providerName: '',
-      providerImageUrl: '',
-      isFavorite: false,
-      isVisible: false
+      cancellationDeadline: null
   }
 
   @Input() eventDate: Date
@@ -38,7 +30,7 @@ export class BudgetMenuCategoryItemComponent {
 
   handleRemoveItem(): void {
     if (this.isCancellable()) {
-      this.itemDeleted.emit(this.solutionCard.solutionId);
+      this.itemDeleted.emit(this.solutionCard.id);
     } else {
       this.dialog.open(ErrorDialogComponent, {
         width: '400px',
@@ -54,7 +46,7 @@ export class BudgetMenuCategoryItemComponent {
 
   isCancellable(): boolean {
     let currentDate: Date = new Date();
-    if (this.solutionCard.type === 'SERVICE') {
+    if (this.solutionCard.cancellationDeadline !== null) {
       let tempDate: Date = new Date(this.eventDate)
       tempDate.setDate(tempDate.getDate() + this.solutionCard.cancellationDeadline)
       return tempDate > currentDate
