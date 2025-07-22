@@ -17,9 +17,10 @@ import { AuthService } from '../../infrastructure/auth/auth.service';
 export class EventDetailsComponent {
   private _snackBar = inject(MatSnackBar);
   event: EventDetails;
+  currentMarker: L.Marker | undefined;
 
-  constructor(private eventService: EventsService, 
-              private route: ActivatedRoute, 
+  constructor(private eventService: EventsService,
+              private route: ActivatedRoute,
               private dialog: MatDialog,
               private chatService: ChatService,
               private router: Router,
@@ -58,7 +59,7 @@ export class EventDetailsComponent {
           dialogRef.afterClosed().subscribe(() => {
            this.router.navigate(['']);
           });
-        }   
+        }
       }
     });
   }
@@ -90,6 +91,15 @@ export class EventDetailsComponent {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
         '&copy; <a href="https://carto.com/">Carto</a>'
     }).addTo(map);
+
+    const icon : L.Icon = L.icon({
+      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+    });
+
+    this.currentMarker = L.marker([this.event.location.latitude, this.event.location.longitude], { icon }).addTo(map);
   }
 
   downloadEventDetails(): void {
