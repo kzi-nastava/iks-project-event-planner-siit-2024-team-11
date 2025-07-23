@@ -5,6 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { BudgetMenuCategoryEditDialogComponent } from '../budget-menu-category-edit-dialog/budget-menu-category-edit-dialog.component';
 import { BudgetMenuSolutionSelectionDialogComponent } from '../budget-menu-solution-selection-dialog/budget-menu-solution-selection-dialog.component';
+import { ReviewService } from '../../reviews/service/review.service';
+import { AuthService } from '../../infrastructure/auth/auth.service';
+import { CreateReview } from '../../reviews/model/review.model';
+import { CreateReviewComponent } from '../../reviews/create-review/create-review.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-budget-menu-category',
@@ -26,7 +31,8 @@ export class BudgetMenuCategoryComponent {
 
   @Output() budgetItemDeleted: EventEmitter<number> = new EventEmitter();
 
-  constructor(private dialog: MatDialog, private budgetService: BudgetService) {
+  constructor(private dialog: MatDialog, private budgetService: BudgetService, private reviewService: ReviewService,
+              private authService: AuthService, private router: Router) {
     }
 
   ngOnInit() {
@@ -54,6 +60,33 @@ export class BudgetMenuCategoryComponent {
       if (result && result[0]) {
         this.budgetItem.budgetedEntries.push(result[1])
         this.calculateTotalFunds()
+        this.reviewService.isSolutionReviewedByUser(this.authService.getId(), result[1].solutionId).subscribe({
+              next: (isReviewed) => {
+                if (!isReviewed) {
+                  let createReview: CreateReview = {
+                    graderId: this.authService.getId(),
+                    solutionId: result[1].solutionId,
+                    eventId: null,
+                    grade: null,
+                    comment: null
+                  }
+              
+                  const dialogRef = this.dialog.open(CreateReviewComponent, {
+                    disableClose: true, // Prevent closing by clicking outside
+                    data: {
+                      title: `"${result[1].name}"`,
+                      message: `Please rate the product you purchased!`,
+                      createReview: createReview
+                    }
+                  });
+                  dialogRef.afterClosed().subscribe(() => {
+                    this.router.navigate(['']).then(() => {
+                      window.location.reload();
+                    });
+                  });
+                }
+              }
+        })
       }
     })
   }
