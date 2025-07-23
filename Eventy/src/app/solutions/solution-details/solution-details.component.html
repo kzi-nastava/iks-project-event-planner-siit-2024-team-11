@@ -67,7 +67,11 @@
              </div>
              <div class="reviews-container">
                 <h1>Reviews</h1>
-                <div class="reviews-inner-container"></div>
+                <div class="reviews-inner-container">
+                    <div *ngFor="let review of reviews">
+                        <app-review-card [review]="review"></app-review-card>
+                    </div>
+                </div>
              </div>
         </div>
     </div>

@@ -41,4 +41,8 @@ export class ReviewService {
   declineReview(reviewId: number): Observable<Review> {
     return this.httpClient.put<Review>(environment.apiHost + this.urlPrefix + "/" + reviewId + "/decline", {});
   }
+
+  getAllForSolution(solutionId: number): Observable<Review[]> {
+    return this.httpClient.get<Review[]>(environment.apiHost + this.urlPrefix + "/solution/" + solutionId);
+  }
 }

@@ -13,13 +13,15 @@ import { ReviewService } from './service/review.service';
 import { SharedModule } from '../shared/shared.module';
 import { PendingReviewsComponent } from './pending-reviews/pending-reviews.component';
 import { ReviewDetailsDialogComponent } from './review-details-dialog/review-details-dialog.component';
+import { ReviewCardComponent } from './review-card/review-card.component';
 
 
 @NgModule({
   declarations: [
     CreateReviewComponent,
     PendingReviewsComponent,
-    ReviewDetailsDialogComponent
+    ReviewDetailsDialogComponent,
+    ReviewCardComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { ReviewDetailsDialogComponent } from './review-details-dialog/review-det
   ],
   exports: [
     CreateReviewComponent,
+    ReviewCardComponent
   ],
   providers: [
     ReviewService,

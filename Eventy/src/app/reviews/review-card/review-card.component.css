@@ -1,0 +1,49 @@
+.review-card {
+  background-color: whitesmoke;
+  border-radius: 50px;
+  margin: 5%;
+  padding: 20px;
+}
+
+.organiser_container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.organiser_img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100px;
+}
+
+.organiser {
+    margin: 0;
+    margin-left: 5px;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0;
+    font-family: Figtree;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5px;
+}
+
+.star {
+  font-size: 20px;
+  color: gray;
+}
+
+.star.filled::before {
+  content: '★';
+  color: gold;
+}
+
+.star.empty::before {
+  content: '☆';
+  color: gray;
+}

@@ -11,6 +11,9 @@ import { ChatService } from '../../chat/chat.service';
 import { ProductService } from '../../products/product.service';
 import { EventsService } from '../../events/services/events/events-service.service';
 import { OwnEventsDialogComponent } from '../../events/own-events-dialog/own-events-dialog.component';
+import { ReviewService } from '../../reviews/service/review.service';
+import { CreateReview, Review } from '../../reviews/model/review.model';
+import { CreateReviewComponent } from '../../reviews/create-review/create-review.component';
 
 @Component({
   selector: 'app-solution-details',
@@ -37,9 +40,11 @@ export class SolutionDetailsComponent {
     isFavorite: false,
     isVisible: false
   }
+  reviews: Review[] = []
 
   constructor(private route: ActivatedRoute, private solutionService: SolutionsService, private dialog: MatDialog, private router: Router,
-              private authService: AuthService, private chatService: ChatService, private productService: ProductService, private eventService: EventsService) {
+              private authService: AuthService, private chatService: ChatService, private productService: ProductService, private eventService: EventsService,
+              private reviewService: ReviewService) {
     this.currentUser = authService.getId()
     this.currentRole = authService.getRole()
     let id: number = route.snapshot.params['solutionId'];
@@ -72,6 +77,11 @@ export class SolutionDetailsComponent {
            this.router.navigate(['']);
           });
         }   
+      }
+    })
+    this.reviewService.getAllForSolution(id).subscribe({
+      next: (reviews: Review[]) => {
+        this.reviews = reviews;
       }
     })
   }
@@ -196,7 +206,30 @@ export class SolutionDetailsComponent {
                   title: "Product purchased",
                   message: "Product purchased successfully!",
                 },
-              }).afterClosed().subscribe(() => this.router.navigate(['']));
+              }).afterClosed().subscribe(() => {
+                this.reviewService.isSolutionReviewedByUser(this.authService.getId(), this.solution.solutionId).subscribe({
+                    next: (isReviewed) => {
+                      if (!isReviewed) {
+                        let createReview: CreateReview = {
+                          graderId: this.authService.getId(),
+                          solutionId: this.solution.solutionId,
+                          eventId: null,
+                          grade: null,
+                          comment: null
+                        }
+                    
+                        const dialogRef = this.dialog.open(CreateReviewComponent, {
+                          disableClose: true, // Prevent closing by clicking outside
+                          data: {
+                            title: `"${this.solution.name}"`,
+                            message: `Please rate the product you purchased!`,
+                            createReview: createReview
+                          }
+                        });
+                      }
+                    }
+              })
+              });
             },
             error: () => {
               this.errorDialog("Error", "Error with purchasing this product!");
