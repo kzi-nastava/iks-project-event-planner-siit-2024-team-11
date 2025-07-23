@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { PricelistMenuComponent } from './pricelist-menu/pricelist-menu.component';
 import { PricelistItemComponent } from './pricelist-item/pricelist-item.component';
+import { ReviewsModule } from '../reviews/reviews.module';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { PricelistItemComponent } from './pricelist-item/pricelist-item.componen
     SharedModule,
     RouterModule,
     MatIconModule,
+    ReviewsModule,
 ],
   exports: [
     SolutionFiltersComponent,
