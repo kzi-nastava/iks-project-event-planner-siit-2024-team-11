@@ -13,6 +13,8 @@ export interface Review {
    title: String; // event/product/service name
    status: Status;
    isDeleted: boolean;
+   senderName: string;
+   senderAvatar: string;
 }
 
 export interface CreateReview {
