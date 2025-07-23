@@ -20,4 +20,17 @@ describe('ReservationSelectEventComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit false and null on init', () => {
+    spyOn(component.continueButtonClicked, 'emit');
+    spyOn(component.selectedEventCardEventEmitter, 'emit');
+
+    component.ngOnInit();
+
+    expect(component.continueButtonClicked.emit).toHaveBeenCalledWith(false);
+    expect(component.selectedEventCardEventEmitter.emit).toHaveBeenCalledWith(null);
+  }); 
+
+  
+  
 });
