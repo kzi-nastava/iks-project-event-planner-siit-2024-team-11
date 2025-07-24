@@ -52,8 +52,7 @@ export class RegisterProviderComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      const {confirmedPassword, ...user} = this.registerForm.value;
-      this.authService.register(user).subscribe({
+      this.authService.register(this.registerForm.value).subscribe({
         next: (response: string) => {
           this.dialog.open(InvalidInputDataDialogComponent, {
           data : {

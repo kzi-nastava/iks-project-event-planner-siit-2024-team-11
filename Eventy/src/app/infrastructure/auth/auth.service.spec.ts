@@ -29,6 +29,7 @@ describe('AuthService', () => {
       profilePictures: [],
       email: 'ves@gmail.com',
       password: 'admin',
+      confirmedPassword: 'admin',
       firstName: 'Ves',
       lastName: 'Ves Last',
       address: 'Some Address 27',

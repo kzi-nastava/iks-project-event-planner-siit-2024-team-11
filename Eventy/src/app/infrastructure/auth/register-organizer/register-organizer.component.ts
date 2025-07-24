@@ -52,7 +52,7 @@ export class RegisterOrganizerComponent {
       this.registerForm.updateValueAndValidity();
       this.registerForm.markAllAsTouched();
     } else {
-      const {profilePicture, confirmedPassword, ...userData} = this.registerForm.value;
+      const {profilePicture, ...userData} = this.registerForm.value;
       let user: RegisterData = {
         ...userData,
         profilePictures: [this.registerForm.controls['profilePicture'].value]
