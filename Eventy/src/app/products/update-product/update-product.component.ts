@@ -34,7 +34,7 @@ export class UpdateProductComponent {
     relevantEventTypes: new FormControl ([], [Validators.required]),
     price: new FormControl (null, [Validators.required, Validators.min(0)]),
     discount: new FormControl (null, [Validators.required, Validators.min(0), Validators.max(100)]),
-    images: new FormControl (null, [Validators.required])
+    images: new FormControl (null)
   });
 
   constructor(private eventTypeService: EventTypeService, private solutionCategoryService: SolutionCategoryService,
@@ -56,7 +56,7 @@ export class UpdateProductComponent {
               relevantEventTypes: new FormControl (solution.eventTypeNames.map(name => this.allEventTypes.find(type => type.name === name)), [Validators.required]),
               price: new FormControl (solution.price, [Validators.required, Validators.min(0)]),
               discount: new FormControl (solution.discount, [Validators.required, Validators.min(0), Validators.max(100)]),
-              images: new FormControl (solution.images, [Validators.required]),
+              images: new FormControl (solution.images),
             });
 
             for(let image of solution.images) {
@@ -152,8 +152,8 @@ export class UpdateProductComponent {
             disableClose: true, // Prevent closing by clicking outside
             backdropClass: 'blurred_backdrop_dialog',
             data: {
-              title: "Product added",
-              message: "Product added successfully",
+              title: "Product updated",
+              message: "Product updated successfully",
             },
           }).afterClosed().subscribe(() => this.router.navigate(['solutions', product.id]));
         },
