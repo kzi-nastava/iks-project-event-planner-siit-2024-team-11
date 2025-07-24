@@ -14,6 +14,7 @@ import { OwnEventsDialogComponent } from '../../events/own-events-dialog/own-eve
 import { ReviewService } from '../../reviews/service/review.service';
 import { CreateReview, Review } from '../../reviews/model/review.model';
 import { CreateReviewComponent } from '../../reviews/create-review/create-review.component';
+import { YesNoFancierDialogComponent } from '../../shared/yes-no-fancier-dialog/yes-no-fancier-dialog.component';
 
 @Component({
   selector: 'app-solution-details',
@@ -174,14 +175,28 @@ export class SolutionDetailsComponent {
   }
 
   deleteSolution(): void {
-    this.solutionService.delete(this.solution.solutionId).subscribe({
-      next: (response: any) => {
-        this.router.navigate(['']);
+    const yesNoRef = this.dialog.open(YesNoFancierDialogComponent, {
+      width: '400px',
+      disableClose: true, // prevents closing by clicking outside
+      backdropClass: 'blurred_backdrop_dialog',
+      data: {
+        title: 'Confirm Purchase', 
+        message: 'Are you sure you want to delete ' + this.solution.name + '?',
       },
-      error: () => {
-        this.errorDialog("Error deleting the solution", "Error deleting the solution.")
+    });
+
+    yesNoRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.solutionService.delete(this.solution.solutionId).subscribe({
+          next: (response: any) => {
+            this.router.navigate(['']);
+          },
+          error: () => {
+            this.errorDialog("Error deleting the solution", "Error deleting the solution.")
+          }
+        })
       }
-    })
+    })  
   }
 
   purchaseProduct() {
@@ -225,6 +240,11 @@ export class SolutionDetailsComponent {
                             message: `Please rate the product you purchased!`,
                             createReview: createReview
                           }
+                        });
+                        dialogRef.afterClosed().subscribe(() => {
+                          this.router.navigate(['']).then(() => {
+                            window.location.reload();
+                          });
                         });
                       }
                     }
