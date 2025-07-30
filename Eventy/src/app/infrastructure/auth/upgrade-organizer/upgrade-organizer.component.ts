@@ -71,6 +71,8 @@ export class UpgradeOrganizerComponent {
 
       this.authService.upgradeProfile(upgradeProfileData).subscribe({
         next: (response: string) => {
+          this.logOut()
+          
           this.dialog.open(SuccessfulDialogComponent, {
             width: '400px',
             disableClose: true, // Prevent closing by clicking outside
@@ -103,6 +105,11 @@ export class UpgradeOrganizerComponent {
         }
       });
     }
+  }
+
+  logOut(): void {
+    localStorage.removeItem('user');
+    this.authService.setUser();
   }
 
   onFileSelected(event: Event): void {
