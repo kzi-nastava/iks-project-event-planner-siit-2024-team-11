@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.space {
+    width: 8%;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background-color: blue !important;
+    color: white !important;
+    margin-right: 10px;
+}

@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {IEventType} from '../model/events.model';
+import {EventType, EventTypeCard, EventTypeWithActivity} from '../model/events.model';
 import {EventTypeService} from '../event-type.service';
 import {PageEvent} from '@angular/material/paginator';
+import {PagedResponse} from '../../shared/model/paged-response.model';
+import {ErrorDialogComponent} from '../../shared/error-dialog/error-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 interface ICardClasses {
   "event-type-card": boolean,
@@ -14,19 +17,17 @@ interface ICardClasses {
 })
 export class AllEventTypesComponent implements OnInit {
   searchQuery: string = "";
-  eventTypes: IEventType[] = [];
-  selectedEventType: IEventType;
+  selectedEventType: EventTypeWithActivity;
   pageSize: number = 12;
   currentPage: number = 0;
-  paginatedEventTypes: IEventType[] = [];
+  paginatedEventTypes: EventTypeCard[] = [];
+  totalCount: number = 0;
 
-  constructor(private eventTypeService: EventTypeService) {
+  constructor(private eventTypeService: EventTypeService, private dialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
-    this.eventTypes = this.eventTypeService.getAll();
-
     this.updatePaginatedEventTypes();
   }
 
@@ -34,11 +35,15 @@ export class AllEventTypesComponent implements OnInit {
     this.searchQuery = "";
   }
 
-  selectType(eventType: IEventType): void {
-    if(this.selectedEventType === eventType) {
+  selectType(eventType: EventTypeCard): void {
+    if(this.selectedEventType && this.selectedEventType.id === eventType.id) {
       this.selectedEventType = null;
     } else {
-      this.selectedEventType = eventType;
+      this.eventTypeService.get(eventType.id).subscribe({
+        next: (response: EventTypeWithActivity) => {
+          this.selectedEventType = response;
+        }
+      });
     }
   }
 
@@ -73,10 +78,10 @@ export class AllEventTypesComponent implements OnInit {
     return triplet;
   }
 
-  getCardClasses(eventType: IEventType): ICardClasses {
+  getCardClasses(eventType: EventTypeCard): ICardClasses {
     return {
       "event-type-card" : true,
-      "selected-card": this.selectedEventType && this.selectedEventType.name === eventType.name
+      "selected-card": this.selectedEventType && this.selectedEventType.id === eventType.id
     }
   }
 
@@ -87,19 +92,60 @@ export class AllEventTypesComponent implements OnInit {
   }
 
   private updatePaginatedEventTypes(): void {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedEventTypes = this.eventTypes.slice(startIndex, endIndex);
+    this.eventTypeService.getEventTypes(this.searchQuery, {
+      page: this.currentPage,
+      size: this.pageSize,
+    })
+      .subscribe( {
+        next: (response: PagedResponse<EventTypeCard>) => {
+          this.paginatedEventTypes = response.content;
+          this.totalCount = response.totalElements;
+        }
+      });
   }
 
   search(): void {
-    this.eventTypes = this.eventTypeService.search(this.searchQuery);
+    this.currentPage = 0;
     this.updatePaginatedEventTypes();
   }
 
-  deleteType(): void {
-    this.eventTypeService.delete(this.selectedEventType);
-    this.eventTypes = this.eventTypeService.getAll();
-    this.updatePaginatedEventTypes();
+  toggleActivate(): void {
+    if(this.selectedEventType.id === 0 && this.selectedEventType.name === "All") {
+      this.dialog.open(ErrorDialogComponent, {
+        width: '400px',
+        disableClose: true,
+        backdropClass: 'blurred_backdrop_dialog',
+        data: {
+          title: "Deactivation unsuccessful",
+          message: 'You can\'t deactivate event type ALL!',
+        },
+      });
+
+      return;
+    }
+
+    this.eventTypeService.toggleActivate(this.selectedEventType.id).subscribe({
+      next: (response: EventType) => {
+        this.updatePaginatedEventTypes();
+
+        this.eventTypeService.get(this.selectedEventType.id).subscribe({
+          next: (response: EventTypeWithActivity) => {
+            console.log(response);
+            this.selectedEventType = response;
+          }
+        });
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          disableClose: true,
+          backdropClass: 'blurred_backdrop_dialog',
+          data: {
+            title: "Deactivation unsuccessful",
+            message: 'You can\'t deactivate an event type that is in use!',
+          },
+        });
+      }
+    });
   }
 }

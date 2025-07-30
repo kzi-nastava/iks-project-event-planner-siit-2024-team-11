@@ -1,0 +1,215 @@
+.register {
+   display: flex;
+   flex-direction: row;
+ }
+ 
+  .left-side {
+    width: 40vw;
+    position: fixed;
+    left: 0;
+    background-color: #929AB7;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100% - 60px);
+  }
+
+    .welcome_to_container {
+      display: flex;
+      height: 44%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+      
+      .welcome-text {
+        margin: 0;
+        font-size: 1.7vw;
+        font-weight: 400;
+        letter-spacing: 1.5px;
+        font-family: Albert Sans;
+      }
+    
+      .logo {
+        margin-top: 5vh;
+        width: 65%;
+      }
+    
+    .already_have_acc_container {
+      display: flex;
+      height: 52%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 2.5vw;
+    }
+
+      .register-text {
+        font-size: 1.3vw;
+        text-align: center;
+        color: #F6F4F4;
+        margin: 0;
+        padding-bottom: 15px;
+        font-family: Albert Sans;
+      } 
+
+      .confirm_filter_container {
+        padding: 0.6vw;
+        padding-left: 1.9vw;
+        padding-right: 1.9vw;
+        border-radius: 10px;
+        background: linear-gradient(to left, #535a71, #647285);
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        cursor: pointer;
+     }
+     .confirm_filter_container:hover {
+        background: linear-gradient(to left, #404556, #5a6676);
+     }
+
+  .right-side {
+    position: fixed;
+    left: 40vw;
+    width: 60vw;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  @media (max-width: 730px) {
+    .left-side {
+      display: none;
+    }
+    .right-side {
+      width: 100%;
+    }
+  }
+ 
+    .form {
+      background-color: #F1F1F1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100% - 60px);
+    }
+  
+      .register-label {
+        font-family: "Albert Sans";
+        font-size: 3.5vw;
+        color: #979797;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+
+      .welcome_container {
+        width: 100%;
+        background-color: white;
+        padding-top: 18px;
+        padding-bottom: 23px;
+      }
+  
+      .description_container {
+        display: flex;
+        border-radius: 13px;
+        padding: 11px;
+        padding-left: 13px;
+        padding-right: 13px;
+        margin: 30px;
+        margin-top: 25px;
+        margin-bottom: 0;
+        flex-direction: column;
+        line-height: 21px;
+        background-color: white;
+        box-shadow: 0px 0px 3px #d8d8d8cb;
+      }
+     
+        .description {
+           margin: 0;
+           font-size: 16.5px;
+           font-family: Albert Sans;
+           color: #5B5B5B;
+           letter-spacing: 0.3;
+        }
+
+        .line_container {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          margin-top: 30px;
+          margin-bottom: 10px;
+        }
+        
+        .line {
+          position: absolute;
+          width: 95%;
+          height: 1px;
+          margin: 0;
+          background-color: #d1d1d1; 
+        }
+        
+        .line-text {
+          position: relative;
+          background-color: #F1F1F1;
+          padding: 0 10px;
+          margin: 0;
+          font-size: 19px; 
+          font-weight: 400;
+          font-family: Albert Sans;
+          color: #b9b9b9; 
+        }
+
+      .fields {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+        ::placeholder {
+          color: rgb(192, 192, 192);
+          opacity: 1; /* Firefox */
+        }
+        ::-ms-input-placeholder { /* Edge 12 -18 */
+            color: rgb(192, 192, 192);
+        }
+
+        .field {
+          margin-top: 2.5vh;
+        }
+
+        .name-fields {
+          display: flex;
+          flex-direction: row;
+          width: 54vw;
+          justify-content: space-between;
+        }
+  
+        .name-field {
+          margin-top: 2.5vh;
+        }
+      
+    #button_confirm {
+      margin-top: 0vh;
+      margin-bottom: 18vh; /* this keeps the whole form in the central place */
+    }
+
+    .confirm_registration_container {
+      width: 26vw;
+      padding: 13px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 3px rgb(180, 180, 180);
+      background: linear-gradient(to left, #7f88aa, #97aac1);
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      cursor: pointer;
+   }
+
+    .confirm_registration_container:hover {
+        background: linear-gradient(to left, rgb(95, 103, 129), #8ea0b7);
+    }

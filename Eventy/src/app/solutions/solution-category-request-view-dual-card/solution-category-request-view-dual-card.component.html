@@ -1,0 +1,37 @@
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <b>{{categoryDouble[0].name}}</b>
+            <div class = "manipulation_buttons_container">
+                <a mat-button class="approve-btn" (click)="approveRequest(categoryDouble[0])">
+                  <mat-icon>check</mat-icon> Approve
+                </a>
+                <a mat-button class="edit-btn" (click)="editRequest(categoryDouble[0], 0)">
+                  <mat-icon>edit</mat-icon> Edit
+                </a>
+                <a mat-button class="delete-btn" (click)="deleteRequestAndPickNew(categoryDouble[0])">
+                  <mat-icon>refresh</mat-icon> Replace and delete
+                </a>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="categoryDouble[1]">
+        <mat-card-content>
+            <b>{{categoryDouble[1].name}}</b>
+            <div class = "manipulation_buttons_container">
+                <a mat-button class="approve-btn" (click)="approveRequest(categoryDouble[1])">
+                  <mat-icon>check</mat-icon> Approve
+                </a>
+                <a mat-button class="edit-btn" (click)="editRequest(categoryDouble[1], 1)">
+                  <mat-icon>edit</mat-icon> Edit
+                </a>
+                <a mat-button class="delete-btn" (click)="deleteRequestAndPickNew(categoryDouble[1])">
+                  <mat-icon>refresh</mat-icon> Replace and delete
+                </a>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    
+</div>

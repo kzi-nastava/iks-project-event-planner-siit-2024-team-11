@@ -1,0 +1,70 @@
+.category-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.not-good {
+    color: red
+}
+
+h3, p {
+   margin: 0;
+   padding: 0; 
+}
+
+.category-info {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.category-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button {
+  background-color: #1976d2;
+  color: white !important;
+}
+
+.delete-button {
+  background-color: #d32f2f;
+  color: white !important;
+}
+
+.add-new-solution-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  height: 69px; /* approximate height matching cards */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin: 5px auto;
+  border: 3px dashed #aaa;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.add-new-solution-container:hover {
+  background-color: #e0f7fa;
+  border-color: #26c6da;
+}
+
+.plus-sign {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #777;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.add-new-solution-container:hover .plus-sign {
+  color: #26c6da;
+  transform: scale(1.3);
+}

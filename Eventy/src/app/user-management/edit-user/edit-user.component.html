@@ -1,0 +1,4 @@
+<div>
+  <app-edit-user-form *ngIf="!isProvider()" [user]="getUserOrganizer()"></app-edit-user-form>
+  <app-edit-provider-form *ngIf="isProvider()" [user]="getUserProvider()"></app-edit-provider-form>
+</div>

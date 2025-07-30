@@ -6,7 +6,7 @@
 
      <div class = "category_container">
         <p style = "margin-right: 5px;" class = "category">Category:</p>
-        <p class = "category">{{service.category.name}}</p>
+        <p class = "category">{{service.name}}</p>
      </div>
 
      <div class = "duration_container">
@@ -16,11 +16,11 @@
 
      <div class = "reservation_container">
         <p style = "margin-right: 5px;" class = "reservation">Reservation:</p>
-        <p class = "reservation">{{service.reservationType === 0 ? "manual" : "automatic"}}</p>
+        <p class = "reservation">{{service.reservationType.toLowerCase()}}</p>
      </div>
 
      <div class = "manipulation_buttons_container">
-      <a mat-button [routerLink]="['../edit-service', 1337]" class="edit-btn">
+      <a mat-button [routerLink]="['../edit-service', service.solutionId]" class="edit-btn">
         <mat-icon>edit</mat-icon> Edit
       </a>
       <a mat-button class="delete-btn">
@@ -50,7 +50,7 @@
      </div>
 
      <div class = "image_container">
-        <img class = "service_image" src = "solution_assets/{{service.imageUrls[0]}}"/>
+        <img class = "service_image" src = "http://localhost:8080/{{service.firstImageUrl}}"/>
      </div>
   </div>
 </div>

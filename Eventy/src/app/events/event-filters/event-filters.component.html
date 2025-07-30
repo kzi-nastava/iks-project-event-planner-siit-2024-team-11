@@ -1,10 +1,9 @@
-<div  id = "event_filters" class = "sticky_container">
-   
+<div id = "event_filters" class = "sticky_container">
    <div style = "cursor: pointer; display: flex; flex-direction: row; justify-content: space-between; margin-left: 30px; margin-right: 30px; padding-top: 20px;">
       <div style = "display: flex; justify-content: center; align-items: center;">
          <p style = "font-size: 20px; letter-spacing: 1px; margin: 0; color: #A0A0A0; font-family: Albert Sans;">Filters</p>
       </div>
-      <div class = "resetFilterContainer" (click)="resetFilters()">
+      <div id = "reset_event_filters_button" class = "resetFilterContainer" (click)="resetFilters()">
          <mat-icon style = "color: white; font-size: 23px; margin-right: 5px; margin-top: 1px;">delete_outline</mat-icon>
          <p style = "margin: 0; color: white; font-family: Albert Sans; font-weight: 500">Reset All</p>
       </div>
@@ -17,15 +16,12 @@
          <p class = "input_label">Event types:</p>
       </div>
       <mat-form-field>
-         <mat-select [formControl]="eventTypes" multiple>
-            <mat-option value="Wedding">Wedding</mat-option>
-            <mat-option value="Sport">Sport</mat-option>
-            <mat-option value="Conference">Conference</mat-option>
-            <mat-option value="Party">Party</mat-option>
-            <mat-option value="Prom">Prom</mat-option>
-            <mat-option value="Big Party">Big Party</mat-option>
+         <mat-select id="event_types_filter_select" [formControl]="eventTypes" multiple>
+            <mat-option *ngFor="let eventType of eventTypeOptions" [value]="eventType">
+               {{eventType}}
+            </mat-option>
          </mat-select>
-       </mat-form-field>
+      </mat-form-field>
    </div>
 
    <div class = "input_container">
@@ -33,7 +29,7 @@
          <p class = "input_label">Max participants:</p>
       </div>
       <mat-form-field class="example-full-width">
-         <input type="number" matInput [(ngModel)]="maxParticipantsValue" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+         <input id="max_participants_filter_select" type="number" matInput [(ngModel)]="maxParticipantsValue" min = "1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
        </mat-form-field>
    </div>
 
@@ -43,13 +39,14 @@
       </div>
      <form class="example-form">
          <mat-form-field>
-            <input type="text"  
+            <input id="location_filter_select" 
+                   type="text"  
                    matInput
                    [formControl]="locations"
                    [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                @for (locationOption of filteredLocationOptions | async; track locationOption) {
-               <mat-option [value]="locationOption">{{locationOption}}</mat-option>
+                  <mat-option [value]="locationOption">{{locationOption}}</mat-option>
                }
             </mat-autocomplete>
          </mat-form-field>
@@ -75,8 +72,8 @@
    </div>
 
    <div style = "display: flex; justify-content: center; margin-top: 25px;">
-      <div class = "confirm_filter_container" (click) = "filterEvents()">
-         <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">CONFIRM</p>
+      <div id = "filter_events_button" class = "confirm_filter_container" (click) = "filterEvents()">
+         <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">FILTER</p>
       </div>
    </div>  
 </div>

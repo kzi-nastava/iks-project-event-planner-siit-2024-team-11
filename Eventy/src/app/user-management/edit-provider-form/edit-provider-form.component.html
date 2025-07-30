@@ -1,0 +1,103 @@
+<form class="form" [formGroup]="editForm">
+  <p class="register-label">
+    Edit {{user.name}}
+  </p>
+
+  <div class="fields">
+    <div class="profile-picture-picker">
+      <div class="carousel">
+        <img [src]="editForm.controls['profilePictures'].value[pictureIndex]" alt="Profile picture" />
+
+        <div class="carousel-buttons">
+          <button mat-mini-fab (click)="previousPicture()" [disabled]="pictureIndex === 0">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <button mat-mini-fab (click)="nextPicture()" [disabled]="pictureIndex === editForm.controls['profilePictures'].value.length - 1">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <input #picturesPickerId id="picturesPicker" type="file" (change)="onFilesSelected($event)" accept="image/*" multiple />
+      <div class="picture-button" (click)="triggerFileInput()">Choose Pictures</div>
+    </div>
+
+    <mat-form-field class="field">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Ex. something@gmail.com" formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Old Password</mat-label>
+      <input matInput type="password" formControlName="oldPassword" />
+      @if (editForm.controls['oldPassword'].hasError('required')) {
+        <mat-error>Old Password is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('oldPassword')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('password')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Confirm password</mat-label>
+      <input matInput type="password" formControlName="confirmedPassword" />
+      @if (editForm.controls['confirmedPassword'].hasError('match')) {
+        <mat-error>Passwords don't match</mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('confirmedPassword')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput placeholder="Company Name" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Description</mat-label>
+      <textarea type="text" matInput placeholder="Your Description" formControlName="description"></textarea>
+      @if (editForm.controls['description'].hasError('required')) {
+        <mat-error>Description is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('description')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Address</mat-label>
+      <input type="text" matInput placeholder="Ex. Some Street 32" formControlName="address" />
+      @if (editForm.controls['address'].hasError('required')) {
+        <mat-error>Address is <strong>required</strong></mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('address')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Phone Number</mat-label>
+      <input type="text" matInput placeholder="Ex. +381 65 57 30 724" formControlName="phoneNumber" />
+      @if (editForm.controls['phoneNumber'].hasError('required') && !editForm.controls['phoneNumber'].hasError("pattern")) {
+        <mat-error>Phone number is <strong>required</strong></mat-error>
+      }
+      @if (editForm.controls['phoneNumber'].hasError('pattern')) {
+        <mat-error>Invalid phone number</mat-error>
+      }
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetValue('phoneNumber')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <button mat-flat-button class="button" (click)="confirmEdit()" type="submit">EDIT</button>
+</form>

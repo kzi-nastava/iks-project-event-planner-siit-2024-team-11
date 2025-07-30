@@ -1,11 +1,14 @@
+<div id="all_event_cards_home" class = "container">
 
-<div class = "container">
-   
    <!-- SEARCH & FILTER -->
    <div class = "search_and_filter_container"> 
       <div class = "search_container">
-         <input class = "search_form" placeholder="Search..">  
-         <div class = "search_icon_container">
+         <input 
+            class = "search_form" 
+            placeholder="Search.." 
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput()">  
+         <div id = "search_events_button" class = "search_icon_container" (click)="applySearchAndFilters()">
             <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
          </div>    
       </div>
@@ -20,14 +23,14 @@
          <div id = "all_events" style = "display: flex; flex-direction: row; align-items: center; color: #8F8B8B; margin-left: 50px;">
             <p style = "font-weight: 450; margin: 0; margin-top: -13px; margin-right: 10px; font-family: Albert Sans;">Sort by:</p>
             <mat-form-field>
-               <mat-select [(value)]="sortValue">
-                  <mat-option [value]="sortValue">Event Type</mat-option>  
-                  <mat-option [value]="sortValue">Name</mat-option>    
-                  <mat-option [value]="sortValue">Max Participants (ASC)</mat-option> 
-                  <mat-option [value]="sortValue">Max Participants (DESC)</mat-option>       
-                  <mat-option [value]="sortValue">Location</mat-option>      
-                  <mat-option [value]="sortValue">Date (ASC)</mat-option>    
-                  <mat-option [value]="sortValue">Date (DESC)</mat-option>
+               <mat-select [(value)]="sortValue" (selectionChange)="onSortChange($event)">
+                  <mat-option [value]="'type'">Event Type</mat-option>  
+                  <mat-option [value]="'name'">Name</mat-option>    
+                  <mat-option [value]="'maxNumberParticipants,asc'">Max Participants (ASC)</mat-option> 
+                  <mat-option [value]="'maxNumberParticipants,desc'">Max Participants (DESC)</mat-option>       
+                  <mat-option [value]="'location'">Location</mat-option>      
+                  <mat-option [value]="'date,asc'">Date (ASC)</mat-option>    
+                  <mat-option [value]="'date,desc'">Date (DESC)</mat-option>
                </mat-select>
             </mat-form-field>
          </div>
@@ -35,10 +38,30 @@
    </div>
 
    <!-- ALL EVENTS -->
-   <div *ngFor="let eventCard of allEvents;">
-      <div class="featured_left"> 
-         <app-event-card [eventCard]="eventCard" class = "featured_card"/>     
+   <div *ngFor="let eventCard of paginatedEvents;">
+      <div 
+         (click)="handleCardClick(eventCard)" 
+         [ngClass]="{'selected_event_border': eventCard === selectedEventCard}" 
+         style = "margin: 6px; border: 4px solid #F1F1F1"
+      > 
+         <app-event-card 
+            [eventCard]="eventCard" 
+            [isClickable]="isCardClickable"        
+         />     
       </div>   
    </div>
+
+ 
+</div>
+
+<div class = "paginator_container">
+   <mat-paginator 
+      [length]="totalCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[1, 2, 5, 10]"
+      aria-label="Select page"
+      (page)="onPageChange($event)"
+      style="background: white;"
+   />
 </div>
 

@@ -12,7 +12,7 @@
 <!-- FEATURED ITEMS -->
 <div class = "featured_items_container">
 
-   <div *ngFor="let solutionCard of featuredSolutions; let i = index">
+   <div *ngFor="let solutionCard of featuredSolutions; let i = index" style = "margin-bottom: 10px; margin-top: 10px">
       <!-- Left Card -->
       <div *ngIf="i % 2 === 0" class="featured_left"> 
          <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" class = "featured_card" style = "position: absolute; z-index: 3;"/>

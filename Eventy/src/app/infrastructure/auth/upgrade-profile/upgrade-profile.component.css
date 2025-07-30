@@ -1,0 +1,139 @@
+.register {
+   display: flex;
+   flex-direction: row;
+ 
+ }
+ 
+  .left-side {
+    width: 40vw;
+    position: fixed;
+    left: 0;
+    background-color: #929AB7;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100vh - 60px);
+  }
+
+    .welcome_to_container {
+      display: flex;
+      height: 30%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+      
+      .welcome-text {
+        margin: 0;
+        font-size: 1.6vw;
+        font-weight: 400;
+        letter-spacing: 1.5px;
+        font-family: Albert Sans;
+      }
+    
+      .logo {
+        margin-top: 1.7vh;
+        width: 62%;
+      }
+
+    .select_role_text_container {
+      display: flex;
+      height: 16.5%;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    
+      .select-text {
+        font-size: 1.4vw;
+        font-family: Albert Sans;
+        font-weight: 500;
+        color: white;
+      }
+  
+    .role-buttons {
+      display: flex;
+      height: 28%;
+      justify-content: center;
+      flex-direction: row;
+    }
+
+      .role-button {
+        width: 27%;
+        display: flex;  
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px solid rgb(106, 119, 150);
+        border-radius: 15px;
+        background-color: #E8E8E8;
+        cursor: pointer;
+      }
+
+        .role-button img {
+          width: 58%;
+          height: 50%;
+        }
+
+        .role-button-text {
+          margin: 0;
+          font-family: "Albert Sans";
+          font-size: 1vw;
+          font-weight: 600;
+          color: #6E717B;
+        }
+
+        .not-selected-button {
+          opacity: 65%;
+        }
+
+    .already_have_acc_container {
+      display: flex;
+      height: 17%;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 2.2vw;
+    }
+
+      .register-text {
+        font-size: 1.3vw;
+        text-align: center;
+        color: #F6F4F4;
+        margin: 0;
+        padding-bottom: 10px;
+        font-family: Albert Sans;
+      } 
+
+      .confirm_filter_container {
+        padding: 0.63vw;
+        padding-left: 1.6vw;
+        padding-right: 1.6vw;
+        border-radius: 10px;
+        background: linear-gradient(to left, #535a71, #647285);
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        cursor: pointer;
+     }
+     .confirm_filter_container:hover {
+        background: linear-gradient(to left, #404556, #5a6676);
+     }
+
+  .right-side {
+    position: fixed;
+    left: 40vw;
+    width: 60vw;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  @media (max-width: 730px) {
+    .left-side {
+      display: none;
+    }
+    .right-side {
+      width: 100%;
+    }
+  }
+ 
+ 

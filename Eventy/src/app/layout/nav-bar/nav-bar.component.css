@@ -24,11 +24,11 @@ mat-icon {
 }
 
 .tool-bar-icon {
-  margin-left: 25px;
+  margin-left: 20px;
 }
 
 .drawer-opener {
-  margin-right: 1vw;
+  margin-right: 20px;
 }
 
 img {
@@ -39,3 +39,23 @@ img {
 .clickable:hover {
   cursor: pointer;
 }
+
+#notificationsDrawer {
+  width: 300px; /* Adjust to your needs */
+  background-color: #fff; /* Make it stand out */
+  z-index: 1000;
+}
+
+.notification_container {
+  display: flex;
+}
+
+  .notification-dot {
+    width: 7px;
+    height: 7px;
+    background-color: red;
+    border-radius: 50px;
+    margin-top: -19px;
+    margin-left: -6px;
+  }
+

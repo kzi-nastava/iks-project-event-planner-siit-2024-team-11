@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -139,7 +140,179 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
   }
 
-/* global */
-.ng-trigger {
+
+.mat-mdc-form-field-error-wrapper {
+  background-color: transparent !important;
+} 
+
+
+/* service reservation datepicker */
+#reservation-select-datetime {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 52px !important;
+    width: 27vw !important;
+    align-items: center !important;
+    justify-content: center !important;
+ }
+
+  .mat-mdc-checkbox {
+    width: 8vw !important;
+  }
+
+  .mdc-label {
+    font-size: 15px;
+    font-family: Albert Sans;
+    font-weight: 400;
+  }
+
+  .mat-mdc-form-field-error {
+    margin-left: -15px !important;
+  }
+}
+
+.mat-datepicker-content {
   background-color: white !important;
-} /* ovo mora u global.. vidjeti sa kolegama.. */
+  box-shadow: 0px 0px 7px rgb(227, 227, 227) !important;
+}
+
+#reservation-select-event {
+  .ng-trigger {
+    background-color: #ffffff !important;
+  } 
+}
+
+.timepicker {
+  padding-top: 15px !important;
+}
+
+.blurred_backdrop_dialog {
+  background: rgba(62, 62, 62, 0.411);
+  backdrop-filter: blur(3px);
+}
+
+#invitations_sending {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 50px !important;
+    font-size: 16px;
+    width: 19.5vw;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 3px;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+#fast_registration {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 53px !important;
+    font-size: 16px;
+    width: 54vw;
+    padding-left: 18px;
+    padding-right: 5px;
+    padding-top: 3px;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+#fast_registration_double_fields {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 53px !important;
+    font-size: 16px;
+    width: 26vw;
+    padding-left: 18px !important;
+    padding-right: 5px !important; 
+    padding-top: 3px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+#upgrade_organizer {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 54px !important;
+    font-size: 16px;
+    width: 54vw;
+    padding-left: 18px;
+    padding-right: 5px;
+    padding-top: 3px;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+#upgrade_organizer_double_fields {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 54px !important;
+    font-size: 16px;
+    width: 26vw;
+    padding-left: 18px !important;
+    padding-right: 5px !important; 
+    padding-top: 3px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+#upgrade_provider {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    height: 54px !important;
+    font-size: 16px;
+    width: 54vw;
+    padding-left: 18px;
+    padding-right: 5px;
+    padding-top: 3px;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+#upgrade_provider_desc {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    font-size: 16px;
+    width: 54vw;
+    padding-left: 18px;
+    padding-right: 5px;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+} 
+
+#create_review_message {
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 0px 3px rgb(159, 159, 159) !important;
+    font-size: 16px;
+    width: 330px;
+    padding-left: 18px;
+    padding-right: 5px;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+} 

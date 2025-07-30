@@ -9,12 +9,31 @@
 
   <!-- Maybe not *ngIf, maybe it should just be with a class that makes it to dissapear?
   Because we need it to keep the data? Or maybe also keep the data here? We will see... -->
-  <app-event-creation-basic-information *ngIf="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION"></app-event-creation-basic-information>
-  <app-agenda-creation *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"></app-agenda-creation>
-  <app-invitations-sending *ngIf="eventOrganizationStage === EventOrganizationStage.INVITATIONS_SENDING"></app-invitations-sending>
+  <app-event-creation-basic-information
+    *ngIf="eventOrganizationStage === EventOrganizationStage.BASIC_INFORMATION"
+    [basicInformationForm]="basicInformationForm"
+    [selectedAddress]="selectedAddress"
+    [selectedLatLng]="selectedLatLng"
+    (getAdress)="getAddress($event)"
+  />
+  <app-agenda-creation
+    *ngIf="eventOrganizationStage === EventOrganizationStage.AGENDA_CREATION"
+    (AgendaEventEmitter)="collectAgenda($event)"
+    [minStartTime]="getStartMinDateForAgenda()"/>
+  <app-invitations-sending
+    *ngIf="eventOrganizationStage === EventOrganizationStage.INVITATIONS_SENDING"
+    (invitedEmailsEventEmitter)="collectInvitedEmails($event)"
+  />
 
-  <div class="bottom-part">
-    <button mat-flat-button class="button" type="submit" (click)="submit()" *ngIf="!isForward()"><mat-icon>add</mat-icon>ADD EVENT</button>
-    <button mat-flat-button class="button" (click)="goForward()" *ngIf="isForward()"><mat-icon>arrow_forward</mat-icon>NEXT</button>
-  </div>
+  <div style = "box-shadow: 10px 0px 5px rgb(228, 228, 228); padding: 18px; bottom: 0; background-color: white; border-left: solid 3px #F1F1F1;">
+    <div id = "continue-div" style = "display: flex; justify-content: center;">
+      <div class = "confirm_selection_container" *ngIf="!isForward()" (click)="submit()">
+        <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">CONFIRM CREATION</p>
+      </div>
+      <div class = "confirm_selection_container" *ngIf="isForward()" (click)="goForward()">
+        <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">CONTINUE</p>
+      </div>
+    </div>
+ </div>
+
 </div>

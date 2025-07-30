@@ -1,0 +1,7 @@
+<h1>Budget</h1>
+<div class="container" *ngFor="let item of budget.categoryItems">
+    <app-budget-menu-category [eventId]="eventId" [eventDate]="budget.eventDate" [budgetItem]="item" (budgetItemDeleted)="budgetItemDeleted($event)"></app-budget-menu-category>
+</div>
+<div class="add-category-container" *ngIf="isEditable()" (click)="handleBudgetItemAdded()">
+  <span class="plus-sign">+</span>
+</div>

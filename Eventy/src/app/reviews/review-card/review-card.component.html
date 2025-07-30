@@ -1,0 +1,15 @@
+<div class="review-card">
+    <div class = "organiser_container">
+        <img src = "{{review.senderAvatar}}" class = "organiser_img">
+        <p id = "organiser" class = "organiser">
+            {{review.senderName}} gave this solution
+        </p>
+        <div class="stars">
+            <span class="star"
+                *ngFor="let star of [1,2,3,4,5]; let i = index"
+                [ngClass]="{ 'filled': i < review.grade, 'empty': i >= review.grade }">
+            </span>
+        </div>
+    </div>
+    <h6>{{review.comment}}</h6>
+</div>

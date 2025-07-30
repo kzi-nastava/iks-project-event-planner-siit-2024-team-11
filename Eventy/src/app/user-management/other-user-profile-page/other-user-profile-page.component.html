@@ -1,0 +1,66 @@
+<div *ngIf="user != null" class="all-container">
+  <div class="basic-info-wrapper">
+    <div style="flex: 1;"></div>
+
+    <div class="basic-info">
+      <img class="pfp-image" *ngIf="isOrganizer()" src="{{ getOrganizerProfilePicture() }}" alt="Profile Picture" />
+      <div class="carousel" *ngIf="!isOrganizer()">
+        <img [src]="getProviderProfilePictures()[pictureIndex]" alt="Profile picture" />
+
+        <div class="carousel-buttons">
+          <button mat-mini-fab (click)="previousPicture()" [disabled]="pictureIndex === 0">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <button mat-mini-fab (click)="nextPicture()" [disabled]="pictureIndex === getProviderProfilePictures().length - 1">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+      <span class="name">{{ getName() }}</span>
+      <!-- <span class="info">Type: {{ isOrganizer() ? "Organizer" : "Provider" }}</span>  is this useless? -->
+      <span class="info" *ngIf="!isOrganizer()">{{ getDescription() }}</span>
+      <span class="info"><span class="info-name">Email:</span> {{ user.email }}</span>
+      <span class="info"><span class="info-name">Address:</span> {{ user.address }}</span>
+      <span class="info"><span class="info-name">Phone number:</span> {{ user.phoneNumber }}</span>
+    </div>
+
+    <div class="basic-info-buttons">
+      <button mat-flat-button class="button" type="submit"><mat-icon>chat_bubble</mat-icon> Chat</button>
+      <button mat-flat-button class="button negative-button" type="submit" (click)="handleReportUser()">
+        <mat-icon>error</mat-icon> Report User
+      </button>
+      <button mat-flat-button class="button negative-button" type="submit" (click)="handleBlockUser()">
+        <mat-icon>error</mat-icon> Block User
+      </button> 
+    </div>
+  </div>
+
+  <div  class="my-cards">
+    <p>
+      {{ isOrganizer() ? "My Organized Events" : "My Products/Services" }}
+    </p>
+
+    <div class = "search_container">
+      <input class = "search_form" placeholder="Search.." [(ngModel)]="searchQuery" />
+      <div class = "search_icon_container" (click)="search()">
+        <mat-icon style = "font-size: 26px; cursor: pointer;">search</mat-icon>
+      </div>
+    </div>
+
+    <div *ngIf="isOrganizer()">
+      <div *ngFor="let eventCard of myEvents;" class = "small-padding">
+        <app-event-card [eventCard]="eventCard" />
+      </div>
+    </div>
+
+    <div *ngIf="!isOrganizer()">
+      <div *ngFor="let solutionCard of mySolutions; let i = index" class = "small-padding">
+        <app-service-card *ngIf="isService(solutionCard)" [serviceCard]="solutionCard" />
+        <app-product-card *ngIf="isProduct(solutionCard)" [productCard]="solutionCard" />
+      </div>
+    </div>
+
+    <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" [pageSizeOptions]="[12, 15, 18, 21]" aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

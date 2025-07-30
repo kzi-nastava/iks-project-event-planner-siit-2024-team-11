@@ -1,0 +1,93 @@
+.solution-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 5px;
+    margin: auto;
+    margin-top: 10px;
+    width: 75%
+}
+
+.margin-5 {
+    margin: 5px;
+}
+
+.width-25 {
+    width: 25%;
+}
+
+h4, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+.delete-button {
+    background-color: red !important;
+    color: white !important;
+}
+
+.price_container {
+    justify-content: center;
+    display: inline-block;
+    flex-direction: column;
+}
+
+.old_price {
+    margin: 0;
+    color: #F40F0F;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 0px;
+    padding: 0;
+    background: linear-gradient(to top left,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) calc(50% - 1px),
+        rgb(238, 30, 30) 50%,
+        rgba(0, 0, 0, 0) calc(50% + 1px),
+        rgba(0, 0, 0, 0) 100%);
+    display:flex;
+    margin-left: 5px;
+    font-family: Albert Sans;
+}
+
+.current_price {
+    margin: 0;
+    color: #454444;
+    font-weight: 700;
+    font-size: 24.5px;
+    margin-top: 0px;
+    margin-left: 5px;
+    font-family: Albert Sans;
+}
+
+.organiser_container {
+    display: flex;  
+    flex-direction: row;
+}
+
+.organiser_img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 100ms ease;
+}
+.organiser_img:hover {
+    box-shadow: 0px 0px 5px #242630;
+}
+
+.organiser {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 500;
+    color: #798098;
+    letter-spacing: 0;
+    font-family: Figtree;
+    cursor: pointer;
+}
+#organiser:hover {
+    text-decoration: underline 1px #7882a2;
+    text-underline-offset: 3px;
+}

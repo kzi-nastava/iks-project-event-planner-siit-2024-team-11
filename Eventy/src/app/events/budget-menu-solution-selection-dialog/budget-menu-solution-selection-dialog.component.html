@@ -1,0 +1,43 @@
+<h2 mat-dialog-title *ngIf="stage === 1">Select a solution type</h2>
+<h2 mat-dialog-title *ngIf="stage === 2 && availableSolutions.length > 0">Select a solution</h2>
+<h2 mat-dialog-title *ngIf="stage === 3">Are you sure you want to purchase {{selectedSolution.name}} by {{selectedSolution.providerName}} for {{(selectedSolution.price - selectedSolution.price * selectedSolution.discount / 100).toFixed(2)}}$?</h2>
+
+<mat-dialog-content>
+    <div *ngIf="stage === 1" class="first-container">
+    <button mat-button class="type-selection-button" (click)="loadProducts()">Product</button>
+    <button mat-button class="type-selection-button" (click)="loadServices()">Service</button>
+    </div>
+    <div *ngIf="stage === 2" class="second-container">
+        <div *ngIf="availableSolutions.length === 0">
+            <h4>
+                It appears there are no solutions of the {{this.solutionType}} type that fall under the {{this.data.categoryName}} category...
+            </h4>
+        </div>
+        <div *ngFor="let solution of availableSolutions">
+            <div class="solution-card">
+                <h6 class="margin-5 width-25">{{solution.name}}</h6>
+                <div class = "organiser_container width-25">
+                    <img src = "{{solution.providerImageUrl}}" class = "organiser_img">
+                    <div style = "display: flex; flex-direction: column; margin-left: 9px;">
+                        <p style = "margin-right: 5px; margin-top: 1px" class = "category">Provider:</p>
+                        <p id = "organiser" class = "organiser" style = "margin-top: -1px">
+                        {{solution.providerName}}
+                        </p>
+                    </div>
+                </div>
+                <div class = "price_container margin-5 width-25">
+                    <div style = "display: inline-block" [ngStyle]="{'visibility' : solution.discount === 0 ? 'hidden' : 'visible'}">
+                        <p class = "old_price">{{(solution.price).toFixed(2)}}$</p>
+                    </div>
+                    <p [ngStyle]="{'margin-top' : solution.discount === 0 ? '-11px' : '0px',
+                                'padding-bottom': solution.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(solution.price - solution.price * solution.discount / 100).toFixed(2)}}$</p>
+                </div>
+                <button mat-button class="proceed-button width-25" (click)="handleSolutionSelected(solution)">GET</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="stage === 3" class="third-container">
+        <button mat-button class="confirm-button" (click)="purchaseProduct()">Yes, buy this product</button>
+        <button mat-button class="deny-button" (click)="returnToSolutionList()">No, take me back</button>
+    </div>
+</mat-dialog-content>

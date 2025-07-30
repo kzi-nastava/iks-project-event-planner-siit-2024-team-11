@@ -3,9 +3,9 @@
    margin-left: 33%;
    padding-top: 30px;
    padding-bottom: 15px;
+   min-height: 100vh;
    display: flex;
    flex-direction: column;
-   justify-content: center;
    align-items: center;
    background-color: #F1F1F1;
    width: 67%;
@@ -76,5 +76,23 @@
       justify-content: center;
       align-items: center;
    }
+
+   .selected_event_border {
+      border: 4px solid #808AAC !important; /* Example color for the border */
+      border-radius: 13px;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+      transition: border 0.05s ease;
+   }
  
+.paginator_container {
+   display: flex;
+   width: 100%;
+   justify-content: center;
+   margin-left: 33%;
+   background-color: #ffffff;
+   width: 67%;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
       

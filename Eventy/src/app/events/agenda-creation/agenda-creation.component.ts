@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {IActivity} from '../model/events.model';
+import {Activity} from '../model/events.model';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {
   InvalidInputDataDialogComponent
@@ -22,14 +22,10 @@ export class AgendaCreationComponent {
   });
 
   displayedColumns: string[] = ['name', 'description', 'location', 'startTime', 'endTime'];
-  agenda: IActivity[] = [{
-    "name": "something",
-    "description": "hey",
-    "location": "here",
-    "timeRange": [new Date(), new Date(20)]
-  }];
+  agenda: Activity[] = [];
 
-  minStartTime: Date = new Date();
+  @Output() AgendaEventEmitter = new EventEmitter<Activity[]>();
+  @Input() minStartTime!: Date;
 
   constructor(private dialog: MatDialog) {
   }
@@ -41,7 +37,14 @@ export class AgendaCreationComponent {
     this.activityForm.controls['timeRange'].setValue(this.activityForm.controls['timeRange'].value)
 
     if(this.activityForm.valid) {
-      this.agenda = [...this.agenda, this.activityForm.value];
+      let newActivity: Activity = {
+        name: this.activityForm.controls['name'].value,
+        description: this.activityForm.controls['description'].value,
+        location: this.activityForm.controls['location'].value,
+        startTime: this.activityForm.controls['timeRange'].value[0],
+        endTime: this.activityForm.controls['timeRange'].value[1]
+      }
+      this.agenda = [...this.agenda, newActivity];
       this.minStartTime = this.activityForm.value.timeRange[1];
       this.activityForm.reset(
         {
@@ -54,13 +57,8 @@ export class AgendaCreationComponent {
       Object.keys(this.activityForm.controls).forEach(key => {
         this.activityForm.controls[key].setErrors(null) ;
       });
-    } else {
-      this.dialog.open(InvalidInputDataDialogComponent, {
-        data : {
-          title: "Invalid input",
-          message: "Invalid input data"
-        }
-      });
+
+      this.AgendaEventEmitter.emit(this.agenda);
     }
   }
 
@@ -78,7 +76,7 @@ export class AgendaCreationComponent {
   private validateTimeRange(): ValidatorFn {
     return (): ValidationErrors | null => {
       if(this.activityForm) {
-        return this.activityForm.controls['timeRange'].value[0] && this.activityForm.controls['timeRange'].value[1] ? null : { bothTimesEntered: true };
+        return this.activityForm.controls['timeRange'].value[0] && this.activityForm.controls['timeRange'].value[1] && this.activityForm.controls['timeRange'].value[0] < this.activityForm.controls['timeRange'].value[1] ? null : { bothTimesEntered: true };
       }
 
       return null;

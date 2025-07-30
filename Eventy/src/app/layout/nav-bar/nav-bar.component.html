@@ -2,13 +2,17 @@
   <div>
     <mat-icon class="drawer-opener clickable" (click)="drawer.toggle()">menu</mat-icon>
     <a class="clickable" [routerLink]="['']">
-      <img src="logo-nav.png" alt="Eventy Logo" />
+      <img src="logo-nav.png" alt="Eventy Logo" style = "margin-top: 6px"/>
     </a>
   </div>
   <div>
     <!-- Router Links will be added here -->
-    <mat-icon class="tool-bar-icon clickable">account_circle</mat-icon>
-    <mat-icon class="tool-bar-icon clickable">chat_bubble</mat-icon>
-    <mat-icon class="tool-bar-icon clickable">notifications</mat-icon>
+    <mat-icon *ngIf="role !== null" class="tool-bar-icon clickable" [routerLink]="['profile']">account_circle</mat-icon>
+    <mat-icon *ngIf="role !== null" class="tool-bar-icon clickable" (click)="openChat()">chat_bubble</mat-icon>
+    <div *ngIf="role !== null" class = "notification_container"> <!-- notifications -->
+      <mat-icon class="tool-bar-icon clickable" (click)="notificationsDrawer.toggle()">notifications</mat-icon>
+      <div *ngIf="userNotificationsInfo?.hasNewNotifications && !userNotificationsInfo?.areNotificationsMuted" class="notification-dot"></div>
+    </div>
+    <mat-icon id="logout-button" *ngIf="role !== null" class="tool-bar-icon clickable" (click)="logOut()">logout</mat-icon>
   </div>
 </mat-toolbar>

@@ -1,0 +1,19 @@
+<div class="solution-card">
+   <h6 class="margin-5 width-25">{{solutionCard.name}}</h6>
+   <div class = "organiser_container width-25">
+      <div style = "display: flex; flex-direction: column; margin-left: 9px;">
+         <p style = "margin-right: 5px; margin-top: 1px" class = "category">Provider:</p>
+         <p id = "organiser" class = "organiser" style = "margin-top: -1px">
+         {{solutionCard.providerName}}
+         </p>
+      </div>
+   </div>
+   <div class = "price_container margin-5 width-25">
+      <div style = "display: inline-block" [ngStyle]="{'visibility' : solutionCard.discount === 0 ? 'hidden' : 'visible'}">
+         <p class = "old_price">{{(solutionCard.price).toFixed(2)}}$</p>
+      </div>
+      <p [ngStyle]="{'margin-top' : solutionCard.discount === 0 ? '-11px' : '0px',
+                  'padding-bottom': solutionCard.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(solutionCard.price - solutionCard.price * solutionCard.discount / 100).toFixed(2)}}$</p>
+   </div>
+   <button mat-button class="delete-button width-25" (click)="handleRemoveItem()">REMOVE</button>
+</div>

@@ -1,46 +1,129 @@
 import { Injectable } from '@angular/core';
-import {Organizer, Provider, User} from './model/users.model';
+import {BlockUser, CalendarOccupancy, UpdateUser, User, UserNotificationsInfo} from './model/users.model';
+import {EventCard} from '../events/model/event-card.model';
+import {SolutionCard} from '../solutions/model/solution-card.model';
+import {environment} from '../../env/constants';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {formatDate} from '@angular/common';
+import {PageProperties} from '../shared/model/page-properties.model';
+import {PagedResponse} from '../shared/model/paged-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private users : (Organizer | Provider | User)[] = [
-    {
-      email : "user1@gmail.com",
-      password : "password1",
-      address : "Neka Ulica 4",
-      phoneNumber : "05334564",
-      firstName : "Ime",
-      lastName : "Prezime"
-    },
-    {
-      email : "user2@gmail.com",
-      password : "password2",
-      address : "Jos Neka Ulica 28",
-      phoneNumber : "0493913438",
-      name : "Moja kompanija",
-      description : "Opis kompanije"
-    },
-    {
-      email : "user3@gmail.com",
-      password : "password3",
-      address : "Ulica Ovo 32",
-      phoneNumber : "+3224 3234 13"
-    }
-  ];
+  private readonly userProfileUrlPrefix: string = "/api/users";
+  private readonly eventsUrlPrefix: string = "/api/events";
+  private readonly solutionsUrlPrefix: string = "/api/solutions";
 
-  login(email : string, password : string) : User | Provider | Organizer | null {
-    for(let user of this.users) {
-      if(user.email === email && user.password === password ) {
-        return user;
-      }
-    }
-
-    return null;
+  constructor(private httpClient: HttpClient) {
   }
 
-  register(newUser: (Organizer | Provider)) : void {
-    this.users.push(newUser);
+  get(id: number): Observable<User> {
+    return this.httpClient.get<User>(environment.apiHost + this.userProfileUrlPrefix + "/" + id);
+  }
+
+  edit(updateUser: UpdateUser): Observable<User> {
+    return this.httpClient.put<User>(environment.apiHost + this.userProfileUrlPrefix, updateUser);
+  }
+
+  deactivate(id: number): any {
+    return this.httpClient.delete(environment.apiHost + this.userProfileUrlPrefix + "/" + id);
+  }
+
+  getMyCalendar(id: number, startDate: Date, endDate: Date): Observable<CalendarOccupancy[]> {
+    let params = new HttpParams();
+
+    if(startDate && endDate) {
+      const formattedStartDate = formatDate(startDate, 'yyyy-MM-dd', 'en-US');
+      const formattedEndDate = formatDate(endDate, 'yyyy-MM-dd', 'en-US');
+
+      params = params
+        .set('startDate', formattedStartDate)
+        .set('endDate', formattedEndDate);
+    }
+
+    return this.httpClient.get<CalendarOccupancy[]>(environment.apiHost + this.userProfileUrlPrefix + "/" + id + "/calendar", { params: params });
+  }
+
+  getMyFavoriteEvents(userId: number, search?: string, pageProperties?: PageProperties): Observable<PagedResponse<EventCard>> {
+    let params = new HttpParams();
+
+    if(search) {
+      params = params.set('search', search);
+    }
+
+    if(pageProperties) {
+      params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
+    }
+
+    return this.httpClient.get<PagedResponse<EventCard>>(environment.apiHost + this.eventsUrlPrefix + "/favorite/" + userId, { params: params });
+  }
+
+  getMyFavoriteSolutions(userId: number, search?: string, pageProperties?: PageProperties): Observable<PagedResponse<SolutionCard>> {
+    let params = new HttpParams();
+
+    if(search) {
+      params = params.set('search', search);
+    }
+
+    if(pageProperties) {
+      params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
+    }
+
+    return this.httpClient.get<PagedResponse<SolutionCard>>(environment.apiHost + this.solutionsUrlPrefix + "/favorite/" + userId, { params: params });
+  }
+
+  getMyEvents(userId: number, search?: string, pageProperties?: PageProperties): Observable<PagedResponse<EventCard>> {
+    let params = new HttpParams();
+
+    if(search) {
+      params = params.set('search', search);
+    }
+
+    if(pageProperties) {
+      params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
+    }
+
+    return this.httpClient.get<PagedResponse<EventCard>>(environment.apiHost + this.eventsUrlPrefix + "/organized/" + userId, { params: params });
+  }
+
+  getMySolutions(userId: number, search?: string, pageProperties?: PageProperties): Observable<PagedResponse<SolutionCard>> {
+    let params = new HttpParams();
+
+    if(search) {
+      params = params.set('search', search);
+    }
+
+    if(pageProperties) {
+      params = params
+        .set('page', pageProperties.page)
+        .set('size', pageProperties.size);
+    }
+
+    return this.httpClient.get<PagedResponse<SolutionCard>>(environment.apiHost + this.solutionsUrlPrefix + "/catalog/" + userId, { params: params });
+  }
+
+  getUserNotificationsInfo(userId: number): Observable<UserNotificationsInfo> {
+    return this.httpClient.get<UserNotificationsInfo>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/notifications-info");
+  }
+
+  toggleUserNotifications(userId: number, toggleValue: Boolean): Observable<Boolean> {
+    return this.httpClient.put<Boolean>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/notifications-info", toggleValue);
+  }
+
+  updateLastReadNotifications(userId: number): Observable<Date> {
+    return this.httpClient.put<Date>(environment.apiHost + this.userProfileUrlPrefix + "/" + userId + "/last-read-notifications", {});
+  }
+
+  blockUser(blockUser: BlockUser): Observable<BlockUser> {
+    return this.httpClient.post<BlockUser>(environment.apiHost + this.userProfileUrlPrefix + "/block", blockUser);
   }
 }
