@@ -30,8 +30,8 @@
       <app-event-filters
          (filtersChanged)="handleFiltersChanged($event)" 
          (filtersReset)="handleFiltersReset()"
-         [eventTypeOptions]="eventTypesFilter"
-         [locationOptions]="locationsFilter"/>
+         [eventTypeOptions]="eventTypesEventsFilter"
+         [locationOptions]="locationsEventsFilter"/>
       <!-- ALL EVENTS -->
       <app-all-events 
          [filters]="filters" 
@@ -47,7 +47,10 @@
       <!-- SOLUTIONS FILTER -->
       <app-solution-filters
          (filtersChanged)="handleFiltersChanged($event)" 
-         (filtersReset)="handleFiltersReset()"/>
+         (filtersReset)="handleFiltersReset()"
+         [solutionCategoryOptions]="solutionCategoriesSolutionsFilter"
+         [eventTypeOptions]="eventTypesSolutionsFilter"
+         [companyOptions]="companiesSolutionsFilter"/>
       <!-- ALL SOLUTIONS -->
       <app-all-solutions
          [filters]="filters" 

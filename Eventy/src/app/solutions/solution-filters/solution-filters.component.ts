@@ -1,4 +1,4 @@
-import { Component, inject, Output, EventEmitter  } from '@angular/core';
+import { Component, inject, Output, EventEmitter, Input  } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -21,9 +21,17 @@ export class SolutionFiltersComponent {
 
   // filter values
   type: string = "Any";
+
   solutionCategories = new FormControl('');
+  @Input() solutionCategoryOptions: string[];
+  
   eventTypes = new FormControl('');
+  @Input() eventTypeOptions: string[];
+  
   company = new FormControl('');
+  @Input() companyOptions: string[];
+  filteredCompanyOptions: Observable<string[]>;
+
   minPrice: number = null;
   maxPrice: number = null;
   dateRangeForm: FormGroup;
@@ -31,11 +39,6 @@ export class SolutionFiltersComponent {
 
   @Output() filtersChanged = new EventEmitter<any>();
   @Output() filtersReset = new EventEmitter<void>();
-
-  // view options
-  eventTypesValue: string = "Wedding";
-  companyOptions: string[] = ['B.G. DOO', 'M&M DOO', 'VIT DOO', 'H&M', 'Apple', 'Samsung'];
-  filteredCompanyOptions: Observable<string[]>;
 
   ////////////////////////////////////
 
@@ -97,8 +100,6 @@ export class SolutionFiltersComponent {
                    "Date start: " + startDate + ";   " +
                    "Date end: " + endDate + ";  " + 
                    "Availability: " + this.isAvailable;
-
-    this._snackBar.open(message, "OK!");
   }
 
   resetFilters(): void {

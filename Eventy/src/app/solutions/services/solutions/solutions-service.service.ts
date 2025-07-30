@@ -118,4 +118,16 @@ export class SolutionsService {
       responseType: 'blob'
     });
   }
+
+  getAllUniqueCategoriesForSolutions(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiHost + this.urlPrefix + "/categories");
+  }
+  
+  getAllUniqueEventTypesForSolutions(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiHost + this.urlPrefix + "/event-types");
+  }
+
+  getAllUniqueCompaniesForSolutions(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiHost + this.urlPrefix + "/companies");
+  }
 }

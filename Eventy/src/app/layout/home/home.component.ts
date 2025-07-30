@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateReviewComponent } from '../../reviews/create-review/create-review.component';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { CreateReview } from '../../reviews/model/review.model';
+import { SolutionsService } from '../../solutions/services/solutions/solutions-service.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,13 +18,18 @@ export class HomeComponent {
   filters: any = {}; // To store filters
   searchQuery: string = ''; // To store search input
 
-  eventTypesFilter: string[] = [];
-  locationsFilter: string[] = [];
+  eventTypesEventsFilter: string[] = [];
+  locationsEventsFilter: string[] = [];
 
+  solutionCategoriesSolutionsFilter: string[] = [];
+  eventTypesSolutionsFilter: string[] = [];
+  companiesSolutionsFilter: string[] = [];
+  
   ///////////////////////////////////////////////////////
 
   constructor(private authService: AuthService,
               private eventService: EventsService,
+              private solutionsService: SolutionsService,
               private dialog: MatDialog) {}
 
   ngOnInit() {
@@ -32,8 +38,12 @@ export class HomeComponent {
       this.handleReviewEvents();
     } 
 
-    this.loadFilterEventTypes();
-    this.loadFilterLocations();
+    this.loadEventsFilterEventTypes();
+    this.loadEventsFilterLocations();
+
+    this.loadSolutionsFilterCategories();
+    this.loadSolutionsFilterEventTypes();
+    this.loadSolutionsFilterCompanies();
   }
 
   private handleReviewEvents() {
@@ -92,36 +102,84 @@ export class HomeComponent {
     });
   }
 
-  private loadFilterEventTypes() {
+  private loadEventsFilterEventTypes() {
     this.eventService.getAllUniqueEventTypesForEvents().subscribe({
       next: (eventTypes) => {
-        this.eventTypesFilter = eventTypes;
+        this.eventTypesEventsFilter = eventTypes;
       },
       error: () => {
         this.dialog.open(ErrorDialogComponent, {
           data : {
             title: "Error!",
-            message: "Error while loading filter event types"
+            message: "Error while loading events filter event types"
+          }
+        });
+      }
+    }); 
+  }
+
+  private loadEventsFilterLocations() {
+    this.eventService.getAllUniqueLocationsForEvents().subscribe({
+      next: (locations) => {
+        this.locationsEventsFilter = locations;
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error!",
+            message: "Error while loading events filter locations"
           }
         });
       }
     });
   }
 
-  private loadFilterLocations() {
-    this.eventService.getAllUniqueLocationsForEvents().subscribe({
-      next: (locations) => {
-        this.locationsFilter = locations;
+  private loadSolutionsFilterCategories() {
+    this.solutionsService.getAllUniqueCategoriesForSolutions().subscribe({
+      next: (categories) => {
+        this.solutionCategoriesSolutionsFilter = categories;
       },
       error: () => {
         this.dialog.open(ErrorDialogComponent, {
           data : {
             title: "Error!",
-            message: "Error while loading filter locations"
+            message: "Error while loading solutions filter categories"
           }
         });
       }
-    });
+    }); 
+  }
+
+  private loadSolutionsFilterEventTypes() {
+    this.solutionsService.getAllUniqueEventTypesForSolutions().subscribe({
+      next: (eventTypes) => {
+        this.eventTypesSolutionsFilter = eventTypes;
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error!",
+            message: "Error while loading solutions filter event types"
+          }
+        });
+      }
+    }); 
+  }
+
+  private loadSolutionsFilterCompanies() {
+    this.solutionsService.getAllUniqueCompaniesForSolutions().subscribe({
+      next: (companies) => {
+        this.companiesSolutionsFilter = companies;
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error!",
+            message: "Error while loading solutions filter companies"
+          }
+        });
+      }
+    }); 
   }
 
   switchTab(tab: number) : void { 
