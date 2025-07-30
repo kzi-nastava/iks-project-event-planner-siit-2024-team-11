@@ -44,7 +44,9 @@
    <!-- EVENTS FILTER -->
    <app-event-filters
       (filtersChanged)="handleFiltersChanged($event)" 
-      (filtersReset)="handleFiltersReset()"/>
+      (filtersReset)="handleFiltersReset()"
+      [eventTypeOptions]="eventTypesEventsFilter"
+      [locationOptions]="locationsEventsFilter"/>
    <!-- SELECT EVENT FROM ALL EVENTS -->
    <app-all-events 
       [filters]="filters" 

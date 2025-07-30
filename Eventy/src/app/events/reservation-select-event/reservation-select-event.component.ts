@@ -1,5 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { EventCard } from '../model/event-card.model';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { EventsService } from '../services/events/events-service.service';
 
 @Component({
   selector: 'app-reservation-select-event',
@@ -15,7 +18,13 @@ export class ReservationSelectEventComponent {
   filters: any = {}; // To store filters
   searchQuery: string = ''; // To store search input
 
+  eventTypesEventsFilter: string[] = [];
+  locationsEventsFilter: string[] = [];
+
   ///////////////////////////////////////////////////////
+
+  constructor(private eventService: EventsService,
+              private dialog: MatDialog) {}
 
   ngOnInit() {
     this.continueButtonClicked.emit(false);
@@ -25,6 +34,9 @@ export class ReservationSelectEventComponent {
       top: 0,
       behavior: 'smooth' // smooth scrolling
     });
+
+    this.loadEventsFilterEventTypes();
+    this.loadEventsFilterLocations();
   }
 
   onEventSelected(eventCard: EventCard) {
@@ -49,5 +61,37 @@ export class ReservationSelectEventComponent {
   // Handle search input
   handleSearch(searchValue: string): void {
     this.searchQuery = searchValue;
+  }
+
+  private loadEventsFilterEventTypes() {
+    this.eventService.getAllUniqueEventTypesForEvents().subscribe({
+      next: (eventTypes) => {
+        this.eventTypesEventsFilter = eventTypes;
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error!",
+            message: "Error while loading events filter event types"
+          }
+        });
+      }
+    }); 
+  }
+  
+  private loadEventsFilterLocations() {
+    this.eventService.getAllUniqueLocationsForEvents().subscribe({
+      next: (locations) => {
+        this.locationsEventsFilter = locations;
+      },
+      error: () => {
+        this.dialog.open(ErrorDialogComponent, {
+          data : {
+            title: "Error!",
+            message: "Error while loading events filter locations"
+          }
+        });
+      }
+    });
   }
 }
