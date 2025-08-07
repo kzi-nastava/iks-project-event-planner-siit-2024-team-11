@@ -4,16 +4,24 @@ import { ReservationSelectEventComponent } from './reservation-select-event.comp
 import { Component, Input } from '@angular/core';
 import { EventCard } from '../model/event-card.model';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
+import { EventsService } from '../services/events/events-service.service';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('ReservationSelectEventComponent', () => {
   let component: ReservationSelectEventComponent;
   let fixture: ComponentFixture<ReservationSelectEventComponent>;
+  let dialog: MatDialog;
+  let eventsService: jasmine.SpyObj<EventsService>;
 
   @Component({
     selector: 'app-event-filters',
     template: ''
   })
-  class MockEventFilters {}
+  class MockEventFilters {
+    @Input() eventTypeOptions: string[];
+    @Input() locationOptions: string[];
+  }
   
   @Component({
     selector: 'app-all-events',
@@ -31,13 +39,22 @@ describe('ReservationSelectEventComponent', () => {
                                isFavorite: false };
 
   beforeEach(async () => {
+    const eventsServiceSpy = jasmine.createSpyObj('EventsService',  ['getAllUniqueEventTypesForEvents','getAllUniqueLocationsForEvents']);
+    eventsServiceSpy.getAllUniqueEventTypesForEvents.and.returnValue(of([]));
+    eventsServiceSpy.getAllUniqueLocationsForEvents.and.returnValue(of([]));
+
     await TestBed.configureTestingModule({
-      declarations: [ReservationSelectEventComponent, MockEventFilters, MockAllEvents]
-    })
-    .compileComponents();
+      declarations: [ReservationSelectEventComponent, MockEventFilters, MockAllEvents],
+      providers: [
+        { provide: EventsService, useValue: eventsServiceSpy },
+        { provide: MatDialog, useValue: jasmine.createSpyObj('MatDialog', ['open']) }
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ReservationSelectEventComponent);
+    dialog = TestBed.inject(MatDialog);
     component = fixture.componentInstance;
+    eventsService = TestBed.inject(EventsService) as jasmine.SpyObj<EventsService>;
     fixture.detectChanges();
   });
 
