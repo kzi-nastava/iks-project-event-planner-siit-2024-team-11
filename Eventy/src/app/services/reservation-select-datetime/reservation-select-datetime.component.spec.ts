@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { ActivatedRoute } from '@angular/router';
 
 describe('ReservationSelectDatetimeComponent', () => {
   let component: ReservationSelectDatetimeComponent;
@@ -31,7 +32,8 @@ describe('ReservationSelectDatetimeComponent', () => {
   let mockSolution: SolutionCard = { solutionId: 1, type: "SERVICE", name: 'Test Service', categoryName: "kat",
                                      description: "desc", eventTypeNames: null, price: 1, discount: 0,
                                      firstImageUrl: "f", isAvailable: true, providerId: 2, providerName: "prov",
-                                     providerImageUrl: "string", isFavorite: false };
+                                     providerImageUrl: "string", isFavorite: false,
+                                     minReservationTime: 60, maxReservationTime: 60 };
   
   let mockEvent: EventCard = { eventId: 1, name: 'Test Event', description: "desc", maxNumberParticipants: 2,
                                isOpen: true, eventTypeName: "et", locationName: "loc", startDate: new Date(),
@@ -52,18 +54,25 @@ describe('ReservationSelectDatetimeComponent', () => {
     const reviewServiceSpy = jasmine.createSpyObj('ReviewService', ['isSolutionReviewedByUser']);
 
     await TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule, MaterialModule,
+      imports: [FormsModule, ReactiveFormsModule, MaterialModule, RouterModule,
                 BrowserAnimationsModule, DatepickerModule, MatFormFieldModule,
                 MatInputModule, MatCheckboxModule, MatCardModule, NgxMatTimepickerModule],
-      declarations: [ReservationSelectDatetimeComponent, MockAppServiceCardComponent, RouterTestingModu  ],
+      declarations: [ReservationSelectDatetimeComponent, MockAppServiceCardComponent],
       providers: [
         { provide: ReservationsService, useValue: reservationServiceSpy },
         { provide: AuthService, useValue: authServiceSpy },
         { provide: ReviewService, useValue: reviewServiceSpy },
+        { provide: ActivatedRoute, useValue: {
+            snapshot: {
+              paramMap: {
+                get: (key: string) => 'some-id'
+              }
+            }
+          }
+        },
         MatDialog, Router
       ],
-    })
-    .compileComponents();
+    }) .compileComponents();
 
     fixture = TestBed.createComponent(ReservationSelectDatetimeComponent);
     component = fixture.componentInstance;
@@ -82,5 +91,13 @@ describe('ReservationSelectDatetimeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set isFixedDuration and validators correctly in ngOnInit', () => {
+    component.selectedService = mockSolution;
+
+    component.ngOnInit();
+    expect(component.isFixedDuration).toBeTrue();
+    expect(component.endTimeControl.validator).toBeNull(); 
   });
 });
