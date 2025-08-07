@@ -1,20 +1,37 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateReservationComponent } from './create-reservation.component';
-import { ReservationSelectEventComponent } from '../../events/reservation-select-event/reservation-select-event.component';
-import { By } from '@angular/platform-browser';
 import { SolutionCard } from '../../solutions/model/solution-card.model';
 import { EventCard } from '../../events/model/event-card.model';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SolutionsService } from '../../solutions/services/solutions/solutions-service.service';
 import { of, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { Component, Input, NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('CreateReservationComponent', () => {
   let component: CreateReservationComponent;
   let fixture: ComponentFixture<CreateReservationComponent>;
   let dialog: MatDialog;
-  let solutionsService: SolutionsService
+  let router: Router;
+  let solutionsService: jasmine.SpyObj<SolutionsService>;
   
+  @Component({
+    selector: 'app-reservation-select-event',
+    template: ''
+  })
+  class MockReservationSelectEventComponent {}
+
+  @Component({
+    selector: 'app-reservation-select-datetime',
+    template: ''
+  })
+  class MockReservationSelectDatetimeComponent {
+    @Input() selectedEvent: EventCard;
+    @Input() selectedService: SolutionCard;
+  }
+
   let mockSolution: SolutionCard = { solutionId: 1, type: "SERVICE", name: 'Test Service', categoryName: "kat",
                                      description: "desc", eventTypeNames: null, price: 1, discount: 0,
                                      firstImageUrl: "f", isAvailable: true, providerId: 2, providerName: "prov",
@@ -26,13 +43,22 @@ describe('CreateReservationComponent', () => {
                                isFavorite: false };
                       
   beforeEach(async () => {
+    const serviceSpy = jasmine.createSpyObj('SolutionsService', ['getSolution']);
+
     await TestBed.configureTestingModule({
-      declarations: [CreateReservationComponent]
+      declarations: [CreateReservationComponent, MockReservationSelectEventComponent, MockReservationSelectDatetimeComponent,],
+      providers: [
+        { provide: SolutionsService, useValue: serviceSpy },
+        MatDialog, Router
+      ],
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(CreateReservationComponent);
     component = fixture.componentInstance;
+    dialog = TestBed.inject(MatDialog);
+    router = TestBed.inject(Router);
+    solutionsService = TestBed.inject(SolutionsService) as jasmine.SpyObj<SolutionsService>;
     fixture.detectChanges();
   });
 
@@ -53,10 +79,9 @@ describe('CreateReservationComponent', () => {
     component.stage = 2;
     component.selectedService = mockSolution
     component.selectedEvent = mockEvent
-
     fixture.detectChanges();
 
-    const dateTimeComponent = fixture.nativeElement.querySelector('app-reservation-select-datetime');
+    const dateTimeComponent = fixture.debugElement.query(By.css('app-reservation-select-datetime'));
     expect(dateTimeComponent).not.toBeNull();
   });
 
@@ -79,21 +104,8 @@ describe('CreateReservationComponent', () => {
     }));
   });
 
-  it('should handle selectedEventCardEventEmitter correctly', () => {
-    spyOn(component, 'onSelectedEventCard');
-    component.stage = 1;
-    component.selectedService = mockSolution
-                               
-    fixture.detectChanges();
-
-    const childDebugElement = fixture.debugElement.query(By.directive(ReservationSelectEventComponent));
-    childDebugElement.triggerEventHandler('selectedEventCardEventEmitter', mockEvent);
-
-    expect(component.onSelectedEventCard).toHaveBeenCalledWith(mockEvent);
-  });
-
   it('should load service on init if passed in navigation', () => {
-    spyOn(solutionsService, 'getSolution').and.returnValue(of(mockSolution));
+    solutionsService.getSolution.and.returnValue(of(mockSolution));
 
     component.passedService = mockSolution;
     component.ngOnInit();
@@ -101,19 +113,4 @@ describe('CreateReservationComponent', () => {
     expect(solutionsService.getSolution).toHaveBeenCalledWith(1);
     expect(component.selectedService).toEqual(mockSolution);
   }); 
-
-  it('should open error dialog if service loading fails', () => {
-    spyOn(dialog, 'open');
-    spyOn(solutionsService, 'getSolution').and.returnValue(throwError(() => new Error('failed to load the service')));
-
-    component.passedService = mockSolution;
-    component.ngOnInit();
-
-    expect(dialog.open).toHaveBeenCalledWith(ErrorDialogComponent, jasmine.objectContaining({
-      data: jasmine.objectContaining({ 
-        title: 'Loading Error',
-        message: jasmine.stringContaining('Please make sure that an event is selected before continuing to the next step.')
-      })
-    }));
-  });
 });

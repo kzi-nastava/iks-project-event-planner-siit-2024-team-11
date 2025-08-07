@@ -6,7 +6,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YesNoFancierDialogComponent } from '../../shared/yes-no-fancier-dialog/yes-no-fancier-dialog.component';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
-import { SolutionsService } from '../../solutions/services/solutions/solutions-service.service';
 import { ReservationsService } from '../services/reservations/reservations-service.service';
 import { Reservation } from '../model/reservations.model';
 import { formatDate } from '@angular/common';
@@ -38,8 +37,7 @@ export class ReservationSelectDatetimeComponent {
   selectedEndTime: Date | null = null;
   confirmReservationClickedStage: Number = 0;
 
-  constructor(private solutionsService: SolutionsService, 
-              private reservationsService: ReservationsService, 
+  constructor(private reservationsService: ReservationsService, 
               private authService: AuthService,
               private reviewService: ReviewService,
               private dialog: MatDialog, 
