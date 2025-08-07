@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 
 import { ReservationSelectDatetimeComponent } from './reservation-select-datetime.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -107,7 +107,7 @@ describe('ReservationSelectDatetimeComponent', () => {
     expect(component.endTimeControl.validator).toBeNull(); 
   });
 
-  it('should invalidate date that is too early', () => {
+  it('should invalidate date that is too early (falls into reservation deadline)', () => {
     component.selectedService = mockSolution; // deadline = 3 days here
 
     const tooEarly = new Date();
@@ -146,7 +146,7 @@ describe('ReservationSelectDatetimeComponent', () => {
     expect(error).toEqual({ durationTooLong: true });
   });
 
-  it('should open confirmation dialog, proceed on confirmation and call createReservation with correct data', () => {
+  it('should open confirmation dialog, proceed on confirmation, call createReservation with correct data', () => {
     component.selectedService = mockSolution;
     component.selectedEvent = mockEvent;
 
@@ -211,7 +211,7 @@ describe('ReservationSelectDatetimeComponent', () => {
     expect(reservationService.createReservation).toHaveBeenCalledWith(reservation);
   });
 
-  it('should open ErrorDialog when createReservation on reservation deadline (too late to reserve)', () => {
+  it('should open ErrorDialog when the new reservation falls into reservation deadline (too early to reserve)', () => {
     component.selectedService = mockSolution;
     component.selectedEvent = mockEvent;
 
@@ -221,6 +221,8 @@ describe('ReservationSelectDatetimeComponent', () => {
     component.dateControl.setValue(mockDate);
     component.startTimeControl.setValue('10:00 AM');
     component.endTimeControl.setValue('11:00 AM');
+    component.endTimeControl.updateValueAndValidity();
+    component.startTimeControl.updateValueAndValidity();
 
     (window as any).parseTimeTo24HourFormat = (time: string) => {
       if (time === '10:00 AM') return '10:00';
@@ -256,15 +258,171 @@ describe('ReservationSelectDatetimeComponent', () => {
     }));
 
     expect(reservationService.createReservation).toHaveBeenCalledTimes(0);
+
+    const errors = component.dateValidator()(component.dateControl);
+    expect(errors).toEqual(jasmine.objectContaining({ tooEarly: true }));
   });
 
-  /*
-  it('should open ErrorDialog when createReservation on reservation deadline (too late to reserve)', () => {
+  it("should open ErrorDialog when the reservation's start date is after the end date", () => {
     component.selectedService = mockSolution;
     component.selectedEvent = mockEvent;
 
     const mockDate = new Date();
-    mockDate.setDate(mockDate.getDate() + 1);
+    mockDate.setDate(mockDate.getDate() + 20);
+    component.dateControl.setValue(mockDate);
+
+    const endTime = new Date();
+    endTime.setHours(10);
+    component.selectedEndTime = endTime;
+    const control = new FormControl('11:00 AM');
+    const error = component.startTimeValidator()(control);  
+
+    (window as any).parseTimeTo24HourFormat = (time: string) => {
+      if (time === '10:00 AM') return '10:00';
+      if (time === '11:00 AM') return '11:00';
+      return '00:00';
+    };
+
+    reservationService.createReservation.and.returnValue(throwError(() => new Error('Creation failed')));
+
+    const dialogRefMock = {
+      afterClosed: () => of(true) // user clicks "Yes"
+    };
+
+    const openSpy = spyOn(dialog, 'open').and.callFake((componentType: any) => {
+      if (componentType === YesNoFancierDialogComponent) {
+        return dialogRefMock as any;
+
+      } else if (componentType === ErrorDialogComponent) {
+        return {
+          afterClosed: () => of() // auto-close success dialog
+        } as any;
+      }
+      return {} as any;
+    });
+
+    component.onContinueButtonClicked();
+    
+    expect(openSpy).toHaveBeenCalledWith(ErrorDialogComponent, jasmine.objectContaining({
+      data: {
+        title: 'Invalid data',
+        message: "Please make sure that all inputs are valid before confirming the reservation."
+      }
+    }));
+
+    expect(reservationService.createReservation).toHaveBeenCalledTimes(0);
+
+    expect(error).toEqual({ invalidTime: true });
+  });
+
+  it("should open ErrorDialog when the reservation duration is too short", () => {
+    component.selectedService = { ...mockSolution, minReservationTime: 60, maxReservationTime: 120 };
+    component.selectedEvent = mockEvent;
+
+    const mockDate = new Date();
+    mockDate.setDate(mockDate.getDate() + 10);
+    component.dateControl.setValue(mockDate);
+
+    const endTime = new Date();
+    endTime.setHours(11);
+    component.selectedEndTime = endTime;
+    const control = new FormControl('10:30 AM'); // 30 min duration 
+    component.startTimeValidator()(control);
+
+    (window as any).parseTimeTo24HourFormat = (time: string) => {
+      if (time === '10:30 AM') return '10:30';
+      if (time === '11:00 AM') return '11:00';
+      return '00:00';
+    };
+
+    reservationService.createReservation.and.returnValue(throwError(() => new Error('Creation failed')));
+
+    const dialogRefMock = {
+      afterClosed: () => of(true) // user clicks "Yes"
+    };
+
+    const openSpy = spyOn(dialog, 'open').and.callFake((componentType: any) => {
+      if (componentType === YesNoFancierDialogComponent) {
+        return dialogRefMock as any;
+
+      } else if (componentType === ErrorDialogComponent) {
+        return {
+          afterClosed: () => of() // auto-close success dialog
+        } as any;
+      }
+      return {} as any;
+    });
+
+    component.onContinueButtonClicked();
+    
+    expect(openSpy).toHaveBeenCalledWith(ErrorDialogComponent, jasmine.objectContaining({
+      data: {
+        title: 'Invalid data',
+        message: "Please make sure that all inputs are valid before confirming the reservation."
+      }
+    }));
+
+    expect(reservationService.createReservation).toHaveBeenCalledTimes(0);
+  });
+  
+  it("should open ErrorDialog when the reservation duration is too long", () => {
+    component.selectedService = { ...mockSolution, minReservationTime: 60, maxReservationTime: 120 };
+    component.selectedEvent = mockEvent;
+
+    const mockDate = new Date();
+    mockDate.setDate(mockDate.getDate() + 10);
+    component.dateControl.setValue(mockDate);
+
+    const endTime = new Date();
+    endTime.setHours(14);
+    component.selectedEndTime = endTime;
+    const control = new FormControl('10:30 AM'); // 30 min duration 
+    const error = component.startTimeValidator()(control);
+
+    (window as any).parseTimeTo24HourFormat = (time: string) => {
+      if (time === '10:30 AM') return '10:30';
+      if (time === '14:00 PM') return '14:00';
+      return '00:00';
+    };
+
+    reservationService.createReservation.and.returnValue(throwError(() => new Error('Creation failed')));
+
+    const dialogRefMock = {
+      afterClosed: () => of(true) // user clicks "Yes"
+    };
+
+    const openSpy = spyOn(dialog, 'open').and.callFake((componentType: any) => {
+      if (componentType === YesNoFancierDialogComponent) {
+        return dialogRefMock as any;
+
+      } else if (componentType === ErrorDialogComponent) {
+        return {
+          afterClosed: () => of() // auto-close success dialog
+        } as any;
+      }
+      return {} as any;
+    });
+
+    component.onContinueButtonClicked();
+    
+    expect(openSpy).toHaveBeenCalledWith(ErrorDialogComponent, jasmine.objectContaining({
+      data: {
+        title: 'Invalid data',
+        message: "Please make sure that all inputs are valid before confirming the reservation."
+      }
+    }));
+
+    expect(reservationService.createReservation).toHaveBeenCalledTimes(0);
+
+    expect(error).toEqual({ durationTooLong: true });
+  });
+
+  it('should open ErrorDialog and not create a review when createReservation fails on backend side', fakeAsync(() => {
+    component.selectedService = mockSolution;
+    component.selectedEvent = mockEvent;
+
+    const mockDate = new Date();
+    mockDate.setDate(mockDate.getDate() + 20);
 
     component.dateControl.setValue(mockDate);
     component.startTimeControl.setValue('10:00 AM');
@@ -287,11 +445,7 @@ describe('ReservationSelectDatetimeComponent', () => {
       reservationEndDateTime:`${formattedMockDate}T${formattedEndTime}:00`,
     };
 
-    const backendError = {
-      error: ["reservationStartDateTime", "It's too late to make a reservation."]
-    };
-
-    reservationService.createReservation.and.returnValue(throwError(() => backendError));
+    reservationService.createReservation.and.returnValue(throwError(() => ({ error: ['ERROR: Failed on backend side.'] })));
 
     const dialogRefMock = {
       afterClosed: () => of(true) // user clicks "Yes"
@@ -311,6 +465,8 @@ describe('ReservationSelectDatetimeComponent', () => {
 
     component.onContinueButtonClicked();
 
+    flush(); // simulate passage of async time
+
     expect(openSpy).toHaveBeenCalledWith(YesNoFancierDialogComponent, jasmine.objectContaining({
       data: {
         title: 'Confirm Reservation',
@@ -321,10 +477,10 @@ describe('ReservationSelectDatetimeComponent', () => {
     expect(openSpy).toHaveBeenCalledWith(ErrorDialogComponent, jasmine.objectContaining({
       data: {
         title: 'Creation Failed',
-        message: "It's too late to make a reservation."
+        message: "Failed on backend side."
       }
     }));
 
     expect(reservationService.createReservation).toHaveBeenCalledWith(reservation);
-  });*/
+  }));
 });

@@ -151,10 +151,6 @@ export class ReservationSelectDatetimeComponent {
         }
       }
 
-      /*if (this.isOverlapping(startTime, endTime)) {
-        return { invalidEndTime: true };
-      }*/
-
       return null;
     };
   }
