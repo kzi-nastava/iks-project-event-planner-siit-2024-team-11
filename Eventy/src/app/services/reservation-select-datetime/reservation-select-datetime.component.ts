@@ -6,7 +6,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YesNoFancierDialogComponent } from '../../shared/yes-no-fancier-dialog/yes-no-fancier-dialog.component';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
-import { SolutionsService } from '../../solutions/services/solutions/solutions-service.service';
 import { ReservationsService } from '../services/reservations/reservations-service.service';
 import { Reservation } from '../model/reservations.model';
 import { formatDate } from '@angular/common';
@@ -28,7 +27,6 @@ export class ReservationSelectDatetimeComponent {
   @Input() selectedService: SolutionCard;
   // date
   dateControl: FormControl;
-  reservedDates = ['2025-01-15', '2025-01-20']; // Mock reserved dates
   selectedDate: Date;
   // time
   startTimeControl: FormControl;
@@ -38,8 +36,7 @@ export class ReservationSelectDatetimeComponent {
   selectedEndTime: Date | null = null;
   confirmReservationClickedStage: Number = 0;
 
-  constructor(private solutionsService: SolutionsService, 
-              private reservationsService: ReservationsService, 
+  constructor(private reservationsService: ReservationsService, 
               private authService: AuthService,
               private reviewService: ReviewService,
               private dialog: MatDialog, 
@@ -87,11 +84,6 @@ export class ReservationSelectDatetimeComponent {
       if (selectedDate < tooEarlyDate) {
         return { tooEarly: true };
       }
-
-      // Check if the selected date is already reserved
-      /*if (this.reservedDates.includes(selectedDate.toISOString().split('T')[0])) {
-        return { alreadyReserved: true };
-      }*/
  
       this.selectedDate = selectedDate;
       return null; // Valid date
@@ -135,10 +127,7 @@ export class ReservationSelectDatetimeComponent {
           return { durationTooShort: true };
         }
       }
-      
-      /*if (this.isOverlapping(startTime, this.endTimeControl.value)) {
-        return { invalidStartTime: true };
-      }*/
+
       return null;
     };
   }
@@ -161,10 +150,6 @@ export class ReservationSelectDatetimeComponent {
           return { durationTooShort: true };
         }
       }
-
-      /*if (this.isOverlapping(startTime, endTime)) {
-        return { invalidEndTime: true };
-      }*/
 
       return null;
     };
