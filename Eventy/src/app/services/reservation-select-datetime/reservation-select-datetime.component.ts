@@ -27,7 +27,6 @@ export class ReservationSelectDatetimeComponent {
   @Input() selectedService: SolutionCard;
   // date
   dateControl: FormControl;
-  reservedDates = ['2025-01-15', '2025-01-20']; // Mock reserved dates
   selectedDate: Date;
   // time
   startTimeControl: FormControl;
@@ -85,11 +84,6 @@ export class ReservationSelectDatetimeComponent {
       if (selectedDate < tooEarlyDate) {
         return { tooEarly: true };
       }
-
-      // Check if the selected date is already reserved
-      /*if (this.reservedDates.includes(selectedDate.toISOString().split('T')[0])) {
-        return { alreadyReserved: true };
-      }*/
  
       this.selectedDate = selectedDate;
       return null; // Valid date
@@ -133,10 +127,7 @@ export class ReservationSelectDatetimeComponent {
           return { durationTooShort: true };
         }
       }
-      
-      /*if (this.isOverlapping(startTime, this.endTimeControl.value)) {
-        return { invalidStartTime: true };
-      }*/
+
       return null;
     };
   }
