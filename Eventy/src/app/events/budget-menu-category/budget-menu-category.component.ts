@@ -135,7 +135,8 @@ export class BudgetMenuCategoryComponent {
     }
   }
 
-  handleDeleteSelf() {
+  handleDeleteSelf(event: MouseEvent) {
+    event.stopPropagation();
     if (this.isEditable()) {
       this.budgetItemDeleted.emit(this.budgetItem.id);
     } else {

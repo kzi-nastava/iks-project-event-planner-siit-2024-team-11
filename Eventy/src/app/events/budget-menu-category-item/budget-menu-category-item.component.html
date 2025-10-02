@@ -15,5 +15,5 @@
       <p [ngStyle]="{'margin-top' : solutionCard.discount === 0 ? '-11px' : '0px',
                   'padding-bottom': solutionCard.discount === 0 ? '11px' : '0px'}"  class = "current_price">{{(solutionCard.price - solutionCard.price * solutionCard.discount / 100).toFixed(2)}}$</p>
    </div>
-   <button mat-button class="delete-button width-25" (click)="handleRemoveItem()">REMOVE</button>
+   <button mat-button class="delete-button width-25" (click)="handleRemoveItem($event)">REMOVE</button>
 </div>

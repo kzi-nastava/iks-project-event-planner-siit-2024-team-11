@@ -2,10 +2,10 @@
 <h2 mat-dialog-title *ngIf="stage === 2 && availableSolutions.length > 0">Select a solution</h2>
 <h2 mat-dialog-title *ngIf="stage === 3">Are you sure you want to purchase {{selectedSolution.name}} by {{selectedSolution.providerName}} for {{(selectedSolution.price - selectedSolution.price * selectedSolution.discount / 100).toFixed(2)}}$?</h2>
 
-<mat-dialog-content>
+<mat-dialog-content id="solution-selection-dialog">
     <div *ngIf="stage === 1" class="first-container">
-    <button mat-button class="type-selection-button" (click)="loadProducts()">Product</button>
-    <button mat-button class="type-selection-button" (click)="loadServices()">Service</button>
+    <button mat-button class="type-selection-button" id="select-products-button" (click)="loadProducts()">Product</button>
+    <button mat-button class="type-selection-button" id="select-services-button" (click)="loadServices()">Service</button>
     </div>
     <div *ngIf="stage === 2" class="second-container">
         <div *ngIf="availableSolutions.length === 0">
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div *ngIf="stage === 3" class="third-container">
-        <button mat-button class="confirm-button" (click)="purchaseProduct()">Yes, buy this product</button>
+        <button mat-button class="confirm-button" id="budget-purchase-product-button" (click)="purchaseProduct()">Yes, buy this product</button>
         <button mat-button class="deny-button" (click)="returnToSolutionList()">No, take me back</button>
     </div>
 </mat-dialog-content>

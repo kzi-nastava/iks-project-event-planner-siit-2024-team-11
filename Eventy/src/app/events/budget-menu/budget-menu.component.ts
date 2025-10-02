@@ -33,7 +33,6 @@ export class BudgetMenuComponent {
         this.budget = budget
       },
       error: (err) => {
-        if (err.response === 403) {
           this.dialog.open(ErrorDialogComponent, {
             width: '400px',
             disableClose: true, // prevents closing by clicking outside
@@ -43,7 +42,6 @@ export class BudgetMenuComponent {
               message: 'You are not allowed to view budgets of events you are not organizing!',
             },
           });
-        }
       }
     })
   }
@@ -65,9 +63,9 @@ export class BudgetMenuComponent {
   }
 
   budgetItemDeleted(budgetItemId: number) {
-    this.budgetService.removeBudgetItem(budgetItemId).subscribe({
+    this.budgetService.removeBudgetItem(this.eventId, budgetItemId).subscribe({
       next: (response: any) => {
-        this.budget.categoryItems.filter(entry => entry.id !== budgetItemId);
+        this.budget.categoryItems = this.budget.categoryItems.filter(entry => entry.id !== budgetItemId);
       },
       error: (err: Error) => {
          this.dialog.open(ErrorDialogComponent, {
