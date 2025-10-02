@@ -20,8 +20,8 @@ export class BudgetService {
     return this.httpClient.post<BudgetItem>(environment.apiHost + this.urlPrefix + "/" + eventId + "/item/" + categoryId, allocatedFunds);
   }
 
-  removeBudgetItem(budgetItemId: number): Observable<any> {
-    return this.httpClient.delete<any>(environment.apiHost + this.urlPrefix + "/item/" + budgetItemId)
+  removeBudgetItem(eventId:number, budgetItemId: number): Observable<any> {
+    return this.httpClient.delete<any>(environment.apiHost + this.urlPrefix + "/" + eventId + "/item/" + budgetItemId)
   }
 
   updateBudgetItemFunds(budgetItemId: number, newAllocatedFunds: number): Observable<BudgetItem> {
@@ -29,6 +29,6 @@ export class BudgetService {
   }
 
   removeBudgetItemSolution(budgetItemId: number, solutionHistoryId: number): Observable<any> {
-    return this.httpClient.delete<any>(environment.apiHost + this.urlPrefix + "/item/" + budgetItemId + "/" + solutionHistoryId)
+    return this.httpClient.delete<any>(environment.apiHost + this.urlPrefix + "/item/" + budgetItemId + "/solution/" + solutionHistoryId)
   }
 }

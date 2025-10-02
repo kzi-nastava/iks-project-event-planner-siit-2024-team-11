@@ -28,7 +28,8 @@ export class BudgetMenuCategoryItemComponent {
   }
   
 
-  handleRemoveItem(): void {
+  handleRemoveItem(event: MouseEvent): void {
+    event.stopPropagation()
     if (this.isCancellable()) {
       this.itemDeleted.emit(this.solutionCard.id);
     } else {
@@ -46,11 +47,11 @@ export class BudgetMenuCategoryItemComponent {
 
   isCancellable(): boolean {
     let currentDate: Date = new Date();
+    let eventDate: Date = new Date(this.eventDate)
+    console.log(this.solutionCard.cancellationDeadline)
     if (this.solutionCard.cancellationDeadline !== null) {
-      let tempDate: Date = new Date(this.eventDate)
-      tempDate.setDate(tempDate.getDate() + this.solutionCard.cancellationDeadline)
-      return tempDate > currentDate
+      currentDate.setDate(currentDate.getDate() + this.solutionCard.cancellationDeadline)
     }
-    return this.eventDate > currentDate  
+    return eventDate > currentDate  
   }
 }

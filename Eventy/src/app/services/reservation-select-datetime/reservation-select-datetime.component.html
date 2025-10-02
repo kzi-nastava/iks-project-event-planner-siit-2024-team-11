@@ -117,7 +117,7 @@
                <!-- Event Date picker -->
                <mat-form-field appearance="fill" style = "width: 26vw;">
                   <mat-label>Event Date</mat-label>
-                  <input matInput [matDatepicker]="picker" [formControl]="dateControl" [matDatepickerFilter]="dateFilter" />
+                  <input id="date-input-field" matInput [matDatepicker]="picker" [formControl]="dateControl" [matDatepickerFilter]="dateFilter" />
                   <mat-datepicker #picker></mat-datepicker>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-error *ngIf="dateControl.hasError('required')">
@@ -149,7 +149,7 @@
                <div class="time-picker-container">
                   <mat-form-field appearance="fill" style="width: 26vw;">
                      <mat-label>Start Time</mat-label>
-                     <input
+                     <input id="start-time-input"
                        matInput
                        [ngxMatTimepicker]="startPicker"
                        [formControl]="startTimeControl"                 
@@ -183,6 +183,7 @@
                   <mat-form-field appearance="fill" style="width: 26vw;">
                      <mat-label>End Time</mat-label>
                      <input
+                       id = "end-time-input"
                        matInput
                        [ngxMatTimepicker]="endPicker"
                        [formControl]="endTimeControl"
@@ -217,7 +218,7 @@
 
    <div style = "box-shadow: 10px 0px 5px rgb(228, 228, 228); padding: 18px; bottom: 0; background-color: white; border-left: solid 3px #F1F1F1;">
       <div style = "display: flex; justify-content: center;">
-         <div class = "confirm_selection_container" (click)="onContinueButtonClicked()">
+         <div id="confirm-reservation-button" class = "confirm_selection_container" (click)="onContinueButtonClicked()">
             <p style = "font-size: 18px; margin: 0; color: white; font-weight: 600; font-family: Albert Sans;">CONFIRM RESERVATION</p>
          </div>
       </div>  
